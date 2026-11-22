@@ -1,17 +1,62 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import { CRIT } from '../data/scorecard';
+import { SITE_DATE } from '../data/meta';
 ---
 
 <BaseLayout
-  title="How we rank products"
-  description="TopBestBuy scorecard methodology for Malaysia (stub)."
+  title="How we score"
+  description="Our seven-criterion scorecard, weights, tie-breakers and changelog."
+  canonical="/how-we-rank"
 >
-  <StubShell
-    title="How we rank"
-    kicker="Methodology"
-    description="Seven-criterion scorecard and evidence rules from the mockup land here in Phase 3."
-  >
-    <p>Weights and thin-evidence caps will mirror mockup CORE scoring in Phase 2.</p>
-  </StubShell>
+  <Breadcrumbs items={[{ label: 'How we score' }]} />
+  <h1 class="font-display text-3xl font-extrabold">How we score</h1>
+  <p class="max-w-[60ch] text-[var(--tb-muted)]">
+    Every Top 10 uses the same scorecard, so you can compare lists and check our working.
+  </p>
+  <div class="tb-callout">
+    <strong>What we do and do not do.</strong> We research and aggregate expert reviews, owner reviews,
+    official specs and dated retailer prices. We do not test products ourselves.
+  </div>
+  <h2 class="mt-8 font-display text-2xl font-bold">The seven criteria</h2>
+  <div class="tb-tablewrap mt-3">
+    <table class="tb-table">
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th>Weight</th>
+          <th>What we look at</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          CRIT.map((c) => (
+            <tr>
+              <td>{c[1]}</td>
+              <td class="tb-num">{c[2]}%</td>
+              <td>{c[3]}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="tb-prose mt-8">
+    <h2>The maths</h2>
+    <p>
+      Each criterion gets a sub-score from 0 to 5. The total is the sum of weight × score ÷ 5,
+      giving a score out of 100. Ties break on reliability, then value.
+    </p>
+    <p>
+      Total = Σ (weight × sub-score ÷ 5). Example: 5/5 on performance adds 30 points; 4/5 adds
+      24.
+    </p>
+    <h2>Refresh schedule</h2>
+    <p>Prices monthly. Full re-score quarterly. Recalls or major price changes trigger updates.</p>
+    <h2>Changelog</h2>
+    <p>
+      <strong>{SITE_DATE}</strong> · Scorecard v1.0 · First public scorecard (mockup parity).
+    </p>
+  </div>
 </BaseLayout>

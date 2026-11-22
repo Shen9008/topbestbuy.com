@@ -1,33 +1,174 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
 import ImageSlot from '../components/media/ImageSlot.astro';
+import PriceAlertForm from '../components/islands/PriceAlertForm';
+import { SITE_DATE } from '../data/meta';
+import { CATS } from '../data/categories';
+import { LISTS } from '../data/lists';
+import { POSTS } from '../data/posts';
+import { listSlugs, RANKED, topPick } from '../lib/catalog';
+import { productFullName } from '../lib/format';
+
+const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
+const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-back-pain', 'blog-do-you-need-an-ionizer'];
 ---
 
 <BaseLayout
-  title="Best product lists for Malaysia"
-  description="Editorial Top 10 lists, tools, and trust pages for Malaysian shoppers. MYR pricing, en-MY English."
+  title="Top 10 best buys for Malaysia"
+  description="Ten picks, clear reasons, no hype. Scored Top 10 lists for appliances, home and lifestyle in Malaysia."
 >
-  <StubShell
-    title="Top picks for Malaysia, ranked with care"
-    kicker="Home"
-    description="Mockup section order ships in Phase 3. This home shell mirrors IA: hero, category discovery, and list tiles without product data."
-    showHeroImage={false}
-  >
-    <p>
-      Placeholder home: category tiles and featured lists will slot in here. No
-      invented rankings in Phase 1.
-    </p>
-    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <li>
-        <ImageSlot slotId="category-tile" label="Category tile" />
-      </li>
-      <li>
-        <ImageSlot slotId="list-tile-a" label="List tile" />
-      </li>
-      <li>
-        <ImageSlot slotId="list-tile-b" label="List tile" />
-      </li>
-    </ul>
-  </StubShell>
+  <section class="grid items-center gap-8 py-4 lg:grid-cols-[1.15fr_0.85fr]">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-widest text-[var(--tb-muted)]">
+        Malaysia edition · updated {SITE_DATE}
+      </p>
+      <h1 class="font-display text-4xl font-extrabold sm:text-5xl">Ten picks. Clear reasons. No hype.</h1>
+      <p class="max-w-[52ch] text-lg text-[var(--tb-muted)]">
+        Every Top 10 is scored on a published scorecard, with dated prices, trade-offs and the sources behind each pick.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        {listSlugs().map((slug) => (
+          <a href={`/${slug}`} class="tb-chip">
+            {LISTS[slug as keyof typeof LISTS].short}
+          </a>
+        ))}
+        <a href="/tools?tool=finder" class="tb-chip">Not sure? Take the 3-question finder</a>
+      </div>
+    </div>
+    <div>
+      <ImageSlot slotId="home-hero" aspect="banner" label="Home hero banner" />
+      <div class="mt-4 space-y-2" aria-label="Current number one picks">
+        {
+          tops.slice(0, 5).map(
+            (p) =>
+              p && (
+                <a
+                  href={`/${p.list}`}
+                  class="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-3 no-underline"
+                >
+                  <span class="tb-rank">1</span>
+                  <span>
+                    <strong class="text-[var(--tb-ink)]">{productFullName(p)}</strong>
+                    <br />
+                    <small class="text-[var(--tb-muted)]">
+                      {LISTS[p.list as keyof typeof LISTS].short} · {p.tag}
+                    </small>
+                  </span>
+                  <span class="tb-score text-lg">{p.total.toFixed(1)}</span>
+                </a>
+              ),
+          )
+        }
+        <p class="text-xs text-[var(--tb-muted)]">
+          Scores are editor judgments from scorecard v1.0. <a href="/categories">See all lists</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="my-10 grid gap-3 sm:grid-cols-3">
+    {
+      [
+        ['Pick in 30 seconds', 'Top 3 summary, then ten scored picks.'],
+        ['Know the trade-offs', 'Every pick lists what it does badly.'],
+        ['Built for Malaysia', 'MYR prices, local warranty notes, local retailers.'],
+      ].map(([title, copy]) => (
+        <div class="tb-card">
+          <h3 class="m-0 font-display text-base font-bold">{title}</h3>
+          <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{copy}</p>
+        </div>
+      ))
+    }
+  </section>
+
+  <div class="flex flex-wrap gap-4 border-y border-[var(--tb-line)] py-4 text-sm font-semibold">
+    <span>No paid rankings</span>
+    <span>Dated prices and sources</span>
+    <span>Scorecard published</span>
+    <span>Corrections log</span>
+  </div>
+
+  <section class="py-10">
+    <h2 class="font-display text-2xl font-bold">What are you shopping for?</h2>
+    <div class="mt-3 flex flex-wrap gap-2">
+      {
+        CATS.map((c) => (
+          <a href={`/category/${c.id}`} class="tb-chip">
+            {c.name}
+            {c.lists.length ? ` (${c.lists.length})` : ''}
+          </a>
+        ))
+      }
+    </div>
+    <h2 class="mt-8 font-display text-2xl font-bold">Start with a list</h2>
+    <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        listSlugs().map((slug) => {
+          const L = LISTS[slug as keyof typeof LISTS];
+          const p = RANKED[slug]?.[0];
+          return (
+            <a href={`/${slug}`} class="tb-tile">
+              <span class="tb-pill">{CATS.find((c) => c.id === L.cat)?.name}</span>
+              <h3 class="m-0 font-display text-lg font-bold">{L.short}: Top 10 in Malaysia</h3>
+              {
+                p && (
+                  <p class="m-0 text-sm text-[var(--tb-muted)]">
+                    #1 {productFullName(p)} ({p.total.toFixed(1)}/100)
+                  </p>
+                )
+              }
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="border-y border-[var(--tb-line)] py-10">
+    <h2 class="font-display text-2xl font-bold">Narrow it down in a minute</h2>
+    <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        [
+          ['finder', 'Product finder', 'Three questions, three picks.'],
+          ['vacuum', 'Vacuum type chooser', 'Robot, cordless or corded.'],
+          ['cleanser', 'Cleanser matcher', 'Filter by skin type.'],
+          ['purifier', 'Purifier room size', 'The CADR your room needs.'],
+        ].map(([tool, title, desc]) => (
+          <a href={`/tools?tool=${tool}`} class="tb-tile">
+            <h3 class="m-0 font-display text-base font-bold">{title}</h3>
+            <span class="text-sm text-[var(--tb-muted)]">{desc}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="py-10">
+    <h2 class="font-display text-2xl font-bold">Guides and explainers</h2>
+    <div class="mt-4 grid gap-3 sm:grid-cols-3">
+      {
+        postCards.map((id) => {
+          const p = POSTS[id as keyof typeof POSTS];
+          return (
+            <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
+              <span class="tb-pill">{p.type}</span>
+              <h3 class="m-0 font-display text-base font-bold">{p.h1}</h3>
+              <span class="text-xs text-[var(--tb-muted)]">{p.time} read</span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="grid gap-6 pb-6 lg:grid-cols-2">
+    <div class="tb-card">
+      <h2 class="mt-0 font-display text-xl font-bold">What should we rank next?</h2>
+      <p class="text-sm text-[var(--tb-muted)]">
+        Vote on the next Top 10. Demand also guides our research queue.
+      </p>
+      <a href="/coming-next" class="tb-btn mt-3">Vote now</a>
+    </div>
+    <PriceAlertForm client:idle listKey="home" />
+  </section>
 </BaseLayout>

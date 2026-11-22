@@ -1,8 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
 ---
 
-<BaseLayout title="About TopBestBuy" description="Who we are (stub).">
-  <StubShell title="About" kicker="Trust" />
+<BaseLayout title="About us" description="Why TopBestBuy exists: short, honest Top 10 lists for people in Malaysia." canonical="/about">
+  <Breadcrumbs items={[{ label: 'Trust', href: '/about' }, { label: 'About us' }]} />
+  <h1 class="font-display text-3xl font-extrabold">About us</h1>
+  <article class="tb-prose mt-6">
+    <p>
+      TopBestBuy helps people in Malaysia pick a good product without reading fifty tabs. Each
+      list is ten picks, ranked on a published scorecard, with trade-offs stated plainly.
+    </p>
+    <h2>Who we write for</h2>
+    <p>
+      Households choosing appliances, bedroom and lifestyle products, who want a clear shortlist
+      and honest reasons.
+    </p>
+    <h2>What we promise</h2>
+    <ul>
+      <li>Rankings are never for sale.</li>
+      <li>We say what we did and did not do.</li>
+      <li>Every price and spec has a date and a source.</li>
+      <li>Mistakes are fixed and logged.</li>
+    </ul>
+  </article>
 </BaseLayout>

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import PollWidget from '../components/islands/PollWidget';
+---
+
+<BaseLayout title="Vote for the next Top 10" description="Choose which Top 10 list we research next." canonical="/coming-next">
+  <Breadcrumbs items={[{ label: 'Vote' }]} />
+  <h1 class="font-display text-3xl font-extrabold">What should we rank next?</h1>
+  <p class="text-[var(--tb-muted)]">One vote per visit in this demo. Sample numbers plus yours.</p>
+  <PollWidget client:load />
+</BaseLayout>
