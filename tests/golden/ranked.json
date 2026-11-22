@@ -1,0 +1,1674 @@
+{
+  "best-air-fryers-malaysia": [
+    {
+      "id": "tefal-easy-fry-mega-ey855d",
+      "rank": 1,
+      "total": 84.5,
+      "thin": false,
+      "subs": [
+        4,
+        4.5,
+        4.5,
+        3.5,
+        4.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "philips-3000-72l",
+      "rank": 2,
+      "total": 82.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        3.5,
+        4.5,
+        4,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "philips-1000-dual-na150",
+      "rank": 3,
+      "total": 81.5,
+      "thin": false,
+      "subs": [
+        4,
+        4,
+        4.5,
+        3.5,
+        4,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "ninja-ds-xl-sl451",
+      "rank": 4,
+      "total": 80.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        3.5,
+        4,
+        4.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "xiaomi-essential-6l",
+      "rank": 5,
+      "total": 76,
+      "thin": false,
+      "subs": [
+        3.5,
+        5,
+        3.5,
+        2.5,
+        3.5,
+        5,
+        4
+      ]
+    },
+    {
+      "id": "xiaomi-ds-12l",
+      "rank": 6,
+      "total": 76,
+      "thin": false,
+      "subs": [
+        4,
+        4,
+        3,
+        4.5,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "khind-arf77",
+      "rank": 7,
+      "total": 72,
+      "thin": false,
+      "subs": [
+        3.5,
+        4,
+        3.5,
+        3,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "khind-arf35c",
+      "rank": 8,
+      "total": 70.5,
+      "thin": false,
+      "subs": [
+        3,
+        4.5,
+        3.5,
+        2.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "gaabor-ga-e6a",
+      "rank": 9,
+      "total": 70,
+      "thin": false,
+      "subs": [
+        3,
+        5,
+        3,
+        2.5,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "id": "mayer-mmaf3000",
+      "rank": 10,
+      "total": 67,
+      "thin": false,
+      "subs": [
+        3,
+        3.5,
+        3.5,
+        3,
+        3.5,
+        4,
+        4
+      ]
+    }
+  ],
+  "best-air-purifiers-malaysia": [
+    {
+      "id": "xiaomi-ap4-compact",
+      "rank": 1,
+      "total": 79,
+      "thin": false,
+      "subs": [
+        3.5,
+        5,
+        3.5,
+        4,
+        3.5,
+        5,
+        4
+      ]
+    },
+    {
+      "id": "sharp-fpj30la",
+      "rank": 2,
+      "total": 78,
+      "thin": false,
+      "subs": [
+        3.5,
+        4.5,
+        4,
+        3.5,
+        3.5,
+        5,
+        4
+      ]
+    },
+    {
+      "id": "sharp-kin50lw",
+      "rank": 3,
+      "total": 77.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        3,
+        4,
+        4,
+        3.5,
+        3.5,
+        4
+      ]
+    },
+    {
+      "id": "panasonic-f-pxj30a",
+      "rank": 4,
+      "total": 75.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        3.5,
+        4.5,
+        3.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "philips-600i",
+      "rank": 5,
+      "total": 75.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4,
+        4,
+        3.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "lg-puricare-alpha-pet",
+      "rank": 6,
+      "total": 73,
+      "thin": false,
+      "subs": [
+        4,
+        2,
+        4,
+        4.5,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "prism-aura",
+      "rank": 7,
+      "total": 73,
+      "thin": false,
+      "subs": [
+        3.5,
+        4.5,
+        3,
+        4,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "blueair-classic-205",
+      "rank": 8,
+      "total": 72.5,
+      "thin": false,
+      "subs": [
+        4,
+        3,
+        4,
+        3,
+        3.5,
+        3.5,
+        4
+      ]
+    },
+    {
+      "id": "dyson-tp09",
+      "rank": 9,
+      "total": 72,
+      "thin": false,
+      "subs": [
+        4,
+        2,
+        4,
+        4.5,
+        4,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "acerpure-pro-p3",
+      "rank": 10,
+      "total": 70,
+      "thin": false,
+      "subs": [
+        4.5,
+        1.5,
+        3.5,
+        4.5,
+        3.5,
+        3,
+        4
+      ]
+    }
+  ],
+  "best-mattress-malaysia": [
+    {
+      "id": "origin-hybrid",
+      "rank": 1,
+      "total": 88,
+      "thin": false,
+      "subs": [
+        4.5,
+        4.5,
+        4,
+        4.5,
+        4.5,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "sonno-original",
+      "rank": 2,
+      "total": 86,
+      "thin": false,
+      "subs": [
+        4.5,
+        4,
+        4,
+        4,
+        5,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "king-koil-spinalcare-pedic-13",
+      "rank": 3,
+      "total": 79.5,
+      "thin": false,
+      "subs": [
+        4,
+        3.5,
+        4.5,
+        3.5,
+        4,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "ecolux-palladio-12",
+      "rank": 4,
+      "total": 76.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4.5,
+        3.5,
+        3.5,
+        4,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "ikea-vestmarka",
+      "rank": 5,
+      "total": 70.5,
+      "thin": true,
+      "subs": [
+        3,
+        5,
+        3.5,
+        2.5,
+        3,
+        3.5,
+        4
+      ]
+    },
+    {
+      "id": "mlily-supreme-cooling",
+      "rank": 6,
+      "total": 66.5,
+      "thin": true,
+      "subs": [
+        3,
+        3.5,
+        3.5,
+        3,
+        3,
+        4,
+        4.5
+      ]
+    },
+    {
+      "id": "naturenite-identity-80",
+      "rank": 7,
+      "total": 66,
+      "thin": true,
+      "subs": [
+        3,
+        3,
+        4,
+        3,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "dreamland-chiro-perfect",
+      "rank": 8,
+      "total": 66,
+      "thin": true,
+      "subs": [
+        3,
+        2.5,
+        4,
+        3,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "nosda-cloud",
+      "rank": 9,
+      "total": 66,
+      "thin": true,
+      "subs": [
+        3,
+        3.5,
+        3.5,
+        3,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "dunlopillo-talasilver-wave",
+      "rank": 10,
+      "total": 62.5,
+      "thin": true,
+      "subs": [
+        3,
+        1.5,
+        4.5,
+        3,
+        3.5,
+        3.5,
+        4
+      ]
+    }
+  ],
+  "best-vacuum-cleaners-malaysia": [
+    {
+      "id": "dyson-v12-detect-slim-absolute",
+      "rank": 1,
+      "total": 81,
+      "thin": false,
+      "subs": [
+        4.5,
+        2.5,
+        4.5,
+        4.5,
+        4,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "dyson-v12-origin",
+      "rank": 2,
+      "total": 78,
+      "thin": false,
+      "subs": [
+        4,
+        3,
+        4.5,
+        3,
+        4.5,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "dreame-v12-pro",
+      "rank": 3,
+      "total": 78,
+      "thin": false,
+      "subs": [
+        4,
+        4.5,
+        3.5,
+        4,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "roborock-q7-pro-max-plus",
+      "rank": 4,
+      "total": 73.5,
+      "thin": true,
+      "subs": [
+        3,
+        4.5,
+        4,
+        3,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "xiaomi-robot-x10-plus",
+      "rank": 5,
+      "total": 73,
+      "thin": false,
+      "subs": [
+        3.5,
+        3.5,
+        3.5,
+        4.5,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "airbot-hypersonics-pro",
+      "rank": 6,
+      "total": 72,
+      "thin": false,
+      "subs": [
+        3.5,
+        4.5,
+        3,
+        3.5,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "khind-vc9000ms",
+      "rank": 7,
+      "total": 71.5,
+      "thin": false,
+      "subs": [
+        3,
+        4,
+        3.5,
+        3,
+        4.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "xiaomi-trueclean-w10-pro",
+      "rank": 8,
+      "total": 71,
+      "thin": false,
+      "subs": [
+        3.5,
+        3.5,
+        3.5,
+        3.5,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "panasonic-mc-sb85kh047",
+      "rank": 9,
+      "total": 69,
+      "thin": false,
+      "subs": [
+        3.5,
+        2.5,
+        4,
+        3.5,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "roborock-s8-max-v-ultra",
+      "rank": 10,
+      "total": 63,
+      "thin": true,
+      "subs": [
+        3,
+        2,
+        4,
+        3,
+        3.5,
+        4,
+        4
+      ]
+    }
+  ],
+  "best-wireless-earbuds-malaysia": [
+    {
+      "id": "apple-airpods-pro-2",
+      "rank": 1,
+      "total": 83,
+      "thin": false,
+      "subs": [
+        4.5,
+        3,
+        4.5,
+        4.5,
+        4,
+        5,
+        4
+      ]
+    },
+    {
+      "id": "sony-wf-1000xm5",
+      "rank": 2,
+      "total": 80.5,
+      "thin": false,
+      "subs": [
+        5,
+        2.5,
+        4,
+        4.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "soundcore-liberty-4-nc",
+      "rank": 3,
+      "total": 79.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        5,
+        3.5,
+        4.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "oneplus-buds-3",
+      "rank": 4,
+      "total": 78,
+      "thin": false,
+      "subs": [
+        4,
+        4.5,
+        3.5,
+        4,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "sony-wf-c710n",
+      "rank": 5,
+      "total": 75.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4,
+        4,
+        3.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "jabra-elite-10",
+      "rank": 6,
+      "total": 73.5,
+      "thin": false,
+      "subs": [
+        4,
+        2.5,
+        4,
+        4,
+        3.5,
+        4,
+        4.5
+      ]
+    },
+    {
+      "id": "oppo-enco-buds2",
+      "rank": 7,
+      "total": 72.5,
+      "thin": true,
+      "subs": [
+        3,
+        5,
+        3.5,
+        3,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "baseus-bowie-30-anc",
+      "rank": 8,
+      "total": 71,
+      "thin": false,
+      "subs": [
+        3,
+        5,
+        3,
+        3.5,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "samsung-galaxy-buds3",
+      "rank": 9,
+      "total": 67.5,
+      "thin": true,
+      "subs": [
+        3,
+        3.5,
+        3.5,
+        3,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "bose-qc-ultra-earbuds-2",
+      "rank": 10,
+      "total": 63,
+      "thin": true,
+      "subs": [
+        3,
+        2,
+        4,
+        3,
+        3.5,
+        4,
+        4
+      ]
+    }
+  ],
+  "best-facial-cleansers-malaysia": [
+    {
+      "id": "cetaphil-gentle-skin-cleanser",
+      "rank": 1,
+      "total": 81.5,
+      "thin": false,
+      "subs": [
+        4,
+        4.5,
+        4.5,
+        3,
+        3,
+        5,
+        4.5
+      ]
+    },
+    {
+      "id": "cerave-foaming-cleanser-oily",
+      "rank": 2,
+      "total": 81.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        3.5,
+        4.5,
+        3.5,
+        3,
+        5,
+        4.5
+      ]
+    },
+    {
+      "id": "simple-refreshing-facial-wash-gel",
+      "rank": 3,
+      "total": 81.5,
+      "thin": false,
+      "subs": [
+        4,
+        5,
+        4,
+        3,
+        3,
+        5,
+        4.5
+      ]
+    },
+    {
+      "id": "la-roche-posay-toleriane-caring-wash",
+      "rank": 4,
+      "total": 79,
+      "thin": false,
+      "subs": [
+        4.5,
+        3,
+        4.5,
+        3.5,
+        3,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "hada-labo-moisturizing-face-wash",
+      "rank": 5,
+      "total": 76.5,
+      "thin": false,
+      "subs": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "hada-labo-hydrating-cleansing-oil",
+      "rank": 6,
+      "total": 75.5,
+      "thin": false,
+      "subs": [
+        4,
+        3.5,
+        4,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "eucerin-dermopure-gel-to-foam",
+      "rank": 7,
+      "total": 73.5,
+      "thin": false,
+      "subs": [
+        4,
+        3,
+        4,
+        3.5,
+        3,
+        4,
+        4.5
+      ]
+    },
+    {
+      "id": "hada-labo-deep-clean-pore-refining",
+      "rank": 8,
+      "total": 73.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4.5,
+        3.5,
+        3,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "eversoft-avocado-rice-bran",
+      "rank": 9,
+      "total": 69.5,
+      "thin": false,
+      "subs": [
+        3,
+        4.5,
+        3.5,
+        2.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "aiken-prebiotic-facial-cleanser",
+      "rank": 10,
+      "total": 69,
+      "thin": false,
+      "subs": [
+        3,
+        5,
+        3,
+        2.5,
+        3,
+        4,
+        4
+      ]
+    }
+  ],
+  "best-washing-machines-malaysia": [
+    {
+      "id": "bosch-wgg254a0sg",
+      "rank": 1,
+      "total": 80.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        2.5,
+        4.5,
+        4,
+        4.5,
+        4,
+        4.5
+      ]
+    },
+    {
+      "id": "midea-mf200w100wb",
+      "rank": 2,
+      "total": 75,
+      "thin": false,
+      "subs": [
+        3.5,
+        5,
+        3,
+        4,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "samsung-ww10t634dlh",
+      "rank": 3,
+      "total": 73.5,
+      "thin": false,
+      "subs": [
+        4,
+        3,
+        4,
+        4,
+        2.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "samsung-wa16cg6745bv",
+      "rank": 4,
+      "total": 70.5,
+      "thin": true,
+      "subs": [
+        3,
+        4,
+        4,
+        3,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "panasonic-na-fd135x3bt",
+      "rank": 5,
+      "total": 70.5,
+      "thin": true,
+      "subs": [
+        3,
+        4,
+        4,
+        3,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "lg-fv1409s4w",
+      "rank": 6,
+      "total": 69.5,
+      "thin": true,
+      "subs": [
+        3,
+        3.5,
+        4,
+        3,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "lg-fv1409s3w",
+      "rank": 7,
+      "total": 69.5,
+      "thin": true,
+      "subs": [
+        3,
+        3.5,
+        4,
+        3,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "hisense-wdqy8014evjmt",
+      "rank": 8,
+      "total": 68,
+      "thin": true,
+      "subs": [
+        3,
+        4.5,
+        3,
+        3,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "electrolux-ewf1143r7sc",
+      "rank": 9,
+      "total": 67,
+      "thin": true,
+      "subs": [
+        3,
+        3,
+        4,
+        3,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "toshiba-tw-bh85s2m",
+      "rank": 10,
+      "total": 66,
+      "thin": true,
+      "subs": [
+        3,
+        3.5,
+        3.5,
+        3,
+        3,
+        4,
+        4
+      ]
+    }
+  ],
+  "best-laptops-for-students-malaysia": [
+    {
+      "id": "macbook-air-13-m5",
+      "rank": 1,
+      "total": 82,
+      "thin": false,
+      "subs": [
+        5,
+        2,
+        5,
+        4,
+        3.5,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "asus-vivobook-16-a1607q",
+      "rank": 2,
+      "total": 77.5,
+      "thin": false,
+      "subs": [
+        4,
+        3.5,
+        3.5,
+        4,
+        4.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "hp-pavilion-aero-13",
+      "rank": 3,
+      "total": 74,
+      "thin": false,
+      "subs": [
+        4,
+        3.5,
+        3.5,
+        4,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "acer-swift-go-14-ai",
+      "rank": 4,
+      "total": 74,
+      "thin": false,
+      "subs": [
+        4.5,
+        2.5,
+        3.5,
+        4.5,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "lenovo-ideapad-slim-3-15amn8",
+      "rank": 5,
+      "total": 72.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4,
+        3.5,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "macbook-air-m4",
+      "rank": 6,
+      "total": 72,
+      "thin": true,
+      "subs": [
+        3,
+        3,
+        5,
+        3,
+        3.5,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "asus-vivobook-15",
+      "rank": 7,
+      "total": 71.5,
+      "thin": true,
+      "subs": [
+        3,
+        4.5,
+        3.5,
+        3,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "dell-inspiron-14-5440",
+      "rank": 8,
+      "total": 71,
+      "thin": true,
+      "subs": [
+        3,
+        4,
+        4,
+        3,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "lenovo-ideapad-slim-3-16",
+      "rank": 9,
+      "total": 70.5,
+      "thin": true,
+      "subs": [
+        3,
+        4.5,
+        3.5,
+        3,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "lenovo-ideapad-flex-5-14abr8",
+      "rank": 10,
+      "total": 68,
+      "thin": true,
+      "subs": [
+        3,
+        4,
+        3.5,
+        3,
+        3,
+        4,
+        4
+      ]
+    }
+  ],
+  "best-smart-watches-malaysia": [
+    {
+      "id": "apple-watch-se-3",
+      "rank": 1,
+      "total": 85.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        3.5,
+        4.5,
+        4.5,
+        4,
+        5,
+        4.5
+      ]
+    },
+    {
+      "id": "apple-watch-series-11",
+      "rank": 2,
+      "total": 85.5,
+      "thin": false,
+      "subs": [
+        5,
+        2.5,
+        4.5,
+        5,
+        4,
+        5,
+        4.5
+      ]
+    },
+    {
+      "id": "garmin-forerunner-70",
+      "rank": 3,
+      "total": 84,
+      "thin": false,
+      "subs": [
+        4.5,
+        4,
+        4.5,
+        4,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "garmin-forerunner-170",
+      "rank": 4,
+      "total": 83,
+      "thin": false,
+      "subs": [
+        4.5,
+        3.5,
+        4.5,
+        4.5,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "garmin-venu-3",
+      "rank": 5,
+      "total": 79,
+      "thin": false,
+      "subs": [
+        4.5,
+        2.5,
+        4.5,
+        4.5,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "huawei-watch-fit-5",
+      "rank": 6,
+      "total": 77,
+      "thin": false,
+      "subs": [
+        4,
+        4,
+        3.5,
+        4,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "huawei-watch-gt-runner-2",
+      "rank": 7,
+      "total": 77,
+      "thin": false,
+      "subs": [
+        4,
+        4,
+        3.5,
+        4,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "samsung-galaxy-watch7",
+      "rank": 8,
+      "total": 76.5,
+      "thin": false,
+      "subs": [
+        4,
+        3,
+        4,
+        4.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "redmi-watch-6",
+      "rank": 9,
+      "total": 76.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        5,
+        3.5,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "amazfit-cheetah-2-pro",
+      "rank": 10,
+      "total": 73.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        2.5,
+        3.5,
+        4.5,
+        3,
+        3.5,
+        4
+      ]
+    }
+  ],
+  "best-smart-tvs-malaysia": [
+    {
+      "id": "tcl-p8l-65",
+      "rank": 1,
+      "total": 80.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        4,
+        3.5,
+        4.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "hisense-65-uled-mini-led",
+      "rank": 2,
+      "total": 80.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        4,
+        3.5,
+        4.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "samsung-crystal-uhd-u8000h-43",
+      "rank": 3,
+      "total": 79.5,
+      "thin": false,
+      "subs": [
+        4,
+        3.5,
+        4.5,
+        4,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "lg-oled-ai-b6-55",
+      "rank": 4,
+      "total": 78,
+      "thin": false,
+      "subs": [
+        5,
+        1.5,
+        4.5,
+        4.5,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "samsung-50cu7700",
+      "rank": 5,
+      "total": 75.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        3.5,
+        4.5,
+        3.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "lg-50ut7300",
+      "rank": 6,
+      "total": 75.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4,
+        4,
+        3.5,
+        3.5,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "sony-kd-50x77l",
+      "rank": 7,
+      "total": 75,
+      "thin": false,
+      "subs": [
+        4,
+        2.5,
+        4.5,
+        4,
+        3.5,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "hisense-50a6k",
+      "rank": 8,
+      "total": 74.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4.5,
+        3.5,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "tcl-43s5k",
+      "rank": 9,
+      "total": 73.5,
+      "thin": false,
+      "subs": [
+        3,
+        5,
+        3.5,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "xiaomi-tv-a-pro-2026",
+      "rank": 10,
+      "total": 72.5,
+      "thin": false,
+      "subs": [
+        3.5,
+        4.5,
+        3,
+        4,
+        2.5,
+        4.5,
+        4
+      ]
+    }
+  ],
+  "best-running-shoes-malaysia": [
+    {
+      "id": "nike-pegasus-41",
+      "rank": 1,
+      "total": 84,
+      "thin": false,
+      "subs": [
+        4,
+        5,
+        4.5,
+        3.5,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "id": "hoka-mach-5",
+      "rank": 2,
+      "total": 82.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        4.5,
+        4,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "saucony-ride-17",
+      "rank": 3,
+      "total": 81,
+      "thin": false,
+      "subs": [
+        4,
+        5,
+        4,
+        3.5,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "brooks-glycerin-20",
+      "rank": 4,
+      "total": 80,
+      "thin": false,
+      "subs": [
+        4.5,
+        3.5,
+        4.5,
+        3.5,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "asics-novablast-5",
+      "rank": 5,
+      "total": 78.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        3,
+        4.5,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "hoka-clifton-9",
+      "rank": 6,
+      "total": 78.5,
+      "thin": false,
+      "subs": [
+        4.5,
+        3.5,
+        4,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "asics-gel-kayano-32",
+      "rank": 7,
+      "total": 78,
+      "thin": false,
+      "subs": [
+        4,
+        3.5,
+        4.5,
+        3.5,
+        3,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "id": "new-balance-1080-v14",
+      "rank": 8,
+      "total": 78,
+      "thin": false,
+      "subs": [
+        4.5,
+        3,
+        4.5,
+        3.5,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "asics-gel-cumulus-27",
+      "rank": 9,
+      "total": 77.5,
+      "thin": false,
+      "subs": [
+        4,
+        4,
+        4,
+        3.5,
+        3,
+        4.5,
+        4
+      ]
+    },
+    {
+      "id": "adidas-supernova-rise-2",
+      "rank": 10,
+      "total": 75,
+      "thin": false,
+      "subs": [
+        3.5,
+        4,
+        4,
+        3.5,
+        3,
+        5,
+        4
+      ]
+    }
+  ]
+}

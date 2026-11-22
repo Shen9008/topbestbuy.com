@@ -11,7 +11,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "data:extract": "node scripts/extract-mockup.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.1",
@@ -31,6 +34,7 @@
     "prettier-plugin-astro": "^1.1.2",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.73.0",
+    "vitest": "^3.2.4",
     "wrangler": "^4.166.0"
   }
 }
