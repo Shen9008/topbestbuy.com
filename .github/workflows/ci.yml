@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, phase-1-foundation, 'cursor/**']
+    branches: [main, phase-1-foundation, phase-2-data, 'cursor/**']
   pull_request:
 
 jobs:
@@ -17,4 +17,5 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run check
+      - run: npm run test
       - run: npm run build
