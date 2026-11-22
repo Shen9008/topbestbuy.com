@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import { POSTS } from '../../data/posts';
+---
+
+<BaseLayout
+  title="Guides and explainers"
+  description="Plain-English buying guides, care tips and myth-busters from TopBestBuy."
+  canonical="/guides"
+>
+  <Breadcrumbs items={[{ label: 'Guides' }]} />
+  <h1 class="font-display text-3xl font-extrabold">Guides and explainers</h1>
+  <p class="max-w-[60ch] text-[var(--tb-muted)]">
+    Short answers to the questions people ask before and after they buy.
+  </p>
+  <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      Object.entries(POSTS).map(([id, p]) => (
+        <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
+          <span class="tb-pill">{p.type}</span>
+          <h2 class="m-0 font-display text-lg font-bold">{p.h1}</h2>
+          <p class="m-0 text-sm text-[var(--tb-muted)]">{p.tldr}</p>
+          <span class="text-xs text-[var(--tb-muted)]">{p.time} read</span>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

@@ -1,17 +1,152 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import StubShell from '../../components/pages/StubShell.astro';
-import { REVIEW_STUB_IDS } from '../../lib/routes';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import ImageSlot from '../../components/media/ImageSlot.astro';
+import SaveButton from '../../components/islands/SaveButton';
+import { allProductsMap, getList, RANKED } from '../../lib/catalog';
+import { CRIT } from '../../data/scorecard';
+import { SITE_DATE } from '../../data/meta';
+import { formatRM, productFullName } from '../../lib/format';
+import { usageScoresForProduct } from '../../lib/list-extra';
 
 export function getStaticPaths() {
-  return REVIEW_STUB_IDS.map((id) => ({ params: { id } }));
+  return Object.keys(allProductsMap()).map((id) => ({ params: { id } }));
 }
 
+const catalog = allProductsMap();
 const { id } = Astro.params;
+const product = catalog[id!];
+if (!product) throw new Error(`Unknown product ${id}`);
+const list = getList(product.list);
+const peers = RANKED[product.list] ?? [];
+const usageRows = usageScoresForProduct(product.subs, list.usages);
 ---
 
-<BaseLayout title={`Review ${id}`} description="Product review (stub)." canonical={`/reviews/${id}`}>
-  <StubShell title={`Review: ${id}`} kicker="Review">
-    <p>Review layout and JSON-LD ship in Phase 3. No product copy in Phase 1.</p>
-  </StubShell>
+<BaseLayout
+  title={`${productFullName(product)} review`}
+  description={`${productFullName(product)} scored ${product.total.toFixed(1)}/100 on our scorecard with usage scores, specs and trade-offs.`}
+  canonical={`/reviews/${id}`}
+>
+  <Breadcrumbs
+    items={[
+      { label: 'Top 10 lists', href: '/categories' },
+      { label: list.short, href: `/${product.list}` },
+      { label: `${productFullName(product)} review` },
+    ]}
+  />
+
+  <h1 class="font-display text-3xl font-extrabold">
+    {productFullName(product)} review: scores and what the evidence says
+  </h1>
+
+  <p class="text-sm text-[var(--tb-muted)]">
+    Scorecard v1.0 · Evidence checked {SITE_DATE} ·
+    <span class="tb-pill tb-pill-sample">Prices as reported</span>
+  </p>
+
+  <ImageSlot slotId={`review-${id}`} aspect="banner" label={`${productFullName(product)} hero`} />
+
+  <div class="tb-disclosure">
+    <strong>We did not test this product ourselves.</strong> Scores reflect our reading of expert
+    reviews, owner reviews and official specs. <a href="/how-we-rank">How we rank</a>.
+  </div>
+
+  <div class="mt-6 grid gap-4 lg:grid-cols-2">
+    <div class="tb-card">
+      <p class="text-xs font-bold uppercase text-[var(--tb-muted)]">Verdict</p>
+      <p class="tb-score text-4xl">
+        {product.total.toFixed(1)}
+        <span class="text-base font-normal text-[var(--tb-muted)]"> / 100</span>
+      </p>
+      <p class="text-sm">
+        Ranked <strong>#{product.rank} of 10</strong> in <a href={`/${product.list}`}>{list.h1.split(':')[0]}</a>.
+        {product.tag}. Best for: {product.best.toLowerCase()}.
+      </p>
+      <p class="tb-score text-xl">{formatRM(product.price)}</p>
+      <p class="text-sm">
+        <strong>After-sales and warranty:</strong> {product.X.a ?? 'Not verified'}
+      </p>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <button type="button" class="tb-btn tb-btn-sm">See price at retailer</button>
+        <SaveButton client:idle productId={product.id} />
+      </div>
+    </div>
+    <div class="tb-card">
+      <h2 class="mt-0 text-lg font-bold">Scorecard</h2>
+      <div class="tb-tablewrap">
+        <table class="tb-table">
+          <thead>
+            <tr>
+              <th>Criterion</th>
+              <th>Weight</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              CRIT.map((c, i) => (
+                <tr>
+                  <td>{c[1]}</td>
+                  <td class="tb-num">{c[2]}%</td>
+                  <td class="tb-num">{product.subs[i]}/5</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 grid gap-4 lg:grid-cols-2">
+    <h2 class="sr-only">Usage and trade-offs</h2>
+    <div class="tb-card">
+      <h3 class="mt-0 text-lg font-bold">Usage scores</h3>
+      <div class="tb-tablewrap">
+        <table class="tb-table">
+          <tbody>
+            {usageRows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td class="tb-num">
+                  <strong>{row.score.toFixed(1)}</strong>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tb-card">
+      <h3 class="mt-0 text-lg font-bold">Pros and trade-offs</h3>
+      <h4 class="text-sm font-bold text-[var(--color-good)]">Pros</h4>
+      <ul class="tb-pros text-sm">{product.pros.map((x) => <li>{x}</li>)}</ul>
+      <h4 class="text-sm font-bold text-[var(--tb-accent)]">Trade-offs</h4>
+      <ul class="tb-cons text-sm">{product.cons.map((x) => <li>{x}</li>)}</ul>
+    </div>
+  </div>
+
+  <section class="mt-8">
+    <h2 class="font-display text-2xl font-bold">Alternatives</h2>
+    <div class="mt-3 grid gap-3 sm:grid-cols-3">
+      {
+        peers
+          .filter((x) => x.id !== product.id)
+          .slice(0, 3)
+          .map((x) => (
+            <a href={`/reviews/${x.id}`} class="tb-tile">
+              <strong>{productFullName(x)}</strong>
+              <span>{x.tag}</span>
+              <span class="tb-num">
+                {x.total.toFixed(1)}/100 · {formatRM(x.price)}
+              </span>
+            </a>
+          ))
+      }
+    </div>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <a href="/compare" class="tb-btn tb-btn-ghost tb-btn-sm">Compare with others</a>
+      <a href={`/${product.list}`} class="tb-btn tb-btn-ghost tb-btn-sm">Back to the Top 10</a>
+    </div>
+  </section>
 </BaseLayout>

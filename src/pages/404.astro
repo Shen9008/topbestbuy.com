@@ -1,21 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
 ---
 
-<BaseLayout title="Page not found" noindex={true} description="The page you requested is not on TopBestBuy yet.">
-  <StubShell
-    title="We could not find that page"
-    kicker="404"
-    description="Check the URL or return home. Full search ships in Phase 4."
-    showHeroImage={false}
-  >
-    <p>
-      <a
-        href="/"
-        class="cursor-pointer font-semibold text-[var(--tb-accent)] underline underline-offset-4"
-        >Return home</a
-      >
-    </p>
-  </StubShell>
+<BaseLayout title="Page not found" description="This page does not exist." noindex>
+  <h1 class="font-display text-3xl font-extrabold">That page is not here</h1>
+  <p class="text-[var(--tb-muted)]">Try a Top 10 list, guides, or search from the header.</p>
+  <div class="mt-6 flex flex-wrap gap-2">
+    <a href="/categories" class="tb-btn">Browse lists</a>
+    <a href="/" class="tb-btn tb-btn-ghost">Home</a>
+  </div>
 </BaseLayout>

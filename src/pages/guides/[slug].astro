@@ -1,17 +1,58 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import StubShell from '../../components/pages/StubShell.astro';
-import { GUIDE_STUB_SLUGS } from '../../lib/routes';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import { POSTS } from '../../data/posts';
+import { LISTS } from '../../data/lists';
+import { SITE_DATE } from '../../data/meta';
 
 export function getStaticPaths() {
-  return GUIDE_STUB_SLUGS.map((slug) => ({ params: { slug } }));
+  return Object.keys(POSTS).map((key) => ({
+    params: { slug: key.replace(/^blog-/, '') },
+    props: { postId: key },
+  }));
 }
 
-const { slug } = Astro.params;
+const { postId } = Astro.props;
+const post = POSTS[postId as keyof typeof POSTS];
 ---
 
-<BaseLayout title={slug.replace(/-/g, ' ')} description="Buying guide (stub)." canonical={`/guides/${slug}`}>
-  <StubShell title={slug} kicker="Guide">
-    <p>Guide prose from list `guide` fields and blog posts lands in Phase 3.</p>
-  </StubShell>
+<BaseLayout title={post.title} description={post.meta} canonical={`/guides/${Astro.params.slug}`}>
+  <Breadcrumbs items={[{ label: 'Guides', href: '/guides' }, { label: post.type }]} />
+  <span class="tb-pill">{post.type}</span>
+  <h1 class="mt-2 font-display text-3xl font-extrabold">{post.h1}</h1>
+  <p class="text-sm text-[var(--tb-muted)]">
+    By <strong>[Editor name]</strong> · Updated {SITE_DATE} · {post.time} read ·
+    <span class="tb-pill tb-pill-sample">Sample article</span>
+  </p>
+  <div class="tb-disclosure">
+    <strong>How we make money:</strong> we may earn a commission from links on this page. This
+    never affects our rankings. <a href="/how-we-rank">How we rank</a>
+  </div>
+  <div class="tb-callout border-2 border-[var(--tb-ink)]">
+    <strong>Short answer</strong>
+    <p class="m-0 mt-2">{post.tldr}</p>
+  </div>
+  <article class="tb-prose mt-6" set:html={post.body} />
+  <section class="mt-8">
+    <h2 class="font-display text-xl font-bold">Keep reading</h2>
+    <div class="mt-3 flex flex-wrap gap-2">
+      {
+        post.related.map((r) =>
+          LISTS[r as keyof typeof LISTS] ? (
+            <a href={`/${r}`} class="tb-btn tb-btn-ghost tb-btn-sm">
+              {LISTS[r as keyof typeof LISTS].short}: Top 10
+            </a>
+          ) : POSTS[r as keyof typeof POSTS] ? (
+            <a href={`/guides/${r.replace(/^blog-/, '')}`} class="tb-btn tb-btn-ghost tb-btn-sm">
+              {POSTS[r as keyof typeof POSTS].h1}
+            </a>
+          ) : (
+            <a href="/how-we-rank" class="tb-btn tb-btn-ghost tb-btn-sm">
+              How we rank
+            </a>
+          ),
+        )
+      }
+    </div>
+  </section>
 </BaseLayout>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import ComparePicker from '../components/islands/ComparePicker';
+---
+
+<BaseLayout
+  title="Compare products side by side"
+  description="Compare up to three products on the same scorecard: scores, usage scores, price and specs."
+  canonical="/compare"
+>
+  <Breadcrumbs items={[{ label: 'Tools', href: '/tools' }, { label: 'Compare' }]} />
+  <h1 class="font-display text-3xl font-extrabold">Compare products</h1>
+  <p class="max-w-[60ch] text-[var(--tb-muted)]">
+    Pick up to three. Use products from the same list for the clearest comparison.
+  </p>
+  <div class="mt-6">
+    <ComparePicker client:load />
+  </div>
+</BaseLayout>

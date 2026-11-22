@@ -2,10 +2,12 @@
 import '../styles/global.css';
 import Seo from '../components/seo/Seo.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
+import UtilBanner from '../components/layout/UtilBanner.astro';
 import DesktopIconRail from '../components/layout/DesktopIconRail.astro';
 import SiteTopBar from '../components/layout/SiteTopBar.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import MobileTabBar from '../components/layout/MobileTabBar.astro';
+import AppChrome from '../components/islands/AppChrome';
 
 export interface Props {
   title: string;
@@ -33,6 +35,7 @@ const { title, description, canonical, noindex } = Astro.props;
   </head>
   <body class="min-h-screen antialiased">
     <SkipLink />
+    <UtilBanner />
     <DesktopIconRail />
     <div class="flex min-h-screen flex-col lg:pl-[var(--rail-width)]">
       <SiteTopBar />
@@ -45,5 +48,6 @@ const { title, description, canonical, noindex } = Astro.props;
       <SiteFooter />
     </div>
     <MobileTabBar />
+    <AppChrome client:load />
   </body>
 </html>

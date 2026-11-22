@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import ImageSlot from '../components/media/ImageSlot.astro';
+import { CATS } from '../data/categories';
+---
+
+<BaseLayout
+  title="All Top 10 lists by category"
+  description="Browse TopBestBuy Top 10 lists by category for Malaysia."
+  canonical="/categories"
+>
+  <Breadcrumbs items={[{ label: 'Top 10 lists' }]} />
+  <h1 class="font-display text-3xl font-extrabold">Top 10 lists by category</h1>
+  <p class="max-w-[60ch] text-[var(--tb-muted)]">
+    Live lists are scored on our published scorecard. Planned lists follow search demand and your votes.
+  </p>
+  <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      CATS.map((c) => (
+        <a
+          href={`/category/${c.id}`}
+          class:list={['tb-tile', !c.lists.length && 'opacity-75']}
+        >
+          <ImageSlot slotId={`cat-${c.id}`} aspect="video" label={`${c.name} tile`} />
+          <span class:list={['tb-pill', c.lists.length && 'tb-pill-good']}>
+            {c.lists.length ? `${c.lists.length} live` : 'coming'}
+          </span>
+          <h3 class="m-0 font-display text-lg font-bold">{c.name}</h3>
+          <p class="m-0 text-sm text-[var(--tb-muted)]">{c.desc}</p>
+          <span class="text-xs text-[var(--tb-muted)]">Next: {c.soon.slice(0, 3).join(', ')}</span>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

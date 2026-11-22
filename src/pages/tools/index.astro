@@ -1,14 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import StubShell from '../../components/pages/StubShell.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import ToolsHub from '../../components/islands/ToolsHub';
+
+const initialTool = Astro.url.searchParams.get('tool') ?? undefined;
 ---
 
-<BaseLayout title="Buying tools" description="Calculators and choosers for Malaysian shoppers (stub).">
-  <StubShell title="Tools hub" kicker="Tools">
-    <p>
-      Per-tool routes (finder, air fryer size, purifier CADR, and others) will
-      appear under <code class="text-[var(--tb-ink)]">/tools/&lt;slug&gt;</code> in
-      Phase 4.
-    </p>
-  </StubShell>
+<BaseLayout
+  title="Buying tools and calculators"
+  description="Product finder and calculators: air fryer size, purifier room size, running cost, mattress firmness."
+  canonical="/tools"
+>
+  <Breadcrumbs items={[{ label: 'Tools' }]} />
+  <h1 class="font-display text-3xl font-extrabold">Buying tools</h1>
+  <p class="max-w-[60ch] text-[var(--tb-muted)]">
+    Narrow the field in a minute. Estimates only: check the notes under each result.
+  </p>
+  <div class="mt-6">
+    <ToolsHub client:load initialTool={initialTool} />
+  </div>
+  <p class="mt-4 text-sm">
+    <a href="/compare">Compare products side by side</a>
+  </p>
 </BaseLayout>

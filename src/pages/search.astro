@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
+import SearchPage from '../components/islands/SearchPage';
 ---
 
-<BaseLayout title="Search" description="Search TopBestBuy lists and guides (stub).">
-  <StubShell title="Search" kicker="Discover">
-    <p>SiteSearch island and index build land in Phase 4.</p>
-  </StubShell>
+<BaseLayout title="Search" description="Search TopBestBuy lists, guides and tools.">
+  <h1 class="font-display text-3xl font-extrabold">Search</h1>
+  <p class="text-[var(--tb-muted)]">Lists, guides, tools and methodology pages.</p>
+  <SearchPage client:load />
 </BaseLayout>

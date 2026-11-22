@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
+import SavedPage from '../components/islands/SavedPage';
 ---
 
-<BaseLayout title="Saved lists" description="Your shortlist on TopBestBuy (stub).">
-  <StubShell title="Saved" kicker="Shortlist">
-    <p>ShortlistDrawer and optional localStorage sync ship in Phase 4.</p>
-  </StubShell>
+<BaseLayout title="My shortlist" description="Products saved on this device for comparison.">
+  <h1 class="font-display text-3xl font-extrabold">My shortlist</h1>
+  <p class="text-[var(--tb-muted)]">Saved on this device. Open compare when you have up to three picks.</p>
+  <SavedPage client:load />
 </BaseLayout>

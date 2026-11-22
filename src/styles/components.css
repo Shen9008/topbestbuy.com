@@ -1,0 +1,133 @@
+@layer components {
+  .tb-card {
+    @apply rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 shadow-[0_1px_0_rgba(0,0,0,0.12),0_12px_32px_-16px_rgba(0,0,0,0.35)];
+  }
+
+  .tb-btn {
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-sm)] border-2 border-[var(--tb-accent)] bg-[var(--tb-accent)] px-5 text-sm font-bold text-[var(--tb-accent-ink)] transition-[filter,background-color,border-color] duration-200 hover:brightness-110;
+  }
+
+  .tb-btn-ghost {
+    @apply border-[var(--tb-ink)] bg-transparent text-[var(--tb-ink)] hover:bg-[var(--tb-surface-raised)];
+  }
+
+  .tb-btn-sm {
+    @apply min-h-10 px-3.5 text-sm;
+  }
+
+  .tb-chip {
+    @apply inline-flex min-h-9 cursor-pointer items-center rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 text-sm font-semibold text-[var(--tb-ink)] transition-colors duration-200 hover:border-[var(--tb-accent)];
+  }
+
+  .tb-chip-on {
+    @apply border-[var(--tb-ink)] bg-[var(--tb-ink)] text-[var(--tb-bg)];
+  }
+
+  .tb-rank {
+    @apply inline-flex items-center bg-[var(--tb-accent)] px-3 py-1 font-display text-lg font-extrabold text-[var(--tb-accent-ink)];
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+  }
+
+  .tb-pill {
+    @apply inline-block rounded-[var(--radius-pill)] bg-[var(--tb-surface-raised)] px-2.5 py-0.5 text-xs font-bold text-[var(--tb-ink)];
+  }
+
+  .tb-pill-good {
+    @apply bg-[var(--color-good)] text-white;
+  }
+
+  .tb-pill-thin {
+    @apply border border-dashed border-[var(--color-warn)] bg-transparent;
+  }
+
+  .tb-pill-sample {
+    @apply border border-dashed border-[var(--tb-muted)] bg-transparent text-[var(--tb-muted)];
+  }
+
+  .tb-score {
+    @apply font-display text-2xl font-extrabold tabular-nums text-[var(--tb-ink)];
+  }
+
+  .tb-disclosure {
+    @apply my-4 rounded-r-[var(--radius-sm)] border border-[var(--tb-line)] border-l-4 border-l-[var(--color-good)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm;
+  }
+
+  .tb-prose {
+    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+  }
+
+  .tb-tablewrap {
+    @apply overflow-x-auto rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface)];
+  }
+
+  .tb-table {
+    @apply w-full border-collapse text-sm tabular-nums;
+  }
+
+  .tb-table th,
+  .tb-table td {
+    @apply border-b border-[var(--tb-line)] px-3 py-2.5 text-left align-top;
+  }
+
+  .tb-table th {
+    @apply bg-[var(--tb-surface-raised)] font-bold whitespace-nowrap;
+  }
+
+  .tb-table tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .tb-num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tb-tile {
+    @apply flex cursor-pointer flex-col gap-1.5 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 text-[var(--tb-ink)] no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:border-[var(--tb-accent)];
+  }
+
+  .tb-eeat {
+    @apply my-4 rounded-[var(--radius-md)] border border-[var(--tb-line)] border-l-4 border-l-[var(--color-good)] bg-[var(--tb-surface)] p-4;
+  }
+
+  .tb-callout {
+    @apply my-4 rounded-[var(--radius-sm)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm;
+  }
+
+  .tb-jumpbar {
+    @apply sticky z-[var(--z-sticky)] -mx-4 mb-4 flex gap-2 overflow-x-auto bg-[var(--tb-bg)] px-1 py-2 lg:hidden;
+    top: calc(var(--topbar-height));
+  }
+
+  .tb-jumpbar a {
+    @apply inline-flex min-h-10 shrink-0 items-center rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 text-sm font-semibold text-[var(--tb-ink)] no-underline;
+  }
+
+  .tb-jumpbar a.tb-jump-active {
+    @apply border-[var(--tb-ink)] bg-[var(--tb-ink)] text-[var(--tb-bg)];
+  }
+
+  .sr-only {
+    @apply absolute h-px w-px overflow-hidden whitespace-nowrap;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .tb-bar {
+    @apply grid grid-cols-[minmax(0,9rem)_1fr_2.5rem] items-center gap-2 text-xs;
+  }
+
+  .tb-bar-track {
+    @apply h-2 overflow-hidden rounded-full bg-[var(--tb-line)];
+  }
+
+  .tb-bar-fill {
+    @apply block h-full rounded-full bg-[var(--tb-accent)];
+  }
+
+  .tb-pros li::marker {
+    color: var(--color-good);
+  }
+
+  .tb-cons li::marker {
+    color: var(--tb-accent);
+  }
+}
