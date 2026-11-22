@@ -20,10 +20,9 @@ const { title, description, canonical, noindex } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en-MY" data-theme="dark">
+<html lang="en-MY" data-theme="light">
   <head>
     <Seo title={title} description={description} canonical={canonical} noindex={noindex} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script is:inline>
       try {
         const t = localStorage.getItem('tb-theme');

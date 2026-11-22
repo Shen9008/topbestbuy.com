@@ -1,0 +1,49 @@
+---
+/** Approved lockups per Brand Guidelines v1.0 (Nov 2026). */
+export interface Props {
+  variant?: 'full' | 'mark';
+  class?: string;
+}
+
+const { variant = 'full', class: className } = Astro.props;
+
+const markHeight = '2.5rem'; /* 40px — within 36–44px desktop nav target */
+---
+
+<a
+  href="/"
+  class:list={[
+    'inline-flex shrink-0 items-center rounded-sm p-1 focus:outline-none',
+    className,
+  ]}
+  aria-label="TopBestBuy.online home"
+>
+  {
+    variant === 'mark' ? (
+      <img
+        src="/brand/logo-mark.png"
+        alt=""
+        width={40}
+        height={40}
+        class="h-10 w-10 object-contain"
+        style={`height: ${markHeight}; width: ${markHeight};`}
+        decoding="async"
+      />
+    ) : (
+      <>
+        <img
+          src="/brand/logo-wordmark-light.png"
+          alt="TopBestBuy.online"
+          width={220}
+          height={44}
+          class="logo-wordmark-img h-9 w-auto max-w-[min(52vw,13.75rem)] object-contain object-left sm:h-10 sm:max-w-[15rem]"
+          decoding="async"
+        />
+        <span class="logo-wordmark-text hidden items-baseline gap-0 font-display text-lg font-bold tracking-tight sm:text-xl">
+          <span class="text-[var(--color-brand-navy,#061D32)]">TopBestBuy</span>
+          <span class="text-[var(--color-brand-orange,#FF7900)]">.online</span>
+        </span>
+      </>
+    )
+  }
+</a>

@@ -1,22 +1,28 @@
 /**
- * TopBestBuy semantic tokens — dark default, light override.
- * Accent: #FF7A3D · Display: Sora · Body: Source Sans 3
+ * TopBestBuy semantic tokens — light default per Brand Guidelines v1.0.
+ * Brand: navy #061D32 · accent #FF7900 · Inter
  */
 
 @theme {
-  --font-display: 'Sora', system-ui, sans-serif;
-  --font-body: 'Source Sans 3', system-ui, sans-serif;
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 
-  --color-bg: oklch(0.16 0 0);
-  --color-surface: oklch(0.22 0 0);
-  --color-surface-raised: oklch(0.28 0 0);
-  --color-ink: oklch(0.93 0 0);
-  --color-muted: oklch(0.68 0.02 260);
-  --color-line: oklch(0.32 0 0);
-  --color-accent: oklch(0.72 0.16 45);
-  --color-accent-ink: oklch(0.18 0.04 45);
-  --color-good: oklch(0.72 0.12 160);
-  --color-warn: oklch(0.75 0.12 85);
+  --color-brand-navy: #061d32;
+  --color-brand-orange: #ff7900;
+  --color-brand-offwhite: #f7f9fb;
+  --color-brand-slate: #526273;
+  --color-brand-border: #e2e8ee;
+
+  --color-bg: oklch(0.98 0.006 240);
+  --color-surface: oklch(1 0 0);
+  --color-surface-raised: oklch(0.97 0.006 240);
+  --color-ink: oklch(0.22 0.04 250);
+  --color-muted: oklch(0.48 0.03 250);
+  --color-line: oklch(0.9 0.01 240);
+  --color-accent: oklch(0.7 0.18 48);
+  --color-accent-ink: oklch(0.22 0.04 250);
+  --color-good: oklch(0.52 0.1 160);
+  --color-warn: oklch(0.58 0.12 75);
 
   --radius-sm: 12px;
   --radius-md: 18px;
@@ -38,40 +44,58 @@
 }
 
 :root {
-  color-scheme: dark;
-  --tb-bg: var(--color-bg);
+  color-scheme: light;
+  --tb-bg: var(--color-brand-offwhite);
   --tb-surface: var(--color-surface);
   --tb-surface-raised: var(--color-surface-raised);
-  --tb-ink: var(--color-ink);
-  --tb-muted: var(--color-muted);
-  --tb-line: var(--color-line);
-  --tb-accent: var(--color-accent);
-  --tb-accent-ink: var(--color-accent-ink);
+  --tb-ink: var(--color-brand-navy);
+  --tb-muted: var(--color-brand-slate);
+  --tb-line: var(--color-brand-border);
+  --tb-accent: var(--color-brand-orange);
+  --tb-accent-ink: var(--color-brand-navy);
 }
 
-[data-theme='light'] {
-  color-scheme: light;
-  --tb-bg: oklch(0.98 0.005 85);
-  --tb-surface: oklch(1 0 0);
-  --tb-surface-raised: oklch(0.96 0.008 85);
-  --tb-ink: oklch(0.22 0.02 260);
-  --tb-muted: oklch(0.48 0.02 260);
-  --tb-line: oklch(0.88 0.01 85);
-  --tb-accent: oklch(0.72 0.16 45);
-  --tb-accent-ink: oklch(0.98 0.005 85);
+[data-theme='dark'] {
+  color-scheme: dark;
+  --tb-bg: oklch(0.16 0.03 250);
+  --tb-surface: oklch(0.22 0.03 250);
+  --tb-surface-raised: oklch(0.28 0.03 250);
+  --tb-ink: oklch(0.93 0.01 240);
+  --tb-muted: oklch(0.68 0.02 250);
+  --tb-line: oklch(0.32 0.02 250);
+  --tb-accent: oklch(0.72 0.16 48);
+  --tb-accent-ink: oklch(0.16 0.03 250);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme='dark']) {
-    color-scheme: light;
-    --tb-bg: oklch(0.98 0.005 85);
-    --tb-surface: oklch(1 0 0);
-    --tb-surface-raised: oklch(0.96 0.008 85);
-    --tb-ink: oklch(0.22 0.02 260);
-    --tb-muted: oklch(0.48 0.02 260);
-    --tb-line: oklch(0.88 0.01 85);
-    --tb-accent: oklch(0.72 0.16 45);
-    --tb-accent-ink: oklch(0.98 0.005 85);
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --tb-bg: oklch(0.16 0.03 250);
+    --tb-surface: oklch(0.22 0.03 250);
+    --tb-surface-raised: oklch(0.28 0.03 250);
+    --tb-ink: oklch(0.93 0.01 240);
+    --tb-muted: oklch(0.68 0.02 250);
+    --tb-line: oklch(0.32 0.02 250);
+    --tb-accent: oklch(0.72 0.16 48);
+    --tb-accent-ink: oklch(0.16 0.03 250);
+  }
+}
+
+html[data-theme='dark'] .logo-wordmark-img {
+  display: none;
+}
+
+html[data-theme='dark'] .logo-wordmark-text {
+  display: inline-flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme='light']) .logo-wordmark-img {
+    display: none;
+  }
+
+  html:not([data-theme='light']) .logo-wordmark-text {
+    display: inline-flex;
   }
 }
 

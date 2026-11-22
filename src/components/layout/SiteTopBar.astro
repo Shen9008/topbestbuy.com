@@ -1,6 +1,7 @@
 ---
 import ThemeToggle from '../islands/ThemeToggle.tsx';
 import MegaMenu from './MegaMenu.astro';
+import SiteLogo from './SiteLogo.astro';
 
 const path = Astro.url.pathname;
 ---
@@ -11,12 +12,7 @@ const path = Astro.url.pathname;
   <div
     class="relative mx-auto flex h-[var(--topbar-height)] max-w-[var(--content-max)] items-center gap-3 px-4"
   >
-    <a
-      href="/"
-      class="font-display text-lg font-extrabold tracking-tight text-[var(--tb-ink)] lg:hidden"
-    >
-      TopBestBuy<span class="ml-1 rounded bg-[var(--tb-accent)] px-1.5 text-xs text-[var(--tb-accent-ink)]">10</span>
-    </a>
+    <SiteLogo variant="full" class="lg:hidden" />
     <MegaMenu currentPath={path} />
     <nav class="hidden items-center gap-1 xl:flex" aria-label="Primary">
       <a href="/categories" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Lists</a>

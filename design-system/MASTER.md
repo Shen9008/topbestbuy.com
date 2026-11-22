@@ -6,37 +6,44 @@
 
 ---
 
-**Project:** TopBestBuy
-**Generated:** 2026-11-22 13:18:30
-**Category:** Cybersecurity Platform
+**Project:** TopBestBuy.online
+**Guidelines:** Brand Guidelines v1.0 (November 2026)
+**Category:** Editorial product rankings (Malaysia)
 
 ---
+
+## Brand identity (approved)
+
+| Element | Rule |
+|---------|------|
+| Mark | Shopping bag + orange checkmark; favicons and compact nav |
+| Wordmark | `TopBestBuy` navy + `.online` orange; light lockup in header/footer |
+| Clear space | ≥ height of capital **T** around the lockup |
+| Nav height | Logo ~36–44 px tall on desktop |
+| Don’t | Stretch, rotate, arbitrary recolour, drop shadows, gradients on logo |
+
+**Repo assets:** `public/brand/logo-mark.png`, `logo-wordmark-light.png`, `public/favicon.svg`.
 
 ## Global Rules
 
 ### Color Palette
 
-| Role | Hex | CSS Variable |
-|------|-----|--------------|
-| Primary | `#1C1917` | `--color-primary` |
-| Secondary | `#44403C` | `--color-secondary` |
-| CTA/Accent | `#CA8A04` | `--color-cta` |
-| Background | `#FAFAF9` | `--color-background` |
-| Text | `#0C0A09` | `--color-text` |
+| Token | Hex | Use |
+|-------|-----|-----|
+| Primary navy | `#061D32` | Headings, primary buttons, `--color-brand-navy` |
+| Accent orange | `#FF7900` | Rank highlights, selected states |
+| White | `#FFFFFF` | Cards, surfaces |
+| Off-white | `#F7F9FB` | Page background |
+| Slate grey | `#526273` | Supporting copy |
+| Border grey | `#E2E8EE` | Dividers, inputs |
 
-**Color Notes:** Premium dark + gold accent
+**Allocation target:** ~65% neutrals, 25% navy, 10% orange.
 
 ### Typography
 
-- **Heading Font:** Rubik
-- **Body Font:** Nunito Sans
-- **Mood:** ecommerce, clean, shopping, product, retail, conversion
-- **Google Fonts:** [Rubik + Nunito Sans](https://fonts.google.com/share?selection.family=Nunito+Sans:wght@300;400;500;600;700|Rubik:wght@300;400;500;600;700)
-
-**CSS Import:**
-```css
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap');
-```
+- **Typeface:** Inter (400 body, 600–700 headings)
+- **Loaded via:** `@fontsource/inter` in `src/styles/fonts.css`
+- **Tabular figures:** prices and scores
 
 ### Spacing Variables
 
@@ -153,13 +160,11 @@
 
 ## Style Guidelines
 
-**Style:** Cyberpunk UI
+**Style:** Editorial-first rankings site (light default)
 
-**Keywords:** Neon, dark mode, terminal, HUD, sci-fi, glitch, dystopian, futuristic, matrix, tech noir
+**Keywords:** Trust, clarity, comparison tables, restrained accent, mobile-first
 
-**Best For:** Gaming platforms, tech products, crypto apps, sci-fi applications, developer tools, entertainment
-
-**Key Effects:** Neon glow (text-shadow), glitch animations (skew/offset), scanlines (::before overlay), terminal fonts
+**Best For:** Top 10 lists, methodology pages, product cards with scores
 
 ### Page Pattern
 
@@ -173,8 +178,9 @@
 
 ## Anti-Patterns (Do NOT Use)
 
-- ❌ Light mode
-- ❌ Poor data viz
+- ❌ Off-brand logo treatment (see Brand identity)
+- ❌ Multiple competing orange CTAs in one viewport
+- ❌ Poor data viz / missing price currency and date
 
 ### Additional Forbidden Patterns
 

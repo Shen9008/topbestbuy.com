@@ -1,4 +1,6 @@
 ---
+import SiteLogo from './SiteLogo.astro';
+
 const links = [
   { href: '/', label: 'Home' },
   { href: '/search', label: 'Search' },
@@ -29,12 +31,7 @@ function isActive(href: string) {
   class="fixed bottom-[var(--tabbar-height)] left-0 top-0 z-[var(--z-rail)] hidden w-[var(--rail-width)] flex-col items-center gap-2 border-r border-[var(--tb-line)] bg-[var(--tb-surface)] py-4 lg:flex"
   aria-label="Primary"
 >
-  <a
-    href="/"
-    class="mb-4 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--tb-accent)] font-display text-sm font-bold text-[var(--tb-accent-ink)]"
-  >
-    TB
-  </a>
+  <SiteLogo variant="mark" class="mb-4" />
   {
     links.map((link) => (
       <a
