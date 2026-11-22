@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StubShell from '../../components/pages/StubShell.astro';
+import { REVIEW_STUB_IDS } from '../../lib/routes';
+
+export function getStaticPaths() {
+  return REVIEW_STUB_IDS.map((id) => ({ params: { id } }));
+}
+
+const { id } = Astro.params;
+---
+
+<BaseLayout title={`Review ${id}`} description="Product review (stub)." canonical={`/reviews/${id}`}>
+  <StubShell title={`Review: ${id}`} kicker="Review">
+    <p>Review layout and JSON-LD ship in Phase 3. No product copy in Phase 1.</p>
+  </StubShell>
+</BaseLayout>

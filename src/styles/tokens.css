@@ -1,0 +1,87 @@
+/**
+ * TopBestBuy semantic tokens — dark default, light override.
+ * Accent: #FF7A3D · Display: Sora · Body: Source Sans 3
+ */
+
+@theme {
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-body: 'Source Sans 3', system-ui, sans-serif;
+
+  --color-bg: oklch(0.16 0 0);
+  --color-surface: oklch(0.22 0 0);
+  --color-surface-raised: oklch(0.28 0 0);
+  --color-ink: oklch(0.93 0 0);
+  --color-muted: oklch(0.68 0.02 260);
+  --color-line: oklch(0.32 0 0);
+  --color-accent: oklch(0.72 0.16 45);
+  --color-accent-ink: oklch(0.18 0.04 45);
+  --color-good: oklch(0.72 0.12 160);
+  --color-warn: oklch(0.75 0.12 85);
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-dropdown: 20;
+  --z-rail: 30;
+  --z-tabbar: 40;
+  --z-toast: 50;
+
+  --content-max: 1180px;
+  --prose-max: 70ch;
+  --rail-width: 4.5rem;
+  --topbar-height: 3.75rem;
+  --tabbar-height: 4rem;
+}
+
+:root {
+  color-scheme: dark;
+  --tb-bg: var(--color-bg);
+  --tb-surface: var(--color-surface);
+  --tb-surface-raised: var(--color-surface-raised);
+  --tb-ink: var(--color-ink);
+  --tb-muted: var(--color-muted);
+  --tb-line: var(--color-line);
+  --tb-accent: var(--color-accent);
+  --tb-accent-ink: var(--color-accent-ink);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --tb-bg: oklch(0.98 0.005 85);
+  --tb-surface: oklch(1 0 0);
+  --tb-surface-raised: oklch(0.96 0.008 85);
+  --tb-ink: oklch(0.22 0.02 260);
+  --tb-muted: oklch(0.48 0.02 260);
+  --tb-line: oklch(0.88 0.01 85);
+  --tb-accent: oklch(0.72 0.16 45);
+  --tb-accent-ink: oklch(0.98 0.005 85);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --tb-bg: oklch(0.98 0.005 85);
+    --tb-surface: oklch(1 0 0);
+    --tb-surface-raised: oklch(0.96 0.008 85);
+    --tb-ink: oklch(0.22 0.02 260);
+    --tb-muted: oklch(0.48 0.02 260);
+    --tb-line: oklch(0.88 0.01 85);
+    --tb-accent: oklch(0.72 0.16 45);
+    --tb-accent-ink: oklch(0.98 0.005 85);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

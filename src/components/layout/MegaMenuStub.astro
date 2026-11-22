@@ -1,0 +1,88 @@
+---
+import { CATEGORY_IDS } from '../../lib/routes';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const categories = CATEGORY_IDS.map((id) => ({
+  href: `/category/${id}`,
+  label: id.charAt(0).toUpperCase() + id.slice(1),
+}));
+---
+
+<div class="relative hidden md:block">
+  <button
+    type="button"
+    id="mega-trigger"
+    class="inline-flex cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-4 py-2 text-sm font-semibold text-[var(--tb-ink)] transition-colors hover:border-[var(--tb-accent)]"
+    aria-expanded="false"
+    aria-controls="mega-panel"
+  >
+    Browse categories
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </button>
+  <div
+    id="mega-panel"
+    class="absolute left-0 top-[calc(100%+0.5rem)] z-[var(--z-dropdown)] hidden w-[min(100vw-2rem,42rem)] rounded-[var(--radius-lg)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] p-4 shadow-lg"
+    role="region"
+    aria-label="Category mega menu (stub)"
+    hidden
+  >
+    <p class="mb-3 text-sm text-[var(--tb-muted)]">
+      Full mega menu ships in Phase 4. Category hubs below are placeholder links.
+    </p>
+    <ul class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+      {
+        categories.map((cat) => (
+          <li>
+            <a
+              href={cat.href}
+              class:list={[
+                'block cursor-pointer rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium transition-colors',
+                currentPath === cat.href
+                  ? 'bg-[var(--tb-accent)] text-[var(--tb-accent-ink)]'
+                  : 'text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]',
+              ]}
+            >
+              {cat.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  const trigger = document.getElementById('mega-trigger');
+  const panel = document.getElementById('mega-panel');
+  if (trigger && panel) {
+    trigger.addEventListener('click', () => {
+      const open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+      panel.classList.toggle('hidden', open);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+        trigger.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+        panel.classList.add('hidden');
+      }
+    });
+  }
+</script>

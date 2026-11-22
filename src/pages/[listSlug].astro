@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StubShell from '../components/pages/StubShell.astro';
+import { LIST_SLUGS } from '../lib/routes';
+
+export function getStaticPaths() {
+  return LIST_SLUGS.map((listSlug) => ({ params: { listSlug } }));
+}
+
+const { listSlug } = Astro.params;
+---
+
+<BaseLayout
+  title={listSlug.replace(/-/g, ' ')}
+  description="Top 10 list for Malaysia (stub)."
+  canonical={`/${listSlug}`}
+>
+  <StubShell title={listSlug} kicker="Top 10 list">
+    <p>
+      List template: hero, quick picks, compare table, and guide sections follow
+      mockup order in Phase 3. Slug: <code>{listSlug}</code>
+    </p>
+  </StubShell>
+</BaseLayout>

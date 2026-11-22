@@ -1,0 +1,42 @@
+---
+import { TRUST_ROUTES } from '../../lib/routes';
+---
+
+<footer
+  class="border-t border-[var(--tb-line)] bg-[var(--tb-surface)] pb-[calc(var(--tabbar-height)+1rem)] lg:pb-8 lg:pl-[var(--rail-width)]"
+>
+  <div class="mx-auto max-w-[var(--content-max)] px-4 py-10">
+    <p class="font-display text-base font-semibold text-[var(--tb-ink)]">
+      Trust and editorial
+    </p>
+    <p class="mt-2 text-sm text-[var(--tb-muted)]">
+      Malaysia-first guidance in English (en-MY). Prices in MYR. Affiliate links
+      are labelled on live pages in Phase 5.
+    </p>
+    <ul class="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+      {
+        TRUST_ROUTES.map((route) => (
+          <li>
+            <a
+              href={route.href}
+              class="cursor-pointer text-sm font-medium text-[var(--tb-ink)] underline decoration-[var(--tb-line)] underline-offset-4 transition-colors hover:text-[var(--tb-accent)] hover:decoration-[var(--tb-accent)]"
+            >
+              {route.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href="/how-we-rank"
+          class="cursor-pointer text-sm font-medium text-[var(--tb-ink)] underline decoration-[var(--tb-line)] underline-offset-4 transition-colors hover:text-[var(--tb-accent)]"
+        >
+          How we rank
+        </a>
+      </li>
+    </ul>
+    <p class="mt-8 text-xs text-[var(--tb-muted)]">
+      © {new Date().getFullYear()} TopBestBuy · topbestbuy.online · Phase 1 shell
+    </p>
+  </div>
+</footer>

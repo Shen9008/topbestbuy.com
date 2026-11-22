@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StubShell from '../components/pages/StubShell.astro';
+import ImageSlot from '../components/media/ImageSlot.astro';
+---
+
+<BaseLayout
+  title="Best product lists for Malaysia"
+  description="Editorial Top 10 lists, tools, and trust pages for Malaysian shoppers. MYR pricing, en-MY English."
+>
+  <StubShell
+    title="Top picks for Malaysia, ranked with care"
+    kicker="Home"
+    description="Mockup section order ships in Phase 3. This home shell mirrors IA: hero, category discovery, and list tiles without product data."
+    showHeroImage={false}
+  >
+    <p>
+      Placeholder home: category tiles and featured lists will slot in here. No
+      invented rankings in Phase 1.
+    </p>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <li>
+        <ImageSlot slotId="category-tile" label="Category tile" />
+      </li>
+      <li>
+        <ImageSlot slotId="list-tile-a" label="List tile" />
+      </li>
+      <li>
+        <ImageSlot slotId="list-tile-b" label="List tile" />
+      </li>
+    </ul>
+  </StubShell>
+</BaseLayout>

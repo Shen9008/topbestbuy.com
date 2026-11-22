@@ -1,0 +1,31 @@
+---
+import ThemeToggle from '../islands/ThemeToggle.tsx';
+import MegaMenuStub from './MegaMenuStub.astro';
+
+const path = Astro.url.pathname;
+---
+
+<header
+  class="sticky top-0 z-[var(--z-sticky)] border-b border-[var(--tb-line)] bg-[var(--tb-bg)]/90 backdrop-blur-md lg:pl-[var(--rail-width)]"
+>
+  <div
+    class="mx-auto flex h-[var(--topbar-height)] max-w-[var(--content-max)] items-center gap-4 px-4"
+  >
+  <a
+    href="/"
+    class="font-display text-lg font-bold tracking-tight text-[var(--tb-ink)] lg:hidden"
+  >
+    TopBestBuy
+  </a>
+    <MegaMenuStub currentPath={path} />
+    <div class="ml-auto flex items-center gap-3">
+      <a
+        href="/search"
+        class="hidden cursor-pointer text-sm font-medium text-[var(--tb-muted)] transition-colors hover:text-[var(--tb-accent)] sm:inline"
+      >
+        Search lists
+      </a>
+      <ThemeToggle client:load />
+    </div>
+  </div>
+</header>

@@ -1,0 +1,63 @@
+---
+import { resolveManifestSlot } from '../../lib/image-manifest';
+
+export interface Props {
+  slotId: string;
+  alt?: string;
+  aspect?: 'square' | 'video' | 'banner';
+  label?: string;
+  class?: string;
+}
+
+const {
+  slotId,
+  alt,
+  aspect = 'square',
+  label = 'Image placeholder',
+  class: className = '',
+} = Astro.props;
+
+const entry = resolveManifestSlot(slotId);
+const aspectClass =
+  aspect === 'banner'
+    ? 'aspect-[21/9]'
+    : aspect === 'video'
+      ? 'aspect-video'
+      : 'aspect-square';
+
+const resolvedAlt = entry?.alt ?? alt ?? `${label} (${slotId})`;
+---
+
+<figure
+  class:list={[
+    'overflow-hidden rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)]',
+    aspectClass,
+    className,
+  ]}
+  data-image-slot={slotId}
+>
+  {
+    entry ? (
+      <img
+        src={entry.src}
+        alt={resolvedAlt}
+        width={entry.width}
+        height={entry.height}
+        loading="lazy"
+        decoding="async"
+        class="h-full w-full object-cover"
+      />
+    ) : (
+      <div class="flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center">
+        <span
+          class="rounded-[var(--radius-pill)] border border-dashed border-[var(--tb-line)] px-3 py-1 font-mono text-xs text-[var(--tb-muted)]"
+          aria-hidden="true"
+        >
+          {slotId}
+        </span>
+        <span class="text-sm text-[var(--tb-muted)]">{label}</span>
+      </div>
+    )
+  }
+  <figcaption class="sr-only">{resolvedAlt}</figcaption>
+</figure>
