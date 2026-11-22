@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StubShell from '../../components/pages/StubShell.astro';
+import { CATEGORY_IDS } from '../../lib/routes';
+
+export function getStaticPaths() {
+  return CATEGORY_IDS.map((cat) => ({ params: { cat } }));
+}
+
+const { cat } = Astro.params;
+---
+
+<BaseLayout
+  title={`${cat} category`}
+  description="Category hub for TopBestBuy Malaysia (stub)."
+  canonical={`/category/${cat}`}
+>
+  <StubShell title={`${cat.charAt(0).toUpperCase()}${cat.slice(1)}`} kicker="Category hub">
+    <p>Category tiles and list links from mockup CATS arrive in Phase 2.</p>
+  </StubShell>
+</BaseLayout>

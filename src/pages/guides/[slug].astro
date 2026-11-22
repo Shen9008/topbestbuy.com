@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StubShell from '../../components/pages/StubShell.astro';
+import { GUIDE_STUB_SLUGS } from '../../lib/routes';
+
+export function getStaticPaths() {
+  return GUIDE_STUB_SLUGS.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title={slug.replace(/-/g, ' ')} description="Buying guide (stub)." canonical={`/guides/${slug}`}>
+  <StubShell title={slug} kicker="Guide">
+    <p>Guide prose from list `guide` fields and blog posts lands in Phase 3.</p>
+  </StubShell>
+</BaseLayout>

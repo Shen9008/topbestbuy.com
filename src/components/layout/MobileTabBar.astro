@@ -1,0 +1,59 @@
+---
+import { MOBILE_TABS } from '../../lib/routes';
+
+const icons: Record<string, string> = {
+  home: 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5Z',
+  search: 'm21 21-4.35-4.35M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z',
+  grid: 'M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z',
+  bookmark: 'M6 4h12v16l-6-4-6 4V4Z',
+  tools:
+    'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z',
+};
+
+function isActive(href: string) {
+  const path = Astro.url.pathname;
+  if (href === '/') return path === '/';
+  if (href.startsWith('/category')) {
+    return path.startsWith('/category');
+  }
+  return path === href || path.startsWith(`${href}/`);
+}
+---
+
+<nav
+  class="fixed bottom-0 left-0 right-0 z-[var(--z-tabbar)] border-t border-[var(--tb-line)] bg-[var(--tb-surface)]/95 backdrop-blur-md lg:hidden"
+  aria-label="Mobile primary"
+>
+  <ul class="grid h-[var(--tabbar-height)] grid-cols-5">
+    {
+      MOBILE_TABS.map((tab) => (
+        <li>
+          <a
+            href={tab.href}
+            class:list={[
+              'flex h-full cursor-pointer flex-col items-center justify-center gap-0.5 text-[0.65rem] font-medium transition-colors',
+              isActive(tab.href)
+                ? 'text-[var(--tb-accent)]'
+                : 'text-[var(--tb-muted)]',
+            ]}
+            aria-current={isActive(tab.href) ? 'page' : undefined}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              aria-hidden="true"
+            >
+              <path d={icons[tab.icon]} />
+            </svg>
+            {tab.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

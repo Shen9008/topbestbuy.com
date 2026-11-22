@@ -1,0 +1,6 @@
+# Cloudflare Pages redirects (Phase 5 expands)
+https://www.topbestbuy.online/* https://topbestbuy.online/:splat 301
+http://www.topbestbuy.online/* https://topbestbuy.online/:splat 301
+/how-we-make-money /affiliate-disclosure 301
+/methodology /how-we-rank 301
+/how-we-score /how-we-rank 301

@@ -1,0 +1,43 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'TopBestBuy helps shoppers in Malaysia compare products with transparent scores and editorial guidance. Prices shown in MYR.',
+  canonical,
+  ogImage = '/og-default.png',
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://topbestbuy.online');
+const canonicalUrl = canonical
+  ? new URL(canonical, site).href
+  : new URL(Astro.url.pathname, site).href;
+const fullTitle = title.includes('TopBestBuy') ? title : `${title} · TopBestBuy`;
+const ogImageUrl = new URL(ogImage, site).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex" />}
+<link rel="canonical" href={canonicalUrl} />
+
+<meta property="og:site_name" content="TopBestBuy" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_MY" />
+<meta property="og:image" content={ogImageUrl} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
