@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 import { dispatchToggleSave } from './AppChrome';
+import Icon from '../ui/Icon';
 
 const STORAGE_KEY = 'tb-shortlist';
 
@@ -31,10 +32,11 @@ export default function SaveButton({ productId }: { productId: string }) {
   return (
     <button
       type="button"
-      class={`tb-btn tb-btn-ghost tb-btn-sm ${saved ? '!border-[var(--tb-accent)] !bg-[var(--tb-accent)] !text-[var(--tb-accent-ink)]' : ''}`}
+      class={`tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5 ${saved ? '!border-[var(--tb-accent)] !bg-[var(--tb-accent)] !text-[var(--tb-accent-ink)]' : ''}`}
       aria-pressed={saved}
       onClick={() => dispatchToggleSave(productId)}
     >
+      <Icon name={saved ? 'bookmark-check' : 'bookmark'} size={16} strokeWidth={2} />
       {saved ? 'Saved' : 'Save'}
     </button>
   );

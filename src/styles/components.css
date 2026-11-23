@@ -93,6 +93,10 @@
     @apply my-4 rounded-[var(--radius-sm)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm;
   }
 
+  .tb-icon {
+    flex-shrink: 0;
+  }
+
   .tb-jumpbar {
     @apply sticky z-[var(--z-sticky)] -mx-4 mb-4 flex gap-2 overflow-x-auto bg-[var(--tb-bg)] px-1 py-2 lg:hidden;
     top: calc(var(--topbar-height));

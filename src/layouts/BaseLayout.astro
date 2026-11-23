@@ -8,6 +8,7 @@ import SiteTopBar from '../components/layout/SiteTopBar.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import MobileTabBar from '../components/layout/MobileTabBar.astro';
 import AppChrome from '../components/islands/AppChrome';
+import BackToTop from '../components/ui/BackToTop.astro';
 
 export interface Props {
   title: string;
@@ -47,6 +48,7 @@ const { title, description, canonical, noindex } = Astro.props;
       <SiteFooter />
     </div>
     <MobileTabBar />
+    <BackToTop />
     <AppChrome client:load />
   </body>
 </html>

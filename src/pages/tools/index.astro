@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import Icon from '../../components/ui/Icon.astro';
 import ToolsHub from '../../components/islands/ToolsHub';
 
 const initialTool = Astro.url.searchParams.get('tool') ?? undefined;
@@ -20,6 +21,9 @@ const initialTool = Astro.url.searchParams.get('tool') ?? undefined;
     <ToolsHub client:load initialTool={initialTool} />
   </div>
   <p class="mt-4 text-sm">
-    <a href="/compare">Compare products side by side</a>
+    <a href="/compare" class="inline-flex min-h-11 items-center gap-2 font-semibold text-[var(--tb-accent)]">
+      <Icon name="compare" size={18} strokeWidth={2} />
+      Compare products side by side
+    </a>
   </p>
 </BaseLayout>
