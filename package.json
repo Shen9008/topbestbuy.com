@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "data:extract": "node scripts/extract-mockup.mjs"
+    "data:extract": "node scripts/extract-mockup.mjs",
+    "assets:generate": "node scripts/generate-visual-assets.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.1",
@@ -34,6 +35,7 @@
     "eslint-plugin-astro": "^3.2.1",
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
+    "sharp": "^0.35.5",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.73.0",
     "vitest": "^3.2.4",
