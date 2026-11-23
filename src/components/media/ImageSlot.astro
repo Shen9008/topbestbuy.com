@@ -26,11 +26,14 @@ const aspectClass =
       : 'aspect-square';
 
 const resolvedAlt = entry?.alt ?? alt ?? `${label} (${slotId})`;
+const isProductSquare = Boolean(entry && aspect === 'square' && slotId.startsWith('prod-'));
+const imgFitClass = isProductSquare ? 'object-contain p-3' : 'object-cover';
 ---
 
 <figure
   class:list={[
-    'overflow-hidden rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)]',
+    'overflow-hidden rounded-[var(--radius-md)] border border-[var(--tb-line)]',
+    entry ? 'bg-transparent' : 'bg-[var(--tb-surface)]',
     aspectClass,
     className,
   ]}
@@ -45,7 +48,7 @@ const resolvedAlt = entry?.alt ?? alt ?? `${label} (${slotId})`;
         height={entry.height}
         loading="lazy"
         decoding="async"
-        class="h-full w-full object-cover"
+        class:list={['h-full w-full', imgFitClass]}
       />
     ) : (
       <div class="flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-center">
