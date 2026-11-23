@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type Dispatch, type StateUpdater } fr
 import { searchSite, type SearchHit } from '../../lib/search-index';
 import { allProductsMap } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
+import Icon from '../ui/Icon';
 
 const STORAGE_KEY = 'tb-shortlist';
 
@@ -120,9 +121,10 @@ export default function AppChrome() {
           <h2 class="m-0 font-display text-xl font-bold">My shortlist</h2>
           <button
             type="button"
-            class="tb-btn tb-btn-ghost tb-btn-sm"
+            class="tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5"
             onClick={() => setDrawerOpen(false)}
           >
+            <Icon name="x" size={16} strokeWidth={2} />
             Close
           </button>
         </div>
@@ -161,7 +163,8 @@ export default function AppChrome() {
                 </div>
               );
             })}
-            <a href="/compare" class="tb-btn w-full">
+            <a href="/compare" class="tb-btn inline-flex w-full items-center justify-center gap-2">
+              <Icon name="compare" size={18} strokeWidth={2} />
               Compare these
             </a>
           </div>
@@ -169,7 +172,11 @@ export default function AppChrome() {
       </aside>
 
       <ApplicationDialog open={searchOpen} onClose={() => setSearchOpen(false)}>
-        <label class="mb-2 block text-sm font-bold" for="tb-search-q">
+        <label
+          class="mb-2 flex items-center gap-2 text-sm font-bold"
+          for="tb-search-q"
+        >
+          <Icon name="search" size={18} strokeWidth={2} />
           Search lists, guides and tools
         </label>
         <input
@@ -230,7 +237,12 @@ function ApplicationDialog({
       onClick={(e) => e.stopPropagation()}
     >
       <div class="mb-3 flex justify-end">
-        <button type="button" class="tb-btn tb-btn-ghost tb-btn-sm" onClick={onClose}>
+        <button
+          type="button"
+          class="tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5"
+          onClick={onClose}
+        >
+          <Icon name="x" size={16} strokeWidth={2} />
           Close
         </button>
       </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
+import Icon from '../ui/Icon';
 
 type Theme = 'dark' | 'light';
 
@@ -35,25 +36,14 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      class="inline-flex cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3 py-1.5 text-sm font-medium text-[var(--tb-ink)] transition-colors hover:border-[var(--tb-accent)]"
+      class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3 py-1.5 text-sm font-medium text-[var(--tb-ink)] transition-colors hover:border-[var(--tb-accent)]"
       aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        aria-hidden="true"
-      >
-        {theme === 'dark' ? (
-          <path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
-        ) : (
-          <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a6.5 6.5 0 0 0 11.5 11.5z" />
-        )}
-      </svg>
+      <Icon
+        name={theme === 'dark' ? 'sun' : 'moon'}
+        size={18}
+        strokeWidth={2}
+      />
       <span class="hidden sm:inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
     </button>
   );

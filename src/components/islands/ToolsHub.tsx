@@ -5,6 +5,8 @@ import { RANKED } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
 import { matchesFragrancePreference } from '../../lib/scoring';
 import type { RankedProduct } from '../../lib/scoring';
+import { TOOL_TAB_ICONS, type IconName } from '../../icons';
+import Icon from '../ui/Icon';
 
 const TABS = [
   ['finder', 'Product finder'],
@@ -30,18 +32,22 @@ export default function ToolsHub({ initialTool }: { initialTool?: string }) {
   return (
     <div>
       <div class="mb-4 flex flex-wrap gap-2" role="tablist" aria-label="Tools">
-        {TABS.map(([id, label]) => (
-          <button
-            key={id}
-            type="button"
-            role="tab"
-            aria-selected={tab === id}
-            class={`tb-chip ${tab === id ? 'tb-chip-on' : ''}`}
-            onClick={() => setTab(id)}
-          >
-            {label}
-          </button>
-        ))}
+        {TABS.map(([id, label]) => {
+          const icon = TOOL_TAB_ICONS[id] as IconName | undefined;
+          return (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={tab === id}
+              class={`tb-chip inline-flex min-h-11 items-center gap-1.5 ${tab === id ? 'tb-chip-on' : ''}`}
+              onClick={() => setTab(id)}
+            >
+              {icon ? <Icon name={icon} size={16} strokeWidth={2} /> : null}
+              {label}
+            </button>
+          );
+        })}
       </div>
       <div class="tb-card" role="tabpanel">
         {tab === 'finder' && <FinderTool />}
@@ -365,7 +371,12 @@ function Question({
         ))}
       </div>
       {onBack && (
-        <button type="button" class="tb-btn tb-btn-ghost tb-btn-sm mt-3" onClick={onBack}>
+        <button
+          type="button"
+          class="tb-btn tb-btn-ghost tb-btn-sm mt-3 inline-flex min-h-11 items-center gap-1.5"
+          onClick={onBack}
+        >
+          <Icon name="chevron-left" size={16} strokeWidth={2} />
           Back
         </button>
       )}

@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button
+  type="button"
+  id="tb-back-to-top"
+  class="fixed bottom-[calc(var(--tabbar-height)+1rem)] right-4 z-[var(--z-sticky)] hidden min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--tb-line)] bg-[var(--tb-surface)] text-[var(--tb-ink)] shadow-md transition-opacity hover:border-[var(--tb-accent)] hover:text-[var(--tb-accent)] lg:bottom-6"
+  aria-label="Back to top"
+>
+  <Icon name="arrow-up" size={20} />
+</button>
+
+<script>
+  const btn = document.getElementById('tb-back-to-top');
+  if (btn) {
+    const toggle = () => {
+      const show = window.scrollY > 480;
+      btn.classList.toggle('hidden', !show);
+      btn.classList.toggle('inline-flex', show);
+    };
+    toggle();
+    window.addEventListener('scroll', toggle, { passive: true });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>
