@@ -7,10 +7,10 @@ Short reference for engineers. Full spec: `C:\Users\Chia Shen\Downloads\TopBestB
 | File | Use |
 |------|-----|
 | `public/brand/logo-mark.png` | Rail home, favicons, PWA icons (from *Navy Shopping Bag Checkmark.png*) |
-| `public/brand/logo-wordmark-light.png` | Header (mobile) and footer on light surfaces |
+| `public/brand/logo-wordmark.svg` | Full lockup on light surfaces (header mobile, footer) |
+| `public/brand/logo-wordmark-dark.png` | Full lockup on dark surfaces |
+| `public/brand/logo-wordmark-light.png` | Raster light lockup (legacy backup; prefer SVG) |
 | `public/favicon.svg` | SVG favicon (simplified geometry until vector master ships) |
-
-**Missing from source folder:** no approved SVG wordmark or dedicated dark-background lockup PNG. Dark theme uses mark + typographic `.online` fallback in `SiteLogo.astro`.
 
 ## Colours
 
@@ -30,7 +30,7 @@ Inter (via `@fontsource/inter`) for headings and body, per PDF. Weights 400 / 50
 
 ## Components wired
 
-- `SiteLogo.astro` — mark vs full lockup, dark-theme text fallback
+- `SiteLogo.astro` — mark vs full lockup; SVG wordmark (light) and PNG dark lockup swap with theme
 - `SiteTopBar.astro`, `SiteFooter.astro`, `DesktopIconRail.astro`
 - `Seo.astro` — favicon set, apple-touch, `site.webmanifest`, `theme-color`
 

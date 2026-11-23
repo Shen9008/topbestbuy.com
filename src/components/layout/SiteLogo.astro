@@ -8,6 +8,8 @@ export interface Props {
 const { variant = 'full', class: className } = Astro.props;
 
 const markHeight = '2.5rem'; /* 40px — within 36–44px desktop nav target */
+const wordmarkClass =
+  'h-9 w-auto max-w-[min(52vw,13.75rem)] object-contain object-left sm:h-10 sm:max-w-[15rem]';
 ---
 
 <a
@@ -32,17 +34,21 @@ const markHeight = '2.5rem'; /* 40px — within 36–44px desktop nav target */
     ) : (
       <>
         <img
-          src="/brand/logo-wordmark-light.png"
+          src="/brand/logo-wordmark.svg"
+          alt="TopBestBuy.online"
+          width={220}
+          height={36}
+          class:list={['logo-wordmark-light', wordmarkClass]}
+          decoding="async"
+        />
+        <img
+          src="/brand/logo-wordmark-dark.png"
           alt="TopBestBuy.online"
           width={220}
           height={44}
-          class="logo-wordmark-img h-9 w-auto max-w-[min(52vw,13.75rem)] object-contain object-left sm:h-10 sm:max-w-[15rem]"
+          class:list={['logo-wordmark-dark', wordmarkClass]}
           decoding="async"
         />
-        <span class="logo-wordmark-text hidden items-baseline gap-0 font-display text-lg font-bold tracking-tight sm:text-xl">
-          <span class="text-[var(--color-brand-navy,#061D32)]">TopBestBuy</span>
-          <span class="text-[var(--color-brand-orange,#FF7900)]">.online</span>
-        </span>
       </>
     )
   }
