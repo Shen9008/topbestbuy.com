@@ -46,7 +46,7 @@ describe('icon policy', () => {
     const files = await walk(SRC);
     const offenders: string[] = [];
     for (const file of files) {
-      const rel = relative(ROOT, file);
+      const rel = relative(ROOT, file).replace(/\\/g, '/');
       if (ALLOWED_SVG.has(rel)) continue;
       const text = await readFile(file, 'utf8');
       if (RAW_SVG_RE.test(text)) {

@@ -1,10 +1,30 @@
 @layer components {
   .tb-card {
-    @apply rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 shadow-[0_1px_0_rgba(0,0,0,0.12),0_12px_32px_-16px_rgba(0,0,0,0.35)];
+    @apply rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 shadow-[0_1px_0_rgb(0_0_0/0.2),0_16px_40px_-20px_rgb(0_0_0/0.45)];
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-card:active,
+    .tb-btn:active,
+    .tb-tile:active {
+      transform: scale(0.97);
+    }
   }
 
   .tb-btn {
-    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-sm)] border-2 border-[var(--tb-accent)] bg-[var(--tb-accent)] px-5 text-sm font-bold text-[var(--tb-accent-ink)] transition-[filter,background-color,border-color] duration-200 hover:brightness-110;
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-pill)] border border-transparent bg-[var(--tb-cta-bg)] px-6 text-sm font-bold text-[var(--tb-cta-ink)] transition-[transform,filter,background-color,border-color] duration-[var(--dur-base)];
+  }
+
+  .tb-btn:hover {
+    filter: brightness(1.05);
+  }
+
+  .tb-btn-accent {
+    @apply border-[var(--tb-accent)] bg-[var(--tb-accent)] text-[var(--tb-accent-ink)];
   }
 
   .tb-btn-ghost {
@@ -49,7 +69,7 @@
   }
 
   .tb-disclosure {
-    @apply my-4 rounded-r-[var(--radius-sm)] border border-[var(--tb-line)] border-l-4 border-l-[var(--color-good)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm;
+    @apply my-4 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm;
   }
 
   .tb-prose {
@@ -82,11 +102,86 @@
   }
 
   .tb-tile {
-    @apply flex cursor-pointer flex-col gap-1.5 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 text-[var(--tb-ink)] no-underline transition-transform duration-200 hover:-translate-y-0.5 hover:border-[var(--tb-accent)];
+    @apply relative flex cursor-pointer flex-col gap-1.5 overflow-hidden rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 text-[var(--tb-ink)] no-underline;
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-tile:hover {
+      transform: translateY(-2px);
+      border-color: var(--tb-accent);
+      box-shadow: 0 0 0 1px color-mix(in oklch, var(--tb-accent) 35%, transparent);
+    }
   }
 
   .tb-eeat {
-    @apply my-4 rounded-[var(--radius-md)] border border-[var(--tb-line)] border-l-4 border-l-[var(--color-good)] bg-[var(--tb-surface)] p-4;
+    @apply my-4 rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-4;
+  }
+
+  .tb-hero {
+    @apply relative mx-auto max-w-[42rem] py-10 text-center;
+  }
+
+  .tb-hero::before {
+    content: '';
+    position: absolute;
+    inset: -4rem -2rem 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, color-mix(in oklch, var(--tb-accent) 12%, transparent), transparent),
+      linear-gradient(color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px);
+    background-size:
+      auto,
+      28px 28px,
+      28px 28px;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 88%);
+  }
+
+  .tb-search-hero {
+    @apply mt-6 flex w-full max-w-xl mx-auto items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] py-1.5 pl-4 pr-1.5 text-left shadow-[0_8px_32px_-12px_rgb(0_0_0/0.4)];
+  }
+
+  .tb-search-hero .tb-btn {
+    @apply shrink-0;
+  }
+
+  @keyframes tb-reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-reveal {
+      animation: tb-reveal-up var(--dur-base) var(--ease-out) both;
+    }
+
+    .tb-reveal-stagger > * {
+      animation: tb-reveal-up var(--dur-base) var(--ease-out) both;
+    }
+
+    .tb-reveal-stagger > *:nth-child(1) {
+      animation-delay: 0ms;
+    }
+    .tb-reveal-stagger > *:nth-child(2) {
+      animation-delay: 40ms;
+    }
+    .tb-reveal-stagger > *:nth-child(3) {
+      animation-delay: 80ms;
+    }
+    .tb-reveal-stagger > *:nth-child(4) {
+      animation-delay: 120ms;
+    }
   }
 
   .tb-callout {

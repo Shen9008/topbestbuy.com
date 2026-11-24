@@ -77,6 +77,14 @@ export default function AppChrome() {
         e.preventDefault();
         onOpenSearch();
       }
+      if (
+        (e.key === 'k' || e.key === 'K') &&
+        (e.metaKey || e.ctrlKey) &&
+        !/input|textarea|select/i.test((document.activeElement as HTMLElement)?.tagName ?? '')
+      ) {
+        e.preventDefault();
+        onOpenSearch();
+      }
     };
     document.addEventListener('keydown', onKey);
     return () => {
