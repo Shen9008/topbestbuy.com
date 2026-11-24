@@ -36,12 +36,12 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3 py-1.5 text-sm font-medium text-[var(--tb-ink)] transition-colors hover:border-[var(--tb-accent)]"
+      class="tb-icon-slot tb-icon-slot--hover inline-flex min-h-11 cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium"
       aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
     >
       <Icon
-        name={theme === 'dark' ? 'sun' : 'moon'}
-        size={18}
+        name={theme === 'dark' ? 'state.theme-light' : 'state.theme-dark'}
+        size={20}
         strokeWidth={2}
       />
       <span class="hidden sm:inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>

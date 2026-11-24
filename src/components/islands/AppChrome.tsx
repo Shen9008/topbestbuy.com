@@ -77,6 +77,14 @@ export default function AppChrome() {
         e.preventDefault();
         onOpenSearch();
       }
+      if (
+        (e.key === 'k' || e.key === 'K') &&
+        (e.metaKey || e.ctrlKey) &&
+        !/input|textarea|select/i.test((document.activeElement as HTMLElement)?.tagName ?? '')
+      ) {
+        e.preventDefault();
+        onOpenSearch();
+      }
     };
     document.addEventListener('keydown', onKey);
     return () => {
@@ -124,7 +132,7 @@ export default function AppChrome() {
             class="tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5"
             onClick={() => setDrawerOpen(false)}
           >
-            <Icon name="x" size={16} strokeWidth={2} />
+            <Icon name="state.close" size={16} strokeWidth={2} />
             Close
           </button>
         </div>
@@ -132,7 +140,10 @@ export default function AppChrome() {
           Saved on this device only. Compare up to 3 products.
         </p>
         {shortlist.length === 0 ? (
-          <div class="tb-callout mt-4">Nothing saved yet. Tap Save on any product.</div>
+          <div class="tb-callout mt-4 flex items-start gap-3">
+            <Icon name="state.empty-saved" size={32} class="shrink-0 opacity-80" />
+            <p class="m-0">Nothing saved yet. Tap Save on any product.</p>
+          </div>
         ) : (
           <div class="mt-4 space-y-3">
             {shortlist.map((id) => {
@@ -164,7 +175,7 @@ export default function AppChrome() {
               );
             })}
             <a href="/compare" class="tb-btn inline-flex w-full items-center justify-center gap-2">
-              <Icon name="compare" size={18} strokeWidth={2} />
+              <Icon name="tool.compare" size={20} strokeWidth={2} />
               Compare these
             </a>
           </div>
@@ -176,7 +187,7 @@ export default function AppChrome() {
           class="mb-2 flex items-center gap-2 text-sm font-bold"
           for="tb-search-q"
         >
-          <Icon name="search" size={18} strokeWidth={2} />
+          <Icon name="nav.search" size={20} strokeWidth={2} />
           Search lists, guides and tools
         </label>
         <input
@@ -190,7 +201,10 @@ export default function AppChrome() {
         />
         <div class="mt-4 space-y-2" aria-live="polite">
           {results.length === 0 ? (
-            <div class="tb-callout">No match. Try a product type like air fryer or mattress.</div>
+            <div class="tb-callout flex items-start gap-3">
+              <Icon name="state.empty-search" size={32} class="shrink-0 opacity-80" />
+              <p class="m-0">No match. Try a product type like air fryer or mattress.</p>
+            </div>
           ) : (
             results.map((hit) => (
               <a
@@ -242,7 +256,7 @@ function ApplicationDialog({
           class="tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5"
           onClick={onClose}
         >
-          <Icon name="x" size={16} strokeWidth={2} />
+          <Icon name="state.close" size={16} strokeWidth={2} />
           Close
         </button>
       </div>

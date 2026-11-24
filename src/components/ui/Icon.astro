@@ -2,26 +2,41 @@
 import {
   DEFAULT_STROKE_WIDTH,
   getIconNodes,
-  type IconName,
+  defaultIconSize,
+  ICON_SIZES,
+  type IconMapKey,
+  type IconSize,
 } from '../../icons';
 
 interface Props {
-  name: IconName;
-  size?: number;
+  name: IconMapKey;
+  size?: IconSize;
   strokeWidth?: number;
   class?: string;
   decorative?: boolean;
+  label?: string;
+  spin?: boolean;
 }
 
 const {
   name,
-  size = 24,
+  size = defaultIconSize(name) as IconSize,
   strokeWidth = DEFAULT_STROKE_WIDTH,
   class: className,
   decorative = true,
+  label,
+  spin = false,
 } = Astro.props;
 
+if (!decorative && !label) {
+  throw new Error(`Icon "${name}" with decorative={false} requires a label.`);
+}
+if (size !== undefined && !(ICON_SIZES as readonly number[]).includes(size)) {
+  throw new Error(`Icon size must be one of ${ICON_SIZES.join(', ')}.`);
+}
+
 const nodes = getIconNodes(name);
+const isLoader = name === 'state.loading';
 ---
 
 <svg
@@ -34,8 +49,14 @@ const nodes = getIconNodes(name);
   stroke-width={strokeWidth}
   stroke-linecap="round"
   stroke-linejoin="round"
-  class:list={['tb-icon', className]}
+  class:list={[
+    'tb-icon',
+    spin || isLoader ? 'tb-icon-spin' : undefined,
+    className,
+  ]}
   aria-hidden={decorative ? 'true' : undefined}
+  role={decorative ? undefined : 'img'}
+  aria-label={decorative ? undefined : label}
 >
   {
     nodes.map(([tag, attrs]) => {

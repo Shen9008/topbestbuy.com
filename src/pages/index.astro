@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImageSlot from '../components/media/ImageSlot.astro';
+import Icon from '../components/ui/Icon.astro';
 import PriceAlertForm from '../components/islands/PriceAlertForm';
 import { SITE_DATE } from '../data/meta';
 import { CATS } from '../data/categories';
@@ -8,6 +9,12 @@ import { LISTS } from '../data/lists';
 import { POSTS } from '../data/posts';
 import { listSlugs, RANKED, topPick } from '../lib/catalog';
 import { productFullName } from '../lib/format';
+import {
+  CATEGORY_ICONS,
+  LIST_SLUG_ICONS,
+  TOOL_TAB_ICONS,
+  type IconMapKey,
+} from '../icons';
 
 const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
 const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-back-pain', 'blog-do-you-need-an-ionizer'];
@@ -17,27 +24,37 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
   title="Top 10 best buys for Malaysia"
   description="Ten picks, clear reasons, no hype. Scored Top 10 lists for appliances, home and lifestyle in Malaysia."
 >
-  <section class="grid items-center gap-8 py-4 lg:grid-cols-[1.15fr_0.85fr]">
-    <div>
-      <p class="text-xs font-bold uppercase tracking-widest text-[var(--tb-muted)]">
-        Malaysia edition · updated {SITE_DATE}
-      </p>
-      <h1 class="font-display text-4xl font-extrabold sm:text-5xl">Ten picks. Clear reasons. No hype.</h1>
-      <p class="max-w-[52ch] text-lg text-[var(--tb-muted)]">
-        Every Top 10 is scored on a published scorecard, with dated prices, trade-offs and the sources behind each pick.
-      </p>
-      <div class="mt-5 flex flex-wrap gap-2">
-        {listSlugs().map((slug) => (
-          <a href={`/${slug}`} class="tb-chip">
-            {LISTS[slug as keyof typeof LISTS].short}
-          </a>
-        ))}
-        <a href="/tools?tool=finder" class="tb-chip">Not sure? Take the 3-question finder</a>
-      </div>
+  <section class="tb-hero tb-reveal">
+    <p class="text-xs font-semibold text-[var(--tb-muted)]">
+      Malaysia edition · updated {SITE_DATE} · prices in MYR
+    </p>
+    <h1 class="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+      Ten picks. Clear reasons. No hype.
+    </h1>
+    <p class="mx-auto mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+      Every Top 10 is scored on a published scorecard, with dated prices, trade-offs and the sources behind each pick.
+    </p>
+    <div class="tb-search-hero" aria-label="Open site search">
+      <span class="flex min-w-0 flex-1 items-center gap-2 text-sm text-[var(--tb-muted)]">
+        <Icon name="nav.search" size={20} strokeWidth={2} />
+        <span class="truncate">Search lists, guides and tools</span>
+        <kbd class="ml-auto hidden rounded border border-[var(--tb-line)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--tb-muted)] sm:inline">⌘K</kbd>
+      </span>
+      <button type="button" id="home-open-search" class="tb-btn">Search</button>
     </div>
-    <div>
-      <ImageSlot slotId="home-hero" aspect="banner" label="Home hero banner" />
-      <div class="mt-4 space-y-2" aria-label="Current number one picks">
+    <p class="mt-3 text-xs text-[var(--tb-muted)]">
+      Or <a href="/tools?tool=finder">take the 3-question finder</a>
+    </p>
+  </section>
+
+  <script is:inline>
+    document.getElementById('home-open-search')?.addEventListener('click', () => {
+      window.dispatchEvent(new Event('tb-open-search'));
+    });
+  </script>
+
+  <section class="grid items-start gap-8 pb-6 lg:grid-cols-[1fr_0.9fr]">
+    <div class="tb-reveal-stagger space-y-2" aria-label="Current number one picks">
         {
           tops.slice(0, 5).map(
             (p) =>
@@ -59,12 +76,26 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
               ),
           )
         }
-        <p class="text-xs text-[var(--tb-muted)]">
-          Scores are editor judgments from scorecard v1.0. <a href="/categories">See all lists</a>
-        </p>
-      </div>
+      <p class="text-xs text-[var(--tb-muted)]">
+        Scores are editor judgments from scorecard v1.0. <a href="/categories">See all lists</a>
+      </p>
+    </div>
+    <div class="hidden lg:block">
+      <ImageSlot slotId="home-hero" aspect="banner" label="Home hero banner" />
     </div>
   </section>
+
+  <div class="mt-4 flex flex-wrap justify-center gap-2 lg:mt-0">
+    {listSlugs().slice(0, 8).map((slug) => {
+      const icon = LIST_SLUG_ICONS[slug];
+      return (
+        <a href={`/${slug}`} class="tb-chip inline-flex items-center gap-1.5">
+          {icon ? <Icon name={icon} size={16} /> : null}
+          {LISTS[slug as keyof typeof LISTS].short}
+        </a>
+      );
+    })}
+  </div>
 
   <section class="my-10 grid gap-3 sm:grid-cols-3">
     {
@@ -82,22 +113,39 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
   </section>
 
   <div class="flex flex-wrap gap-4 border-y border-[var(--tb-line)] py-4 text-sm font-semibold">
-    <span>No paid rankings</span>
-    <span>Dated prices and sources</span>
-    <span>Scorecard published</span>
-    <span>Corrections log</span>
+    {
+      (
+        [
+          ['trust.no-paid', 'No paid rankings'],
+          ['trust.dated', 'Dated prices and sources'],
+          ['trust.scorecard', 'Scorecard published'],
+          ['trust.log', 'Corrections log'],
+        ] as const
+      ).map(([key, label]) => (
+        <span class="inline-flex items-center gap-2">
+          <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
+            <Icon name={key} size={32} />
+          </span>
+          {label}
+        </span>
+      ))
+    }
   </div>
 
   <section class="py-10">
     <h2 class="font-display text-2xl font-bold">What are you shopping for?</h2>
     <div class="mt-3 flex flex-wrap gap-2">
       {
-        CATS.map((c) => (
-          <a href={`/category/${c.id}`} class="tb-chip">
-            {c.name}
-            {c.lists.length ? ` (${c.lists.length})` : ''}
-          </a>
-        ))
+        CATS.map((c) => {
+          const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
+          return (
+            <a href={`/category/${c.id}`} class="tb-chip inline-flex items-center gap-1.5">
+              {icon ? <Icon name={icon} size={20} /> : null}
+              {c.name}
+              {c.lists.length ? ` (${c.lists.length})` : ''}
+            </a>
+          );
+        })
       }
     </div>
     <h2 class="mt-8 font-display text-2xl font-bold">Start with a list</h2>
@@ -109,7 +157,12 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
           return (
             <a href={`/${slug}`} class="tb-tile">
               <span class="tb-pill">{CATS.find((c) => c.id === L.cat)?.name}</span>
-              <h3 class="m-0 font-display text-lg font-bold">{L.short}: Top 10 in Malaysia</h3>
+              <h3 class="m-0 flex items-center gap-2 font-display text-lg font-bold">
+                {LIST_SLUG_ICONS[slug] ? (
+                  <Icon name={LIST_SLUG_ICONS[slug]} size={24} class="shrink-0" />
+                ) : null}
+                {L.short}: Top 10 in Malaysia
+              </h3>
               {
                 p && (
                   <p class="m-0 text-sm text-[var(--tb-muted)]">
@@ -133,12 +186,22 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
           ['vacuum', 'Vacuum type chooser', 'Robot, cordless or corded.'],
           ['cleanser', 'Cleanser matcher', 'Filter by skin type.'],
           ['purifier', 'Purifier room size', 'The CADR your room needs.'],
-        ].map(([tool, title, desc]) => (
+        ].map(([tool, title, desc]) => {
+          const icon = TOOL_TAB_ICONS[tool] as IconMapKey | undefined;
+          return (
           <a href={`/tools?tool=${tool}`} class="tb-tile">
-            <h3 class="m-0 font-display text-base font-bold">{title}</h3>
+            <h3 class="m-0 flex items-center gap-2 font-display text-base font-bold">
+              {icon ? (
+                <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
+                  <Icon name={icon} size={20} />
+                </span>
+              ) : null}
+              {title}
+            </h3>
             <span class="text-sm text-[var(--tb-muted)]">{desc}</span>
           </a>
-        ))
+          );
+        })
       }
     </div>
   </section>

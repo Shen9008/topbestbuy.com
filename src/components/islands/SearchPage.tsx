@@ -10,13 +10,13 @@ export default function SearchPage() {
     <div class="mt-6">
       <label class="block text-sm font-bold" for="search-page-q">
         <span class="inline-flex items-center gap-2">
-          <Icon name="search" size={18} strokeWidth={2} />
+          <Icon name="nav.search" size={20} strokeWidth={2} />
           Search lists, guides and tools
         </span>
       </label>
       <div class="relative mt-2">
         <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--tb-muted)]">
-          <Icon name="search" size={18} strokeWidth={2} />
+          <Icon name="nav.search" size={20} strokeWidth={2} />
         </span>
         <input
           id="search-page-q"

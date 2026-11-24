@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { allProductsMap } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
+import Icon from '../ui/Icon';
 
 const STORAGE_KEY = 'tb-shortlist';
 
@@ -24,7 +25,12 @@ export default function SavedPage() {
   }, []);
 
   if (ids.length === 0) {
-    return <div class="tb-callout mt-6">Nothing saved yet. Tap Save on any product card.</div>;
+    return (
+      <div class="tb-callout mt-6 flex items-start gap-3">
+        <Icon name="state.empty-saved" size={32} class="shrink-0 opacity-80" />
+        <p class="m-0">Nothing saved yet. Tap Save on any product card.</p>
+      </div>
+    );
   }
 
   return (
@@ -47,7 +53,8 @@ export default function SavedPage() {
           </div>
         );
       })}
-      <a href="/compare" class="tb-btn">
+      <a href="/compare" class="tb-btn inline-flex items-center gap-2">
+        <Icon name="tool.compare" size={20} />
         Compare these
       </a>
     </div>

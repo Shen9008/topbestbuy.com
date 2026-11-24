@@ -1,10 +1,10 @@
 ---
 import Icon from '../ui/Icon.astro';
 import { MOBILE_TABS } from '../../lib/routes';
-import { NAV_ICON_NAMES, type IconName } from '../../icons';
+import { MOBILE_TAB_ICONS, type IconMapKey } from '../../icons';
 
-function tabIcon(key: (typeof MOBILE_TABS)[number]['icon']): IconName {
-  return NAV_ICON_NAMES[key];
+function tabIcon(key: (typeof MOBILE_TABS)[number]['icon']): IconMapKey {
+  return MOBILE_TAB_ICONS[key];
 }
 
 function isActive(href: string) {
@@ -28,14 +28,14 @@ function isActive(href: string) {
           <a
             href={tab.href}
             class:list={[
-              'flex h-full min-h-11 cursor-pointer flex-col items-center justify-center gap-0.5 text-[0.65rem] font-medium transition-colors',
+              'flex h-full min-h-11 cursor-pointer flex-col items-center justify-center gap-0.5 text-[0.65rem] font-medium transition-colors duration-150',
               isActive(tab.href)
                 ? 'text-[var(--tb-accent)]'
                 : 'text-[var(--tb-muted)]',
             ]}
             aria-current={isActive(tab.href) ? 'page' : undefined}
           >
-            <Icon name={tabIcon(tab.icon)} size={22} />
+            <Icon name={tabIcon(tab.icon)} size={24} />
             {tab.label}
           </a>
         </li>

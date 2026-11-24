@@ -7,7 +7,7 @@
 ## Direction
 
 - **Structure:** Mockup page types and section order (lists, tools hub, trust, mobile tab bar).
-- **Skin:** Dark default canvas `#141414` family, elevated surfaces, pill chips, 18–28px card radii, warm accent `#FF7A3D`.
+- **Skin:** Dark default canvas `#141414` family, elevated surfaces, pill chips, 32px card radii, accent `#FF7900`, white pill primary CTA on dark.
 - **Type:** Display **Sora** (600–800), body **Source Sans 3** (400–700), self-hosted under `public/fonts/`.
 
 ## Tokens

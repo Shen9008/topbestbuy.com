@@ -1,5 +1,5 @@
 /**
- * TopBestBuy semantic tokens — light default per Brand Guidelines v1.0.
+ * TopBestBuy semantic tokens — fora-inspired dark default (21st.dev redesign).
  * Brand: navy #061D32 · accent #FF7900 · Inter
  */
 
@@ -12,6 +12,7 @@
   --color-brand-offwhite: #f7f9fb;
   --color-brand-slate: #526273;
   --color-brand-border: #e2e8ee;
+  --color-fora-canvas: #141414;
 
   --color-bg: oklch(0.98 0.006 240);
   --color-surface: oklch(1 0 0);
@@ -26,8 +27,13 @@
 
   --radius-sm: 12px;
   --radius-md: 18px;
-  --radius-lg: 28px;
+  --radius-lg: 32px;
+  --radius-card: 32px;
   --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
 
   --z-base: 0;
   --z-sticky: 10;
@@ -44,6 +50,20 @@
 }
 
 :root {
+  color-scheme: dark;
+  --tb-bg: var(--color-fora-canvas);
+  --tb-surface: oklch(0.22 0.008 260);
+  --tb-surface-raised: oklch(0.28 0.01 260);
+  --tb-ink: oklch(0.96 0.005 260);
+  --tb-muted: oklch(0.68 0.02 260);
+  --tb-line: oklch(0.34 0.01 260 / 0.55);
+  --tb-accent: var(--color-brand-orange);
+  --tb-accent-ink: var(--color-brand-navy);
+  --tb-cta-bg: oklch(0.99 0 0);
+  --tb-cta-ink: var(--color-brand-navy);
+}
+
+[data-theme='light'] {
   color-scheme: light;
   --tb-bg: var(--color-brand-offwhite);
   --tb-surface: var(--color-surface);
@@ -53,52 +73,48 @@
   --tb-line: var(--color-brand-border);
   --tb-accent: var(--color-brand-orange);
   --tb-accent-ink: var(--color-brand-navy);
+  --tb-cta-bg: var(--color-brand-navy);
+  --tb-cta-ink: oklch(0.99 0 0);
 }
 
-[data-theme='dark'] {
-  color-scheme: dark;
-  --tb-bg: oklch(0.16 0.03 250);
-  --tb-surface: oklch(0.22 0.03 250);
-  --tb-surface-raised: oklch(0.28 0.03 250);
-  --tb-ink: oklch(0.93 0.01 240);
-  --tb-muted: oklch(0.68 0.02 250);
-  --tb-line: oklch(0.32 0.02 250);
-  --tb-accent: oklch(0.72 0.16 48);
-  --tb-accent-ink: oklch(0.16 0.03 250);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    color-scheme: dark;
-    --tb-bg: oklch(0.16 0.03 250);
-    --tb-surface: oklch(0.22 0.03 250);
-    --tb-surface-raised: oklch(0.28 0.03 250);
-    --tb-ink: oklch(0.93 0.01 240);
-    --tb-muted: oklch(0.68 0.02 250);
-    --tb-line: oklch(0.32 0.02 250);
-    --tb-accent: oklch(0.72 0.16 48);
-    --tb-accent-ink: oklch(0.16 0.03 250);
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --tb-bg: var(--color-brand-offwhite);
+    --tb-surface: var(--color-surface);
+    --tb-surface-raised: var(--color-surface-raised);
+    --tb-ink: var(--color-brand-navy);
+    --tb-muted: var(--color-brand-slate);
+    --tb-line: var(--color-brand-border);
+    --tb-accent: var(--color-brand-orange);
+    --tb-accent-ink: var(--color-brand-navy);
+    --tb-cta-bg: var(--color-brand-navy);
+    --tb-cta-ink: oklch(0.99 0 0);
   }
 }
 
 .logo-wordmark-dark {
-  display: none;
-}
-
-html[data-theme='dark'] .logo-wordmark-light {
-  display: none;
-}
-
-html[data-theme='dark'] .logo-wordmark-dark {
   display: block;
 }
 
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme='light']) .logo-wordmark-light {
+.logo-wordmark-light {
+  display: none;
+}
+
+html[data-theme='light'] .logo-wordmark-dark {
+  display: none;
+}
+
+html[data-theme='light'] .logo-wordmark-light {
+  display: block;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) .logo-wordmark-dark {
     display: none;
   }
 
-  html:not([data-theme='light']) .logo-wordmark-dark {
+  html:not([data-theme='dark']) .logo-wordmark-light {
     display: block;
   }
 }

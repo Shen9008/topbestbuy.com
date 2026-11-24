@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import Icon from '../../components/ui/Icon.astro';
 import { CATEGORY_IDS } from '../../lib/routes';
 import { getCategory, RANKED } from '../../lib/catalog';
 import { LISTS } from '../../data/lists';
 import { POSTS } from '../../data/posts';
 import { productFullName } from '../../lib/format';
 import { SITE_DATE } from '../../data/meta';
+import { CATEGORY_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
 
 export function getStaticPaths() {
   return CATEGORY_IDS.map((cat) => ({ params: { cat } }));
@@ -15,6 +17,7 @@ export function getStaticPaths() {
 const { cat } = Astro.params;
 const category = getCategory(cat!);
 if (!category) throw new Error(`Unknown category ${cat}`);
+const catIcon = CATEGORY_ICONS[cat!] as IconMapKey | undefined;
 ---
 
 <BaseLayout
@@ -23,8 +26,17 @@ if (!category) throw new Error(`Unknown category ${cat}`);
   canonical={`/category/${cat}`}
 >
   <Breadcrumbs items={[{ label: 'Top 10 lists', href: '/categories' }, { label: category.name }]} />
-  <h1 class="font-display text-3xl font-extrabold">{category.name}</h1>
-  <p class="text-[var(--tb-muted)]">{category.desc}</p>
+  <div class="flex flex-wrap items-center gap-3">
+    {catIcon ? (
+      <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
+        <Icon name={catIcon} size={32} />
+      </span>
+    ) : null}
+    <div>
+      <h1 class="m-0 font-display text-3xl font-extrabold">{category.name}</h1>
+      <p class="m-0 mt-1 text-[var(--tb-muted)]">{category.desc}</p>
+    </div>
+  </div>
 
   <h2 class="mt-8 font-display text-2xl font-bold">Live lists</h2>
   {
@@ -33,9 +45,13 @@ if (!category) throw new Error(`Unknown category ${cat}`);
         {category.lists.map((slug) => {
           const L = LISTS[slug as keyof typeof LISTS];
           const p = RANKED[slug]?.[0];
+          const listIcon = LIST_SLUG_ICONS[slug];
           return (
             <a href={`/${slug}`} class="tb-tile">
-              <h3 class="m-0 font-display text-lg font-bold">{L.h1}</h3>
+              <h3 class="m-0 flex items-center gap-2 font-display text-lg font-bold">
+                {listIcon ? <Icon name={listIcon} size={24} class="shrink-0" /> : null}
+                {L.h1}
+              </h3>
               {p && (
                 <span class="text-sm">
                   #1: {productFullName(p)} ({p.total.toFixed(1)}/100)

@@ -14,18 +14,18 @@ const { items } = Astro.props;
 ---
 
 <nav class="mb-3 text-sm text-[var(--tb-muted)]" aria-label="Breadcrumb">
-  <a href="/" class="inline-flex items-center gap-1 hover:text-[var(--tb-accent)]">
-    <Icon name="home" size={14} class="opacity-70" />
+  <a href="/" class="inline-flex items-center gap-1 transition-colors duration-150 hover:text-[var(--tb-accent)]">
+    <Icon name="nav.home" size={20} class="opacity-70" />
     <span>Home</span>
   </a>
   {
     items.map((item) => (
       <>
         <span aria-hidden="true" class="mx-1 inline-flex items-center">
-          <Icon name="chevron-right" size={14} strokeWidth={2} class="opacity-50" />
+          <Icon name="nav.chevron-right" size={20} strokeWidth={2} class="opacity-50" />
         </span>
         {item.href ? (
-          <a href={item.href} class="hover:text-[var(--tb-accent)]">
+          <a href={item.href} class="transition-colors duration-150 hover:text-[var(--tb-accent)]">
             {item.label}
           </a>
         ) : (

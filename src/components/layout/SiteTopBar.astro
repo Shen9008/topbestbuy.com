@@ -25,18 +25,20 @@ const path = Astro.url.pathname;
       <button
         type="button"
         id="open-search"
-        class="inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface)] text-[var(--tb-ink)]"
+        class="tb-icon-slot tb-icon-slot--hover tb-icon-slot-pad-20 cursor-pointer"
         aria-label="Search the site"
+        title="Search"
       >
-        <Icon name="search" size={18} strokeWidth={2} />
+        <Icon name="nav.search" size={20} strokeWidth={2} />
       </button>
       <button
         type="button"
         id="open-shortlist"
-        class="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-2.5 text-[var(--tb-ink)]"
+        class="tb-icon-slot tb-icon-slot--hover inline-flex min-h-11 cursor-pointer items-center gap-1.5 px-2.5"
         aria-label="Open my shortlist"
+        title="Saved"
       >
-        <Icon name="heart" size={18} strokeWidth={2} />
+        <Icon name="nav.saved" size={20} strokeWidth={2} />
         <span class="text-xs font-bold">Saved</span>
       </button>
       <ThemeToggle client:load />

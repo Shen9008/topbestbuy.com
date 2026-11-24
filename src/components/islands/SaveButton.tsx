@@ -36,7 +36,7 @@ export default function SaveButton({ productId }: { productId: string }) {
       aria-pressed={saved}
       onClick={() => dispatchToggleSave(productId)}
     >
-      <Icon name={saved ? 'bookmark-check' : 'bookmark'} size={16} strokeWidth={2} />
+      <Icon name={saved ? 'product.saved' : 'product.save'} size={16} strokeWidth={2} />
       {saved ? 'Saved' : 'Save'}
     </button>
   );
