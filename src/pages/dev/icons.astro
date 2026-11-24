@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { ICON_MAP_KEYS, ICON_SIZES, type IconMapKey } from '../../icons';
+---
+
+<BaseLayout
+  title="Icon gallery (dev)"
+  description="Internal gallery of icon-map keys for visual sign-off."
+  noindex
+  canonical="/dev/icons"
+>
+  <h1 class="font-display text-3xl font-extrabold">Icon gallery</h1>
+  <p class="text-sm text-[var(--tb-muted)]">
+    Lucide at default 1.5px stroke. Keys from <code>src/icons/icon-map.ts</code>. Not indexed.
+  </p>
+
+  <div class="mt-6 grid gap-8">
+    {
+      ICON_SIZES.map((size) => (
+        <section>
+          <h2 class="font-display text-xl font-bold">Size {size}px</h2>
+          <ul class="mt-3 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {ICON_MAP_KEYS.map((key) => (
+              <li class="tb-card flex items-center gap-3 p-3 text-sm">
+                <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0 text-[var(--tb-ink)]">
+                  <Icon name={key as IconMapKey} size={size} />
+                </span>
+                <code class="text-xs">{key}</code>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <section class="mt-10">
+    <h2 class="font-display text-xl font-bold">Themes</h2>
+    <p class="text-sm text-[var(--tb-muted)]">Toggle site theme (top bar) and scroll — tokens use <code>currentColor</code>.</p>
+    <div class="mt-3 flex flex-wrap gap-2">
+      {(['nav.home', 'nav.saved', 'score.perf', 'trust.methodology'] as const).map((key) => (
+        <span class="tb-icon-slot tb-icon-slot-pad-16">
+          <Icon name={key} size={24} />
+        </span>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

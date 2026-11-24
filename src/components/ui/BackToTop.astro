@@ -5,10 +5,11 @@ import Icon from './Icon.astro';
 <button
   type="button"
   id="tb-back-to-top"
-  class="fixed bottom-[calc(var(--tabbar-height)+1rem)] right-4 z-[var(--z-sticky)] hidden min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--tb-line)] bg-[var(--tb-surface)] text-[var(--tb-ink)] shadow-md transition-opacity hover:border-[var(--tb-accent)] hover:text-[var(--tb-accent)] lg:bottom-6"
+  class="tb-icon-slot tb-icon-slot--hover tb-icon-slot-pad-20 fixed bottom-[calc(var(--tabbar-height)+1rem)] right-4 z-[var(--z-sticky)] hidden cursor-pointer rounded-full shadow-md lg:bottom-6"
   aria-label="Back to top"
+  title="Back to top"
 >
-  <Icon name="arrow-up" size={20} />
+  <Icon name="nav.back-to-top" size={20} />
 </button>
 
 <script>
@@ -22,7 +23,8 @@ import Icon from './Icon.astro';
     toggle();
     window.addEventListener('scroll', toggle, { passive: true });
     btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
     });
   }
 </script>

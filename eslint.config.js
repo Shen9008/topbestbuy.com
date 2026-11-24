@@ -18,6 +18,19 @@ export default tseslint.config(
     },
   },
   {
+    files: ['src/**/*.{ts,tsx,astro}'],
+    ignores: ['src/data/**', 'src/components/ui/Icon.astro', 'src/components/ui/Icon.tsx'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'JSXElement[openingElement.name.name="svg"]',
+          message: 'Use <Icon> instead of raw <svg> (see docs/ICONS.md).',
+        },
+      ],
+    },
+  },
+  {
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'warn',

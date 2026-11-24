@@ -5,7 +5,7 @@ import { RANKED } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
 import { matchesFragrancePreference } from '../../lib/scoring';
 import type { RankedProduct } from '../../lib/scoring';
-import { TOOL_TAB_ICONS, type IconName } from '../../icons';
+import { TOOL_TAB_ICONS, type IconMapKey } from '../../icons';
 import Icon from '../ui/Icon';
 
 const TABS = [
@@ -33,7 +33,7 @@ export default function ToolsHub({ initialTool }: { initialTool?: string }) {
     <div>
       <div class="mb-4 flex flex-wrap gap-2" role="tablist" aria-label="Tools">
         {TABS.map(([id, label]) => {
-          const icon = TOOL_TAB_ICONS[id] as IconName | undefined;
+          const icon = TOOL_TAB_ICONS[id] as IconMapKey | undefined;
           return (
             <button
               key={id}
@@ -376,7 +376,7 @@ function Question({
           class="tb-btn tb-btn-ghost tb-btn-sm mt-3 inline-flex min-h-11 items-center gap-1.5"
           onClick={onBack}
         >
-          <Icon name="chevron-left" size={16} strokeWidth={2} />
+          <Icon name="tool.back" size={16} strokeWidth={2} />
           Back
         </button>
       )}

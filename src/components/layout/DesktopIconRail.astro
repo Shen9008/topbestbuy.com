@@ -1,15 +1,14 @@
 ---
 import Icon from '../ui/Icon.astro';
 import SiteLogo from './SiteLogo.astro';
-import type { IconName } from '../../icons';
-import { NAV_ICON_NAMES } from '../../icons';
+import type { IconMapKey } from '../../icons';
 
-const links: { href: string; label: string; icon: IconName }[] = [
-  { href: '/', label: 'Home', icon: NAV_ICON_NAMES.home },
-  { href: '/search', label: 'Search', icon: NAV_ICON_NAMES.search },
-  { href: '/category/kitchen', label: 'Categories', icon: NAV_ICON_NAMES.grid },
-  { href: '/saved', label: 'Saved', icon: NAV_ICON_NAMES.bookmark },
-  { href: '/tools', label: 'Tools', icon: NAV_ICON_NAMES.tools },
+const links: { href: string; label: string; icon: IconMapKey }[] = [
+  { href: '/', label: 'Home', icon: 'nav.home' },
+  { href: '/search', label: 'Search', icon: 'nav.search' },
+  { href: '/category/kitchen', label: 'Categories', icon: 'nav.categories' },
+  { href: '/saved', label: 'Saved', icon: 'nav.saved' },
+  { href: '/tools', label: 'Tools', icon: 'nav.tools' },
 ];
 
 function isActive(href: string) {
@@ -29,14 +28,14 @@ function isActive(href: string) {
       <a
         href={link.href}
         class:list={[
-          'flex w-full flex-col items-center gap-1 px-1 py-2 text-[0.65rem] font-medium transition-colors',
+          'flex w-full min-h-11 flex-col items-center justify-center gap-1 px-1 py-2 text-[0.65rem] font-medium transition-colors duration-150',
           isActive(link.href)
             ? 'text-[var(--tb-accent)]'
-            : 'text-[var(--tb-muted)] hover:text-[var(--tb-ink)]',
+            : 'text-[var(--tb-muted)] hover:text-[var(--tb-accent)]',
         ]}
         aria-current={isActive(link.href) ? 'page' : undefined}
       >
-        <Icon name={link.icon} size={22} />
+        <Icon name={link.icon} size={24} />
         <span>{link.label}</span>
       </a>
     ))

@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Icon from '../components/ui/Icon.astro';
 import { CRIT } from '../data/scorecard';
 import { SITE_DATE } from '../data/meta';
+import { SCORE_CRIT_ICONS, type IconMapKey } from '../icons';
 ---
 
 <BaseLayout
@@ -31,13 +33,25 @@ import { SITE_DATE } from '../data/meta';
       </thead>
       <tbody>
         {
-          CRIT.map((c) => (
-            <tr>
-              <td>{c[1]}</td>
-              <td class="tb-num">{c[2]}%</td>
-              <td>{c[3]}</td>
-            </tr>
-          ))
+          CRIT.map((c) => {
+            const icon = SCORE_CRIT_ICONS[c[0]] as IconMapKey | undefined;
+            return (
+              <tr>
+                <td>
+                  <span class="inline-flex items-center gap-2">
+                    {icon ? (
+                      <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
+                        <Icon name={icon} size={20} />
+                      </span>
+                    ) : null}
+                    {c[1]}
+                  </span>
+                </td>
+                <td class="tb-num">{c[2]}%</td>
+                <td>{c[3]}</td>
+              </tr>
+            );
+          })
         }
       </tbody>
     </table>
