@@ -260,18 +260,58 @@
   }
 
   .tb-tile {
-    @apply relative flex cursor-pointer flex-col gap-1.5 overflow-hidden rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 text-[var(--tb-ink)] no-underline;
+    @apply relative flex cursor-pointer flex-col gap-2 overflow-hidden rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 text-[var(--tb-ink)] no-underline;
     transition:
       transform var(--dur-base) var(--ease-out),
       border-color var(--dur-fast) var(--ease-out),
       box-shadow var(--dur-base) var(--ease-out);
   }
 
+  .tb-tile__head {
+    @apply flex items-start gap-3;
+  }
+
+  .tb-tile__head .tb-h3 {
+    @apply min-w-0 flex-1 leading-snug;
+  }
+
+  .tb-tile__score {
+    @apply text-sm leading-relaxed text-[var(--tb-muted)];
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tb-list-visual-well {
+    @apply inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-2.5 text-[var(--tb-ink)];
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  .tb-list-visual-well :global(svg) {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  .tb-list-visual-well--md :global(svg) {
+    width: 28px;
+    height: 28px;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     .tb-tile:hover {
       transform: translateY(-2px);
-      border-color: var(--tb-accent);
-      box-shadow: 0 0 0 1px color-mix(in oklch, var(--tb-accent) 35%, transparent);
+      border-color: color-mix(in oklch, var(--tb-accent) 40%, var(--tb-line));
+      box-shadow:
+        0 0 0 1px color-mix(in oklch, var(--tb-accent) 22%, transparent),
+        0 12px 32px -20px color-mix(in oklch, var(--tb-accent) 18%, transparent);
+    }
+
+    .tb-tile:hover .tb-list-visual-well {
+      border-color: color-mix(in oklch, var(--tb-accent) 45%, var(--tb-line));
+      color: color-mix(in oklch, var(--tb-accent) 75%, var(--tb-ink));
+      box-shadow: 0 0 12px -4px color-mix(in oklch, var(--tb-accent) 25%, transparent);
     }
   }
 

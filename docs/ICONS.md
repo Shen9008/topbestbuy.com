@@ -111,12 +111,34 @@ Each semantic key maps to one Lucide glyph (stroke icons, 24×24 viewBox):
 
 Full key list: `ICON_MAP_KEYS` in `src/icons/icon-map.ts` or the gallery at `/dev/icons` (noindex).
 
+## Premium list illustrations
+
+Home **Start with a list** tiles and matching category-hub list tiles use bespoke SVG illustrations (not Lucide). Nav, chips, mega-menu, and footer links keep Lucide via `LIST_SLUG_ICONS`.
+
+| Asset (`public/icons/premium/`) | List slug |
+|---------------------------------|-----------|
+| `air-fryers.svg` | `best-air-fryers-malaysia` |
+| `air-purifiers.svg` | `best-air-purifiers-malaysia` |
+| `mattress.svg` | `best-mattress-malaysia` |
+| `vacuum.svg` | `best-vacuum-cleaners-malaysia` |
+| `earbuds.svg` | `best-wireless-earbuds-malaysia` |
+| `cleansers.svg` | `best-facial-cleansers-malaysia` |
+| `washing-machines.svg` | `best-washing-machines-malaysia` |
+| `laptops.svg` | `best-laptops-for-students-malaysia` |
+| `smart-watches.svg` | `best-smart-watches-malaysia` |
+| `smart-tvs.svg` | `best-smart-tvs-malaysia` |
+| `running-shoes.svg` | `best-running-shoes-malaysia` |
+
+Rendered by `src/components/ui/ListVisual.astro` inside `.tb-list-visual-well` (soft bordered well, accent glow on tile hover). Spec: 48×48 viewBox, 1.5px rounded strokes, `currentColor` with `#FF7900` accents at ≤30% opacity, transparent background. Mapping: `src/lib/list-visuals.ts`.
+
+**Licence:** MIT — authored for TopBestBuy (this repo). Separate from Lucide; do not merge into `icon-map` Lucide keys.
+
 ## Lint / tests
 
 `tests/icon-policy.test.ts` fails CI if:
 
 - Emoji appear under `src/` (excluding `src/data/`)
-- Raw `<svg>` appears outside `Icon.astro` / `Icon.tsx`
+- Raw `<svg>` appears outside `Icon.astro` / `Icon.tsx` (list illustrations live under `public/icons/premium/` and load via `ListVisual.astro`)
 - Any `icon-map` key fails to resolve to Lucide nodes
 
 Run: `npm run test`

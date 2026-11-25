@@ -1,0 +1,28 @@
+---
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { LIST_VISUAL_BY_SLUG } from '../../lib/list-visuals';
+
+interface Props {
+  slug: string;
+  size?: 'sm' | 'md';
+}
+
+const { slug, size = 'sm' } = Astro.props;
+const visualId = LIST_VISUAL_BY_SLUG[slug];
+if (!visualId) return;
+
+const svgPath = join(process.cwd(), 'public', 'icons', 'premium', `${visualId}.svg`);
+let markup = '';
+try {
+  markup = readFileSync(svgPath, 'utf-8');
+} catch {
+  return;
+}
+---
+
+<span
+  class:list={['tb-list-visual-well', size === 'md' && 'tb-list-visual-well--md']}
+  aria-hidden="true"
+  set:html={markup}
+/>
