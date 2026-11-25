@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import preact from '@astrojs/preact';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,5 +13,19 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [preact()],
+  integrations: [
+    preact(),
+    sitemap({
+      namespaces: {
+        news: false,
+        xhtml: false,
+        image: false,
+        video: false,
+      },
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return path !== '/404' && !path.startsWith('/dev/');
+      },
+    }),
+  ],
 });
