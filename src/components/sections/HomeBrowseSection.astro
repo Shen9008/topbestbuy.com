@@ -68,6 +68,17 @@ const sectionClass = bare ? '' : 'tb-section';
                 </p>
               )
             }
+            {
+              L.kw && (
+                <span class="mt-2 text-xs text-[var(--tb-muted)]">
+                  About{' '}
+                  <span class="tb-num font-medium text-[var(--tb-ink)]">
+                    {L.kw[1].toLocaleString('en-MY')}
+                  </span>{' '}
+                  searches a month for &ldquo;{L.kw[0]}&rdquo; (Semrush, Malaysia)
+                </span>
+              )
+            }
           </a>
         );
       })

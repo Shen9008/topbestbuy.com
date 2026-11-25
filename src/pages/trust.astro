@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import { documentTitle } from '../lib/seo';
+
+const meta = {
+  title: 'Trust centre',
+  description:
+    'How TopBestBuy works, who we are and how we stay independent — scorecard, editorial policy, team and corrections.',
+};
+
+const items = [
+  { href: '/about', title: 'About us', desc: 'Why we exist and who we serve.' },
+  { href: '/how-we-rank', title: 'How we rank', desc: 'Our scorecard and weights.' },
+  { href: '/editorial-policy', title: 'Editorial policy', desc: 'Independence and corrections.' },
+  { href: '/affiliate-disclosure', title: 'How we make money', desc: 'Affiliate links, ads, sponsors.' },
+  { href: '/team', title: 'Our team', desc: 'The people behind the lists.' },
+  { href: '/corrections', title: 'Corrections log', desc: 'Every fix, in public.' },
+  { href: '/contact', title: 'Contact', desc: 'Questions and tips.' },
+  { href: '/privacy', title: 'Privacy', desc: 'What we collect.' },
+] as const;
+---
+
+<BaseLayout
+  title={documentTitle(meta.title)}
+  description={meta.description}
+  canonical="/trust"
+  ogImage="/images/about/about-hero.webp"
+>
+  <Breadcrumbs items={[{ label: 'Trust centre' }]} />
+  <header class="tb-reveal tb-reveal--hero">
+    <h1 class="tb-h1">Trust centre</h1>
+    <p class="mt-3 max-w-[52ch] text-lg text-[var(--tb-muted)]">
+      Everything you need to decide whether to trust a list.
+    </p>
+  </header>
+  <div class="tb-studio-grid tb-reveal-stagger mt-10">
+    {
+      items.map((item) => (
+        <a href={item.href} class="tb-tile tb-studio-tile no-underline">
+          <h2 class="m-0 tb-h3 text-[var(--tb-ink)]">{item.title}</h2>
+          <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{item.desc}</p>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>
