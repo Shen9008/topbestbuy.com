@@ -1,0 +1,31 @@
+---
+import { EDITORIAL_BYLINE } from '../../data/editorial';
+import { FOUNDER } from '../../data/founder';
+import { SITE_DATE } from '../../data/meta';
+
+interface Props {
+  updated?: boolean;
+  extra?: string;
+}
+
+const { updated = true, extra } = Astro.props;
+---
+
+<p class="text-sm text-[var(--tb-muted)]">
+  Researched by{' '}
+  <a href="/about" class="font-semibold text-[var(--tb-ink)] no-underline hover:text-[var(--tb-accent)]">
+    {EDITORIAL_BYLINE}
+  </a>
+  {' '}
+  · Founded by{' '}
+  <a href="/team" class="font-semibold text-[var(--tb-ink)] no-underline hover:text-[var(--tb-accent)]">
+    {FOUNDER.name}
+  </a>
+  {updated && (
+    <>
+      {' '}
+      · Updated {SITE_DATE}
+    </>
+  )}
+  {extra && <> · {extra}</>}
+</p>

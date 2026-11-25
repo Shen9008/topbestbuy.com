@@ -18,6 +18,7 @@ import {
 } from '../../lib/seo';
 import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
 import { CATS } from '../../data/categories';
+import TrustPathModule from '../../components/sections/TrustPathModule.astro';
 
 export function getStaticPaths() {
   return CATEGORY_IDS.map((cat) => ({ params: { cat } }));
@@ -32,6 +33,10 @@ const categorySchema = {
   '@context': 'https://schema.org',
   '@graph': [breadcrumbListJsonLd(crumbItems)],
 };
+const liveListSlugs = new Set(category.lists as readonly string[]);
+const relatedGuides = Object.entries(POSTS)
+  .filter(([, p]) => (p.related as readonly string[]).some((slug) => liveListSlugs.has(slug)))
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -138,16 +143,22 @@ const categorySchema = {
           seeAllLabel="See all guides"
         />
         <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {Object.entries(POSTS)
-            .slice(0, 3)
-            .map(([id, p]) => (
+          {relatedGuides.length > 0 ? (
+            relatedGuides.map(([id, p]) => (
               <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
                 <span class="tb-pill">{p.type}</span>
                 <h3 class="m-0 text-base font-bold">{p.h1}</h3>
               </a>
-            ))}
+            ))
+          ) : (
+            <p class="text-sm text-[var(--tb-muted)]">
+              <a href="/guides">Browse all guides</a>
+            </p>
+          )}
         </div>
       </section>
+
+      <TrustPathModule />
     </div>
   </div>
 </BaseLayout>

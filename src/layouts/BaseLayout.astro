@@ -11,6 +11,9 @@ import SiteFooter from '../components/layout/SiteFooter.astro';
 import MobileTabBar from '../components/layout/MobileTabBar.astro';
 import AppChrome from '../components/islands/AppChrome';
 import BackToTop from '../components/ui/BackToTop.astro';
+import { siteOrganizationGraph } from '../lib/json-ld';
+
+const orgLd = JSON.stringify(siteOrganizationGraph());
 
 export interface Props {
   title: string;
@@ -36,6 +39,7 @@ const { title, description, canonical, ogImage, ogType, noindex, jsonLd } = Astr
       ogType={ogType}
       noindex={noindex}
     />
+    <script type="application/ld+json" set:html={orgLd} />
     {jsonLd && <JsonLd data={jsonLd} />}
     <script is:inline>
       try {

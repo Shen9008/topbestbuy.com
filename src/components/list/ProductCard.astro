@@ -6,6 +6,7 @@ import { CRIT } from '../../data/scorecard';
 import { SITE_DATE } from '../../data/meta';
 import { formatRM, productFullName } from '../../lib/format';
 import { resolveSources } from '../../lib/sources';
+import SourceLink from '../ui/SourceLink.astro';
 import { SCORE_CRIT_ICONS, type IconMapKey } from '../../icons';
 import type { RankedProduct } from '../../lib/scoring';
 import type { ListCatalog } from '../../data/lists';
@@ -161,9 +162,7 @@ const fullName = productFullName(product);
               {sources.map((s, idx) => (
                 <>
                   {idx > 0 && '; '}
-                  <a href={s.href} target="_blank" rel="noopener nofollow" class="underline">
-                    {s.title}
-                  </a>
+                  <SourceLink source={s} />
                 </>
               ))}
             </span>

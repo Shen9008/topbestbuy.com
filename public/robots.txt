@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://topbestbuy.online/sitemap-index.xml
+
+# AI / GEO discovery (see https://llmstxt.org/)
+Llms-Txt: https://topbestbuy.online/llms.txt

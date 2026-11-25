@@ -18,6 +18,10 @@ import {
   reviewDocumentTitle,
   reviewMetaDescription,
 } from '../../lib/seo';
+import SourceLink from '../../components/ui/SourceLink.astro';
+import EditorialByline from '../../components/sections/EditorialByline.astro';
+import TrustPathModule from '../../components/sections/TrustPathModule.astro';
+import { categorySpotlightReviews } from '../../lib/internal-links';
 
 export function getStaticPaths() {
   return Object.keys(allProductsMap()).map((id) => ({ params: { id } }));
@@ -42,6 +46,7 @@ const crumbItems = [
 const reviewPath = `/reviews/${id}`;
 const reviewTitle = reviewDocumentTitle(fullName);
 const reviewDesc = reviewMetaDescription(fullName, product.total);
+const categoryReviews = categorySpotlightReviews(list.cat, product.list, 2);
 const reviewSchema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -79,9 +84,10 @@ const reviewSchema = {
       <p class="mt-3 text-lg text-[var(--tb-muted)]">
         Scores and what the evidence says — same scorecard as <a href={`/${product.list}`}>{list.short}</a>.
       </p>
-      <p class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--tb-muted)]">
-        <span>Scorecard v1.0</span>
-        <span>Evidence checked {SITE_DATE}</span>
+      <div class="mt-3">
+        <EditorialByline updated={false} extra={`Evidence checked ${SITE_DATE} · Scorecard v1.0`} />
+      </div>
+      <p class="mt-2 text-sm text-[var(--tb-muted)]">
         <span class="tb-pill tb-pill-sample">Prices as reported</span>
       </p>
     </div>
@@ -148,6 +154,12 @@ const reviewSchema = {
         </a>
         <a href="/tools?tool=finder" class="tb-section-link mt-2 justify-start px-0">
           Product finder
+        </a>
+        <a href="/saved" class="tb-section-link mt-2 justify-start px-0">
+          Saved picks
+        </a>
+        <a href={`/category/${list.cat}`} class="tb-section-link mt-2 justify-start px-0">
+          {category?.name ?? 'Category'} hub
         </a>
       </div>
     </aside>
@@ -277,9 +289,7 @@ const reviewSchema = {
                       <td>
                         {sources.length ? (
                           sources.map((s) => (
-                            <a href={s.href} class="block text-sm" rel="noopener noreferrer">
-                              {s.title}
-                            </a>
+                            <SourceLink source={s} class="block text-sm" />
                           ))
                         ) : (
                           <span class="text-[var(--tb-muted)]">[Source URL]</span>
@@ -331,9 +341,34 @@ const reviewSchema = {
         </div>
         <div class="mt-4 flex flex-wrap gap-2">
           <a href="/compare" class="tb-btn tb-btn-ghost tb-btn-sm min-h-11">Compare with others</a>
+          <a href="/saved" class="tb-btn tb-btn-ghost tb-btn-sm min-h-11">Saved list</a>
           <a href={`/${product.list}`} class="tb-btn tb-btn-ghost tb-btn-sm min-h-11">Back to the Top 10</a>
         </div>
       </section>
+
+      {
+        categoryReviews.length > 0 && (
+          <section class="scroll-mt-28 mt-10">
+            <SectionHeader
+              title={`More in ${category?.name ?? list.cat}`}
+              seeAllHref={`/category/${list.cat}`}
+              seeAllLabel="Category lists"
+            />
+            <div class="mt-3 grid gap-3 sm:grid-cols-2">
+              {categoryReviews.map((x) => (
+                <a href={`/reviews/${x.id}`} class="tb-tile tb-card--editorial">
+                  <strong>{productFullName(x)}</strong>
+                  <span class="text-xs text-[var(--tb-muted)]">
+                    #{x.rank} on {getList(x.list).short}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <TrustPathModule />
     </div>
   </div>
 </BaseLayout>
