@@ -12,7 +12,7 @@ export default function PriceAlertForm({ listKey }: { listKey: string }) {
         setMsg('Saved for the demo. Nothing was sent or stored.');
       }}
     >
-      <h3 class="mt-0 font-display text-lg font-bold">Get a price-drop note</h3>
+      <h3 class="mt-0 tb-h3">Get a price-drop note</h3>
       <p class="text-sm text-[var(--tb-muted)]">
         Demo only: nothing is sent or stored.
       </p>
