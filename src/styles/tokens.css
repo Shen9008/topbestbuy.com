@@ -38,13 +38,11 @@
   --z-base: 0;
   --z-sticky: 10;
   --z-dropdown: 20;
-  --z-rail: 30;
   --z-tabbar: 40;
   --z-toast: 50;
 
   --content-max: 1180px;
   --prose-max: 70ch;
-  --rail-width: 4.5rem;
   --topbar-height: 3.75rem;
   --tabbar-height: 4rem;
   --category-rail-height: 2.5rem;
