@@ -3,21 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ImageSlot from '../components/media/ImageSlot.astro';
 import Icon from '../components/ui/Icon.astro';
 import PriceAlertForm from '../components/islands/PriceAlertForm';
+import HomeValueProps from '../components/sections/HomeValueProps.astro';
+import HomeTrustStrip from '../components/sections/HomeTrustStrip.astro';
+import HomeBrowseSection from '../components/sections/HomeBrowseSection.astro';
+import HomeToolsStrip from '../components/sections/HomeToolsStrip.astro';
+import HomeGuidesSection from '../components/sections/HomeGuidesSection.astro';
 import { SITE_DATE } from '../data/meta';
-import { CATS } from '../data/categories';
 import { LISTS } from '../data/lists';
-import { POSTS } from '../data/posts';
-import { listSlugs, RANKED, topPick } from '../lib/catalog';
+import { listSlugs, topPick } from '../lib/catalog';
 import { productFullName } from '../lib/format';
-import {
-  CATEGORY_ICONS,
-  LIST_SLUG_ICONS,
-  TOOL_TAB_ICONS,
-  type IconMapKey,
-} from '../icons';
+import { LIST_SLUG_ICONS } from '../icons';
 
 const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
-const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-back-pain', 'blog-do-you-need-an-ionizer'];
 ---
 
 <BaseLayout
@@ -97,150 +94,13 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
     })}
   </div>
 
-  <section class="tb-home-value my-10" aria-labelledby="home-value-heading">
-    <h2 id="home-value-heading" class="sr-only">How we help you decide</h2>
-    <div class="tb-reveal-stagger grid gap-3 sm:grid-cols-3">
-      {
-        (
-          [
-            ['score.total', '01', 'Pick in 30 seconds', 'Top 3 summary, then ten scored picks.'],
-            ['product.con', '02', 'Know the trade-offs', 'Every pick lists what it does badly.'],
-            ['score.avail', '03', 'Built for Malaysia', 'MYR prices, local warranty notes, local retailers.'],
-          ] as const
-        ).map(([icon, step, title, copy]) => (
-          <article class="tb-value-card">
-            <div class="tb-value-card__head">
-              <span class="tb-value-card__step" aria-hidden="true">{step}</span>
-              <span class="tb-value-card__icon" aria-hidden="true">
-                <Icon name={icon} size={24} />
-              </span>
-            </div>
-            <div>
-              <h3 class="m-0 font-display text-base font-bold tracking-tight">{title}</h3>
-              <p class="m-0 mt-2 text-sm leading-relaxed text-[var(--tb-muted)]">{copy}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <HomeValueProps />
+  <HomeTrustStrip />
+  <HomeBrowseSection />
+  <HomeToolsStrip />
+  <HomeGuidesSection />
 
-  <section class="tb-trust-strip tb-reveal" aria-label="Editorial standards">
-    <div class="tb-trust-strip__grid tb-reveal-stagger">
-      {
-        (
-          [
-            ['trust.no-paid', '/editorial-policy', 'No paid rankings'],
-            ['trust.dated', '/how-we-rank', 'Dated prices and sources'],
-            ['trust.scorecard', '/how-we-rank', 'Scorecard published'],
-            ['trust.log', '/corrections', 'Corrections log'],
-          ] as const
-        ).map(([key, href, label]) => (
-          <a href={href} class="tb-trust-pill">
-            <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
-              <Icon name={key} size={20} />
-            </span>
-            <span class="min-w-0 text-pretty">{label}</span>
-            <Icon name="nav.chevron-right" size={16} class="tb-trust-pill__chevron" aria-hidden="true" />
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="py-10">
-    <h2 class="tb-h2">What are you shopping for?</h2>
-    <div class="mt-3 flex flex-wrap gap-2">
-      {
-        CATS.map((c) => {
-          const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
-          return (
-            <a href={`/category/${c.id}`} class="tb-chip inline-flex items-center gap-1.5">
-              {icon ? <Icon name={icon} size={20} /> : null}
-              {c.name}
-              {c.lists.length ? ` (${c.lists.length})` : ''}
-            </a>
-          );
-        })
-      }
-    </div>
-    <h2 class="mt-8 tb-h2">Start with a list</h2>
-    <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        listSlugs().map((slug) => {
-          const L = LISTS[slug as keyof typeof LISTS];
-          const p = RANKED[slug]?.[0];
-          return (
-            <a href={`/${slug}`} class="tb-tile">
-              <span class="tb-pill">{CATS.find((c) => c.id === L.cat)?.name}</span>
-              <h3 class="m-0 flex items-center gap-2 tb-h3">
-                {LIST_SLUG_ICONS[slug] ? (
-                  <Icon name={LIST_SLUG_ICONS[slug]} size={24} class="shrink-0" />
-                ) : null}
-                {L.short}: Top 10 in Malaysia
-              </h3>
-              {
-                p && (
-                  <p class="m-0 text-sm text-[var(--tb-muted)]">
-                    #1 {productFullName(p)} ({p.total.toFixed(1)}/100)
-                  </p>
-                )
-              }
-            </a>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <section class="border-y border-[var(--tb-line)] py-10">
-    <h2 class="tb-h2">Narrow it down in a minute</h2>
-    <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        [
-          ['finder', 'Product finder', 'Three questions, three picks.'],
-          ['vacuum', 'Vacuum type chooser', 'Robot, cordless or corded.'],
-          ['cleanser', 'Cleanser matcher', 'Filter by skin type.'],
-          ['purifier', 'Purifier room size', 'The CADR your room needs.'],
-        ].map(([tool, title, desc]) => {
-          const icon = TOOL_TAB_ICONS[tool] as IconMapKey | undefined;
-          return (
-          <a href={`/tools?tool=${tool}`} class="tb-tile">
-            <h3 class="m-0 flex items-center gap-2 tb-h3">
-              {icon ? (
-                <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
-                  <Icon name={icon} size={20} />
-                </span>
-              ) : null}
-              {title}
-            </h3>
-            <span class="text-sm text-[var(--tb-muted)]">{desc}</span>
-          </a>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <section class="py-10">
-    <h2 class="tb-h2">Guides and explainers</h2>
-    <div class="mt-4 grid gap-3 sm:grid-cols-3">
-      {
-        postCards.map((id) => {
-          const p = POSTS[id as keyof typeof POSTS];
-          return (
-            <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
-              <span class="tb-pill">{p.type}</span>
-              <h3 class="m-0 tb-h3">{p.h1}</h3>
-              <span class="text-xs text-[var(--tb-muted)]">{p.time} read</span>
-            </a>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <section class="grid gap-6 pb-6 lg:grid-cols-2">
+  <section class="tb-section grid gap-6 pb-6 lg:grid-cols-2">
     <div class="tb-card">
       <h2 class="mt-0 tb-h3">What should we rank next?</h2>
       <p class="text-sm text-[var(--tb-muted)]">

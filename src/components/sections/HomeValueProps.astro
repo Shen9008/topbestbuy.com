@@ -1,0 +1,37 @@
+---
+import Icon from '../ui/Icon.astro';
+import SectionHeader from './SectionHeader.astro';
+import type { IconMapKey } from '../../icons';
+
+const items: { step: string; icon: IconMapKey; title: string; copy: string }[] = [
+  { step: '01', icon: 'tool.finder', title: 'Pick in 30 seconds', copy: 'Top 3 summary, then ten scored picks.' },
+  { step: '02', icon: 'trust.scorecard', title: 'Know the trade-offs', copy: 'Every pick lists what it does badly.' },
+  { step: '03', icon: 'trust.dated', title: 'Built for Malaysia', copy: 'MYR prices, local warranty notes, local retailers.' },
+];
+---
+
+<section class="tb-section" aria-labelledby="home-value-heading">
+  <SectionHeader
+    titleId="home-value-heading"
+    align="center"
+    eyebrow="Why TopBestBuy"
+    title="Research you can scan in a minute"
+    description="No hype — scored lists, dated prices, and the downsides we found."
+  />
+  <div class="tb-feature-grid tb-reveal-stagger mt-8">
+    {
+      items.map((item) => (
+        <article class="tb-value-card">
+          <div class="tb-value-card__head">
+            <span class="tb-value-card__step">{item.step}</span>
+            <span class="tb-value-card__icon" aria-hidden="true">
+              <Icon name={item.icon} size={20} strokeWidth={2} />
+            </span>
+          </div>
+          <h3 class="m-0 font-display text-base font-bold">{item.title}</h3>
+          <p class="m-0 text-sm leading-relaxed text-[var(--tb-muted)]">{item.copy}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
