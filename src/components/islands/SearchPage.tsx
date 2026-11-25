@@ -41,7 +41,7 @@ export default function SearchPage() {
                 <Icon name="nav.search" size={20} strokeWidth={2} />
               </span>
               <span class="min-w-0 font-semibold text-[var(--tb-ink)]">{hit.title}</span>
-              <span class="text-xs font-bold text-[var(--tb-accent)]">Open →</span>
+              <span class="text-xs font-bold text-[var(--tb-accent-fg)]">Open →</span>
             </a>
           ))
         )}

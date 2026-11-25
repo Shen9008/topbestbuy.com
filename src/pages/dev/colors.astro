@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CONTRAST_PAIRS, TOKEN_SWATCHES } from '../../lib/color-contrast';
+---
+
+<BaseLayout
+  title="Colour tokens (dev)"
+  description="Internal swatches and contrast pairs for the lime accent system."
+  noindex
+  canonical="/dev/colors"
+>
+  <h1 class="tb-h1">Colour tokens</h1>
+  <p class="text-sm text-[var(--tb-muted)]">
+    Toggle light/dark in the top bar. Neon lime <code>#C6FF3D</code> is for fills only; links and labels use
+    <code>--accent-fg</code>.
+  </p>
+
+  <section class="mt-10">
+    <h2 class="tb-h3">Semantic swatches</h2>
+    <ul class="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        TOKEN_SWATCHES.map(({ name, var: v }) => (
+          <li class="tb-card flex items-center gap-3 p-3">
+            <span
+              class="h-12 w-12 shrink-0 rounded-[var(--radius-sm)] border border-[var(--tb-line)]"
+              style={`background: var(${v});`}
+            />
+            <div>
+              <p class="m-0 font-semibold">{name}</p>
+              <code class="text-xs">{v}</code>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="tb-h3">Contrast pairs (live)</h2>
+    <p class="text-sm text-[var(--tb-muted)]">Ratios update when you read computed styles in DevTools; targets: 4.5:1 text, 3:1 UI.</p>
+    <ul class="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2">
+      {
+        CONTRAST_PAIRS.map(({ label, fg, bg }) => (
+          <li class="tb-card overflow-hidden p-0">
+            <div class="px-4 py-3" style={`background: var(${bg}); color: var(${fg});`}>
+              <p class="m-0 max-w-none font-semibold">{label}</p>
+              <p class="m-0 mt-1 max-w-none text-sm opacity-90">
+                Sample line — {fg} on {bg}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="tb-h3">Buttons & states</h2>
+    <div class="mt-4 flex flex-wrap gap-3">
+      <button type="button" class="tb-btn">Primary CTA</button>
+      <button type="button" class="tb-btn" disabled>Disabled</button>
+      <button type="button" class="tb-btn tb-btn-secondary">Secondary pill</button>
+      <button type="button" class="tb-btn tb-btn-ghost">Ghost</button>
+    </div>
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <span class="tb-rank">1</span>
+      <span class="tb-pill">Category</span>
+      <span class="tb-pill tb-pill-thin">Limited evidence</span>
+      <span class="tb-pill tb-pill-good">In stock</span>
+    </div>
+    <p class="mt-6 max-w-none">
+      Article <a href="#" class="text-[var(--tb-accent-fg)] underline">inline link</a> with underline.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .tb-card:hover {
+    border-color: var(--accent-line);
+  }
+</style>

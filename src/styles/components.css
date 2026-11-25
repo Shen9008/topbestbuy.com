@@ -68,7 +68,7 @@
   }
 
   .tb-section-link {
-    @apply inline-flex min-h-[var(--hit-target)] min-w-[var(--hit-target)] items-center justify-center gap-1 rounded-[var(--radius-pill)] px-3 text-sm font-bold text-[var(--tb-accent)] no-underline transition-colors duration-150 hover:text-[var(--tb-ink)] focus-visible:outline-offset-4;
+    @apply inline-flex min-h-[var(--hit-target)] min-w-[var(--hit-target)] items-center justify-center gap-1 rounded-[var(--radius-pill)] px-3 text-sm font-bold text-[var(--tb-accent-fg)] no-underline transition-colors duration-150 hover:text-[var(--tb-ink)] focus-visible:outline-offset-4;
   }
 
   .tb-section-link::after {
@@ -146,11 +146,11 @@
   }
 
   .tb-category-pill {
-    @apply inline-flex min-h-[var(--hit-target)] items-center rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 text-sm font-semibold text-[var(--tb-ink)] no-underline transition-[border-color,background-color,color] duration-150 hover:border-[var(--tb-accent)];
+    @apply inline-flex min-h-[var(--hit-target)] items-center rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 text-sm font-semibold text-[var(--tb-ink)] no-underline transition-[border-color,background-color,color] duration-150 hover:border-[var(--accent-line)];
   }
 
   .tb-category-pill--on {
-    @apply border-[var(--tb-accent)] bg-[var(--tb-accent)] text-[var(--tb-accent-ink)];
+    @apply border-[var(--accent-line)] bg-[var(--accent-soft)] text-[var(--tb-accent-fg)];
   }
 
   .tb-feed-row {
@@ -163,7 +163,7 @@
   @media (prefers-reduced-motion: no-preference) {
     .tb-feed-row:hover {
       transform: translateY(-1px);
-      border-color: color-mix(in oklch, var(--tb-accent) 35%, var(--tb-line));
+      border-color: var(--accent-line);
     }
   }
 
@@ -251,7 +251,7 @@
     top: 0;
     height: 2px;
     border-radius: 0 0 2px 2px;
-    background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--tb-accent) 85%, transparent), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
     opacity: 0;
     transition: opacity var(--dur-fast) var(--ease-out);
   }
@@ -259,7 +259,7 @@
   @media (prefers-reduced-motion: no-preference) {
     .tb-value-card:hover {
       transform: translateY(-3px);
-      border-color: color-mix(in oklch, var(--tb-accent) 35%, var(--tb-line));
+      border-color: var(--accent-line);
     }
 
     .tb-value-card:hover::before {
@@ -349,7 +349,7 @@
   }
 
   .tb-guide-tile__dot {
-    @apply h-1.5 w-1.5 rounded-full bg-[var(--tb-accent)];
+    @apply h-1.5 w-1.5 rounded-full bg-[var(--tb-accent-fg)];
   }
 
   .tb-methodology-strip {
@@ -374,19 +374,39 @@
   }
 
   .tb-btn {
-    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-pill)] border border-transparent bg-[var(--tb-cta-bg)] px-6 text-sm font-bold text-[var(--tb-cta-ink)] transition-[transform,filter,background-color,border-color] duration-[var(--dur-base)];
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-sm)] border border-transparent bg-[var(--accent)] px-6 text-sm font-bold text-[var(--on-accent)] transition-[transform,background-color,border-color,box-shadow] duration-[var(--dur-base)] ease-out;
   }
 
   .tb-btn:hover {
-    filter: brightness(1.05);
+    background: var(--accent-hover);
+    box-shadow: var(--glow);
+  }
+
+  .tb-btn:active {
+    background: var(--accent-press);
+  }
+
+  .tb-btn:disabled,
+  .tb-btn[aria-disabled='true'] {
+    @apply cursor-not-allowed border-transparent bg-[var(--surface-2)] text-[var(--text-muted)];
+    box-shadow: none;
+    transform: none;
+  }
+
+  .tb-btn-secondary {
+    @apply border border-[var(--border-strong)] bg-[var(--text-strong)] text-[var(--bg)];
+  }
+
+  [data-theme='light'] .tb-btn-secondary {
+    @apply border-[var(--border)] bg-[var(--text)] text-[var(--bg)];
   }
 
   .tb-btn-accent {
-    @apply border-[var(--tb-accent)] bg-[var(--tb-accent)] text-[var(--tb-accent-ink)];
+    @apply border-[var(--accent)] bg-[var(--accent)] text-[var(--on-accent)];
   }
 
   .tb-btn-ghost {
-    @apply border-[var(--tb-ink)] bg-transparent text-[var(--tb-ink)] hover:bg-[var(--tb-surface-raised)];
+    @apply border-[var(--border-strong)] bg-transparent text-[var(--tb-ink)] shadow-none hover:bg-[var(--tb-surface-raised)] hover:shadow-none;
   }
 
   .tb-btn-sm {
@@ -394,7 +414,7 @@
   }
 
   .tb-chip {
-    @apply inline-flex min-h-9 cursor-pointer items-center rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 text-sm font-semibold text-[var(--tb-ink)] transition-colors duration-200 hover:border-[var(--tb-accent)];
+    @apply inline-flex min-h-9 cursor-pointer items-center rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 text-sm font-semibold text-[var(--tb-ink)] transition-colors duration-200 hover:border-[var(--accent-line)];
   }
 
   .tb-chip-on {
@@ -402,8 +422,7 @@
   }
 
   .tb-rank {
-    @apply inline-flex items-center bg-[var(--tb-accent)] px-3 py-1 font-display text-lg font-extrabold text-[var(--tb-accent-ink)];
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+    @apply inline-flex items-center rounded-[var(--radius-sm)] border border-[var(--accent-line)] bg-[var(--accent-soft)] px-3 py-1 font-display text-lg font-extrabold text-[var(--tb-accent-fg)];
   }
 
   .tb-pill {
@@ -411,11 +430,11 @@
   }
 
   .tb-pill-good {
-    @apply bg-[var(--color-good)] text-white;
+    @apply bg-[var(--success)] text-[var(--bg)];
   }
 
   .tb-pill-thin {
-    @apply border border-dashed border-[var(--color-warn)] bg-transparent;
+    @apply border border-dashed border-[var(--warning)] bg-transparent text-[var(--warning)];
   }
 
   .tb-pill-sample {
@@ -431,7 +450,7 @@
   }
 
   .tb-prose {
-    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent-fg)] [&_a]:underline [&_a]:underline-offset-4 [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
   }
 
   .tb-prose h2 {
@@ -478,16 +497,16 @@
   @media (prefers-reduced-motion: no-preference) {
     .tb-tile:hover {
       transform: translateY(-2px);
-      border-color: color-mix(in oklch, var(--tb-accent) 40%, var(--tb-line));
+      border-color: var(--accent-line);
       box-shadow:
-        0 0 0 1px color-mix(in oklch, var(--tb-accent) 22%, transparent),
-        0 12px 32px -20px color-mix(in oklch, var(--tb-accent) 18%, transparent);
+        0 0 0 1px var(--accent-soft),
+        0 12px 32px -20px rgba(198, 255, 61, 0.12);
     }
 
     .tb-tile:hover .tb-visual-well {
-      border-color: color-mix(in oklch, var(--tb-accent) 45%, var(--tb-line));
-      color: color-mix(in oklch, var(--tb-accent) 75%, var(--tb-ink));
-      box-shadow: 0 0 12px -4px color-mix(in oklch, var(--tb-accent) 25%, transparent);
+      border-color: var(--accent-line);
+      color: var(--tb-accent-fg);
+      box-shadow: 0 0 12px -4px var(--accent-soft);
     }
   }
 
@@ -576,7 +595,7 @@
     z-index: -1;
     pointer-events: none;
     background:
-      radial-gradient(ellipse 80% 60% at 50% -10%, color-mix(in oklch, var(--tb-accent) 12%, transparent), transparent),
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(198, 255, 61, 0.08), transparent),
       linear-gradient(color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px),
       linear-gradient(90deg, color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px);
     background-size:
@@ -612,7 +631,7 @@
 
   .tb-icon-slot--hover:hover,
   .tb-icon-slot--hover:focus-visible {
-    @apply border-[var(--tb-accent)] text-[var(--tb-accent)];
+    @apply border-[var(--accent-line)] text-[var(--tb-accent-fg)];
   }
 
   .tb-icon-slot-pad-16 {
@@ -670,7 +689,7 @@
   }
 
   .tb-bar-fill {
-    @apply block h-full rounded-full bg-[var(--tb-accent)];
+    @apply block h-full rounded-full bg-[var(--tb-accent-fg)];
   }
 
   .tb-pros li::marker {
@@ -678,6 +697,6 @@
   }
 
   .tb-cons li::marker {
-    color: var(--tb-accent);
+    color: var(--danger);
   }
 }

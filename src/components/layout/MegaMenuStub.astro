@@ -18,7 +18,7 @@ const categories = CATEGORY_IDS.map((id) => ({
   <button
     type="button"
     id="mega-trigger"
-    class="inline-flex cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-4 py-2 text-sm font-semibold text-[var(--tb-ink)] transition-colors hover:border-[var(--tb-accent)]"
+    class="inline-flex cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-4 py-2 text-sm font-semibold text-[var(--tb-ink)] transition-colors hover:border-[var(--accent-line)]"
     aria-expanded="false"
     aria-controls="mega-panel"
   >
@@ -44,7 +44,7 @@ const categories = CATEGORY_IDS.map((id) => ({
               class:list={[
                 'block cursor-pointer rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium transition-colors',
                 currentPath === cat.href
-                  ? 'bg-[var(--tb-accent)] text-[var(--tb-accent-ink)]'
+                  ? 'border border-[var(--accent-line)] bg-[var(--accent-soft)] text-[var(--tb-accent-fg)]'
                   : 'text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]',
               ]}
             >

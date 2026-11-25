@@ -363,7 +363,7 @@ function Question({
           <button
             key={value}
             type="button"
-            class="min-h-14 cursor-pointer rounded-[var(--radius-sm)] border-2 border-[var(--tb-line)] bg-[var(--tb-surface)] px-3 text-left text-sm font-bold transition-colors hover:border-[var(--tb-accent)]"
+            class="min-h-14 cursor-pointer rounded-[var(--radius-sm)] border-2 border-[var(--tb-line)] bg-[var(--tb-surface)] px-3 text-left text-sm font-bold transition-colors hover:border-[var(--accent-line)]"
             onClick={() => onPick(value)}
           >
             {label}
@@ -446,7 +446,7 @@ function Num({
 
 function ResultBox({ title, children }: { title: string; children: preact.ComponentChildren }) {
   return (
-    <ResultPanel class="col-span-full mt-3 rounded-[var(--radius-sm)] border-2 border-dashed border-[var(--tb-accent)] bg-[var(--tb-surface)] p-4">
+    <ResultPanel class="col-span-full mt-3 rounded-[var(--radius-sm)] border-2 border-dashed border-[var(--accent-line)] bg-[var(--tb-surface)] p-4">
       <h3 class="m-0 tb-h2">{title}</h3>
       <div class="text-sm">{children}</div>
     </ResultPanel>

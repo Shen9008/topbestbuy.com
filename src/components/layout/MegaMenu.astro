@@ -11,7 +11,7 @@ import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
   <button
     type="button"
     id="mega-trigger"
-    class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-4 py-2 text-sm font-semibold text-[var(--tb-ink)] transition-[color,border-color] duration-150 hover:border-[var(--tb-accent)]"
+    class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-4 py-2 text-sm font-semibold text-[var(--tb-ink)] transition-[color,border-color] duration-150 hover:border-[var(--accent-line)]"
     aria-expanded="false"
     aria-controls="mega-panel"
   >
@@ -44,7 +44,7 @@ import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
                     <li>
                       <a
                         href={`/${slug}`}
-                        class="inline-flex items-center gap-2 text-[var(--tb-ink)] transition-colors duration-150 hover:text-[var(--tb-accent)]"
+                        class="inline-flex items-center gap-2 text-[var(--tb-ink)] transition-colors duration-150 hover:text-[var(--tb-accent-fg)]"
                       >
                         {hasListVisual(slug) ? (
                           <ListVisual slug={slug} size="sm" class="tb-visual-well--compact" />

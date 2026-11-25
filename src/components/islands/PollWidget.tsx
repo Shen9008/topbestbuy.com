@@ -27,7 +27,7 @@ export default function PollWidget() {
               </span>
               <span class="h-2 overflow-hidden rounded-full bg-[var(--tb-line)]">
                 <i
-                  class="block h-full bg-[var(--tb-accent)]"
+                  class="block h-full bg-[var(--tb-accent-fg)]"
                   style={{ width: `${(n / total) * 100}%` }}
                 />
               </span>

@@ -14,7 +14,7 @@ const { items } = Astro.props;
 ---
 
 <nav class="mb-3 text-sm text-[var(--tb-muted)]" aria-label="Breadcrumb">
-  <a href="/" class="inline-flex items-center gap-1 transition-colors duration-150 hover:text-[var(--tb-accent)]">
+  <a href="/" class="inline-flex items-center gap-1 transition-colors duration-150 hover:text-[var(--tb-accent-fg)]">
     <Icon name="nav.home" size={20} class="opacity-70" />
     <span>Home</span>
   </a>
@@ -25,7 +25,7 @@ const { items } = Astro.props;
           <Icon name="nav.chevron-right" size={20} strokeWidth={2} class="opacity-50" />
         </span>
         {item.href ? (
-          <a href={item.href} class="transition-colors duration-150 hover:text-[var(--tb-accent)]">
+          <a href={item.href} class="transition-colors duration-150 hover:text-[var(--tb-accent-fg)]">
             {item.label}
           </a>
         ) : (

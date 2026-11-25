@@ -20,7 +20,7 @@ const liveCats = CATS.filter((c) => c.lists.length);
       liveCats.map((c) => (
         <article class="tb-card">
           <h3 class="m-0 tb-h3">
-            <a href={`/category/${c.id}`} class="no-underline text-[var(--tb-ink)] hover:text-[var(--tb-accent)]">
+            <a href={`/category/${c.id}`} class="no-underline text-[var(--tb-ink)] hover:text-[var(--tb-accent-fg)]">
               {c.name}
             </a>
           </h3>
@@ -28,7 +28,7 @@ const liveCats = CATS.filter((c) => c.lists.length);
             {
               c.lists.map((slug) => (
                 <li>
-                  <a href={`/${slug}`} class="font-semibold text-[var(--tb-accent)] no-underline hover:underline">
+                  <a href={`/${slug}`} class="font-semibold text-[var(--tb-accent-fg)] no-underline hover:underline">
                     {LISTS[slug as keyof typeof LISTS].short}: Top 10
                   </a>
                 </li>

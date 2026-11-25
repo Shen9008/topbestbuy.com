@@ -32,7 +32,7 @@ export default function SavedPage() {
           <p class="m-0 font-semibold">Nothing saved yet</p>
           <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">
             Tap Save on any product card, or browse a{' '}
-            <a href="/categories" class="font-semibold text-[var(--tb-accent)]">
+            <a href="/categories" class="font-semibold text-[var(--tb-accent-fg)]">
               Top 10 list
             </a>
             .

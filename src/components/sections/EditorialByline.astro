@@ -13,12 +13,12 @@ const { updated = true, extra } = Astro.props;
 
 <p class="text-sm text-[var(--tb-muted)]">
   Researched by{' '}
-  <a href="/about" class="font-semibold text-[var(--tb-ink)] no-underline hover:text-[var(--tb-accent)]">
+  <a href="/about" class="font-semibold text-[var(--tb-ink)] no-underline hover:text-[var(--tb-accent-fg)]">
     {EDITORIAL_BYLINE}
   </a>
   {' '}
   · Founded by{' '}
-  <a href="/team" class="font-semibold text-[var(--tb-ink)] no-underline hover:text-[var(--tb-accent)]">
+  <a href="/team" class="font-semibold text-[var(--tb-ink)] no-underline hover:text-[var(--tb-accent-fg)]">
     {FOUNDER.name}
   </a>
   {updated && (

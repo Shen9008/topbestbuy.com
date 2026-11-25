@@ -20,7 +20,7 @@ const top = rows.slice(0, 3);
       <ul class="m-0 mt-2 list-none space-y-1 p-0 text-sm">
         {top.map((p) => (
           <li>
-            <a href={`/reviews/${p.id}`} class="font-semibold text-[var(--tb-accent)] no-underline hover:text-[var(--tb-ink)]">
+            <a href={`/reviews/${p.id}`} class="font-semibold text-[var(--tb-accent-fg)] no-underline hover:text-[var(--tb-ink)]">
               <span class="tb-num text-xs">#{p.rank}</span> {productFullName(p)}
             </a>
             <span class="tb-num text-[var(--tb-muted)]"> · {p.total.toFixed(1)}/100</span>

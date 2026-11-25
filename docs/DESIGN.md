@@ -1,54 +1,78 @@
-# TopBestBuy design system (Phase 1)
+# TopBestBuy design system — neon lime accent
 
 **Lenses:** frontend-design, impeccable, ui-ux-pro-max  
 **Locale:** en-MY · **Currency copy:** MYR  
-**Visual reference:** fora.so skin on mockup information architecture (Phase 0 plan)
+**Visual reference:** fora.so dark canvas; single electric-lime accent (`#C6FF3D`)
 
 ## Direction
 
 - **Structure:** Mockup page types and section order (lists, tools hub, trust, mobile tab bar).
-- **Skin:** Dark default canvas `#141414` family, elevated surfaces, pill chips, 32px card radii, accent `#FF7900`, white pill primary CTA on dark.
-- **Type:** Display **Sora** (600–800), body **Source Sans 3** (400–700), self-hosted under `public/fonts/`.
+- **Skin:** Dark default `#141414`, elevated `#1c1c1c` cards, 12px button radius, 32px card radii, **one neon lime fill CTA per viewport**.
+- **Type:** Inter (display + body), self-hosted.
 
 ## Tokens
 
-Source of truth: `src/styles/tokens.css` (Tailwind v4 `@theme` + `[data-theme]` overrides).
+Source of truth: `src/styles/tokens.css` (CSS variables + Tailwind v4 `@theme`).
 
-| Token | Dark (default) | Role |
-|-------|----------------|------|
-| `--tb-bg` | oklch(0.16 0 0) | Page canvas |
-| `--tb-surface` | oklch(0.22 0 0) | Cards, rail |
-| `--tb-surface-raised` | oklch(0.28 0 0) | Mega menu, modals |
-| `--tb-ink` | oklch(0.93 0 0) | Primary text |
-| `--tb-muted` | oklch(0.68 0.02 260) | Secondary text |
-| `--tb-line` | oklch(0.32 0 0) | Borders |
-| `--tb-accent` | oklch(0.72 0.16 45) | Links, primary CTA |
-| `--tb-accent-ink` | oklch(0.18 0.04 45) | Text on accent |
+| Token | Dark (default) | Light | Role |
+|-------|----------------|-------|------|
+| `--bg` | `#141414` | `#ffffff` | Page canvas |
+| `--surface` | `#1c1c1c` | `#f6f6f4` | Cards |
+| `--surface-2` | `#232323` | `#ececea` | Raised / inputs |
+| `--border` | `#2a2a2a` | `#e2e2de` | Hairlines |
+| `--text` | `#e6e6e6` | `#1a1a1a` | Body |
+| `--text-muted` | `#b4b4b4` | `#5c5c57` | Secondary |
+| `--accent` | `#C6FF3D` | `#C6FF3D` | **Fills only** (CTA, score bars) |
+| `--accent-fg` | `#C6FF3D` | `#4D7C0F` | Links, labels, icons, active nav |
+| `--on-accent` | `#141414` | `#141414` | Text on lime fill |
+| `--accent-soft` | `rgba(198,255,61,0.12)` | `rgba(77,124,15,0.10)` | Badges, rank wells |
+| `--accent-line` | `rgba(198,255,61,0.35)` | `rgba(77,124,15,0.35)` | Hover borders, rules |
 
-Light theme swaps bg/surface/ink via `[data-theme='light']` and prefers-color-scheme fallback until the user toggles theme (Preact island).
+Legacy aliases `--tb-*` map to the same values for existing components.
 
-## Layout shell
+### Semantic states (not brand lime)
 
-- Desktop: fixed **left icon rail** (`--rail-width`), sticky **top bar**, **mega menu stub**, footer with E-E-A-T links.
-- Mobile: **bottom tab bar** (5 tabs), no rail; content padding accounts for `--tabbar-height`.
-- **Skip link** to `#main`; focus rings use accent.
-- **Z-index:** sticky → dropdown → rail → tabbar → toast (semantic scale in tokens).
+| Token | Dark | Light | Use |
+|-------|------|-------|-----|
+| `--success` | `#4ADE80` | `#15803D` | In stock, confirmations |
+| `--warning` | `#FBBF24` | `#B45309` | Limited evidence, verify price |
+| `--danger` | `#F87171` | `#B91C1C` | Errors, cons |
+| `--info` | `#60A5FA` | `#1D4ED8` | Neutral notes |
 
-## Components (Phase 1)
+## Lime usage — do / don't
 
-| Component | Path |
-|-----------|------|
-| Base layout | `src/layouts/BaseLayout.astro` |
-| SEO | `src/components/seo/Seo.astro` |
-| Image placeholder | `src/components/media/ImageSlot.astro` + `src/lib/image-manifest.ts` |
-| Theme toggle | `src/components/islands/ThemeToggle.tsx` |
+**Do**
 
-## Motion and a11y
+- Primary CTA: lime fill + `--on-accent`, hover `--accent-hover` + `--glow`, press `--accent-press` (scale 0.97).
+- Rank badges: `--accent-soft` + `--accent-fg` + `--accent-line` border.
+- Score bars: `--accent-fg` fill on `--border` track; always show numeric score.
+- Active nav / tabs: `--accent-fg` icon + 2px indicator; decorative lines use `--accent-line`.
+- Focus: 2px `--accent-fg` ring, 2px offset.
+- Article links: `--accent-fg` with underline.
 
-- `prefers-reduced-motion: reduce` collapses transitions in `tokens.css`.
-- Body line length capped via `--prose-max: 70ch`.
-- Contrast target: WCAG 4.5:1 body on dark surfaces (impeccable).
+**Don't**
 
-## Out of scope until later phases
+- Neon lime as body text or large background bands (especially on white).
+- More than one lime **fill** button per viewport.
+- Lime for success/warning pills (use semantic tokens).
+- Lime gradients except a faint hero radial (≤ 8% opacity).
 
-Product cards, scoring UI, real imagery, search drawer, compare table, tools logic, affiliate `data-aff` wiring.
+## Components
+
+| Pattern | Class / note |
+|---------|----------------|
+| Primary button | `.tb-btn` |
+| Secondary / ghost | `.tb-btn-secondary`, `.tb-btn-ghost` |
+| Rank | `.tb-rank` |
+| Warning pill | `.tb-pill-thin` → `--warning` |
+| Dev gallery | `/dev/colors` (noindex) |
+
+## Quality
+
+- Automated: `tests/token-contrast.test.ts` (4.5:1 text pairs, light-theme accent-fg rule).
+- Theme toggle: `ThemeToggle.tsx` + `localStorage` (`tb-theme`).
+- `prefers-reduced-motion` and `forced-colors` handled in `tokens.css`.
+
+## Out of scope
+
+Production deploy is separate from token work; confirm hue tweaks (`#B8F23A`–`#C6FF3D`) with before/after screenshots on real devices when tuning.

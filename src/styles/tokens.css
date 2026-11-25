@@ -1,29 +1,32 @@
 /**
- * TopBestBuy semantic tokens — fora-inspired dark default (21st.dev redesign).
- * Brand: navy #061D32 · accent #FF7900 · Inter
+ * TopBestBuy design tokens — neon lime accent, dark default (fora-inspired).
+ * Single source of truth; Tailwind v4 @theme maps semantic utilities.
  */
 
 @theme {
   --font-display: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
-  --color-brand-navy: #061d32;
-  --color-brand-orange: #ff7900;
-  --color-brand-offwhite: #f7f9fb;
-  --color-brand-slate: #526273;
-  --color-brand-border: #e2e8ee;
-  --color-fora-canvas: #141414;
-
-  --color-bg: oklch(0.98 0.006 240);
-  --color-surface: oklch(1 0 0);
-  --color-surface-raised: oklch(0.97 0.006 240);
-  --color-ink: oklch(0.22 0.04 250);
-  --color-muted: oklch(0.48 0.03 250);
-  --color-line: oklch(0.9 0.01 240);
-  --color-accent: oklch(0.7 0.18 48);
-  --color-accent-ink: oklch(0.22 0.04 250);
-  --color-good: oklch(0.52 0.1 160);
-  --color-warn: oklch(0.58 0.12 75);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-strong: var(--text-strong);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-press: var(--accent-press);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-ink: var(--accent-ink);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-line: var(--accent-line);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
 
   --radius-sm: 12px;
   --radius-md: 18px;
@@ -34,7 +37,7 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --dur-fast: 150ms;
-  --dur-base: 220ms;
+  --dur-base: 200ms;
   --dur-reveal: 640ms;
   --motion-rise: 18px;
   --motion-rise-child: 14px;
@@ -55,78 +58,154 @@
   --editorial-sidebar: 16rem;
   --hit-target: 2.75rem;
 
-  /* Breakpoints (reference — match Tailwind sm/md/lg) */
   --bp-sm: 360px;
   --bp-md: 768px;
   --bp-lg: 1280px;
 
-  /* Card density tiers (Action-like feed vs thumb-friendly stacks) */
   --card-pad-dense: 0.75rem;
   --card-pad-comfort: 1.25rem;
   --card-gap-dense: 0.5rem;
   --card-gap-comfort: 1rem;
 }
 
+/* ── Dark theme (default) ── */
 :root {
   color-scheme: dark;
-  --tb-bg: var(--color-fora-canvas);
-  --tb-surface: oklch(0.22 0.008 260);
-  --tb-surface-raised: oklch(0.28 0.01 260);
-  --tb-ink: oklch(0.96 0.005 260);
-  --tb-muted: oklch(0.68 0.02 260);
-  --tb-line: oklch(0.34 0.01 260 / 0.55);
-  --tb-accent: var(--color-brand-orange);
-  --tb-accent-ink: var(--color-brand-navy);
-  --tb-cta-bg: oklch(0.99 0 0);
-  --tb-cta-ink: var(--color-brand-navy);
-  /* Headings — PDF §3–4: navy on light surfaces; high-contrast flat on dark (#141414). No gradients on type. */
-  --tb-heading: #ffffff;
-  --tb-heading-muted: var(--tb-muted);
-  --tb-heading-accent: var(--color-brand-orange);
-  --tb-band-bg: oklch(0.17 0.012 255);
-  --tb-band-bg-alt: color-mix(in oklch, var(--color-brand-navy) 88%, black);
+
+  --bg: #141414;
+  --surface: #1c1c1c;
+  --surface-2: #232323;
+  --border: #2a2a2a;
+  --border-strong: #3a3a3a;
+  --text: #e6e6e6;
+  --text-strong: #ffffff;
+  --text-muted: #b4b4b4;
+  --accent: #c6ff3d;
+  --accent-hover: #d4ff6b;
+  --accent-press: #b3eb2e;
+  --on-accent: #141414;
+  --accent-ink: #4d7c0f;
+  --accent-fg: var(--accent);
+  --accent-soft: rgba(198, 255, 61, 0.12);
+  --accent-line: rgba(198, 255, 61, 0.35);
+  --glow: 0 0 0 1px var(--accent-line), 0 8px 32px rgba(198, 255, 61, 0.18);
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #60a5fa;
+
+  /* Legacy aliases (components/pages) */
+  --tb-bg: var(--bg);
+  --tb-surface: var(--surface);
+  --tb-surface-raised: var(--surface-2);
+  --tb-ink: var(--text);
+  --tb-muted: var(--text-muted);
+  --tb-line: var(--border);
+  --tb-accent: var(--accent);
+  --tb-accent-fg: var(--accent-fg);
+  --tb-accent-ink: var(--on-accent);
+  --tb-heading: var(--text-strong);
+  --tb-heading-muted: var(--text-muted);
+  --tb-heading-accent: var(--accent-fg);
+  --tb-cta-bg: var(--accent);
+  --tb-cta-ink: var(--on-accent);
+  --tb-band-bg: #171717;
+  --tb-band-bg-alt: color-mix(in srgb, var(--surface) 92%, black);
   --tb-sticky-stack: calc(var(--topbar-height) + var(--category-rail-height));
+
+  /* Deprecated shadcn-style aliases → semantic state tokens */
+  --color-good: var(--success);
+  --color-warn: var(--warning);
 }
 
 [data-theme='light'] {
   color-scheme: light;
-  --tb-bg: var(--color-brand-offwhite);
-  --tb-surface: var(--color-surface);
-  --tb-surface-raised: var(--color-surface-raised);
-  --tb-ink: var(--color-brand-navy);
-  --tb-muted: var(--color-brand-slate);
-  --tb-line: var(--color-brand-border);
-  --tb-accent: var(--color-brand-orange);
-  --tb-accent-ink: var(--color-brand-navy);
-  --tb-cta-bg: var(--color-brand-navy);
-  --tb-cta-ink: oklch(0.99 0 0);
-  --tb-heading: var(--color-brand-navy);
-  --tb-heading-muted: var(--color-brand-slate);
-  --tb-heading-accent: var(--color-brand-orange);
-  --tb-band-bg: var(--color-surface-raised);
-  --tb-band-bg-alt: color-mix(in oklch, var(--color-brand-navy) 6%, var(--color-brand-offwhite));
-  --tb-sticky-stack: calc(var(--topbar-height) + var(--category-rail-height));
+
+  --bg: #ffffff;
+  --surface: #f6f6f4;
+  --surface-2: #ececea;
+  --border: #e2e2de;
+  --border-strong: #cacac4;
+  --text: #1a1a1a;
+  --text-strong: #1a1a1a;
+  --text-muted: #5c5c57;
+  --accent: #c6ff3d;
+  --accent-hover: #d4ff6b;
+  --accent-press: #b3eb2e;
+  --on-accent: #141414;
+  --accent-ink: #4d7c0f;
+  --accent-fg: var(--accent-ink);
+  --accent-soft: rgba(77, 124, 15, 0.1);
+  --accent-line: rgba(77, 124, 15, 0.35);
+  --glow: 0 0 0 1px var(--accent-line), 0 8px 32px rgba(77, 124, 15, 0.12);
+
+  --success: #15803d;
+  --warning: #b45309;
+  --danger: #b91c1c;
+  --info: #1d4ed8;
+
+  --tb-bg: var(--bg);
+  --tb-surface: var(--surface);
+  --tb-surface-raised: var(--surface-2);
+  --tb-ink: var(--text);
+  --tb-muted: var(--text-muted);
+  --tb-line: var(--border);
+  --tb-accent: var(--accent);
+  --tb-accent-fg: var(--accent-fg);
+  --tb-accent-ink: var(--on-accent);
+  --tb-heading: var(--text-strong);
+  --tb-heading-muted: var(--text-muted);
+  --tb-heading-accent: var(--accent-fg);
+  --tb-cta-bg: var(--accent);
+  --tb-cta-ink: var(--on-accent);
+  --tb-band-bg: var(--surface);
+  --tb-band-bg-alt: color-mix(in srgb, var(--surface-2) 70%, var(--bg));
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme='dark']) {
     color-scheme: light;
-    --tb-bg: var(--color-brand-offwhite);
-    --tb-surface: var(--color-surface);
-    --tb-surface-raised: var(--color-surface-raised);
-    --tb-ink: var(--color-brand-navy);
-    --tb-muted: var(--color-brand-slate);
-    --tb-line: var(--color-brand-border);
-    --tb-accent: var(--color-brand-orange);
-    --tb-accent-ink: var(--color-brand-navy);
-    --tb-cta-bg: var(--color-brand-navy);
-    --tb-cta-ink: oklch(0.99 0 0);
-    --tb-heading: var(--color-brand-navy);
-    --tb-heading-muted: var(--color-brand-slate);
-    --tb-heading-accent: var(--color-brand-orange);
-    --tb-band-bg: var(--color-surface-raised);
-    --tb-band-bg-alt: color-mix(in oklch, var(--color-brand-navy) 6%, var(--color-brand-offwhite));
-    --tb-sticky-stack: calc(var(--topbar-height) + var(--category-rail-height));
+
+    --bg: #ffffff;
+    --surface: #f6f6f4;
+    --surface-2: #ececea;
+    --border: #e2e2de;
+    --border-strong: #cacac4;
+    --text: #1a1a1a;
+    --text-strong: #1a1a1a;
+    --text-muted: #5c5c57;
+    --accent: #c6ff3d;
+    --accent-hover: #d4ff6b;
+    --accent-press: #b3eb2e;
+    --on-accent: #141414;
+    --accent-ink: #4d7c0f;
+    --accent-fg: var(--accent-ink);
+    --accent-soft: rgba(77, 124, 15, 0.1);
+    --accent-line: rgba(77, 124, 15, 0.35);
+    --glow: 0 0 0 1px var(--accent-line), 0 8px 32px rgba(77, 124, 15, 0.12);
+
+    --success: #15803d;
+    --warning: #b45309;
+    --danger: #b91c1c;
+    --info: #1d4ed8;
+
+    --tb-bg: var(--bg);
+    --tb-surface: var(--surface);
+    --tb-surface-raised: var(--surface-2);
+    --tb-ink: var(--text);
+    --tb-muted: var(--text-muted);
+    --tb-line: var(--border);
+    --tb-accent: var(--accent);
+    --tb-accent-fg: var(--accent-fg);
+    --tb-accent-ink: var(--on-accent);
+    --tb-heading: var(--text-strong);
+    --tb-heading-muted: var(--text-muted);
+    --tb-heading-accent: var(--accent-fg);
+    --tb-cta-bg: var(--accent);
+    --tb-cta-ink: var(--on-accent);
+    --tb-band-bg: var(--surface);
+    --tb-band-bg-alt: color-mix(in srgb, var(--surface-2) 70%, var(--bg));
   }
 }
 
@@ -164,5 +243,17 @@ html[data-theme='light'] .logo-wordmark-light {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 2px;
+  }
+
+  .tb-card,
+  .tb-btn {
+    border: 1px solid CanvasText;
   }
 }

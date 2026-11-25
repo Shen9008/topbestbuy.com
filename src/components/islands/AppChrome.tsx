@@ -220,7 +220,7 @@ export default function AppChrome() {
                   <Icon name="nav.search" size={16} strokeWidth={2} />
                 </span>
                 <span class="min-w-0 font-semibold text-[var(--tb-ink)]">{hit.title}</span>
-                <span class="text-xs font-bold text-[var(--tb-accent)]">→</span>
+                <span class="text-xs font-bold text-[var(--tb-accent-fg)]">→</span>
               </a>
             ))
           )}
