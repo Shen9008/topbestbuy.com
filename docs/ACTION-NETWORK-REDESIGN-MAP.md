@@ -4,12 +4,12 @@ Layout and information rhythm borrow from [Action Network](https://www.actionnet
 
 ## Skill choices
 
-| Skill | P0 | P2 (this phase) |
-|-------|-----|------------------|
-| **frontend-design** | Editorial hub hero, banded home | Hub heroes on guides/tools/compare/search/saved; type-grouped guide index |
-| **impeccable** | 44px hits on pills/jump links | 44px on tool tabs, compare selects, overlay inputs; reduced-motion preserved |
-| **ui-craft** | See-all headers, scroll strips | Feed-density shortlist + search results; `tb-card--editorial` on tool panels |
-| **ui-ux-pro-max** | Bottom tab bar + category rail | Footer **Explore** strip mirrors CategoryRail; sticky guide subnav |
+| Skill | P0 | P2 | P3 |
+|-------|-----|-----|-----|
+| **frontend-design** | Editorial hub hero, banded home | Hub heroes on guides/tools/compare/search/saved; type-grouped guide index | Review hub hero; trust hub heroes on methodology pages |
+| **impeccable** | 44px hits on pills/jump links | 44px on tool tabs, compare selects, overlay inputs; reduced-motion preserved | 44px on review CTAs and jump bar; mega hidden ≥1280 |
+| **ui-craft** | See-all headers, scroll strips | Feed-density shortlist + search results; `tb-card--editorial` on tool panels | Evidence tables + editorial cards on reviews |
+| **ui-ux-pro-max** | Bottom tab bar + category rail | Footer **Explore** strip mirrors CategoryRail; sticky guide subnav | Review sticky jump nav; categories index sidebar parity |
 
 ## IA comparison
 
@@ -55,27 +55,51 @@ Layout and information rhythm borrow from [Action Network](https://www.actionnet
 | **Saved** | `saved.astro`, `SavedPage.tsx`, `AppChrome.tsx` | Hub + feed rows; richer empty state |
 | **Footer** | `SiteFooter.astro` | Explore strip (CategoryRail-style pills) |
 
+### Phase 3 surfaces (done)
+
+| Surface | Files | Pattern |
+|---------|-------|---------|
+| **Review detail** | `reviews/[id].astro` | Hub hero, sticky jump bar (verdict → alternatives), editorial sidebar (list peers) |
+| **Categories index** | `categories.astro` | Hub hero, editorial sidebar, live/coming bands |
+| **How we rank** | `how-we-rank.astro` | Trust hub hero, sidebar, banded criteria table + prose |
+| **Editorial policy** | `editorial-policy.astro` | Trust hub hero, sidebar, banded prose (replaces stub) |
+| **Mega menu** | `MegaMenu.astro`, `SiteTopBar.astro` | Hidden ≥1280 (`xl`) — category rail is primary; Lists nav link hidden on xl |
+
 ## Mobile nav decision
 
 **Bottom tab bar** retained (5 tabs). Category discoverability on mobile: **category rail** under header + footer Explore strip — no hamburger.
 
-## P3 (next)
+## P4 (next)
 
 | Phase | Surfaces | Notes |
 |-------|----------|--------|
-| **P3** | `/reviews/[id]` | Editorial hero + sticky spec jump |
-| **P3** | Mega menu | Optional collapse into rail-only on xl |
-| **P3** | `/categories` index | Band + sidebar parity with category hub |
+| **P4** | Trust stubs | `about`, `affiliate-disclosure`, `corrections`, `team`, `contact`, `privacy` — same band + sidebar shell as `how-we-rank` |
+| **P4** | Review prose | Replace placeholder expert/owner copy with sourced content |
+| **P4** | Jump nav UX | Optional `IntersectionObserver` active state on review/guide jump links (mockup parity) |
 
 ## QA screenshot checklist
 
 - [ ] Guides hub 360px: featured scroll strip
 - [ ] Guide article 1280px: sticky subnav + sidebar
+- [ ] Review detail 360/768/1280px: jump bar scroll, sidebar at lg
+- [ ] Categories index 1280px: sidebar + band tiles
+- [ ] How we rank / editorial policy: prose + table in bands
+- [ ] xl: no mega menu; category rail + footer Explore sufficient
 - [ ] Tools hub: horizontal tabs on mobile
 - [ ] Compare: table scroll + picker in editorial card
 - [ ] Search/Saved: feed row density
 - [ ] Footer Explore strip scroll on mobile
 - [ ] `prefers-reduced-motion`: no reliance on reveal for content visibility
+
+## Before / after (P3 summary)
+
+| Area | Before | After (P3) |
+|------|--------|------------|
+| Reviews | Plain h1 + two-column cards | Hub hero, sticky jump nav, sidebar peers, evidence sheet |
+| Categories index | Simple tile grid | Hub hero, editorial sidebar, live/coming bands |
+| How we rank | Single-column table + prose | Trust hub layout, sidebar, expanded methodology prose |
+| Editorial policy | StubShell only | Full policy prose + trust sidebar |
+| Desktop xl nav | Mega + Lists + rail overlap | Mega off; Lists link off at xl; rail-led browse |
 
 ## Before / after (P2 summary)
 

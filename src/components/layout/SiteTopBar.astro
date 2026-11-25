@@ -14,7 +14,7 @@ const path = Astro.url.pathname;
     <SiteLogo variant="full" class="shrink-0" />
     <MegaMenu currentPath={path} />
     <nav class="hidden items-center gap-1 xl:flex" aria-label="Primary">
-      <a href="/categories" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Lists</a>
+      <a href="/categories" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)] xl:hidden">Lists</a>
       <a href="/tools" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Tools</a>
       <a href="/guides" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Guides</a>
       <a href="/how-we-rank" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">How we rank</a>

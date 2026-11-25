@@ -3,8 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
 import Icon from '../components/ui/Icon.astro';
 import ImageSlot from '../components/media/ImageSlot.astro';
+import EditorialSection from '../components/sections/EditorialSection.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
 import { CATS } from '../data/categories';
 import { CATEGORY_ICONS, type IconMapKey } from '../icons';
+
+const liveCats = CATS.filter((c) => c.lists.length);
+const soonCats = CATS.filter((c) => !c.lists.length);
 ---
 
 <BaseLayout
@@ -13,36 +18,118 @@ import { CATEGORY_ICONS, type IconMapKey } from '../icons';
   canonical="/categories"
 >
   <Breadcrumbs items={[{ label: 'Top 10 lists' }]} />
-  <h1 class="tb-h1">Top 10 lists by category</h1>
-  <p class="max-w-[60ch] text-[var(--tb-muted)]">
-    Live lists are scored on our published scorecard. Planned lists follow search demand and your votes.
-  </p>
-  <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      CATS.map((c) => {
-        const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
-        return (
-          <a
-            href={`/category/${c.id}`}
-            class:list={['tb-tile', !c.lists.length && 'opacity-75']}
-          >
-            <div class="flex items-start justify-between gap-3">
-              <ImageSlot slotId={`cat-${c.id}`} aspect="video" label={`${c.name} tile`} />
-              {icon ? (
-                <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
-                  <Icon name={icon} size={32} />
-                </span>
-              ) : null}
+
+  <header class="tb-hero tb-hero--hub tb-reveal" aria-label="Categories index">
+    <div>
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Shop</p>
+      <h1 class="tb-h1 mt-3 max-w-[18ch]">Top 10 lists by category</h1>
+      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+        Live lists are scored on our published scorecard. Planned lists follow search demand and your votes.
+      </p>
+    </div>
+  </header>
+
+  <div class="tb-editorial-layout mt-6">
+    <aside class="tb-editorial-sidebar" aria-label="Category index">
+      <div class="tb-editorial-sidebar__sticky">
+        <p class="tb-h4 m-0">Jump to category</p>
+        <nav class="mt-3 text-sm" aria-label="Categories">
+          <ul class="m-0 list-none space-y-1 p-0">
+            {
+              CATS.map((c) => (
+                <li>
+                  <a
+                    href={`/category/${c.id}`}
+                    class:list={[
+                      'block min-h-10 rounded-[var(--radius-sm)] px-2 py-2 font-semibold no-underline',
+                      c.lists.length
+                        ? 'text-[var(--tb-muted)] hover:text-[var(--tb-ink)]'
+                        : 'text-[var(--tb-muted)] opacity-70 hover:opacity-100',
+                    ]}
+                  >
+                    {c.name}
+                    <span class="text-xs font-normal"> ({c.lists.length || 'soon'})</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <a href="/coming-next" class="tb-section-link mt-4 justify-start px-0">
+          Vote for next list
+        </a>
+        <a href="/how-we-rank" class="tb-section-link mt-2 justify-start px-0">
+          How we rank
+        </a>
+      </div>
+    </aside>
+
+    <div class="tb-editorial-main min-w-0 space-y-2">
+      <EditorialSection band="default" aria-labelledby="cats-live-heading" class="!py-8">
+        <SectionHeader
+          titleId="cats-live-heading"
+          title="Live categories"
+          description={`${liveCats.length} categories with scored Top 10 lists today.`}
+          seeAllHref="/tools?tool=finder"
+          seeAllLabel="Product finder"
+        />
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {
+            liveCats.map((c) => {
+              const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
+              return (
+                <a href={`/category/${c.id}`} class="tb-tile tb-card--editorial">
+                  <div class="flex items-start justify-between gap-3">
+                    <ImageSlot slotId={`cat-${c.id}`} aspect="video" label={`${c.name} tile`} />
+                    {icon ? (
+                      <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
+                        <Icon name={icon} size={32} />
+                      </span>
+                    ) : null}
+                  </div>
+                  <span class="tb-pill tb-pill-good">{c.lists.length} live</span>
+                  <h2 class="m-0 tb-h3">{c.name}</h2>
+                  <p class="m-0 text-sm text-[var(--tb-muted)]">{c.desc}</p>
+                </a>
+              );
+            })
+          }
+        </div>
+      </EditorialSection>
+
+      {
+        soonCats.length > 0 && (
+          <EditorialSection band="alt" aria-labelledby="cats-soon-heading" class="!py-8">
+            <SectionHeader
+              titleId="cats-soon-heading"
+              title="Coming next"
+              description="Categories in the queue — vote to move one up."
+              seeAllHref="/coming-next"
+              seeAllLabel="Vote"
+            />
+            <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {
+                soonCats.map((c) => {
+                  const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
+                  return (
+                    <a href={`/category/${c.id}`} class="tb-tile opacity-90">
+                      {icon ? (
+                        <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
+                          <Icon name={icon} size={28} />
+                        </span>
+                      ) : null}
+                      <span class="tb-pill">coming</span>
+                      <h2 class="m-0 text-base font-bold">{c.name}</h2>
+                      <p class="m-0 text-sm text-[var(--tb-muted)]">{c.desc}</p>
+                      <span class="text-xs text-[var(--tb-muted)]">Next: {c.soon.slice(0, 2).join(', ')}</span>
+                    </a>
+                  );
+                })
+              }
             </div>
-            <span class:list={['tb-pill', c.lists.length && 'tb-pill-good']}>
-              {c.lists.length ? `${c.lists.length} live` : 'coming'}
-            </span>
-            <h3 class="m-0 tb-h3">{c.name}</h3>
-            <p class="m-0 text-sm text-[var(--tb-muted)]">{c.desc}</p>
-            <span class="text-xs text-[var(--tb-muted)]">Next: {c.soon.slice(0, 3).join(', ')}</span>
-          </a>
-        );
-      })
-    }
+          </EditorialSection>
+        )
+      }
+    </div>
   </div>
 </BaseLayout>
