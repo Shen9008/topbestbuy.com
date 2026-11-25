@@ -127,7 +127,7 @@ function FinderTool() {
   return (
     <Panel>
       <p class="text-xs font-bold uppercase tracking-wide text-[var(--tb-muted)]">Your shortlist</p>
-      <h2 class="mt-0 font-display text-xl font-bold">Three picks for you</h2>
+      <h2 class="mt-0 tb-h3">Three picks for you</h2>
       <ProductPickList products={pick} />
       <a href={`/${kind}`} class="tb-btn mt-3">
         See the full Top 10
@@ -168,7 +168,7 @@ function VacuumTool() {
 
   return (
     <Panel>
-      <h2 class="mt-0 font-display text-xl font-bold">Vacuum type chooser</h2>
+      <h2 class="mt-0 tb-h3">Vacuum type chooser</h2>
       <div class="grid gap-3 sm:grid-cols-2">
         <Select label="Main floor type" value={floor} onInput={setFloor} options={[['hard', 'Tile or laminate'], ['mixed', 'Mixed'], ['carpet', 'Carpet or rugs']]} />
         <Select label="Home size" value={home} onInput={setHome} options={[['s', 'Apartment'], ['m', 'Terrace or semi-D'], ['l', 'Large landed']]} />
@@ -201,7 +201,7 @@ function CleanserTool() {
 
   return (
     <Panel>
-      <h2 class="mt-0 font-display text-xl font-bold">Facial cleanser matcher</h2>
+      <h2 class="mt-0 tb-h3">Facial cleanser matcher</h2>
       <Callout class="tb-callout mb-3 text-sm">General guidance only, not medical advice.</Callout>
       <div class="grid gap-3 sm:grid-cols-3">
         <Select label="Skin type" value={skin} onInput={setSkin} options={[['oily', 'Oily'], ['combination', 'Combination'], ['normal', 'Normal'], ['dry', 'Dry'], ['sensitive', 'Sensitive']]} />
@@ -221,7 +221,7 @@ function AirfryerTool() {
   const fit = rows.filter((p) => Number(p.num.cap) >= litres - 1 && Number(p.num.cap) <= litres + 4).slice(0, 3);
   return (
     <Panel>
-      <h2 class="mt-0 font-display text-xl font-bold">Air fryer size</h2>
+      <h2 class="mt-0 tb-h3">Air fryer size</h2>
       <Grid2>
         <Num label="People you cook for" value={people} onInput={setPeople} min={1} max={12} />
         <Select label="Cooking style" value={style} onInput={setStyle} options={[['1', 'Snacks'], ['1.3', 'Everyday meals'], ['1.6', 'Batch cooking']]} />
@@ -245,7 +245,7 @@ function PurifierTool() {
   const fit = rows.filter((p) => Number(p.num.cadr) >= cadr).sort((a, b) => b.total - a.total).slice(0, 3);
   return (
     <Panel>
-      <h2 class="mt-0 font-display text-xl font-bold">Purifier room size</h2>
+      <h2 class="mt-0 tb-h3">Purifier room size</h2>
       <Grid2>
         <Num label="Length (m)" value={l} onInput={setL} min={1} max={20} step={0.1} />
         <Num label="Width (m)" value={w} onInput={setW} min={1} max={20} step={0.1} />
@@ -268,7 +268,7 @@ function CostTool() {
   const cost = kwh * tariff;
   return (
     <Panel>
-      <h2 class="mt-0 font-display text-xl font-bold">Running cost</h2>
+      <h2 class="mt-0 tb-h3">Running cost</h2>
       <Grid3>
         <Num label="Power (watts)" value={watts} onInput={setWatts} min={5} max={5000} />
         <Num label="Hours per day" value={hours} onInput={setHours} min={0.1} max={24} step={0.1} />
@@ -293,7 +293,7 @@ function MattressTool() {
   const matches = rows.filter((p) => Math.abs(Number(p.num.firm) - firm) <= 1.5 && (!hot || Number(p.num.hot) >= 3)).slice(0, 3);
   return (
     <Panel>
-      <h2 class="mt-0 font-display text-xl font-bold">Mattress firmness picker</h2>
+      <h2 class="mt-0 tb-h3">Mattress firmness picker</h2>
       <Grid3>
         <Select label="Sleeping position" value={pos} onInput={setPos} options={[['side', 'Side'], ['back', 'Back'], ['stomach', 'Stomach'], ['mixed', 'Mixed']]} />
         <Select label="Body weight" value={weight} onInput={setWeight} options={[['l', 'Under 60 kg'], ['m', '60 to 90 kg'], ['h', 'Over 90 kg']]} />
@@ -357,7 +357,7 @@ function Question({
 }) {
   return (
     <div>
-      <h2 class="mt-0 font-display text-xl font-bold">{title}</h2>
+      <h2 class="mt-0 tb-h3">{title}</h2>
       <div class="grid gap-2 sm:grid-cols-2">
         {options.map(([value, label]) => (
           <button
@@ -447,7 +447,7 @@ function Num({
 function ResultBox({ title, children }: { title: string; children: preact.ComponentChildren }) {
   return (
     <ResultPanel class="col-span-full mt-3 rounded-[var(--radius-sm)] border-2 border-dashed border-[var(--tb-accent)] bg-[var(--tb-surface)] p-4">
-      <h3 class="m-0 font-display text-2xl font-extrabold">{title}</h3>
+      <h3 class="m-0 tb-h2">{title}</h3>
       <div class="text-sm">{children}</div>
     </ResultPanel>
   );

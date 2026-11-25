@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="260" viewBox="0 0 1600 260" role="img" aria-label="TopBestBuy.online logo">
+<title>TopBestBuy.online</title>
+<g fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
+<path d="M48 90 L35 194 Q32 213 53 213 H174 Q195 213 192 193 L183 103 Q181 91 168 91 H142"/>
+<path d="M72 92 L72 63 C72 17 147 17 147 63 L147 76"/>
+<path d="M73 91 H167"/>
+</g>
+<path d="M66 148 L93 176 L197 80 L103 190 Q94 199 85 189 Z" fill="#FF7900"/>
+<text x="225" y="166" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-weight="750" font-size="89" letter-spacing="-3">TopBestBuy</text>
+<text x="803" y="166" fill="#FF7900" font-family="Inter, Arial, sans-serif" font-weight="650" font-size="89" letter-spacing="-3">.online</text>
+</svg>
