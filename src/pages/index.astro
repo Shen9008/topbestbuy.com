@@ -3,21 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ImageSlot from '../components/media/ImageSlot.astro';
 import Icon from '../components/ui/Icon.astro';
 import PriceAlertForm from '../components/islands/PriceAlertForm';
+import HomeValueProps from '../components/sections/HomeValueProps.astro';
+import HomeTrustStrip from '../components/sections/HomeTrustStrip.astro';
+import HomeBrowseSection from '../components/sections/HomeBrowseSection.astro';
+import HomeToolsStrip from '../components/sections/HomeToolsStrip.astro';
+import HomeGuidesSection from '../components/sections/HomeGuidesSection.astro';
 import { SITE_DATE } from '../data/meta';
-import { CATS } from '../data/categories';
 import { LISTS } from '../data/lists';
-import { POSTS } from '../data/posts';
-import { listSlugs, RANKED, topPick } from '../lib/catalog';
+import { listSlugs, topPick } from '../lib/catalog';
 import { productFullName } from '../lib/format';
-import {
-  CATEGORY_ICONS,
-  LIST_SLUG_ICONS,
-  TOOL_TAB_ICONS,
-  type IconMapKey,
-} from '../icons';
+import { LIST_SLUG_ICONS } from '../icons';
 
 const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
-const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-back-pain', 'blog-do-you-need-an-ionizer'];
 ---
 
 <BaseLayout
@@ -97,134 +94,13 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
     })}
   </div>
 
-  <section class="my-10 grid gap-3 sm:grid-cols-3">
-    {
-      [
-        ['Pick in 30 seconds', 'Top 3 summary, then ten scored picks.'],
-        ['Know the trade-offs', 'Every pick lists what it does badly.'],
-        ['Built for Malaysia', 'MYR prices, local warranty notes, local retailers.'],
-      ].map(([title, copy]) => (
-        <div class="tb-card">
-          <h3 class="m-0 font-display text-base font-bold">{title}</h3>
-          <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{copy}</p>
-        </div>
-      ))
-    }
-  </section>
+  <HomeValueProps />
+  <HomeTrustStrip />
+  <HomeBrowseSection />
+  <HomeToolsStrip />
+  <HomeGuidesSection />
 
-  <div class="flex flex-wrap gap-4 border-y border-[var(--tb-line)] py-4 text-sm font-semibold">
-    {
-      (
-        [
-          ['trust.no-paid', 'No paid rankings'],
-          ['trust.dated', 'Dated prices and sources'],
-          ['trust.scorecard', 'Scorecard published'],
-          ['trust.log', 'Corrections log'],
-        ] as const
-      ).map(([key, label]) => (
-        <span class="inline-flex items-center gap-2">
-          <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
-            <Icon name={key} size={32} />
-          </span>
-          {label}
-        </span>
-      ))
-    }
-  </div>
-
-  <section class="py-10">
-    <h2 class="font-display text-2xl font-bold">What are you shopping for?</h2>
-    <div class="mt-3 flex flex-wrap gap-2">
-      {
-        CATS.map((c) => {
-          const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
-          return (
-            <a href={`/category/${c.id}`} class="tb-chip inline-flex items-center gap-1.5">
-              {icon ? <Icon name={icon} size={20} /> : null}
-              {c.name}
-              {c.lists.length ? ` (${c.lists.length})` : ''}
-            </a>
-          );
-        })
-      }
-    </div>
-    <h2 class="mt-8 font-display text-2xl font-bold">Start with a list</h2>
-    <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        listSlugs().map((slug) => {
-          const L = LISTS[slug as keyof typeof LISTS];
-          const p = RANKED[slug]?.[0];
-          return (
-            <a href={`/${slug}`} class="tb-tile">
-              <span class="tb-pill">{CATS.find((c) => c.id === L.cat)?.name}</span>
-              <h3 class="m-0 flex items-center gap-2 font-display text-lg font-bold">
-                {LIST_SLUG_ICONS[slug] ? (
-                  <Icon name={LIST_SLUG_ICONS[slug]} size={24} class="shrink-0" />
-                ) : null}
-                {L.short}: Top 10 in Malaysia
-              </h3>
-              {
-                p && (
-                  <p class="m-0 text-sm text-[var(--tb-muted)]">
-                    #1 {productFullName(p)} ({p.total.toFixed(1)}/100)
-                  </p>
-                )
-              }
-            </a>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <section class="border-y border-[var(--tb-line)] py-10">
-    <h2 class="font-display text-2xl font-bold">Narrow it down in a minute</h2>
-    <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        [
-          ['finder', 'Product finder', 'Three questions, three picks.'],
-          ['vacuum', 'Vacuum type chooser', 'Robot, cordless or corded.'],
-          ['cleanser', 'Cleanser matcher', 'Filter by skin type.'],
-          ['purifier', 'Purifier room size', 'The CADR your room needs.'],
-        ].map(([tool, title, desc]) => {
-          const icon = TOOL_TAB_ICONS[tool] as IconMapKey | undefined;
-          return (
-          <a href={`/tools?tool=${tool}`} class="tb-tile">
-            <h3 class="m-0 flex items-center gap-2 font-display text-base font-bold">
-              {icon ? (
-                <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
-                  <Icon name={icon} size={20} />
-                </span>
-              ) : null}
-              {title}
-            </h3>
-            <span class="text-sm text-[var(--tb-muted)]">{desc}</span>
-          </a>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <section class="py-10">
-    <h2 class="font-display text-2xl font-bold">Guides and explainers</h2>
-    <div class="mt-4 grid gap-3 sm:grid-cols-3">
-      {
-        postCards.map((id) => {
-          const p = POSTS[id as keyof typeof POSTS];
-          return (
-            <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
-              <span class="tb-pill">{p.type}</span>
-              <h3 class="m-0 font-display text-base font-bold">{p.h1}</h3>
-              <span class="text-xs text-[var(--tb-muted)]">{p.time} read</span>
-            </a>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <section class="grid gap-6 pb-6 lg:grid-cols-2">
+  <section class="tb-section grid gap-6 pb-6 lg:grid-cols-2">
     <div class="tb-card">
       <h2 class="mt-0 font-display text-xl font-bold">What should we rank next?</h2>
       <p class="text-sm text-[var(--tb-muted)]">
