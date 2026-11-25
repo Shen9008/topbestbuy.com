@@ -1,32 +1,39 @@
 # Visual assets generated
 
 {
-  "generatedAt": "2026-11-23T13:47:34.423Z",
-  "method": "Programmatic SVG studio-cutout illustrations rendered with sharp → WebP/PNG (alpha). 9Router unavailable on VM.",
+  "generatedAt": "2026-11-24T13:52:45.801Z",
+  "method": "9Router image API (http://127.0.0.1:20128); fallback=pollinations-on-provider-miss",
+  "shard": "0/4",
   "counts": {
-    "prod": 110,
-    "review": 110,
-    "list-hero": 11,
-    "category": 10,
-    "editorial": 1,
-    "og": 1,
-    "other": 0
+    "prod": 0,
+    "review": 0,
+    "list-hero": 0,
+    "category": 0,
+    "editorial": 0,
+    "og": 0,
+    "skipped": 2,
+    "failed": 0
   },
-  "totalFiles": 243,
-  "manifestSlots": 253
+  "totalCompleted": 67,
+  "manifestSlots": 253,
+  "failures": 0
 }
+
+## Generation
+
+Assets are produced with `npm run assets:generate`, which calls **9Router** `POST /v1/images/generations` using product/list metadata from `scripts/lib/catalog.mjs`.
+
+Resume state: `scripts/.asset-generation-state.json`.
 
 ## Counts
 
 | Type | Count |
 |------|-------|
-| Product squares (`prod-*`) | 110 |
-| Review heroes (`review-*`) | 110 |
-| List heroes (`list-hero-*`) | 11 |
-| Category tiles (`cat-*`) | 10 |
-| Home hero | 1 |
-| OG default | 1 |
-
-**Total raster files:** 243
+| Product squares | 0 |
+| Review heroes | 0 |
+| List heroes | 0 |
+| Category tiles | 0 |
+| Home hero | 0 |
+| OG default | 0 |
 
 **Manifest slot entries:** 253

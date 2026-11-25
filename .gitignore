@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# asset generation resume (local)
+scripts/.asset-generation-state*.json
+
 # macOS-specific files
 .DS_Store
 

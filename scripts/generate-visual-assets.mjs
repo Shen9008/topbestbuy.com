@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 /**
+ * @deprecated Programmatic SVG placeholders — use `npm run assets:generate` (9Router photorealistic).
+ * Kept as `npm run assets:generate:svg-legacy` for local debugging only.
+ */
+console.warn('Deprecated: use npm run assets:generate (9Router photorealistic pipeline).');
+/**
  * Generate wired TopBestBuy visual assets (SVG → WebP/PNG with alpha).
- * Run: node scripts/generate-visual-assets.mjs
  */
 import fs from 'node:fs';
 import path from 'node:path';
