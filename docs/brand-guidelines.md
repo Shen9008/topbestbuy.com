@@ -4,13 +4,19 @@ Short reference for engineers. Full spec: `C:\Users\Chia Shen\Downloads\TopBestB
 
 ## Logo
 
-| File | Use |
-|------|-----|
-| `public/brand/logo-mark.png` | Rail home, favicons, PWA icons (from *Navy Shopping Bag Checkmark.png*) |
-| `public/brand/logo-wordmark.svg` | Full lockup on light surfaces (header mobile, footer) |
-| `public/brand/logo-wordmark-dark.png` | Full lockup on dark surfaces |
-| `public/brand/logo-wordmark-light.png` | Raster light lockup (legacy backup; prefer SVG) |
-| `public/favicon.svg` | SVG favicon (simplified geometry until vector master ships) |
+Canonical sources live in `C:\Users\Chia Shen\Downloads\TopBestBuy.com` (Brand Guidelines v1.0 PDF in that folder). Re-sync with `npm run brand:sync`.
+
+| Repo file | Source file (TopBestBuy.com) | Use |
+|-----------|------------------------------|-----|
+| `public/brand/logo-mark.png` | `Navy Shopping Bag Checkmark.png` | Rail home mark; master for favicon PNGs |
+| `public/brand/logo-wordmark.svg` | `topbestbuy-wordmark.svg` | Full lockup on light surfaces |
+| `public/brand/logo-wordmark-dark.svg` | `topbestbuy-dark-lockup.svg` | Full lockup on dark surfaces (default theme) |
+| `public/brand/logo-wordmark-dark.png` | `topbestbuy-dark-lockup.png` | Raster dark lockup (email / OG fallback) |
+| `public/brand/logo-wordmark-light.png` | `TopBestBuy.online Logo on White.png` | Raster light lockup backup |
+| `public/favicon.svg` | Hand-tuned 32×32 mark (navy field + bag geometry) |
+| `public/favicon-32.png` | Generated from `logo-mark.png` via `brand:sync` | Legacy tab icon |
+| `public/apple-touch-icon.png` | Generated 180×180 from mark | iOS home screen |
+| `public/icon-192.png`, `icon-512.png` | Generated from mark | `site.webmanifest` |
 
 ## Colours
 
@@ -58,7 +64,7 @@ Inter (via `@fontsource/inter`) for headings and body, per PDF. Weights 400 / 50
 
 ## Components wired
 
-- `SiteLogo.astro` — mark vs full lockup; SVG wordmark (light) and PNG dark lockup swap with theme
+- `SiteLogo.astro` — mark vs full lockup; light/dark SVG wordmarks swap with theme (`data-theme` on `<html>`; default dark)
 - `SiteTopBar.astro`, `SiteFooter.astro`, `DesktopIconRail.astro`
 - `Seo.astro` — favicon set, apple-touch, `site.webmanifest`, `theme-color`
 - Heading utilities — `src/styles/components.css` (`.tb-h1` … `.tb-heading-accent`)
