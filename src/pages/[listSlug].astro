@@ -21,6 +21,7 @@ import {
 import { POSTS } from '../data/posts';
 import type { ListSlug } from '../lib/catalog';
 import Icon from '../components/ui/Icon.astro';
+import ListMethodologyStrip from '../components/sections/ListMethodologyStrip.astro';
 import { LIST_SLUG_ICONS } from '../icons';
 
 export function getStaticPaths() {
@@ -117,24 +118,9 @@ const relatedPosts = Object.entries(POSTS)
 
   <div class="tb-prose mt-4" set:html={list.intro} />
 
-  <div class="tb-callout my-6 grid gap-4 sm:grid-cols-3">
-    <div>
-      <h3 class="m-0 font-display text-base font-bold">Researched, not tested</h3>
-      <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">
-        We read specs, retailers and expert reviews.
-      </p>
-    </div>
-    <div>
-      <h3 class="m-0 font-display text-base font-bold">Dated, sourced prices</h3>
-      <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">Verify at checkout.</p>
-    </div>
-    <div>
-      <h3 class="m-0 font-display text-base font-bold">Seven weighted criteria</h3>
-      <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">Published on every card.</p>
-    </div>
-  </div>
+  <ListMethodologyStrip />
 
-  <div class="tb-callout border-2 border-[var(--tb-ink)]">
+  <div class="tb-callout tb-spotlight border-2 border-[var(--tb-ink)]">
     <strong>Key takeaways</strong>
     <ul class="mb-0 mt-2 list-disc pl-5 text-sm">
       <li>Scored on 7 criteria; weights on <a href="/how-we-rank">How we rank</a>.</li>

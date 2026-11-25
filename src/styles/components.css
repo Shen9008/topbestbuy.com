@@ -10,9 +10,163 @@
   @media (prefers-reduced-motion: no-preference) {
     .tb-card:active,
     .tb-btn:active,
-    .tb-tile:active {
+    .tb-tile:active,
+    .tb-value-card:active,
+    .tb-trust-pill:active,
+    .tb-methodology-card:active {
       transform: scale(0.97);
     }
+  }
+
+  .tb-section {
+    @apply py-10;
+  }
+
+  .tb-section--band {
+    @apply border-y border-[var(--tb-line)] py-12;
+  }
+
+  .tb-feature-grid {
+    @apply grid gap-3 sm:grid-cols-3;
+  }
+
+  .tb-studio-grid {
+    @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .tb-utility-grid {
+    @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .tb-value-card {
+    @apply relative flex flex-col gap-3 overflow-hidden rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-6 shadow-[0_1px_0_rgb(0_0_0/0.2),0_16px_40px_-20px_rgb(0_0_0/0.45)];
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  .tb-value-card::before {
+    content: '';
+    position: absolute;
+    inset-inline: 1.25rem;
+    top: 0;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--tb-accent) 85%, transparent), transparent);
+    opacity: 0;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-value-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in oklch, var(--tb-accent) 35%, var(--tb-line));
+    }
+
+    .tb-value-card:hover::before {
+      opacity: 1;
+    }
+  }
+
+  .tb-value-card__head {
+    @apply flex items-start justify-between gap-3;
+  }
+
+  .tb-value-card__step {
+    @apply font-display text-xs font-bold uppercase tracking-[0.14em] text-[var(--tb-muted)] tabular-nums;
+  }
+
+  .tb-value-card__icon {
+    @apply inline-flex shrink-0 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface)] min-h-11 min-w-11 p-2.5;
+  }
+
+  .tb-trust-strip {
+    @apply relative py-8;
+  }
+
+  .tb-trust-strip::before,
+  .tb-trust-strip::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklch, var(--tb-line) 90%, transparent) 15%,
+      color-mix(in oklch, var(--tb-line) 90%, transparent) 85%,
+      transparent
+    );
+  }
+
+  .tb-trust-strip::before {
+    top: 0;
+  }
+
+  .tb-trust-strip::after {
+    bottom: 0;
+  }
+
+  .tb-trust-strip__grid {
+    @apply grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .tb-trust-pill {
+    @apply flex min-h-11 items-center gap-3 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 py-3 text-sm font-semibold text-[var(--tb-ink)];
+  }
+
+  .tb-trust-pill__icon {
+    @apply inline-flex shrink-0 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] min-h-10 min-w-10 p-2;
+  }
+
+  .tb-studio-tile__head {
+    @apply flex items-start gap-3;
+  }
+
+  .tb-tile__score {
+    @apply pt-1;
+  }
+
+  .tb-utility-tile {
+    @apply gap-3;
+  }
+
+  .tb-utility-tile__icon {
+    @apply inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] p-2.5;
+  }
+
+  .tb-utility-tile__cta {
+    @apply mt-auto pt-1;
+  }
+
+  .tb-guide-tile {
+    @apply min-h-[9.5rem];
+  }
+
+  .tb-guide-tile__dot {
+    @apply h-1.5 w-1.5 rounded-full bg-[var(--tb-accent)];
+  }
+
+  .tb-methodology-strip {
+    @apply my-6 grid gap-3 sm:grid-cols-3;
+  }
+
+  .tb-methodology-card {
+    @apply flex gap-3 rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5;
+  }
+
+  .tb-methodology-card__icon {
+    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)];
+  }
+
+  .tb-check-mark {
+    @apply inline-block h-2 w-2 rounded-full bg-[var(--color-good)];
+  }
+
+  .tb-spotlight {
+    @apply rounded-[var(--radius-card)] bg-[var(--tb-surface)];
+    box-shadow: 0 20px 48px -32px rgb(0 0 0 / 0.55);
   }
 
   .tb-btn {
