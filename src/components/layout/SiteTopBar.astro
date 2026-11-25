@@ -7,13 +7,11 @@ import SiteLogo from './SiteLogo.astro';
 const path = Astro.url.pathname;
 ---
 
-<header
-  class="sticky top-0 z-[var(--z-sticky)] border-b border-[var(--tb-line)] bg-[var(--tb-bg)]/90 backdrop-blur-md lg:pl-[var(--rail-width)]"
->
+<header class="border-b border-[var(--tb-line)] bg-[var(--tb-bg)]/92 backdrop-blur-md lg:pl-[var(--rail-width)]">
   <div
-    class="relative mx-auto flex h-[var(--topbar-height)] max-w-[var(--content-max)] items-center gap-3 px-4"
+    class="relative mx-auto flex h-[var(--topbar-height)] max-w-[var(--content-max)] items-center gap-2 px-4 sm:gap-3"
   >
-    <SiteLogo variant="full" class="lg:hidden" />
+    <SiteLogo variant="full" class="shrink-0" />
     <MegaMenu currentPath={path} />
     <nav class="hidden items-center gap-1 xl:flex" aria-label="Primary">
       <a href="/categories" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Lists</a>

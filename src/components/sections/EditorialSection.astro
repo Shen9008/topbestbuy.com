@@ -1,0 +1,31 @@
+---
+interface Props {
+  band?: 'default' | 'alt' | 'none';
+  class?: string;
+  id?: string;
+  'aria-labelledby'?: string;
+  'aria-label'?: string;
+}
+
+const {
+  band = 'none',
+  class: className = '',
+  id,
+  'aria-labelledby': ariaLabelledby,
+  'aria-label': ariaLabel,
+} = Astro.props;
+
+const bandClass =
+  band === 'default' ? 'tb-band' : band === 'alt' ? 'tb-band tb-band--alt' : 'tb-section tb-section--editorial';
+---
+
+<section
+  id={id}
+  class:list={[bandClass, className]}
+  aria-labelledby={ariaLabelledby}
+  aria-label={ariaLabel}
+>
+  <div class="tb-section__inner">
+    <slot />
+  </div>
+</section>

@@ -18,12 +18,136 @@
     }
   }
 
+  .tb-h1 {
+    @apply font-display text-[2.125rem] font-bold leading-[1.12] tracking-tight sm:text-[3rem];
+  }
+
+  .tb-h2 {
+    @apply font-display text-[1.625rem] font-bold leading-[1.2] tracking-tight sm:text-[2rem];
+  }
+
+  .tb-h3 {
+    @apply font-display text-lg font-semibold leading-snug sm:text-xl;
+  }
+
+  .tb-h4 {
+    @apply font-display text-xs font-bold uppercase tracking-[0.12em] text-[var(--tb-heading-muted)];
+  }
+
+  .tb-heading-accent {
+    color: var(--tb-heading-accent);
+  }
+
   .tb-section {
     @apply py-10;
   }
 
+  .tb-section--editorial {
+    @apply py-[var(--section-gap)];
+  }
+
+  .tb-section__inner {
+    @apply mx-auto w-full max-w-[var(--content-max)];
+  }
+
+  .tb-band {
+    @apply -mx-4 border-y border-[var(--tb-line)] px-4 py-12;
+    background: var(--tb-band-bg);
+  }
+
+  .tb-band--alt {
+    background: var(--tb-band-bg-alt);
+  }
+
+  .tb-section__bar {
+    @apply mb-6 flex flex-wrap items-end justify-between gap-3;
+  }
+
+  .tb-section__bar .tb-section__head {
+    @apply min-w-0 flex-1;
+  }
+
+  .tb-section-link {
+    @apply inline-flex min-h-[var(--hit-target)] min-w-[var(--hit-target)] items-center justify-center gap-1 rounded-[var(--radius-pill)] px-3 text-sm font-bold text-[var(--tb-accent)] no-underline transition-colors duration-150 hover:text-[var(--tb-ink)] focus-visible:outline-offset-4;
+  }
+
+  .tb-section-link::after {
+    content: '→';
+    font-size: 0.85em;
+  }
+
   .tb-section--band {
     @apply border-y border-[var(--tb-line)] py-12;
+  }
+
+  .tb-scroll-strip {
+    @apply flex gap-2 overflow-x-auto overscroll-x-contain pb-1;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .tb-scroll-strip > * {
+    scroll-snap-align: start;
+  }
+
+  .tb-category-pill {
+    @apply inline-flex min-h-[var(--hit-target)] items-center rounded-[var(--radius-pill)] border border-[var(--tb-line)] bg-[var(--tb-surface)] px-3.5 text-sm font-semibold text-[var(--tb-ink)] no-underline transition-[border-color,background-color,color] duration-150 hover:border-[var(--tb-accent)];
+  }
+
+  .tb-category-pill--on {
+    @apply border-[var(--tb-accent)] bg-[var(--tb-accent)] text-[var(--tb-accent-ink)];
+  }
+
+  .tb-feed-row {
+    @apply grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-[var(--card-pad-dense)] no-underline;
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-feed-row:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in oklch, var(--tb-accent) 35%, var(--tb-line));
+    }
+  }
+
+  .tb-card--dense {
+    @apply rounded-[var(--radius-md)] p-[var(--card-pad-comfort)];
+  }
+
+  .tb-card--editorial {
+    @apply my-3 rounded-[var(--radius-md)] p-4 shadow-[0_1px_0_rgb(0_0_0/0.15),0_8px_24px_-16px_rgb(0_0_0/0.35)];
+  }
+
+  .tb-editorial-layout {
+    @apply grid items-start gap-8 lg:grid-cols-[var(--editorial-sidebar)_minmax(0,1fr)];
+  }
+
+  .tb-editorial-sidebar {
+    @apply hidden lg:block;
+  }
+
+  .tb-editorial-sidebar__sticky {
+    position: sticky;
+    top: calc(var(--tb-sticky-stack) + 1rem);
+    max-height: calc(100dvh - var(--tb-sticky-stack) - 2rem);
+    overflow-y: auto;
+  }
+
+  .tb-sticky-subnav {
+    @apply sticky z-[calc(var(--z-sticky)-1)] -mx-4 mb-6 border-b border-[var(--tb-line)] bg-[var(--tb-bg)]/95 px-4 py-2 backdrop-blur-md;
+    top: var(--tb-sticky-stack);
+  }
+
+  .tb-hero--hub {
+    @apply relative max-w-none py-8 text-left sm:py-10 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10 lg:text-left;
+  }
+
+  .tb-hero--hub::before {
+    inset: -2rem -1rem 0;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 92%);
   }
 
   .tb-feature-grid {
@@ -480,8 +604,8 @@
   }
 
   .tb-jumpbar {
-    @apply sticky z-[var(--z-sticky)] -mx-4 mb-4 flex gap-2 overflow-x-auto bg-[var(--tb-bg)] px-1 py-2 lg:hidden;
-    top: calc(var(--topbar-height));
+    @apply flex gap-2 overflow-x-auto overscroll-x-contain px-0.5 py-1;
+    scroll-snap-type: x proximity;
   }
 
   .tb-jumpbar a {

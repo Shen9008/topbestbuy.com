@@ -8,11 +8,25 @@ import { LISTS } from '../../data/lists';
 import { RANKED, listSlugs } from '../../lib/catalog';
 import { productFullName } from '../../lib/format';
 import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
+
+interface Props {
+  bare?: boolean;
+}
+
+const { bare = false } = Astro.props;
+const Tag = bare ? 'div' : 'section';
+const sectionClass = bare ? '' : 'tb-section';
 ---
 
-<section class="tb-section" aria-labelledby="home-browse-heading">
-  <SectionHeader titleId="home-browse-heading" eyebrow="Browse" title="What are you shopping for?" />
-  <div class="mt-4 flex flex-wrap gap-2">
+<Tag class={sectionClass} aria-labelledby="home-browse-heading">
+  <SectionHeader
+    titleId="home-browse-heading"
+    eyebrow="Browse"
+    title="What are you shopping for?"
+    seeAllHref="/categories"
+    seeAllLabel="All categories"
+  />
+  <div class="tb-scroll-strip mt-4 lg:flex lg:flex-wrap lg:overflow-visible lg:pb-0">
     {
       CATS.map((c) => {
         const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
@@ -31,6 +45,8 @@ import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
     titleId="home-lists-heading"
     title="Start with a list"
     description="Every card opens a dated Top 10 with sources and trade-offs."
+    seeAllHref="/categories"
+    seeAllLabel="See all lists"
   />
   <div class="tb-studio-grid tb-reveal-stagger mt-6">
     {
@@ -57,4 +73,4 @@ import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
       })
     }
   </div>
-</section>
+</Tag>

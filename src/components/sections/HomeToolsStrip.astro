@@ -11,13 +11,16 @@ const tools: [ToolVisualId, string, string][] = [
 ];
 ---
 
-<section class="tb-section tb-section--band" aria-labelledby="home-tools-heading">
+<section class="tb-band" aria-labelledby="home-tools-heading">
+  <div class="tb-section__inner">
   <SectionHeader
     titleId="home-tools-heading"
     align="center"
     eyebrow="Tools"
     title="Narrow it down in a minute"
     description="Short calculators and choosers — estimates only; verify before you buy."
+    seeAllHref="/tools"
+    seeAllLabel="See all tools"
   />
   <div class="tb-utility-grid tb-reveal-stagger mt-8">
     {
@@ -35,7 +38,5 @@ const tools: [ToolVisualId, string, string][] = [
       ))
     }
   </div>
-  <p class="mt-6 text-center text-sm">
-    <a href="/tools" class="font-semibold text-[var(--tb-accent)]">See all buying tools</a>
-  </p>
+  </div>
 </section>

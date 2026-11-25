@@ -9,11 +9,14 @@ const postIds = [
 ];
 ---
 
-<section class="tb-section" aria-labelledby="home-guides-heading">
+<section class="tb-section tb-section--editorial" aria-labelledby="home-guides-heading">
+  <div class="tb-section__inner">
   <SectionHeader
     titleId="home-guides-heading"
     title="Guides and explainers"
     description="Longer reads when you need context before you open a list."
+    seeAllHref="/guides"
+    seeAllLabel="See all guides"
   />
   <div class="tb-feature-grid tb-reveal-stagger mt-6">
     {
@@ -31,5 +34,6 @@ const postIds = [
         );
       })
     }
+  </div>
   </div>
 </section>
