@@ -30,7 +30,7 @@ export const imageManifest: Record<string, ImageManifestEntry | undefined> = {
   'category-tile-phones': { src: '/images/categories/phones.webp', width: 600, height: 600, alt: 'Phones and wearables category tile' },
   'category-tile-sleep': { src: '/images/categories/sleep.webp', width: 600, height: 600, alt: 'Sleep and bedroom category tile' },
   'category-tile-tv': { src: '/images/categories/tv.webp', width: 600, height: 600, alt: 'TV and home entertainment category tile' },
-  'home-hero': { src: '/images/editorial/home-hero.webp', width: 1680, height: 720, alt: 'TopBestBuy home — shop smarter in Malaysia' },
+  'home-hero': { src: '/images/editorial/home-hero-cutouts.webp', width: 1200, height: 1500, alt: 'Collage of an air fryer, air purifier, laptop, running shoe and earbuds' },
   'list-hero-best-air-fryers-malaysia': { src: '/images/lists/best-air-fryers-malaysia.webp', width: 1680, height: 720, alt: 'Best Air Fryers in Malaysia : Top 10 Picks, Scored category hero' },
   'list-hero-best-air-purifiers-malaysia': { src: '/images/lists/best-air-purifiers-malaysia.webp', width: 1680, height: 720, alt: 'Best Air Purifiers in Malaysia : Top 10 Picks, Scored category hero' },
   'list-hero-best-facial-cleansers-malaysia': { src: '/images/lists/best-facial-cleansers-malaysia.webp', width: 1680, height: 720, alt: 'Best Facial Cleansers in Malaysia : Top 10 Picks, Scored category hero' },
