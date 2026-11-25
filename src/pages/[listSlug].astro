@@ -23,6 +23,12 @@ import type { ListSlug } from '../lib/catalog';
 import Icon from '../components/ui/Icon.astro';
 import ListMethodologyStrip from '../components/sections/ListMethodologyStrip.astro';
 import { LIST_SLUG_ICONS } from '../icons';
+import {
+  breadcrumbListJsonLd,
+  listDocumentTitle,
+  listMetaDescription,
+  listOgImage,
+} from '../lib/seo';
 
 export function getStaticPaths() {
   return LIST_SLUGS.map((listSlug) => ({ params: { listSlug } }));
@@ -37,6 +43,12 @@ const top3 = rows.slice(0, 3);
 const slug = listSlug as ListSlug;
 const sources = sourcesSection(slug, rows);
 
+const crumbItems = [
+  { label: 'Top 10 lists', href: '/categories' },
+  { label: category?.name ?? list.cat, href: `/category/${list.cat}` },
+  { label: list.short },
+];
+
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -46,8 +58,13 @@ const schema = {
       Astro.site?.href?.replace(/\/$/, '') ?? 'https://topbestbuy.online',
     ),
     faqJsonLd(list.faq),
+    breadcrumbListJsonLd(crumbItems),
   ],
 };
+
+const listTitle = listDocumentTitle(list.short);
+const listDesc = listMetaDescription(list.short, list.meta);
+const listOg = listOgImage(listSlug!) ?? '/og-default.png';
 
 const tool = TOOL_FOR[list.kind] ?? ['finder', 'product finder'];
 const relatedPosts = Object.entries(POSTS)
@@ -55,16 +72,14 @@ const relatedPosts = Object.entries(POSTS)
   .slice(0, 3);
 ---
 
-<BaseLayout title={list.title} description={list.meta} canonical={`/${listSlug}`}>
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-
-  <Breadcrumbs
-    items={[
-      { label: 'Top 10 lists', href: '/categories' },
-      { label: category?.name ?? list.cat, href: `/category/${list.cat}` },
-      { label: list.short },
-    ]}
-  />
+<BaseLayout
+  title={listTitle}
+  description={listDesc}
+  canonical={`/${listSlug}`}
+  ogImage={listOg}
+  jsonLd={schema}
+>
+  <Breadcrumbs items={crumbItems} />
 
   <ImageSlot slotId={`list-hero-${listSlug}`} aspect="banner" label={`List hero: ${list.short}`} />
 

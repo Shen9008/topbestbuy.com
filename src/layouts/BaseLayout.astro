@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import Seo from '../components/seo/Seo.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import type { JsonLd as JsonLdGraph } from '../lib/seo';
 import SkipLink from '../components/layout/SkipLink.astro';
 import UtilBanner from '../components/layout/UtilBanner.astro';
 import SiteTopBar from '../components/layout/SiteTopBar.astro';
@@ -14,16 +16,27 @@ export interface Props {
   title: string;
   description?: string;
   canonical?: string;
+  ogImage?: string;
+  ogType?: string;
   noindex?: boolean;
+  jsonLd?: JsonLdGraph | JsonLdGraph[];
 }
 
-const { title, description, canonical, noindex } = Astro.props;
+const { title, description, canonical, ogImage, ogType, noindex, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en-MY" data-theme="dark">
   <head>
-    <Seo title={title} description={description} canonical={canonical} noindex={noindex} />
+    <Seo
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      ogType={ogType}
+      noindex={noindex}
+    />
+    {jsonLd && <JsonLd data={jsonLd} />}
     <script is:inline>
       try {
         const t = localStorage.getItem('tb-theme');

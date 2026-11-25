@@ -5,9 +5,18 @@ import Icon from '../components/ui/Icon.astro';
 import EditorialSection from '../components/sections/EditorialSection.astro';
 import SectionHeader from '../components/sections/SectionHeader.astro';
 import SearchPage from '../components/islands/SearchPage';
+import { breadcrumbListJsonLd } from '../lib/seo';
 ---
 
-<BaseLayout title="Search" description="Search TopBestBuy lists, guides and tools." canonical="/search">
+<BaseLayout
+  title="Search TopBestBuy Malaysia"
+  description="Search TopBestBuy lists, product reviews, buying guides and calculators for shoppers in Malaysia."
+  canonical="/search"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@graph': [breadcrumbListJsonLd([{ label: 'Search' }])],
+  }}
+>
   <Breadcrumbs items={[{ label: 'Search' }]} />
 
   <header class="tb-hero tb-hero--hub tb-reveal">

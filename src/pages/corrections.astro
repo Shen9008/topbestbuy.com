@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StubShell from '../components/pages/StubShell.astro';
+import { TRUST_META } from '../lib/seo';
 ---
 
-<BaseLayout title="Corrections" description="Corrections log for TopBestBuy (stub).">
+<BaseLayout
+  title={TRUST_META.corrections.title}
+  description={TRUST_META.corrections.description}
+  canonical="/corrections"
+  noindex
+>
   <StubShell title="Corrections" kicker="Trust" />
 </BaseLayout>

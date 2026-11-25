@@ -1,8 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StubShell from '../components/pages/StubShell.astro';
+import { TRUST_META } from '../lib/seo';
 ---
 
-<BaseLayout title="Affiliate disclosure" description="How TopBestBuy earns from affiliate links (stub).">
+<BaseLayout
+  title={TRUST_META['affiliate-disclosure'].title}
+  description={TRUST_META['affiliate-disclosure'].description}
+  canonical="/affiliate-disclosure"
+>
   <StubShell title="Affiliate disclosure" kicker="Trust" />
 </BaseLayout>

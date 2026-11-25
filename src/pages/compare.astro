@@ -4,13 +4,18 @@ import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
 import Icon from '../components/ui/Icon.astro';
 import EditorialSection from '../components/sections/EditorialSection.astro';
 import SectionHeader from '../components/sections/SectionHeader.astro';
+import { breadcrumbListJsonLd } from '../lib/seo';
 import ComparePicker from '../components/islands/ComparePicker';
 ---
 
 <BaseLayout
   title="Compare products side by side"
-  description="Compare up to three products on the same scorecard: scores, usage scores, price and specs."
+  description="Compare up to three Malaysia Top 10 picks on one scorecard — scores, usage fit, MYR price and specs from TopBestBuy."
   canonical="/compare"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@graph': [breadcrumbListJsonLd([{ label: 'Tools', href: '/tools' }, { label: 'Compare' }])],
+  }}
 >
   <Breadcrumbs items={[{ label: 'Tools', href: '/tools' }, { label: 'Compare' }]} />
 

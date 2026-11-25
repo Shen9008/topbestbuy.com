@@ -7,6 +7,7 @@ import SectionHeader from '../components/sections/SectionHeader.astro';
 import { CRIT } from '../data/scorecard';
 import { SITE_DATE } from '../data/meta';
 import { SCORE_CRIT_ICONS, type IconMapKey } from '../icons';
+import { breadcrumbListJsonLd } from '../lib/seo';
 
 const trustLinks = [
   { href: '/how-we-rank', label: 'How we rank' },
@@ -18,9 +19,13 @@ const trustLinks = [
 ---
 
 <BaseLayout
-  title="How we score"
-  description="Our seven-criterion scorecard, weights, tie-breakers and changelog."
+  title="How we rank products in Malaysia"
+  description="Seven weighted criteria, usage scores, tie-breakers and exclusions — how TopBestBuy builds every Top 10 list for Malaysia."
   canonical="/how-we-rank"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@graph': [breadcrumbListJsonLd([{ label: 'How we rank' }])],
+  }}
 >
   <Breadcrumbs items={[{ label: 'How we score' }]} />
 

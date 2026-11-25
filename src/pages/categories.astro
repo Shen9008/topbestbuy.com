@@ -7,15 +7,21 @@ import EditorialSection from '../components/sections/EditorialSection.astro';
 import SectionHeader from '../components/sections/SectionHeader.astro';
 import { CATS } from '../data/categories';
 import { CATEGORY_ICONS, type IconMapKey } from '../icons';
+import { breadcrumbListJsonLd } from '../lib/seo';
 
 const liveCats = CATS.filter((c) => c.lists.length);
 const soonCats = CATS.filter((c) => !c.lists.length);
 ---
 
 <BaseLayout
-  title="All Top 10 lists by category"
-  description="Browse TopBestBuy Top 10 lists by category for Malaysia."
+  title="Browse Top 10 lists by category"
+  description="All TopBestBuy Top 10 categories for Malaysia — kitchen, air, sleep, tech, beauty and fitness. Scored picks with MYR prices."
   canonical="/categories"
+  ogImage="/images/inventory-refresh/categories-hero.webp"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@graph': [breadcrumbListJsonLd([{ label: 'Top 10 lists' }])],
+  }}
 >
   <Breadcrumbs items={[{ label: 'Top 10 lists' }]} />
 

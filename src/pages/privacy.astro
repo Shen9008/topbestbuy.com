@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StubShell from '../components/pages/StubShell.astro';
+import { TRUST_META } from '../lib/seo';
 ---
 
-<BaseLayout title="Privacy" description="Privacy policy for topbestbuy.online (stub).">
+<BaseLayout
+  title={TRUST_META.privacy.title}
+  description={TRUST_META.privacy.description}
+  canonical="/privacy"
+  noindex
+>
   <StubShell title="Privacy" kicker="Trust" />
 </BaseLayout>

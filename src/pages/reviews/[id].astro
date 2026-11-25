@@ -10,6 +10,14 @@ import { SITE_DATE } from '../../data/meta';
 import { formatRM, productFullName } from '../../lib/format';
 import { usageScoresForProduct } from '../../lib/list-extra';
 import { resolveSources } from '../../lib/sources';
+import {
+  articleJsonLd,
+  breadcrumbListJsonLd,
+  listOgImage,
+  productReviewJsonLd,
+  reviewDocumentTitle,
+  reviewMetaDescription,
+} from '../../lib/seo';
 
 export function getStaticPaths() {
   return Object.keys(allProductsMap()).map((id) => ({ params: { id } }));
@@ -25,21 +33,42 @@ const peers = RANKED[product.list] ?? [];
 const usageRows = usageScoresForProduct(product.subs, list.usages);
 const sources = resolveSources(product.X.s);
 const fullName = productFullName(product);
+const crumbItems = [
+  { label: 'Top 10 lists', href: '/categories' },
+  { label: category?.name ?? list.cat, href: `/category/${list.cat}` },
+  { label: list.short, href: `/${product.list}` },
+  { label: 'Review' },
+];
+const reviewPath = `/reviews/${id}`;
+const reviewTitle = reviewDocumentTitle(fullName);
+const reviewDesc = reviewMetaDescription(fullName, product.total);
+const reviewSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    articleJsonLd({
+      headline: fullName,
+      description: reviewDesc,
+      path: reviewPath,
+    }),
+    productReviewJsonLd({
+      name: fullName,
+      description: reviewDesc,
+      path: reviewPath,
+    }),
+    breadcrumbListJsonLd(crumbItems),
+  ],
+};
 ---
 
 <BaseLayout
-  title={`${fullName} review`}
-  description={`${fullName} scored ${product.total.toFixed(1)}/100 on our scorecard with usage scores, specs and trade-offs.`}
-  canonical={`/reviews/${id}`}
+  title={reviewTitle}
+  description={reviewDesc}
+  canonical={reviewPath}
+  ogImage={listOgImage(product.list) ?? '/og-default.png'}
+  ogType="article"
+  jsonLd={reviewSchema}
 >
-  <Breadcrumbs
-    items={[
-      { label: 'Top 10 lists', href: '/categories' },
-      { label: category?.name ?? list.cat, href: `/category/${list.cat}` },
-      { label: list.short, href: `/${product.list}` },
-      { label: 'Review' },
-    ]}
-  />
+  <Breadcrumbs items={crumbItems} />
 
   <header class="tb-hero tb-hero--hub tb-hero--has-media mt-2" aria-label="Review">
     <div class="min-w-0">

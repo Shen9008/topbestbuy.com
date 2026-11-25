@@ -5,6 +5,11 @@ import SectionHeader from '../../components/sections/SectionHeader.astro';
 import { POSTS } from '../../data/posts';
 import { LISTS } from '../../data/lists';
 import { SITE_DATE } from '../../data/meta';
+import {
+  articleJsonLd,
+  breadcrumbListJsonLd,
+  normalizeGuideBodyHtml,
+} from '../../lib/seo';
 
 export function getStaticPaths() {
   return Object.keys(POSTS).map((key) => ({
@@ -18,10 +23,31 @@ const post = POSTS[postId as keyof typeof POSTS];
 const otherGuides = Object.entries(POSTS)
   .filter(([id]) => id !== postId)
   .slice(0, 4);
+const guidePath = `/guides/${Astro.params.slug}`;
+const crumbItems = [{ label: 'Guides', href: '/guides' }, { label: post.type }];
+const guideSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    articleJsonLd({
+      headline: post.h1,
+      description: post.meta,
+      path: guidePath,
+      type: 'BlogPosting',
+    }),
+    breadcrumbListJsonLd(crumbItems),
+  ],
+};
+const bodyHtml = normalizeGuideBodyHtml(post.body);
 ---
 
-<BaseLayout title={post.title} description={post.meta} canonical={`/guides/${Astro.params.slug}`}>
-  <Breadcrumbs items={[{ label: 'Guides', href: '/guides' }, { label: post.type }]} />
+<BaseLayout
+  title={post.title}
+  description={post.meta}
+  canonical={guidePath}
+  ogType="article"
+  jsonLd={guideSchema}
+>
+  <Breadcrumbs items={crumbItems} />
 
   <header class="mt-2 max-w-[var(--prose-max)]">
     <span class="tb-pill">{post.type}</span>
@@ -83,7 +109,7 @@ const otherGuides = Object.entries(POSTS)
       </section>
 
       <section id="guide-body" class="scroll-mt-28">
-        <article class="tb-prose mt-6" set:html={post.body} />
+        <article class="tb-prose mt-6" set:html={bodyHtml} />
       </section>
 
       <section id="guide-more" class="scroll-mt-28 mt-10">

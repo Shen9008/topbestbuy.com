@@ -7,6 +7,7 @@ import EditorialSection from '../../components/sections/EditorialSection.astro';
 import SectionHeader from '../../components/sections/SectionHeader.astro';
 import ToolsHub from '../../components/islands/ToolsHub';
 import type { ToolVisualId } from '../../lib/feature-visuals';
+import { breadcrumbListJsonLd } from '../../lib/seo';
 
 const initialTool = Astro.url.searchParams.get('tool') ?? undefined;
 
@@ -22,9 +23,13 @@ const quickTools: [ToolVisualId, string, string][] = [
 ---
 
 <BaseLayout
-  title="Buying tools and calculators"
-  description="Product finder and calculators: air fryer size, purifier room size, running cost, mattress firmness."
+  title="Buying tools & calculators (MY)"
+  description="Free Malaysia buying tools: product finder, air fryer size, purifier room size, running cost and mattress firmness pickers."
   canonical="/tools"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@graph': [breadcrumbListJsonLd([{ label: 'Tools' }])],
+  }}
 >
   <Breadcrumbs items={[{ label: 'Tools' }]} />
 
