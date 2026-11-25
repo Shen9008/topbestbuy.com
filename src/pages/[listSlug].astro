@@ -87,9 +87,10 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
 >
   <Breadcrumbs items={crumbItems} />
 
-  <ImageSlot slotId={`list-hero-${listSlug}`} aspect="banner" label={`List hero: ${list.short}`} />
+  <div class="tb-reveal tb-reveal--hero">
+    <ImageSlot slotId={`list-hero-${listSlug}`} aspect="banner" label={`List hero: ${list.short}`} />
 
-  <h1 class="tb-h1 flex flex-wrap items-center gap-3">
+    <h1 class="tb-h1 flex flex-wrap items-center gap-3">
     {
       LIST_SLUG_ICONS[listSlug!] ? (
         <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
@@ -143,6 +144,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
   <div class="tb-prose mt-4" set:html={list.intro} />
 
   <ListMethodologyStrip />
+  </div>
 
   <div class="tb-callout tb-spotlight border-2 border-[var(--tb-ink)]">
     <strong>Key takeaways</strong>
@@ -230,7 +232,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
     </aside>
 
     <div class="tb-editorial-main min-w-0">
-      <section id="sec-compare" class="scroll-mt-28">
+      <section id="sec-compare" class="tb-reveal scroll-mt-28">
         <h2 class="tb-h2">Compare at a glance</h2>
         <ListPageClient
           client:load

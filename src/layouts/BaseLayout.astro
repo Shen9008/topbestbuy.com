@@ -11,6 +11,7 @@ import SiteFooter from '../components/layout/SiteFooter.astro';
 import MobileTabBar from '../components/layout/MobileTabBar.astro';
 import AppChrome from '../components/islands/AppChrome';
 import BackToTop from '../components/ui/BackToTop.astro';
+import ScrollMotion from '../components/motion/ScrollMotion.astro';
 import { siteOrganizationGraph } from '../lib/json-ld';
 
 const orgLd = JSON.stringify(siteOrganizationGraph());
@@ -69,5 +70,6 @@ const { title, description, canonical, ogImage, ogType, noindex, jsonLd } = Astr
     <MobileTabBar />
     <BackToTop />
     <AppChrome client:load />
+    <ScrollMotion />
   </body>
 </html>

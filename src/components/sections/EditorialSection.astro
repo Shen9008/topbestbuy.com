@@ -17,11 +17,12 @@ const {
 
 const bandClass =
   band === 'default' ? 'tb-band' : band === 'alt' ? 'tb-band tb-band--alt' : 'tb-section tb-section--editorial';
+const motionClass = band !== 'none' ? 'tb-reveal' : '';
 ---
 
 <section
   id={id}
-  class:list={[bandClass, className]}
+  class:list={[bandClass, motionClass, className]}
   aria-labelledby={ariaLabelledby}
   aria-label={ariaLabel}
 >

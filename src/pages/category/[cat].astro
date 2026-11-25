@@ -47,7 +47,7 @@ const relatedGuides = Object.entries(POSTS)
 >
   <Breadcrumbs items={crumbItems} />
 
-  <header class="mt-2 flex flex-wrap items-center gap-3">
+  <header class="tb-reveal tb-reveal--hero mt-2 flex flex-wrap items-center gap-3">
     {catIcon ? (
       <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
         <Icon name={catIcon} size={32} />
@@ -97,7 +97,7 @@ const relatedGuides = Object.entries(POSTS)
         <SectionHeader titleId="cat-live-heading" title="Live lists" seeAllHref="/categories" seeAllLabel="Index" />
         {
           category.lists.length ? (
-            <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            <div class="tb-reveal-stagger mt-4 grid gap-3 sm:grid-cols-2">
               {category.lists.map((slug) => {
                 const L = LISTS[slug as keyof typeof LISTS];
                 const p = RANKED[slug]?.[0];

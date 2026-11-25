@@ -14,8 +14,13 @@ import { TRUST_META, aboutPageJsonLd } from '../lib/seo';
   jsonLd={aboutPageJsonLd()}
 >
   <Breadcrumbs items={[{ label: 'Trust', href: '/about' }, { label: 'About us' }]} />
-  <h1 class="tb-h1">About us</h1>
-  <article class="tb-prose mt-6">
+  <header class="tb-reveal tb-reveal--hero">
+    <h1 class="tb-h1">About us</h1>
+    <p class="mt-3 max-w-[52ch] text-lg text-[var(--tb-muted)]">
+      Independent Top 10 lists for Malaysia — scored, sourced, and updated on a schedule.
+    </p>
+  </header>
+  <article class="tb-prose mt-6 tb-reveal" data-tb-motion>
     <p>
       TopBestBuy helps people in Malaysia pick a good product without reading fifty tabs. Each
       list is ten picks, ranked on a published scorecard, with trade-offs stated plainly.

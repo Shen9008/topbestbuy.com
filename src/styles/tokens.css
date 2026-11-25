@@ -32,8 +32,12 @@
   --radius-pill: 999px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --dur-fast: 150ms;
   --dur-base: 220ms;
+  --dur-reveal: 640ms;
+  --motion-rise: 18px;
+  --motion-rise-child: 14px;
 
   --z-base: 0;
   --z-sticky: 10;
