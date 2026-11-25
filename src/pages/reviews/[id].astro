@@ -41,7 +41,7 @@ const fullName = productFullName(product);
     ]}
   />
 
-  <header class="tb-hero tb-hero--hub mt-2" aria-label="Review">
+  <header class="tb-hero tb-hero--hub tb-hero--has-media mt-2" aria-label="Review">
     <div class="min-w-0">
       <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">
         {list.short} · #{product.rank} of 10
@@ -56,8 +56,13 @@ const fullName = productFullName(product);
         <span class="tb-pill tb-pill-sample">Prices as reported</span>
       </p>
     </div>
-    <div class="mt-6 lg:mt-0">
-      <ImageSlot slotId={`review-${id}`} aspect="banner" label={`${fullName} hero`} />
+    <div class="tb-hero__media">
+      <ImageSlot
+        slotId={`review-${id}`}
+        aspect="match"
+        label={`${fullName} hero`}
+        class="h-full min-h-0 flex-1"
+      />
     </div>
   </header>
 
