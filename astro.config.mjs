@@ -22,10 +22,7 @@ export default defineConfig({
         image: false,
         video: false,
       },
-      filter: (page) => {
-        const path = new URL(page).pathname;
-        return path !== '/404' && !path.startsWith('/dev/');
-      },
+      filter: (page) => !page.includes('/dev/') && !page.endsWith('/404'),
     }),
   ],
 });
