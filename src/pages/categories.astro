@@ -13,7 +13,7 @@ import { CATEGORY_ICONS, type IconMapKey } from '../icons';
   canonical="/categories"
 >
   <Breadcrumbs items={[{ label: 'Top 10 lists' }]} />
-  <h1 class="font-display text-3xl font-extrabold">Top 10 lists by category</h1>
+  <h1 class="tb-h1">Top 10 lists by category</h1>
   <p class="max-w-[60ch] text-[var(--tb-muted)]">
     Live lists are scored on our published scorecard. Planned lists follow search demand and your votes.
   </p>
@@ -37,7 +37,7 @@ import { CATEGORY_ICONS, type IconMapKey } from '../icons';
             <span class:list={['tb-pill', c.lists.length && 'tb-pill-good']}>
               {c.lists.length ? `${c.lists.length} live` : 'coming'}
             </span>
-            <h3 class="m-0 font-display text-lg font-bold">{c.name}</h3>
+            <h3 class="m-0 tb-h3">{c.name}</h3>
             <p class="m-0 text-sm text-[var(--tb-muted)]">{c.desc}</p>
             <span class="text-xs text-[var(--tb-muted)]">Next: {c.soon.slice(0, 3).join(', ')}</span>
           </a>

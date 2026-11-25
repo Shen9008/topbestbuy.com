@@ -2,13 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import Icon from '../../components/ui/Icon.astro';
+import ListVisual from '../../components/ui/ListVisual.astro';
+import { hasListVisual } from '../../lib/list-visuals';
 import { CATEGORY_IDS } from '../../lib/routes';
 import { getCategory, RANKED } from '../../lib/catalog';
 import { LISTS } from '../../data/lists';
 import { POSTS } from '../../data/posts';
 import { productFullName } from '../../lib/format';
 import { SITE_DATE } from '../../data/meta';
-import { CATEGORY_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
+import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
 
 export function getStaticPaths() {
   return CATEGORY_IDS.map((cat) => ({ params: { cat } }));
@@ -33,28 +35,28 @@ const catIcon = CATEGORY_ICONS[cat!] as IconMapKey | undefined;
       </span>
     ) : null}
     <div>
-      <h1 class="m-0 font-display text-3xl font-extrabold">{category.name}</h1>
+      <h1 class="m-0 tb-h1">{category.name}</h1>
       <p class="m-0 mt-1 text-[var(--tb-muted)]">{category.desc}</p>
     </div>
   </div>
 
-  <h2 class="mt-8 font-display text-2xl font-bold">Live lists</h2>
+  <h2 class="mt-8 tb-h2">Live lists</h2>
   {
     category.lists.length ? (
       <div class="mt-4 grid gap-3 sm:grid-cols-2">
         {category.lists.map((slug) => {
           const L = LISTS[slug as keyof typeof LISTS];
           const p = RANKED[slug]?.[0];
-          const listIcon = LIST_SLUG_ICONS[slug];
           return (
             <a href={`/${slug}`} class="tb-tile">
-              <h3 class="m-0 flex items-center gap-2 font-display text-lg font-bold">
-                {listIcon ? <Icon name={listIcon} size={24} class="shrink-0" /> : null}
-                {L.h1}
-              </h3>
+              <div class="tb-tile__head">
+                {hasListVisual(slug) ? <ListVisual slug={slug} size="md" /> : null}
+                <h3 class="m-0 tb-h3">{L.h1}</h3>
+              </div>
               {p && (
-                <span class="text-sm">
-                  #1: {productFullName(p)} ({p.total.toFixed(1)}/100)
+                <span class="tb-tile__score text-sm">
+                  #1: {productFullName(p)}{' '}
+                  <span class="tb-num">({p.total.toFixed(1)}/100)</span>
                 </span>
               )}
               <span class="text-xs text-[var(--tb-muted)]">Updated {SITE_DATE}</span>
@@ -67,7 +69,7 @@ const catIcon = CATEGORY_ICONS[cat!] as IconMapKey | undefined;
     )
   }
 
-  <h2 class="mt-8 font-display text-2xl font-bold">Coming next</h2>
+  <h2 class="mt-8 tb-h2">Coming next</h2>
   <div class="mt-3 flex flex-wrap gap-2">
     {category.soon.map((s) => (
       <a href="/coming-next" class="tb-chip">
@@ -76,7 +78,7 @@ const catIcon = CATEGORY_ICONS[cat!] as IconMapKey | undefined;
     ))}
   </div>
 
-  <h2 class="mt-8 font-display text-2xl font-bold">Related guides</h2>
+  <h2 class="mt-8 tb-h2">Related guides</h2>
   <div class="mt-3 grid gap-3 sm:grid-cols-3">
     {Object.entries(POSTS)
       .slice(0, 3)

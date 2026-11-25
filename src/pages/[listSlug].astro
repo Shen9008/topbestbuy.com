@@ -68,7 +68,7 @@ const relatedPosts = Object.entries(POSTS)
 
   <ImageSlot slotId={`list-hero-${listSlug}`} aspect="banner" label={`List hero: ${list.short}`} />
 
-  <h1 class="flex flex-wrap items-center gap-3 font-display text-3xl font-extrabold sm:text-4xl">
+  <h1 class="tb-h1 flex flex-wrap items-center gap-3">
     {
       LIST_SLUG_ICONS[listSlug!] ? (
         <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
@@ -190,7 +190,7 @@ const relatedPosts = Object.entries(POSTS)
 
     <div>
       <section id="sec-compare" class="scroll-mt-28">
-        <h2 class="font-display text-2xl font-bold">Compare at a glance</h2>
+        <h2 class="tb-h2">Compare at a glance</h2>
         <ListPageClient
           client:load
           listSlug={listSlug!}
@@ -248,7 +248,7 @@ const relatedPosts = Object.entries(POSTS)
       </section>
 
       <section id="sec-picks" class="mt-10 scroll-mt-28">
-        <h2 class="font-display text-2xl font-bold">All 10 picks</h2>
+        <h2 class="tb-h2">All 10 picks</h2>
         <div id="prods">
           {rows.map((p) => (
             <ProductCard product={p} list={list} />
@@ -295,7 +295,7 @@ const relatedPosts = Object.entries(POSTS)
       </section>
 
       <section id="sec-faq" class="mt-10 scroll-mt-28">
-        <h2 class="font-display text-2xl font-bold">FAQ</h2>
+        <h2 class="tb-h2">FAQ</h2>
         {
           list.faq.map((f) => (
             <details class="my-2 rounded-[var(--radius-sm)] border border-[var(--tb-line)]">
@@ -334,13 +334,13 @@ const relatedPosts = Object.entries(POSTS)
       </section>
 
       <section class="mt-10">
-        <h2 class="font-display text-2xl font-bold">Keep reading</h2>
+        <h2 class="tb-h2">Keep reading</h2>
         <div class="mt-3 grid gap-3 sm:grid-cols-3">
           {
             relatedPosts.map(([id, p]) => (
               <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
                 <span class="tb-pill">{p.type}</span>
-                <h3 class="m-0 font-display text-base font-bold">{p.h1}</h3>
+                <h3 class="m-0 tb-h3">{p.h1}</h3>
                 <span class="text-xs text-[var(--tb-muted)]">{p.time} read</span>
               </a>
             ))

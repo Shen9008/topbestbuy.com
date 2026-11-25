@@ -126,7 +126,7 @@ export default function AppChrome() {
         hidden={!drawerOpen}
       >
         <div class="mb-4 flex items-center justify-between gap-3">
-          <h2 class="m-0 font-display text-xl font-bold">My shortlist</h2>
+          <h2 class="m-0 tb-h3">My shortlist</h2>
           <button
             type="button"
             class="tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5"
