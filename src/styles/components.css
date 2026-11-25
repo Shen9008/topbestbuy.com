@@ -1,4 +1,29 @@
 @layer components {
+  /* Heading scale — PDF §4 (flat colour per §3; orange only via .tb-heading-accent). */
+  .tb-h1 {
+    @apply font-display text-[2.125rem] font-bold leading-[1.2] tracking-tight text-[var(--tb-heading)] sm:text-5xl;
+  }
+
+  .tb-h2 {
+    @apply font-display text-[1.625rem] font-bold leading-[1.2] text-[var(--tb-heading)] sm:text-[2rem];
+  }
+
+  .tb-h3 {
+    @apply font-display text-lg font-semibold leading-snug text-[var(--tb-heading)] sm:text-xl;
+  }
+
+  .tb-h4 {
+    @apply font-display text-sm font-bold leading-snug text-[var(--tb-heading)];
+  }
+
+  .tb-heading-muted {
+    color: var(--tb-heading-muted);
+  }
+
+  .tb-heading-accent {
+    color: var(--tb-heading-accent);
+  }
+
   .tb-card {
     @apply rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-5 shadow-[0_1px_0_rgb(0_0_0/0.2),0_16px_40px_-20px_rgb(0_0_0/0.45)];
     transition:
@@ -198,7 +223,15 @@
   }
 
   .tb-prose {
-    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+  }
+
+  .tb-prose h2 {
+    @apply tb-h2 mt-8;
+  }
+
+  .tb-prose h3 {
+    @apply tb-h3 mt-6;
   }
 
   .tb-tablewrap {
