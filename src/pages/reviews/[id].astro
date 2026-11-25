@@ -248,8 +248,8 @@ const fullName = productFullName(product);
                       <td>
                         {sources.length ? (
                           sources.map((s) => (
-                            <a href={s.url} class="block text-sm" rel="noopener noreferrer">
-                              {s.label}
+                            <a href={s.href} class="block text-sm" rel="noopener noreferrer">
+                              {s.title}
                             </a>
                           ))
                         ) : (
