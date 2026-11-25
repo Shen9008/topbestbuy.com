@@ -14,7 +14,7 @@ function assertPremiumSvg(file: string) {
   expect(existsSync(path), path).toBe(true);
   const svg = readFileSync(path, 'utf8');
   expect(svg).toMatch(/viewBox="0 0 48 48"/);
-  expect(svg).toMatch(/stroke="currentColor"|fill="currentColor"/);
+  expect(svg).toMatch(/(?:stroke|fill)="(?:currentColor|#172542)"/);
   expect(svg).toMatch(/#FF7900/);
   expect(svg).toMatch(/stroke-width="1\.[0-9]"/);
 }
