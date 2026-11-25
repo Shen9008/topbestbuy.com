@@ -1,0 +1,38 @@
+---
+import EditorialSection from './EditorialSection.astro';
+import SectionHeader from './SectionHeader.astro';
+import { homeTopBrands } from '../../lib/home-brands';
+
+const brands = homeTopBrands();
+---
+
+<EditorialSection band="alt" aria-labelledby="home-brands-heading">
+  <SectionHeader
+    titleId="home-brands-heading"
+    align="center"
+    eyebrow="Featured makers"
+    title={"Brands in today's top picks"}
+    description="The manufacturers behind our current number one in each list."
+  />
+  <div
+    class="tb-brand-logo-strip tb-reveal-stagger mt-8"
+    role="list"
+    aria-label="Brands featured in current top picks"
+  >
+    {
+      brands.map((brand) => (
+        <div class="tb-brand-logo-strip__item" role="listitem">
+          <img
+            src={brand.src}
+            alt={brand.name}
+            class="tb-brand-logo-strip__logo"
+            width="128"
+            height="36"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ))
+    }
+  </div>
+</EditorialSection>
