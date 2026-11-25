@@ -23,6 +23,12 @@ export default defineConfig({
         video: false,
       },
       filter: (page) => !page.includes('/dev/') && !page.endsWith('/404'),
+      serialize(item) {
+        return {
+          ...item,
+          lastmod: '2026-11-22',
+        };
+      },
     }),
   ],
 });

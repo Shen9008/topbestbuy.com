@@ -15,13 +15,17 @@ import { LISTS } from '../data/lists';
 import { listSlugs, topPick } from '../lib/catalog';
 import { productFullName } from '../lib/format';
 import { LIST_SLUG_ICONS } from '../icons';
+import { HOME, homePageJsonLd } from '../lib/seo';
 
 const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
 ---
 
 <BaseLayout
-  title="Top 10 best buys for Malaysia"
-  description="Ten picks, clear reasons, no hype. Scored Top 10 lists for appliances, home and lifestyle in Malaysia."
+  title={HOME.title}
+  description={HOME.description}
+  canonical="/"
+  ogImage="/images/editorial/home-hero-cutouts.webp"
+  jsonLd={homePageJsonLd()}
 >
   <section class="tb-hero tb-hero--hub tb-hero--has-media tb-reveal" aria-label="Introduction">
     <div>

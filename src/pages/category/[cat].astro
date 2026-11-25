@@ -11,6 +11,11 @@ import { LISTS } from '../../data/lists';
 import { POSTS } from '../../data/posts';
 import { productFullName } from '../../lib/format';
 import { SITE_DATE } from '../../data/meta';
+import {
+  breadcrumbListJsonLd,
+  categoryDocumentTitle,
+  categoryMetaDescription,
+} from '../../lib/seo';
 import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
 import { CATS } from '../../data/categories';
 
@@ -22,14 +27,20 @@ const { cat } = Astro.params;
 const category = getCategory(cat!);
 if (!category) throw new Error(`Unknown category ${cat}`);
 const catIcon = CATEGORY_ICONS[cat!] as IconMapKey | undefined;
+const crumbItems = [{ label: 'Top 10 lists', href: '/categories' }, { label: category.name }];
+const categorySchema = {
+  '@context': 'https://schema.org',
+  '@graph': [breadcrumbListJsonLd(crumbItems)],
+};
 ---
 
 <BaseLayout
-  title={`${category.name}: Top 10 lists`}
-  description={`Top 10 lists in ${category.name.toLowerCase()} for Malaysia.`}
+  title={categoryDocumentTitle(category.name)}
+  description={categoryMetaDescription(category.name, category.desc)}
   canonical={`/category/${cat}`}
+  jsonLd={categorySchema}
 >
-  <Breadcrumbs items={[{ label: 'Top 10 lists', href: '/categories' }, { label: category.name }]} />
+  <Breadcrumbs items={crumbItems} />
 
   <header class="mt-2 flex flex-wrap items-center gap-3">
     {catIcon ? (

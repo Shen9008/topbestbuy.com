@@ -1,9 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import { TRUST_META } from '../lib/seo';
 ---
 
-<BaseLayout title="About us" description="Why TopBestBuy exists: short, honest Top 10 lists for people in Malaysia." canonical="/about">
+<BaseLayout
+  title={TRUST_META.about.title}
+  description={TRUST_META.about.description}
+  canonical="/about"
+  ogImage="/images/inventory-refresh/about-hero.webp"
+>
   <Breadcrumbs items={[{ label: 'Trust', href: '/about' }, { label: 'About us' }]} />
   <h1 class="tb-h1">About us</h1>
   <article class="tb-prose mt-6">

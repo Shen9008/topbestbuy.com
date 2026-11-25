@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StubShell from '../components/pages/StubShell.astro';
+import { TRUST_META } from '../lib/seo';
 ---
 
-<BaseLayout title="Contact" description="Contact TopBestBuy (stub).">
+<BaseLayout
+  title={TRUST_META.contact.title}
+  description={TRUST_META.contact.description}
+  canonical="/contact"
+  noindex
+>
   <StubShell title="Contact" kicker="Trust" />
 </BaseLayout>

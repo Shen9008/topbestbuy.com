@@ -1,9 +1,12 @@
 ---
+import { clampMetaDescription, documentTitle } from '../../lib/seo';
+
 export interface Props {
   title: string;
   description?: string;
   canonical?: string;
   ogImage?: string;
+  ogType?: string;
   noindex?: boolean;
 }
 
@@ -12,6 +15,7 @@ const {
   description = 'TopBestBuy helps shoppers in Malaysia compare products with transparent scores and editorial guidance. Prices shown in MYR.',
   canonical,
   ogImage = '/og-default.png',
+  ogType = 'website',
   noindex = false,
 } = Astro.props;
 
@@ -19,7 +23,8 @@ const site = Astro.site ?? new URL('https://topbestbuy.online');
 const canonicalUrl = canonical
   ? new URL(canonical, site).href
   : new URL(Astro.url.pathname, site).href;
-const fullTitle = title.includes('TopBestBuy') ? title : `${title} · TopBestBuy`;
+const fullTitle = documentTitle(title);
+const metaDescription = clampMetaDescription(description);
 const ogImageUrl = new URL(ogImage, site).href;
 ---
 
@@ -33,18 +38,19 @@ const ogImageUrl = new URL(ogImage, site).href;
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 <title>{fullTitle}</title>
-<meta name="description" content={description} />
-{noindex && <meta name="robots" content="noindex" />}
+<meta name="description" content={metaDescription} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={canonicalUrl} />
 
 <meta property="og:site_name" content="TopBestBuy" />
 <meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={metaDescription} />
 <meta property="og:url" content={canonicalUrl} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:locale" content="en_MY" />
 <meta property="og:image" content={ogImageUrl} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImageUrl} />

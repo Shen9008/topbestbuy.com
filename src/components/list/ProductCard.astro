@@ -17,6 +17,7 @@ interface Props {
 
 const { product, list } = Astro.props;
 const sources = resolveSources(product.X.s);
+const fullName = productFullName(product);
 ---
 
 <article
@@ -174,8 +175,12 @@ const sources = resolveSources(product.X.s);
         <button type="button" class="tb-btn tb-btn-accent tb-btn-sm" data-aff-placeholder>
           Check price
         </button>
-        <a href={`/reviews/${product.id}`} class="tb-btn tb-btn-ghost tb-btn-sm">
-          Full review
+        <a
+          href={`/reviews/${product.id}`}
+          class="tb-btn tb-btn-ghost tb-btn-sm"
+          aria-label={`${fullName} review`}
+        >
+          {product.brand} review
         </a>
         <a href="/compare" class="tb-btn tb-btn-ghost tb-btn-sm inline-flex items-center gap-1.5">
           <Icon name="product.compare" size={16} />

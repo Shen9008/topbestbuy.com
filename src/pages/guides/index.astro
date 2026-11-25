@@ -4,6 +4,7 @@ import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import EditorialSection from '../../components/sections/EditorialSection.astro';
 import SectionHeader from '../../components/sections/SectionHeader.astro';
 import { POSTS } from '../../data/posts';
+import { breadcrumbListJsonLd } from '../../lib/seo';
 
 const entries = Object.entries(POSTS);
 const featuredIds = [
@@ -24,9 +25,13 @@ for (const [id, p] of entries) {
 ---
 
 <BaseLayout
-  title="Guides and explainers"
-  description="Plain-English buying guides, care tips and myth-busters from TopBestBuy."
+  title="Buying guides for Malaysia"
+  description="Plain-English guides from TopBestBuy: worth-it answers, how-tos and myth-busters tied to our scored Top 10 lists in Malaysia."
   canonical="/guides"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@graph': [breadcrumbListJsonLd([{ label: 'Guides' }])],
+  }}
 >
   <Breadcrumbs items={[{ label: 'Guides' }]} />
 
