@@ -2,9 +2,23 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import Icon from '../../components/ui/Icon.astro';
+import ToolVisual from '../../components/illustrations/ToolVisual.astro';
+import EditorialSection from '../../components/sections/EditorialSection.astro';
+import SectionHeader from '../../components/sections/SectionHeader.astro';
 import ToolsHub from '../../components/islands/ToolsHub';
+import type { ToolVisualId } from '../../lib/feature-visuals';
 
 const initialTool = Astro.url.searchParams.get('tool') ?? undefined;
+
+const quickTools: [ToolVisualId, string, string][] = [
+  ['finder', 'Product finder', 'Three questions, three picks.'],
+  ['vacuum', 'Vacuum chooser', 'Robot, cordless or corded.'],
+  ['cleanser', 'Cleanser matcher', 'Filter by skin type.'],
+  ['purifier', 'Purifier room size', 'CADR for your room.'],
+  ['airfryer', 'Air fryer size', 'Litres for your household.'],
+  ['cost', 'Running cost', 'kWh × your tariff.'],
+  ['mattress', 'Mattress firmness', 'Feel vs back support.'],
+];
 ---
 
 <BaseLayout
@@ -13,17 +27,55 @@ const initialTool = Astro.url.searchParams.get('tool') ?? undefined;
   canonical="/tools"
 >
   <Breadcrumbs items={[{ label: 'Tools' }]} />
-  <h1 class="tb-h1">Buying tools</h1>
-  <p class="max-w-[60ch] text-[var(--tb-muted)]">
-    Narrow the field in a minute. Estimates only: check the notes under each result.
-  </p>
-  <div class="mt-6">
-    <ToolsHub client:load initialTool={initialTool} />
-  </div>
-  <p class="mt-4 text-sm">
-    <a href="/compare" class="inline-flex min-h-11 items-center gap-2 font-semibold text-[var(--tb-accent)]">
-      <Icon name="tool.compare" size={20} strokeWidth={2} />
-      Compare products side by side
-    </a>
-  </p>
+
+  <header class="tb-hero tb-hero--hub tb-reveal" aria-label="Tools hub">
+    <div>
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Calculators</p>
+      <h1 class="tb-h1 mt-3 max-w-[14ch]">Buying tools</h1>
+      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+        Narrow the field in a minute. Estimates only — check the notes under each result.
+      </p>
+    </div>
+  </header>
+
+  <EditorialSection aria-labelledby="tools-quick-heading">
+    <SectionHeader
+      titleId="tools-quick-heading"
+      title="Pick a tool"
+      description="Tap a card or use the tabs below."
+      seeAllHref="/compare"
+      seeAllLabel="Compare products"
+    />
+    <div class="tb-scroll-strip tb-reveal-stagger mt-6 gap-3 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0">
+      {
+        quickTools.map(([tool, title, desc]) => (
+          <a
+            href={`/tools?tool=${tool}`}
+            class="tb-tile tb-utility-tile min-w-[min(100%,14rem)] shrink-0 lg:min-w-0"
+          >
+            <div class="tb-utility-tile__icon" aria-hidden="true">
+              <ToolVisual id={tool} size="md" />
+            </div>
+            <div>
+              <h2 class="m-0 font-display text-base font-bold">{title}</h2>
+              <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">{desc}</p>
+            </div>
+            <span class="tb-utility-tile__cta text-xs font-bold text-[var(--tb-accent)]">Open →</span>
+          </a>
+        ))
+      }
+    </div>
+  </EditorialSection>
+
+  <EditorialSection band="alt" aria-label="Interactive tools">
+    <div class="mt-2">
+      <ToolsHub client:load initialTool={initialTool} />
+    </div>
+    <p class="mt-6 text-sm">
+      <a href="/compare" class="inline-flex min-h-11 items-center gap-2 font-semibold text-[var(--tb-accent)]">
+        <Icon name="tool.compare" size={20} strokeWidth={2} />
+        Compare products side by side
+      </a>
+    </p>
+  </EditorialSection>
 </BaseLayout>

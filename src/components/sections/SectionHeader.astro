@@ -5,19 +5,40 @@ interface Props {
   description?: string;
   align?: 'left' | 'center';
   titleId?: string;
+  seeAllHref?: string;
+  seeAllLabel?: string;
   class?: string;
 }
 
-const { eyebrow, title, description, align = 'left', titleId, class: className = '' } = Astro.props;
+const {
+  eyebrow,
+  title,
+  description,
+  align = 'left',
+  titleId,
+  seeAllHref,
+  seeAllLabel = 'See all',
+  class: className = '',
+} = Astro.props;
 const alignClass = align === 'center' ? 'text-center mx-auto max-w-[40ch]' : 'max-w-[52ch]';
+const barClass = align === 'center' ? 'justify-center' : '';
 ---
 
-<header class:list={['tb-section__head', alignClass, className]}>
-  {eyebrow ? (
-    <p class="m-0 text-xs font-bold uppercase tracking-[0.14em] text-[var(--tb-muted)]">{eyebrow}</p>
-  ) : null}
-  <h2 id={titleId} class="m-0 mt-2 font-display text-2xl font-bold tracking-tight sm:text-[1.65rem]">
-    {title}
-  </h2>
-  {description ? <p class="m-0 mt-2 text-sm text-[var(--tb-muted)] sm:text-base">{description}</p> : null}
-</header>
+<div class:list={['tb-section__bar', barClass, className]}>
+  <header class:list={['tb-section__head', alignClass]}>
+    {eyebrow ? (
+      <p class="m-0 text-xs font-bold uppercase tracking-[0.14em] text-[var(--tb-muted)]">{eyebrow}</p>
+    ) : null}
+    <h2 id={titleId} class="m-0 mt-2 tb-h2">
+      {title}
+    </h2>
+    {description ? <p class="m-0 mt-2 text-sm text-[var(--tb-muted)] sm:text-base">{description}</p> : null}
+  </header>
+  {
+    seeAllHref ? (
+      <a href={seeAllHref} class="tb-section-link shrink-0">
+        {seeAllLabel}
+      </a>
+    ) : null
+  }
+</div>

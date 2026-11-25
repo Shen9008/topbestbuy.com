@@ -1,10 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Icon from '../components/ui/Icon.astro';
+import EditorialSection from '../components/sections/EditorialSection.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
 import SearchPage from '../components/islands/SearchPage';
 ---
 
-<BaseLayout title="Search" description="Search TopBestBuy lists, guides and tools.">
-  <h1 class="tb-h1">Search</h1>
-  <p class="text-[var(--tb-muted)]">Lists, guides, tools and methodology pages.</p>
-  <SearchPage client:load />
+<BaseLayout title="Search" description="Search TopBestBuy lists, guides and tools." canonical="/search">
+  <Breadcrumbs items={[{ label: 'Search' }]} />
+
+  <header class="tb-hero tb-hero--hub tb-reveal">
+    <div>
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Site-wide</p>
+      <h1 class="tb-h1 mt-3 max-w-[12ch]">Search</h1>
+      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+        Lists, guides, tools and methodology pages. Same index as ⌘K and <kbd class="rounded border border-[var(--tb-line)] px-1.5 py-0.5 text-xs font-bold">/</kbd> search.
+      </p>
+      <button
+        type="button"
+        class="tb-btn tb-btn-ghost mt-4 inline-flex min-h-11 items-center gap-2"
+        id="search-page-open-overlay"
+      >
+        <Icon name="nav.search" size={20} strokeWidth={2} />
+        Open quick search
+      </button>
+    </div>
+  </header>
+
+  <EditorialSection band="default" aria-labelledby="search-results-heading">
+    <SectionHeader
+      titleId="search-results-heading"
+      title="Results"
+      description="Dense feed — tap any row to open."
+      seeAllHref="/categories"
+      seeAllLabel="Browse lists"
+    />
+    <SearchPage client:load />
+  </EditorialSection>
+
+  <script is:inline>
+    document.getElementById('search-page-open-overlay')?.addEventListener('click', () => {
+      window.dispatchEvent(new Event('tb-open-search'));
+    });
+  </script>
 </BaseLayout>

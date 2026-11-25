@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import Icon from '../../components/ui/Icon.astro';
 import ListVisual from '../../components/ui/ListVisual.astro';
+import SectionHeader from '../../components/sections/SectionHeader.astro';
 import { hasListVisual } from '../../lib/list-visuals';
 import { CATEGORY_IDS } from '../../lib/routes';
 import { getCategory, RANKED } from '../../lib/catalog';
@@ -11,6 +12,7 @@ import { POSTS } from '../../data/posts';
 import { productFullName } from '../../lib/format';
 import { SITE_DATE } from '../../data/meta';
 import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
+import { CATS } from '../../data/categories';
 
 export function getStaticPaths() {
   return CATEGORY_IDS.map((cat) => ({ params: { cat } }));
@@ -28,65 +30,113 @@ const catIcon = CATEGORY_ICONS[cat!] as IconMapKey | undefined;
   canonical={`/category/${cat}`}
 >
   <Breadcrumbs items={[{ label: 'Top 10 lists', href: '/categories' }, { label: category.name }]} />
-  <div class="flex flex-wrap items-center gap-3">
+
+  <header class="mt-2 flex flex-wrap items-center gap-3">
     {catIcon ? (
       <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
         <Icon name={catIcon} size={32} />
       </span>
     ) : null}
-    <div>
+    <div class="min-w-0 flex-1">
       <h1 class="m-0 tb-h1">{category.name}</h1>
-      <p class="m-0 mt-1 text-[var(--tb-muted)]">{category.desc}</p>
+      <p class="m-0 mt-1 max-w-[52ch] text-[var(--tb-muted)]">{category.desc}</p>
     </div>
-  </div>
+  </header>
 
-  <h2 class="mt-8 tb-h2">Live lists</h2>
-  {
-    category.lists.length ? (
-      <div class="mt-4 grid gap-3 sm:grid-cols-2">
-        {category.lists.map((slug) => {
-          const L = LISTS[slug as keyof typeof LISTS];
-          const p = RANKED[slug]?.[0];
-          return (
-            <a href={`/${slug}`} class="tb-tile">
-              <div class="tb-tile__head">
-                {hasListVisual(slug) ? <ListVisual slug={slug} size="md" /> : null}
-                <h3 class="m-0 tb-h3">{L.h1}</h3>
-              </div>
-              {p && (
-                <span class="tb-tile__score text-sm">
-                  #1: {productFullName(p)}{' '}
-                  <span class="tb-num">({p.total.toFixed(1)}/100)</span>
-                </span>
-              )}
-              <span class="text-xs text-[var(--tb-muted)]">Updated {SITE_DATE}</span>
-            </a>
-          );
-        })}
-      </div>
-    ) : (
-      <div class="tb-callout">No live lists yet. Vote below to bring one forward.</div>
-    )
-  }
-
-  <h2 class="mt-8 tb-h2">Coming next</h2>
-  <div class="mt-3 flex flex-wrap gap-2">
-    {category.soon.map((s) => (
-      <a href="/coming-next" class="tb-chip">
-        {s}
-      </a>
-    ))}
-  </div>
-
-  <h2 class="mt-8 tb-h2">Related guides</h2>
-  <div class="mt-3 grid gap-3 sm:grid-cols-3">
-    {Object.entries(POSTS)
-      .slice(0, 3)
-      .map(([id, p]) => (
-        <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
-          <span class="tb-pill">{p.type}</span>
-          <h3 class="m-0 text-base font-bold">{p.h1}</h3>
+  <div class="tb-editorial-layout mt-8">
+    <aside class="tb-editorial-sidebar">
+      <div class="tb-editorial-sidebar__sticky">
+        <p class="tb-h4 m-0">Categories</p>
+        <nav class="mt-3 text-sm" aria-label="All categories">
+          <ul class="m-0 list-none space-y-1 p-0">
+            {
+              CATS.filter((c) => c.lists.length).map((c) => (
+                <li>
+                  <a
+                    href={`/category/${c.id}`}
+                    class:list={[
+                      'block min-h-10 rounded-[var(--radius-sm)] px-2 py-2 font-semibold no-underline',
+                      c.id === cat
+                        ? 'bg-[var(--tb-surface-raised)] text-[var(--tb-accent)]'
+                        : 'text-[var(--tb-muted)] hover:text-[var(--tb-ink)]',
+                    ]}
+                    aria-current={c.id === cat ? 'page' : undefined}
+                  >
+                    {c.name}
+                    <span class="text-xs font-normal text-[var(--tb-muted)]"> ({c.lists.length})</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <a href="/categories" class="tb-section-link mt-4 justify-start px-0">
+          All lists index
         </a>
-      ))}
+      </div>
+    </aside>
+
+    <div class="tb-editorial-main min-w-0 space-y-10">
+      <section aria-labelledby="cat-live-heading">
+        <SectionHeader titleId="cat-live-heading" title="Live lists" seeAllHref="/categories" seeAllLabel="Index" />
+        {
+          category.lists.length ? (
+            <div class="mt-4 grid gap-3 sm:grid-cols-2">
+              {category.lists.map((slug) => {
+                const L = LISTS[slug as keyof typeof LISTS];
+                const p = RANKED[slug]?.[0];
+                return (
+                  <a href={`/${slug}`} class="tb-tile">
+                    <div class="tb-tile__head">
+                      {hasListVisual(slug) ? <ListVisual slug={slug} size="md" /> : null}
+                      <h3 class="m-0 tb-h3">{L.h1}</h3>
+                    </div>
+                    {p && (
+                      <span class="tb-tile__score text-sm">
+                        #1: {productFullName(p)}{' '}
+                        <span class="tb-num">({p.total.toFixed(1)}/100)</span>
+                      </span>
+                    )}
+                    <span class="text-xs text-[var(--tb-muted)]">Updated {SITE_DATE}</span>
+                  </a>
+                );
+              })}
+            </div>
+          ) : (
+            <div class="tb-callout">No live lists yet. Vote below to bring one forward.</div>
+          )
+        }
+      </section>
+
+      <section aria-labelledby="cat-soon-heading">
+        <SectionHeader titleId="cat-soon-heading" title="Coming next" seeAllHref="/coming-next" seeAllLabel="Vote" />
+        <div class="tb-scroll-strip mt-3">
+          {category.soon.map((s) => (
+            <a href="/coming-next" class="tb-chip shrink-0">
+              {s}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="cat-guides-heading">
+        <SectionHeader
+          titleId="cat-guides-heading"
+          title="Related guides"
+          seeAllHref="/guides"
+          seeAllLabel="See all guides"
+        />
+        <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {Object.entries(POSTS)
+            .slice(0, 3)
+            .map(([id, p]) => (
+              <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
+                <span class="tb-pill">{p.type}</span>
+                <h3 class="m-0 text-base font-bold">{p.h1}</h3>
+              </a>
+            ))}
+        </div>
+      </section>
+    </div>
   </div>
 </BaseLayout>

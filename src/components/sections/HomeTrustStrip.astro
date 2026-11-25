@@ -10,7 +10,8 @@ const items: { visual: TrustVisualId; label: string; href: string }[] = [
 ];
 ---
 
-<section class="tb-trust-strip" aria-label="Editorial independence">
+<section class="tb-band tb-band--alt tb-trust-strip border-y-0 py-10" aria-label="Editorial independence">
+  <div class="tb-section__inner">
   <div class="tb-trust-strip__grid tb-reveal-stagger">
     {
       items.map((item) => (
@@ -22,5 +23,6 @@ const items: { visual: TrustVisualId; label: string; href: string }[] = [
         </a>
       ))
     }
+  </div>
   </div>
 </section>

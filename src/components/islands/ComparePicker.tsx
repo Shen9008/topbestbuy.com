@@ -44,7 +44,7 @@ export default function ComparePicker({ initialIds }: { initialIds?: string[] })
             Product {i + 1}
             {i === 2 ? ' (optional)' : ''}
             <select
-              class="mt-1 w-full min-h-10 rounded-lg border border-[var(--tb-line)] bg-[var(--tb-bg)] px-2"
+              class="mt-1 w-full min-h-11 rounded-lg border border-[var(--tb-line)] bg-[var(--tb-bg)] px-3"
               value={ids[i]}
               onChange={(e) => {
                 const v = (e.target as HTMLSelectElement).value;

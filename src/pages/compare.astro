@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import Icon from '../components/ui/Icon.astro';
+import EditorialSection from '../components/sections/EditorialSection.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
 import ComparePicker from '../components/islands/ComparePicker';
 ---
 
@@ -10,11 +13,36 @@ import ComparePicker from '../components/islands/ComparePicker';
   canonical="/compare"
 >
   <Breadcrumbs items={[{ label: 'Tools', href: '/tools' }, { label: 'Compare' }]} />
-  <h1 class="tb-h1">Compare products</h1>
-  <p class="max-w-[60ch] text-[var(--tb-muted)]">
-    Pick up to three. Use products from the same list for the clearest comparison.
-  </p>
-  <div class="mt-6">
-    <ComparePicker client:load />
-  </div>
+
+  <header class="tb-hero tb-hero--hub tb-reveal" aria-label="Compare">
+    <div>
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Scorecard</p>
+      <h1 class="tb-h1 mt-3 max-w-[16ch]">Compare products</h1>
+      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+        Pick up to three. Use products from the same list for the clearest comparison.
+      </p>
+    </div>
+  </header>
+
+  <EditorialSection band="default" aria-labelledby="compare-picker-heading">
+    <SectionHeader
+      titleId="compare-picker-heading"
+      title="Side by side"
+      description="Same scorecard fields as every Top 10 list."
+      seeAllHref="/saved"
+      seeAllLabel="My shortlist"
+    />
+    <div class="tb-card tb-card--editorial mt-6 p-4 sm:p-6">
+      <ComparePicker client:load />
+    </div>
+  </EditorialSection>
+
+  <EditorialSection class="!pb-8">
+    <p class="m-0 text-sm text-[var(--tb-muted)]">
+      <a href="/tools?tool=finder" class="inline-flex min-h-11 items-center gap-2 font-semibold text-[var(--tb-accent)]">
+        <Icon name="tool.finder" size={20} strokeWidth={2} />
+        Not sure what to compare? Try the product finder
+      </a>
+    </p>
+  </EditorialSection>
 </BaseLayout>

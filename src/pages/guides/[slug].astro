@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import SectionHeader from '../../components/sections/SectionHeader.astro';
 import { POSTS } from '../../data/posts';
 import { LISTS } from '../../data/lists';
 import { SITE_DATE } from '../../data/meta';
@@ -14,45 +15,99 @@ export function getStaticPaths() {
 
 const { postId } = Astro.props;
 const post = POSTS[postId as keyof typeof POSTS];
+const otherGuides = Object.entries(POSTS)
+  .filter(([id]) => id !== postId)
+  .slice(0, 4);
 ---
 
 <BaseLayout title={post.title} description={post.meta} canonical={`/guides/${Astro.params.slug}`}>
   <Breadcrumbs items={[{ label: 'Guides', href: '/guides' }, { label: post.type }]} />
-  <span class="tb-pill">{post.type}</span>
-  <h1 class="mt-2 tb-h1">{post.h1}</h1>
-  <p class="text-sm text-[var(--tb-muted)]">
-    By <strong>[Editor name]</strong> · Updated {SITE_DATE} · {post.time} read ·
-    <span class="tb-pill tb-pill-sample">Sample article</span>
-  </p>
-  <div class="tb-disclosure">
+
+  <header class="mt-2 max-w-[var(--prose-max)]">
+    <span class="tb-pill">{post.type}</span>
+    <h1 class="mt-2 tb-h1">{post.h1}</h1>
+    <p class="text-sm text-[var(--tb-muted)]">
+      By <strong class="text-[var(--tb-ink)]">[Editor name]</strong> · Updated {SITE_DATE} · {post.time} read ·
+      <span class="tb-pill tb-pill-sample">Sample article</span>
+    </p>
+  </header>
+
+  <div class="tb-disclosure max-w-[var(--prose-max)]">
     <strong>How we make money:</strong> we may earn a commission from links on this page. This
     never affects our rankings. <a href="/how-we-rank">How we rank</a>
   </div>
-  <div class="tb-callout border-2 border-[var(--tb-ink)]">
-    <strong>Short answer</strong>
-    <p class="m-0 mt-2">{post.tldr}</p>
-  </div>
-  <article class="tb-prose mt-6" set:html={post.body} />
-  <section class="mt-8">
-    <h2 class="tb-h3">Keep reading</h2>
-    <div class="mt-3 flex flex-wrap gap-2">
-      {
-        post.related.map((r) =>
-          LISTS[r as keyof typeof LISTS] ? (
-            <a href={`/${r}`} class="tb-btn tb-btn-ghost tb-btn-sm">
-              {LISTS[r as keyof typeof LISTS].short}: Top 10
-            </a>
-          ) : POSTS[r as keyof typeof POSTS] ? (
-            <a href={`/guides/${r.replace(/^blog-/, '')}`} class="tb-btn tb-btn-ghost tb-btn-sm">
-              {POSTS[r as keyof typeof POSTS].h1}
-            </a>
-          ) : (
-            <a href="/how-we-rank" class="tb-btn tb-btn-ghost tb-btn-sm">
-              How we rank
-            </a>
-          ),
-        )
-      }
+
+  <nav class="tb-sticky-subnav" aria-label="Jump to section">
+    <div class="tb-jumpbar mx-auto max-w-[var(--content-max)]">
+      <a href="#guide-tldr" class="shrink-0 snap-start">Short answer</a>
+      <a href="#guide-body" class="shrink-0 snap-start">Article</a>
+      <a href="#guide-more" class="shrink-0 snap-start">Keep reading</a>
     </div>
-  </section>
+  </nav>
+
+  <div class="tb-editorial-layout">
+    <aside class="tb-editorial-sidebar" aria-label="Guide index">
+      <div class="tb-editorial-sidebar__sticky">
+        <p class="tb-h4 m-0">More guides</p>
+        <nav class="mt-3 text-sm" aria-label="Other guides">
+          <ul class="m-0 list-none space-y-1 p-0">
+            {
+              otherGuides.map(([id, p]) => (
+                <li>
+                  <a
+                    href={`/guides/${id.replace(/^blog-/, '')}`}
+                    class="block min-h-10 rounded-[var(--radius-sm)] px-2 py-2 font-semibold text-[var(--tb-muted)] no-underline hover:text-[var(--tb-ink)]"
+                  >
+                    {p.h1}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <a href="/guides" class="tb-section-link mt-4 justify-start px-0">
+          All guides
+        </a>
+        <a href="/tools?tool=finder" class="tb-section-link mt-2 justify-start px-0">
+          Product finder
+        </a>
+      </div>
+    </aside>
+
+    <div class="tb-editorial-main min-w-0">
+      <section id="guide-tldr" class="scroll-mt-28">
+        <div class="tb-callout tb-card--editorial border-2 border-[var(--tb-ink)]">
+          <strong>Short answer</strong>
+          <p class="m-0 mt-2">{post.tldr}</p>
+        </div>
+      </section>
+
+      <section id="guide-body" class="scroll-mt-28">
+        <article class="tb-prose mt-6" set:html={post.body} />
+      </section>
+
+      <section id="guide-more" class="scroll-mt-28 mt-10">
+        <SectionHeader title="Keep reading" seeAllHref="/guides" seeAllLabel="See all guides" />
+        <div class="tb-scroll-strip mt-4 gap-2">
+          {
+            post.related.map((r) =>
+              LISTS[r as keyof typeof LISTS] ? (
+                <a href={`/${r}`} class="tb-chip shrink-0">
+                  {LISTS[r as keyof typeof LISTS].short}: Top 10
+                </a>
+              ) : POSTS[r as keyof typeof POSTS] ? (
+                <a href={`/guides/${r.replace(/^blog-/, '')}`} class="tb-chip shrink-0">
+                  {POSTS[r as keyof typeof POSTS].h1}
+                </a>
+              ) : (
+                <a href="/how-we-rank" class="tb-chip shrink-0">
+                  How we rank
+                </a>
+              ),
+            )
+          }
+        </div>
+      </section>
+    </div>
+  </div>
 </BaseLayout>

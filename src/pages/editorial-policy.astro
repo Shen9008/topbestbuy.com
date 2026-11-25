@@ -1,8 +1,98 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import EditorialSection from '../components/sections/EditorialSection.astro';
+
+const trustLinks = [
+  { href: '/how-we-rank', label: 'How we rank' },
+  { href: '/editorial-policy', label: 'Editorial policy' },
+  { href: '/affiliate-disclosure', label: 'How we make money' },
+  { href: '/corrections', label: 'Corrections' },
+  { href: '/about', label: 'About us' },
+];
 ---
 
-<BaseLayout title="Editorial policy" description="How TopBestBuy edits and updates lists (stub).">
-  <StubShell title="Editorial policy" kicker="Trust" />
+<BaseLayout
+  title="Editorial policy"
+  description="How TopBestBuy keeps rankings independent: no paid placement in scores, clear labelling and a corrections process."
+  canonical="/editorial-policy"
+>
+  <Breadcrumbs items={[{ label: 'Trust', href: '/about' }, { label: 'Editorial policy' }]} />
+
+  <header class="tb-hero tb-hero--hub tb-reveal" aria-label="Editorial policy">
+    <div>
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Trust</p>
+      <h1 class="tb-h1 mt-3 max-w-[18ch]">Editorial policy</h1>
+      <p class="mt-4 max-w-[48ch] text-lg text-[var(--tb-muted)]">
+        How we keep rankings independent: no paid placement in scores, clear labelling and a public
+        corrections process.
+      </p>
+    </div>
+  </header>
+
+  <div class="tb-editorial-layout mt-4">
+    <aside class="tb-editorial-sidebar" aria-label="Trust pages">
+      <div class="tb-editorial-sidebar__sticky">
+        <p class="tb-h4 m-0">Trust centre</p>
+        <nav class="mt-3 text-sm" aria-label="Related trust pages">
+          <ul class="m-0 list-none space-y-1 p-0">
+            {
+              trustLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class:list={[
+                      'block min-h-10 rounded-[var(--radius-sm)] px-2 py-2 font-semibold no-underline',
+                      link.href === '/editorial-policy'
+                        ? 'bg-[var(--tb-surface-raised)] text-[var(--tb-accent)]'
+                        : 'text-[var(--tb-muted)] hover:text-[var(--tb-ink)]',
+                    ]}
+                    aria-current={link.href === '/editorial-policy' ? 'page' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="tb-editorial-main min-w-0">
+      <EditorialSection band="default" class="!py-8">
+        <article class="tb-prose max-w-[var(--prose-max)]">
+          <h2>Independence</h2>
+          <p>
+            Editorial staff set scores. Commercial staff never see or change them. Scores are locked before
+            any affiliate data is reviewed.
+          </p>
+          <h2>Sponsored content</h2>
+          <p>
+            Sponsored placements are clearly labelled, sit outside the ranked list, and never alter a score
+            or position.
+          </p>
+          <h2>Sources</h2>
+          <p>
+            We cite independent experts, verified owner reviews and official specs. We do not copy text or
+            images from other publishers.
+          </p>
+          <h2>AI assistance</h2>
+          <p>
+            We may use AI tools to help gather and draft. A named human editor checks every claim, score and
+            price before publication and is accountable for it.
+          </p>
+          <h2>Corrections</h2>
+          <p>
+            If we get something wrong we fix it, add a note and log it on the <a href="/corrections">corrections page</a>.
+            Tell us via <a href="/contact">Contact</a>.
+          </p>
+          <h2>Refresh</h2>
+          <p>
+            Lists carry an updated date and follow the schedule on <a href="/how-we-rank">How we rank</a>.
+          </p>
+        </article>
+      </EditorialSection>
+    </div>
+  </div>
 </BaseLayout>

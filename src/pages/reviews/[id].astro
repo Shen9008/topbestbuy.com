@@ -2,12 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import ImageSlot from '../../components/media/ImageSlot.astro';
+import SectionHeader from '../../components/sections/SectionHeader.astro';
 import SaveButton from '../../components/islands/SaveButton';
-import { allProductsMap, getList, RANKED } from '../../lib/catalog';
+import { allProductsMap, getList, getCategory, RANKED } from '../../lib/catalog';
 import { CRIT } from '../../data/scorecard';
 import { SITE_DATE } from '../../data/meta';
 import { formatRM, productFullName } from '../../lib/format';
 import { usageScoresForProduct } from '../../lib/list-extra';
+import { resolveSources } from '../../lib/sources';
 
 export function getStaticPaths() {
   return Object.keys(allProductsMap()).map((id) => ({ params: { id } }));
@@ -18,135 +20,286 @@ const { id } = Astro.params;
 const product = catalog[id!];
 if (!product) throw new Error(`Unknown product ${id}`);
 const list = getList(product.list);
+const category = getCategory(list.cat);
 const peers = RANKED[product.list] ?? [];
 const usageRows = usageScoresForProduct(product.subs, list.usages);
+const sources = resolveSources(product.X.s);
+const fullName = productFullName(product);
 ---
 
 <BaseLayout
-  title={`${productFullName(product)} review`}
-  description={`${productFullName(product)} scored ${product.total.toFixed(1)}/100 on our scorecard with usage scores, specs and trade-offs.`}
+  title={`${fullName} review`}
+  description={`${fullName} scored ${product.total.toFixed(1)}/100 on our scorecard with usage scores, specs and trade-offs.`}
   canonical={`/reviews/${id}`}
 >
   <Breadcrumbs
     items={[
       { label: 'Top 10 lists', href: '/categories' },
+      { label: category?.name ?? list.cat, href: `/category/${list.cat}` },
       { label: list.short, href: `/${product.list}` },
-      { label: `${productFullName(product)} review` },
+      { label: 'Review' },
     ]}
   />
 
-  <h1 class="tb-h1">
-    {productFullName(product)} review: scores and what the evidence says
-  </h1>
+  <header class="tb-hero tb-hero--hub mt-2" aria-label="Review">
+    <div class="min-w-0">
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">
+        {list.short} · #{product.rank} of 10
+      </p>
+      <h1 class="tb-h1 mt-3">{fullName}</h1>
+      <p class="mt-3 text-lg text-[var(--tb-muted)]">
+        Scores and what the evidence says — same scorecard as <a href={`/${product.list}`}>{list.short}</a>.
+      </p>
+      <p class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--tb-muted)]">
+        <span>Scorecard v1.0</span>
+        <span>Evidence checked {SITE_DATE}</span>
+        <span class="tb-pill tb-pill-sample">Prices as reported</span>
+      </p>
+    </div>
+    <div class="mt-6 lg:mt-0">
+      <ImageSlot slotId={`review-${id}`} aspect="banner" label={`${fullName} hero`} />
+    </div>
+  </header>
 
-  <p class="text-sm text-[var(--tb-muted)]">
-    Scorecard v1.0 · Evidence checked {SITE_DATE} ·
-    <span class="tb-pill tb-pill-sample">Prices as reported</span>
-  </p>
-
-  <ImageSlot slotId={`review-${id}`} aspect="banner" label={`${productFullName(product)} hero`} />
-
-  <div class="tb-disclosure">
+  <div class="tb-disclosure max-w-[var(--prose-max)]">
     <strong>We did not test this product ourselves.</strong> Scores reflect our reading of expert
-    reviews, owner reviews and official specs. <a href="/how-we-rank">How we rank</a>.
+    reviews, owner reviews and official specs. <a href="/how-we-rank">How we rank</a>. We may earn a
+    commission from links on this page.
   </div>
 
-  <div class="mt-6 grid gap-4 lg:grid-cols-2">
-    <div class="tb-card">
-      <p class="text-xs font-bold uppercase text-[var(--tb-muted)]">Verdict</p>
-      <p class="tb-score text-4xl">
-        {product.total.toFixed(1)}
-        <span class="text-base font-normal text-[var(--tb-muted)]"> / 100</span>
-      </p>
-      <p class="text-sm">
-        Ranked <strong>#{product.rank} of 10</strong> in <a href={`/${product.list}`}>{list.h1.split(':')[0]}</a>.
-        {product.tag}. Best for: {product.best.toLowerCase()}.
-      </p>
-      <p class="tb-score text-xl">{formatRM(product.price)}</p>
-      <p class="text-sm">
-        <strong>After-sales and warranty:</strong> {product.X.a ?? 'Not verified'}
-      </p>
-      <div class="mt-3 flex flex-wrap gap-2">
-        <button type="button" class="tb-btn tb-btn-sm">See price at retailer</button>
-        <SaveButton client:idle productId={product.id} />
-      </div>
+  <nav class="tb-sticky-subnav" aria-label="Jump to section">
+    <div class="tb-jumpbar mx-auto max-w-[var(--content-max)]">
+      <a href="#review-verdict" class="shrink-0 snap-start">Verdict</a>
+      <a href="#review-scorecard" class="shrink-0 snap-start">Scorecard</a>
+      <a href="#review-usage" class="shrink-0 snap-start">Usage</a>
+      <a href="#review-evidence" class="shrink-0 snap-start">Evidence</a>
+      <a href="#review-alternatives" class="shrink-0 snap-start">Alternatives</a>
     </div>
-    <div class="tb-card">
-      <h2 class="mt-0 text-lg font-bold">Scorecard</h2>
-      <div class="tb-tablewrap">
-        <table class="tb-table">
-          <thead>
-            <tr>
-              <th>Criterion</th>
-              <th>Weight</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
+  </nav>
+
+  <div class="tb-editorial-layout">
+    <aside class="tb-editorial-sidebar" aria-label="Review navigation">
+      <div class="tb-editorial-sidebar__sticky">
+        <p class="tb-h4 m-0">On this list</p>
+        <a
+          href={`/${product.list}`}
+          class="mt-2 block text-sm font-bold text-[var(--tb-accent)] no-underline hover:text-[var(--tb-ink)]"
+        >
+          {list.h1.split(':')[0]}
+        </a>
+        <nav class="mt-3 text-sm" aria-label="Ranked picks">
+          <ul class="m-0 list-none space-y-1 p-0">
             {
-              CRIT.map((c, i) => (
-                <tr>
-                  <td>{c[1]}</td>
-                  <td class="tb-num">{c[2]}%</td>
-                  <td class="tb-num">{product.subs[i]}/5</td>
-                </tr>
+              peers.slice(0, 5).map((p) => (
+                <li>
+                  <a
+                    href={`/reviews/${p.id}`}
+                    class:list={[
+                      'block min-h-10 rounded-[var(--radius-sm)] px-2 py-2 font-semibold no-underline',
+                      p.id === product.id
+                        ? 'bg-[var(--tb-surface-raised)] text-[var(--tb-accent)]'
+                        : 'text-[var(--tb-muted)] hover:text-[var(--tb-ink)]',
+                    ]}
+                    aria-current={p.id === product.id ? 'page' : undefined}
+                  >
+                    <span class="tb-num text-xs">#{p.rank}</span> {productFullName(p)}
+                  </a>
+                </li>
               ))
             }
-          </tbody>
-        </table>
+          </ul>
+        </nav>
+        <a href="/compare" class="tb-section-link mt-4 justify-start px-0">
+          Compare products
+        </a>
+        <a href="/tools?tool=finder" class="tb-section-link mt-2 justify-start px-0">
+          Product finder
+        </a>
       </div>
+    </aside>
+
+    <div class="tb-editorial-main min-w-0 space-y-10">
+      <section id="review-verdict" class="scroll-mt-28">
+        <div class="tb-card tb-card--editorial">
+          <p class="text-xs font-bold uppercase text-[var(--tb-muted)]">Verdict</p>
+          <p class="tb-score text-4xl">
+            {product.total.toFixed(1)}
+            <span class="text-base font-normal text-[var(--tb-muted)]"> / 100</span>
+          </p>
+          <p class="text-sm">
+            Ranked <strong>#{product.rank} of 10</strong> in <a href={`/${product.list}`}>{list.h1.split(':')[0]}</a>.
+            {product.tag}. Best for: {product.best.toLowerCase()}.
+          </p>
+          {product.X.b && <p class="text-sm">{product.X.b}</p>}
+          <p class="tb-score text-xl">{formatRM(product.price)}</p>
+          <p class="text-sm text-[var(--tb-muted)]">{product.X.p ?? `as of ${SITE_DATE}`}</p>
+          <p class="text-sm">
+            <strong>After-sales and warranty:</strong> {product.X.a ?? 'Not verified'}
+          </p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <button type="button" class="tb-btn tb-btn-sm min-h-11">See price at retailer</button>
+            <SaveButton client:idle productId={product.id} />
+          </div>
+        </div>
+      </section>
+
+      <section id="review-scorecard" class="scroll-mt-28">
+        <SectionHeader title="Scorecard" description="Seven criteria, same weights on every list." />
+        <div class="tb-card tb-card--editorial mt-4">
+          <div class="tb-tablewrap">
+            <table class="tb-table">
+              <thead>
+                <tr>
+                  <th scope="col">Criterion</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  CRIT.map((c, i) => (
+                    <tr>
+                      <td>{c[1]}</td>
+                      <td class="tb-num">{c[2]}%</td>
+                      <td class="tb-num">{product.subs[i]}/5</td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-usage" class="scroll-mt-28">
+        <SectionHeader title="Usage and trade-offs" seeAllHref="/how-we-rank" seeAllLabel="Weights" />
+        <div class="mt-4 grid gap-4 lg:grid-cols-2">
+          <div class="tb-card tb-card--editorial">
+            <h3 class="mt-0 text-lg font-bold">Usage scores</h3>
+            <div class="tb-tablewrap">
+              <table class="tb-table">
+                <tbody>
+                  {usageRows.map((row) => (
+                    <tr>
+                      <th scope="row">{row.label}</th>
+                      <td class="tb-num">
+                        <strong>{row.score.toFixed(1)}</strong>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="mb-0 mt-2 text-xs text-[var(--tb-muted)]">
+              Same criteria, re-weighted for each use. See <a href="/how-we-rank">How we rank</a>.
+            </p>
+          </div>
+          <div class="tb-card tb-card--editorial">
+            <h3 class="mt-0 text-lg font-bold">Pros and trade-offs</h3>
+            <h4 class="text-sm font-bold text-[var(--color-good)]">Pros</h4>
+            <ul class="tb-pros text-sm">{product.pros.map((x) => <li>{x}</li>)}</ul>
+            <h4 class="text-sm font-bold text-[var(--tb-accent)]">Trade-offs</h4>
+            <ul class="tb-cons text-sm">{product.cons.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="scroll-mt-28">
+        <div class="tb-prose">
+          <h2>What experts agree on</h2>
+          <p>
+            [Summarise what two or more independent expert reviews say, naming each source and
+            linking to it. Do not copy their text.]
+          </p>
+          <h2>What owners report</h2>
+          <p>
+            [Summarise recurring themes from verified-purchase reviews on named retailers, with the
+            date and number of reviews you read.]
+          </p>
+          <h2>Who should skip it</h2>
+          <p>Be explicit. For this product: {product.cons[0]?.toLowerCase() ?? 'see trade-offs above'}.</p>
+        </div>
+      </section>
+
+      <section id="review-evidence" class="scroll-mt-28">
+        <SectionHeader title="Evidence sheet" description="Specs and prices with sources and dates." />
+        <div class="tb-card tb-card--editorial mt-4">
+          <div class="tb-tablewrap">
+            <table class="tb-table">
+              <thead>
+                <tr>
+                  <th scope="col">Field</th>
+                  <th scope="col">Value</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Checked</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  list.specCols.map((col, i) => (
+                    <tr>
+                      <th scope="row">{col.replace('*', '')}</th>
+                      <td>{product.specs[i] ?? 'n/a'}</td>
+                      <td>
+                        {sources.length ? (
+                          sources.map((s) => (
+                            <a href={s.url} class="block text-sm" rel="noopener noreferrer">
+                              {s.label}
+                            </a>
+                          ))
+                        ) : (
+                          <span class="text-[var(--tb-muted)]">[Source URL]</span>
+                        )}
+                      </td>
+                      <td class="tb-num text-sm">{SITE_DATE}</td>
+                    </tr>
+                  ))
+                }
+                <tr>
+                  <th scope="row">Price</th>
+                  <td class="tb-num">{formatRM(product.price)}</td>
+                  <td class="text-sm text-[var(--tb-muted)]">[Retailer URL]</td>
+                  <td class="tb-num text-sm">{SITE_DATE}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Warranty</th>
+                  <td>{product.X.a ?? 'Not verified'}</td>
+                  <td class="text-sm text-[var(--tb-muted)]">[Warranty page]</td>
+                  <td class="tb-num text-sm">{SITE_DATE}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-alternatives" class="scroll-mt-28">
+        <SectionHeader
+          title="Alternatives"
+          seeAllHref={`/${product.list}`}
+          seeAllLabel="Full Top 10"
+        />
+        <div class="mt-4 grid gap-3 sm:grid-cols-3">
+          {
+            peers
+              .filter((x) => x.id !== product.id)
+              .slice(0, 3)
+              .map((x) => (
+                <a href={`/reviews/${x.id}`} class="tb-tile tb-card--editorial">
+                  <strong>{productFullName(x)}</strong>
+                  <span>{x.tag}</span>
+                  <span class="tb-num">
+                    {x.total.toFixed(1)}/100 · {formatRM(x.price)}
+                  </span>
+                </a>
+              ))
+          }
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a href="/compare" class="tb-btn tb-btn-ghost tb-btn-sm min-h-11">Compare with others</a>
+          <a href={`/${product.list}`} class="tb-btn tb-btn-ghost tb-btn-sm min-h-11">Back to the Top 10</a>
+        </div>
+      </section>
     </div>
   </div>
-
-  <div class="mt-6 grid gap-4 lg:grid-cols-2">
-    <h2 class="sr-only">Usage and trade-offs</h2>
-    <div class="tb-card">
-      <h3 class="mt-0 text-lg font-bold">Usage scores</h3>
-      <div class="tb-tablewrap">
-        <table class="tb-table">
-          <tbody>
-            {usageRows.map((row) => (
-              <tr>
-                <th scope="row">{row.label}</th>
-                <td class="tb-num">
-                  <strong>{row.score.toFixed(1)}</strong>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="tb-card">
-      <h3 class="mt-0 text-lg font-bold">Pros and trade-offs</h3>
-      <h4 class="text-sm font-bold text-[var(--color-good)]">Pros</h4>
-      <ul class="tb-pros text-sm">{product.pros.map((x) => <li>{x}</li>)}</ul>
-      <h4 class="text-sm font-bold text-[var(--tb-accent)]">Trade-offs</h4>
-      <ul class="tb-cons text-sm">{product.cons.map((x) => <li>{x}</li>)}</ul>
-    </div>
-  </div>
-
-  <section class="mt-8">
-    <h2 class="tb-h2">Alternatives</h2>
-    <div class="mt-3 grid gap-3 sm:grid-cols-3">
-      {
-        peers
-          .filter((x) => x.id !== product.id)
-          .slice(0, 3)
-          .map((x) => (
-            <a href={`/reviews/${x.id}`} class="tb-tile">
-              <strong>{productFullName(x)}</strong>
-              <span>{x.tag}</span>
-              <span class="tb-num">
-                {x.total.toFixed(1)}/100 · {formatRM(x.price)}
-              </span>
-            </a>
-          ))
-      }
-    </div>
-    <div class="mt-4 flex flex-wrap gap-2">
-      <a href="/compare" class="tb-btn tb-btn-ghost tb-btn-sm">Compare with others</a>
-      <a href={`/${product.list}`} class="tb-btn tb-btn-ghost tb-btn-sm">Back to the Top 10</a>
-    </div>
-  </section>
 </BaseLayout>

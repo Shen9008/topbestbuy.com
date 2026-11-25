@@ -31,7 +31,7 @@ export default function ToolsHub({ initialTool }: { initialTool?: string }) {
 
   return (
     <div>
-      <div class="mb-4 flex flex-wrap gap-2" role="tablist" aria-label="Tools">
+      <div class="tb-scroll-strip mb-4 gap-2 pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0" role="tablist" aria-label="Tools">
         {TABS.map(([id, label]) => {
           const icon = TOOL_TAB_ICONS[id] as IconMapKey | undefined;
           return (
@@ -40,7 +40,7 @@ export default function ToolsHub({ initialTool }: { initialTool?: string }) {
               type="button"
               role="tab"
               aria-selected={tab === id}
-              class={`tb-chip inline-flex min-h-11 items-center gap-1.5 ${tab === id ? 'tb-chip-on' : ''}`}
+              class={`tb-chip inline-flex min-h-11 shrink-0 items-center gap-1.5 ${tab === id ? 'tb-chip-on' : ''}`}
               onClick={() => setTab(id)}
             >
               {icon ? <Icon name={icon} size={16} strokeWidth={2} /> : null}
@@ -49,7 +49,7 @@ export default function ToolsHub({ initialTool }: { initialTool?: string }) {
           );
         })}
       </div>
-      <div class="tb-card" role="tabpanel">
+      <div class="tb-card tb-card--editorial" role="tabpanel">
         {tab === 'finder' && <FinderTool />}
         {tab === 'vacuum' && <VacuumTool />}
         {tab === 'cleanser' && <CleanserTool />}

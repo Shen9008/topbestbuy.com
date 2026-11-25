@@ -1,0 +1,63 @@
+---
+import Icon from '../ui/Icon.astro';
+import { CATS } from '../../data/categories';
+import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
+
+const path = Astro.url.pathname;
+
+function isCategoryActive(id: string) {
+  return path === `/category/${id}` || path.startsWith(`/category/${id}/`);
+}
+
+function isListInCategory(_categoryId: string, lists: readonly string[]) {
+  if (path === '/') return false;
+  const slug = path.replace(/^\//, '').split('/')[0];
+  return lists.includes(slug);
+}
+---
+
+<div
+  class="border-b border-[var(--tb-line)] bg-[var(--tb-band-bg)] lg:pl-[var(--rail-width)]"
+  data-category-rail
+>
+  <div
+    class="mx-auto flex max-w-[var(--content-max)] items-center gap-2 px-4 py-2"
+    role="navigation"
+    aria-label="Browse by category"
+  >
+    <span class="hidden shrink-0 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[var(--tb-muted)] sm:inline">
+      Shop
+    </span>
+    <ul class="tb-scroll-strip m-0 flex list-none gap-1.5 p-0">
+      <li class="shrink-0">
+        <a
+          href="/categories"
+          class:list={[
+            'tb-category-pill',
+            path === '/categories' || path.startsWith('/category') ? 'tb-category-pill--on' : '',
+          ]}
+        >
+          All lists
+        </a>
+      </li>
+      {
+        CATS.filter((c) => c.lists.length).map((c) => {
+          const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
+          const active = isCategoryActive(c.id) || isListInCategory(c.id, c.lists);
+          return (
+            <li class="shrink-0">
+              <a
+                href={`/category/${c.id}`}
+                class:list={['tb-category-pill inline-flex items-center gap-1.5', active && 'tb-category-pill--on']}
+                aria-current={active ? 'page' : undefined}
+              >
+                {icon ? <Icon name={icon} size={16} decorative /> : null}
+                {c.name}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</div>

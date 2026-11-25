@@ -12,7 +12,7 @@ interface Props {
 const { asset, size = 'sm', tone = 'default', class: className } = Astro.props;
 
 const svgPath = join(process.cwd(), 'public', 'icons', 'premium', `${asset}.svg`);
-let markup = '';
+let markup: string;
 try {
   markup = readFileSync(svgPath, 'utf-8');
 } catch {

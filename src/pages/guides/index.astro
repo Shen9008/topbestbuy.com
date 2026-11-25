@@ -1,7 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import EditorialSection from '../../components/sections/EditorialSection.astro';
+import SectionHeader from '../../components/sections/SectionHeader.astro';
 import { POSTS } from '../../data/posts';
+
+const entries = Object.entries(POSTS);
+const featuredIds = [
+  'blog-is-an-air-fryer-worth-it',
+  'blog-mattress-firmness-for-back-pain',
+  'blog-do-you-need-an-ionizer',
+];
+const featured = featuredIds
+  .map((id) => [id, POSTS[id as keyof typeof POSTS]] as const)
+  .filter(([, p]) => p);
+
+const byType = new Map<string, typeof entries>();
+for (const [id, p] of entries) {
+  const list = byType.get(p.type) ?? [];
+  list.push([id, p]);
+  byType.set(p.type, list);
+}
 ---
 
 <BaseLayout
@@ -10,20 +29,65 @@ import { POSTS } from '../../data/posts';
   canonical="/guides"
 >
   <Breadcrumbs items={[{ label: 'Guides' }]} />
-  <h1 class="tb-h1">Guides and explainers</h1>
-  <p class="max-w-[60ch] text-[var(--tb-muted)]">
-    Short answers to the questions people ask before and after they buy.
-  </p>
-  <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      Object.entries(POSTS).map(([id, p]) => (
-        <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile">
-          <span class="tb-pill">{p.type}</span>
-          <h2 class="m-0 tb-h3">{p.h1}</h2>
-          <p class="m-0 text-sm text-[var(--tb-muted)]">{p.tldr}</p>
-          <span class="text-xs text-[var(--tb-muted)]">{p.time} read</span>
-        </a>
-      ))
-    }
-  </div>
+
+  <header class="tb-hero tb-hero--hub tb-reveal" aria-label="Guides hub">
+    <div>
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Editorial</p>
+      <h1 class="tb-h1 mt-3 max-w-[16ch]">Guides and explainers</h1>
+      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+        Short answers to the questions people ask before and after they buy — same scorecard, no hype.
+      </p>
+    </div>
+  </header>
+
+  <EditorialSection band="default" aria-labelledby="guides-featured-heading">
+    <SectionHeader
+      titleId="guides-featured-heading"
+      eyebrow="Start here"
+      title="Featured reads"
+      description="The guides readers open most before they open a Top 10 list."
+      seeAllHref="/categories"
+      seeAllLabel="See all lists"
+    />
+    <div class="tb-scroll-strip tb-reveal-stagger mt-6 gap-3 lg:grid lg:max-w-none lg:grid-cols-3 lg:overflow-visible lg:pb-0">
+      {
+        featured.map(([id, p]) => (
+          <a
+            href={`/guides/${id.replace(/^blog-/, '')}`}
+            class="tb-tile tb-guide-tile tb-card--editorial min-w-[min(100%,18rem)] shrink-0 lg:min-w-0"
+          >
+            <span class="tb-pill">{p.type}</span>
+            <h2 class="m-0 tb-h3">{p.h1}</h2>
+            <p class="m-0 text-sm text-[var(--tb-muted)] line-clamp-2">{p.tldr}</p>
+            <p class="m-0 mt-auto flex items-center gap-2 text-xs text-[var(--tb-muted)]">
+              <span class="tb-guide-tile__dot" aria-hidden="true" />
+              {p.time} read
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </EditorialSection>
+
+  {
+    [...byType.entries()].map(([type, posts]) => (
+      <EditorialSection band="alt" aria-labelledby={`guides-type-${type.replace(/\s+/g, '-')}`}>
+        <SectionHeader
+          titleId={`guides-type-${type.replace(/\s+/g, '-')}`}
+          title={type}
+          seeAllHref="/tools"
+          seeAllLabel="Buying tools"
+        />
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map(([id, p]) => (
+            <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile tb-guide-tile">
+              <h3 class="m-0 font-display text-base font-bold leading-snug">{p.h1}</h3>
+              <p class="m-0 text-sm text-[var(--tb-muted)] line-clamp-2">{p.tldr}</p>
+              <span class="mt-auto text-xs text-[var(--tb-muted)]">{p.time} read</span>
+            </a>
+          ))}
+        </div>
+      </EditorialSection>
+    ))
+  }
 </BaseLayout>
