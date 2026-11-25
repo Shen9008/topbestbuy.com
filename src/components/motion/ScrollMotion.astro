@@ -1,0 +1,11 @@
+<script>
+  import { initScrollMotion } from '../../lib/motion/scroll-motion';
+
+  const run = () => initScrollMotion();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run, { once: true });
+  } else {
+    run();
+  }
+</script>

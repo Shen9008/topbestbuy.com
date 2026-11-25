@@ -75,7 +75,7 @@ const reviewSchema = {
 >
   <Breadcrumbs items={crumbItems} />
 
-  <header class="tb-hero tb-hero--hub tb-hero--has-media mt-2" aria-label="Review">
+  <header class="tb-hero tb-hero--hub tb-hero--has-media tb-reveal tb-reveal--hero mt-2" aria-label="Review">
     <div class="min-w-0">
       <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">
         {list.short} · #{product.rank} of 10
@@ -91,7 +91,7 @@ const reviewSchema = {
         <span class="tb-pill tb-pill-sample">Prices as reported</span>
       </p>
     </div>
-    <div class="tb-hero__media">
+    <div class="tb-hero__media" data-tb-parallax>
       <ImageSlot
         slotId={`review-${id}`}
         aspect="match"
