@@ -17,6 +17,7 @@ import { productFullName } from '../lib/format';
 import { LIST_SLUG_ICONS } from '../icons';
 import { HOME, homePageJsonLd } from '../lib/seo';
 import TrustPathModule from '../components/sections/TrustPathModule.astro';
+import BrandLogoStrip from '../components/sections/BrandLogoStrip.astro';
 
 const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
 ---
@@ -62,6 +63,8 @@ const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
       window.dispatchEvent(new Event('tb-open-search'));
     });
   </script>
+
+  <BrandLogoStrip />
 
   <EditorialSection band="default" aria-labelledby="home-picks-heading">
     <SectionHeader
