@@ -75,7 +75,7 @@ export const LISTS = {
       "Type",
       "Warranty (as listed)"
     ],
-    "intro": "<p>Most Malaysian shoppers buy an air fryer on price and litres, then discover that the warranty and the basket coating matter just as much a year later. We ranked ten models that are listed by Malaysian retailers, using retailer pages, Malaysian review roundups and manufacturer specs. Where a Malaysian warranty could not be confirmed, we say so and scored it conservatively.</p>",
+    "intro": "<p>Most Malaysian shoppers choose an air fryer on price and litres, then a year later care about the warranty and the basket coating too. We ranked ten models listed by Malaysian retailers, using retailer pages, local review roundups and manufacturer specs. Where a Malaysian warranty could not be confirmed, we say so and scored it conservatively.</p>",
     "how": "<p>We shortlisted models that appear on Shopee, Harvey Norman, Senheng, Watsons or manufacturer pages, then removed anything without a findable Malaysian price. Performance and reliability scores lean on ProductNation and Shopee Malaysia editorial notes plus listing details, not our own cooking tests. Prices are the lowest credible figure seen on the cited page on 22 November 2026 and swing during sales, so confirm at checkout. Capacity and wattage come from retailer or brand pages.</p>",
     "products": [
       [
@@ -342,7 +342,7 @@ export const LISTS = {
           "cap": 6
         },
         {
-          "b": "Senheng Malaysia listed this dual-basket model at RM699, marked down from RM909, and advertised a free extra year of warranty on top of the standard term, subject to terms. The baskets sync their timing so two dishes finish together, which the Philips pages highlight as the main benefit.",
+          "b": "Senheng Malaysia listed this dual-basket model at RM699, marked down from RM909, and advertised a free extra year of warranty on top of the standard term, subject to terms. The baskets sync their timing so two dishes finish together, which the Philips pages call the main benefit.",
           "a": "Senheng lists a free extra year of warranty (T&C apply). Confirm the base term and the promo conditions at purchase.",
           "p": "RM699 at Senheng (was RM909).",
           "s": [
@@ -642,7 +642,7 @@ export const LISTS = {
       "CADR (claimed)",
       "Filter"
     ],
-    "intro": "<p>An air purifier only works if its airflow suits your room, and the numbers brands print are not always comparable. We compared ten models sold in Malaysia using brand claims, ProductNation's October and November 2026 listings and retailer prices. The source data contained some internal contradictions, which we list in the picks below instead of hiding. Claimed room coverage and CADR are manufacturer figures, not our measurements.</p>",
+    "intro": "<p>An air purifier only works if its airflow suits your room, and the numbers brands print are not always comparable. We compared ten models sold in Malaysia using brand claims, ProductNation's October and November 2026 listings and retailer prices. When sources contradicted each other, we say so in the picks below. Claimed room coverage and CADR are manufacturer figures, not our measurements.</p>",
     "how": "<p>We shortlisted models featured in ProductNation's updated guide and Priceshop's under-RM500 list, then added Sharp and Philips options that appear repeatedly in Malaysian retailer coverage. Scores weigh claimed airflow for the price, filter type, noise claims, and the running cost of replacement filters, where stated. We did not find independent lab measurements for most models, so performance scores are cautious. Prices are third-party reported and dated; ProductNation noted that two Shopee listings had lapsed.</p>",
     "products": [
       [
@@ -723,7 +723,7 @@ export const LISTS = {
           "cadr": 180
         },
         {
-          "b": "ProductNation highlights Sharp's Haze mode, 4 or 8-hour timer and filters that last up to 24 months, but calls the feature set simple. It lists the price at RM456 in most places and RM485 in one, an inconsistency we flag. At a claimed 180 m3/h it fits a bedroom, not a large lounge.",
+          "b": "ProductNation's guide lists Sharp's Haze mode, 4 or 8-hour timer and filters that last up to 24 months, but calls the feature set simple. It lists the price at RM456 in most places and RM485 in one, an inconsistency we flag. At a claimed 180 m3/h it fits a bedroom, not a large lounge.",
           "a": "Warranty not stated in the source.",
           "p": "RM456 (RM485 in one place) per ProductNation.",
           "s": [
@@ -892,7 +892,7 @@ export const LISTS = {
           "cadr": 340
         },
         {
-          "b": "ProductNation highlights low energy use from 20 W, app and Alexa support and a child lock, but notes there is no air sensor or auto mode. Its noise figures contradict each other, so ignore them until you check Blueair's own sheet. A claimed 340 m3/h suits a larger room.",
+          "b": "ProductNation's guide lists low energy use from 20 W, app and Alexa support and a child lock, but notes there is no air sensor or auto mode. Its noise figures contradict each other, so ignore them until you check Blueair's own sheet. A claimed 340 m3/h suits a larger room.",
           "a": "Warranty not stated in the source.",
           "p": "RM1,888 per ProductNation (checked 3 Oct 2026).",
           "s": [
@@ -1184,7 +1184,7 @@ export const LISTS = {
       "Warranty",
       "Trial"
     ],
-    "intro": "<p>A mattress is a decade-long purchase that you cannot judge in a shop for five minutes, which is why warranty and trial terms carry real weight in our scoring. We ranked ten mattresses sold in Malaysia, drawing on ProductNation's October 2026 guide, other Malaysian roundups and brand pages. Two sources have commercial ties to brands they rank, so we flag that and weigh claims accordingly.</p>",
+    "intro": "<p>You cannot judge a mattress in a five-minute shop visit, yet you may keep it for ten years, so warranty and trial terms carry real weight in our scoring. We ranked ten mattresses sold in Malaysia, drawing on ProductNation's October 2026 guide, other Malaysian roundups and brand pages. Two sources have commercial ties to brands they rank, so we flag that and weigh claims accordingly.</p>",
     "how": "<p>We shortlisted mattresses that several Malaysian guides list and that publish a price. Comfort cannot be measured from a desk, so our scores reflect materials, certifications, published firmness, warranty length, trial period and the pros and cons reported by ProductNation and others. Prices are for the starting size shown on the cited page, usually a single or super single, and queen and king prices are higher. Firmness numbers in our picker are editor estimates from brand descriptions and should be verified in person.</p>",
     "products": [
       [
@@ -1752,7 +1752,7 @@ export const LISTS = {
       "Runtime",
       "Bin or tank"
     ],
-    "intro": "<p>Vacuum suction numbers use different units and are rarely comparable across brands, so a bigger figure from one maker does not prove better cleaning. We ranked ten vacuums sold in Malaysia using ProductNation's October 2026 cordless guide, Roborock's Malaysian buying guide and Malaysian price listings. The mix spans cordless sticks, robots and wet-dry machines because Malaysian homes rarely fit one type.</p>",
+    "intro": "<p>Vacuum suction numbers use different units and rarely compare across brands, so a bigger figure from one maker does not prove better cleaning. We ranked ten vacuums sold in Malaysia using ProductNation's October 2026 cordless guide, Roborock's Malaysian buying guide and local price listings. The mix spans cordless sticks, robots and wet-dry machines because Malaysian homes rarely fit one type.</p>",
     "how": "<p>We shortlisted models that appear in Malaysian roundups and have a findable price, then separated them by type so scores compare like with like. Performance leans on reviewer verdicts and published specs, not our own testing. Several robot prices come from undated listings and one guide is published by Roborock itself, so we treat those figures with caution. Cordless prices come from ProductNation's 6 and 7 October 2026 checks. Warranty is confirmed only for the Dyson V12 Origin and Khind VC9000MS.</p>",
     "products": [
       [
@@ -1879,7 +1879,7 @@ export const LISTS = {
           "pets": 3
         },
         {
-          "b": "ProductNation highlights an 85-minute runtime at 1.6 kg, five-stage filtration and an LED crevice tool for RM1,599, and says the build is good for the price, while noting it is not the cheapest. It delivers the most runtime per ringgit among the cordless picks here.",
+          "b": "ProductNation's guide lists an 85-minute runtime at 1.6 kg, five-stage filtration and an LED crevice tool for RM1,599, and says the build is good for the price, while noting it is not the cheapest. It delivers the most runtime per ringgit among the cordless picks here.",
           "a": "Warranty not stated in the source. Verify with the seller.",
           "p": "RM1,599 per ProductNation (6 Oct 2026).",
           "s": [
@@ -2329,7 +2329,7 @@ export const LISTS = {
       "Battery (claimed)",
       "Water rating"
     ],
-    "intro": "<p>Earbuds are bought on promotion prices, which means the sticker price you see in a roundup may differ from the one at checkout. We compared ten models sold in Malaysia using ProductNation's September 2026 guide, its July 2026 budget guide, GadgetSpecs, Malaysian launch reports and Harvey Norman listings. We could not hear or measure these earbuds ourselves, so sound quality scores reflect reviewers' descriptions, not our ears.</p>",
+    "intro": "<p>Earbuds are often bought on promotion prices, so the figure in a roundup may differ from checkout. We compared ten models sold in Malaysia using ProductNation's September 2026 guide, its July 2026 budget guide, GadgetSpecs, local launch reports and Harvey Norman listings. We could not hear or measure these earbuds ourselves, so sound quality scores follow reviewers' descriptions, not our ears.</p>",
     "how": "<p>We included models with a Malaysian price and enough written coverage to judge noise cancelling, battery and fit. Performance scores follow the verdicts reported by ProductNation and GadgetSpecs, adjusted for features such as multipoint, LDAC and water resistance listed on retailer or launch pages. Value compares price with those features. Warranty was rarely stated, so ProductNation's advice applies: buy from an official seller. Some prices are launch prices from 2025, so they may have changed since.</p>",
     "products": [
       [
@@ -2387,14 +2387,14 @@ export const LISTS = {
           5,
           4
         ],
-        "iPhone users who want seamless switching and strong ANC",
+        "iPhone users who want quick device switching and strong ANC",
         [
           "Adaptive Audio (ANC and Transparency)",
           "Not stated",
           "IP54"
         ],
         [
-          "H2 chip and seamless Apple device switching per ProductNation",
+          "H2 chip and quick Apple device switching per ProductNation",
           "IP54 sweat and water resistance",
           "Apple ecosystem integration"
         ],
@@ -2404,7 +2404,7 @@ export const LISTS = {
         ],
         {},
         {
-          "b": "ProductNation's verdict is that it just works every single time, and it lists the H2 chip and seamless switching between Apple devices as pros, with an IP54 rating. It lists a starting price of RM829 on one page and RM889 on another, so check the current figure. On Android, most of the integration advantage disappears.",
+          "b": "ProductNation's verdict is that it pairs reliably with Apple gear, and it lists the H2 chip and quick switching between Apple devices as pros, with an IP54 rating. It lists a starting price of RM829 on one page and RM889 on another, so check the current figure. On Android, most of the integration advantage disappears.",
           "a": "Apple Malaysia and authorised resellers; warranty not stated in the source.",
           "p": "From RM829 (Sep 2026) or RM889 (another ProductNation page).",
           "s": [
@@ -2485,7 +2485,7 @@ export const LISTS = {
         ],
         {},
         {
-          "b": "ProductNation calls it ideal for working adults who juggle calls, meetings and music, and lists an IP68 rating and Dolby Atmos spatial sound, from RM1,279. It also shows the model name inconsistently between headings and body text, so confirm exactly which generation you are buying. Good for workouts and calls.",
+          "b": "ProductNation says it suits working adults who juggle calls, meetings and music, and lists an IP68 rating and Dolby Atmos spatial sound, from RM1,279. It also shows the model name inconsistently between headings and body text, so confirm exactly which generation you are buying. Good for workouts and calls.",
           "a": "Warranty not stated in the source.",
           "p": "From RM1,279 per ProductNation (range RM900 to RM1,300).",
           "s": [
@@ -4622,7 +4622,7 @@ export const LISTS = {
         ],
         {},
         {
-          "b": "NextRift reports RM1,799 for the aluminium GPS 42mm Series 11 and RM2,299 for the cellular version at the October 2025 availability. Malay Mail's launch report highlights hypertension notifications and Sleep Score. It is the stronger watch, but costs far more than the SE 3.",
+          "b": "NextRift reports RM1,799 for the aluminium GPS 42mm Series 11 and RM2,299 for the cellular version at the October 2025 availability. Malay Mail's launch report mentions hypertension notifications and Sleep Score. It is the stronger watch, but costs far more than the SE 3.",
           "a": "Apple Malaysia; warranty terms not verified here.",
           "p": "From RM1,799 at launch, Oct 2025; check current price.",
           "s": [
@@ -5630,7 +5630,7 @@ export const LISTS = {
       "Best for",
       "Price basis"
     ],
-    "intro": "<p>The best running shoe is the one that fits your foot and your running, so a ranking can only narrow the shortlist. We compared ten daily trainers listed in Malaysia using Sports Direct Malaysia's online listings, ProductNation's running-shoe guide and JD Sports Malaysia's under-RM500 guide. Sports Direct prices are promotional and move between visits: four models were re-checked on 22 Nov 2026 and differed from our earlier snapshot, so treat every price as indicative.</p>",
+    "intro": "<p>The best running shoe is the one that fits your foot and your running; a ranking can only narrow the shortlist. We compared ten daily trainers listed in Malaysia using Sports Direct Malaysia's online listings, ProductNation's running-shoe guide and JD Sports Malaysia's under-RM500 guide. Sports Direct prices are promotional and move between visits. Four models were re-checked on 22 Nov 2026 and differed from our earlier snapshot, so treat every price as indicative.</p>",
     "how": "<p>We selected well-known trainers with a Malaysian price and a clear position in the market, from neutral daily shoes to stability models. We did not run in any pair, so cushioning and durability scores reflect brand positioning and written guides, which are editor judgments. Strike-through prices are the retailer's own and may not reflect real previous prices. Return terms were not checked.</p><p>Fairness note: neutral, cushioned and stability shoes share one ranking, and Sports Direct prices move between visits. Choose by shoe type and fit first.</p>",
     "products": [
       [

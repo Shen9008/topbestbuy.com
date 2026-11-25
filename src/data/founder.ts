@@ -10,7 +10,8 @@ export const FOUNDER = {
   location: 'Kuala Lumpur, Malaysia',
   linkedIn: 'https://www.linkedin.com/in/ooi-chia-shen',
   shortBio:
-    'Ooi Chia Shen is the founder of TopBestBuy. He is a Kuala Lumpur–based digital marketing and content specialist with more than a decade of experience in SEO, editorial strategy, and multilingual publishing across Southeast Asia. His work combines journalism-style product research with technical SEO and structured site architecture—skills he has applied while building and growing high-traffic comparison and affiliate properties. He launched TopBestBuy to give Malaysian shoppers clear, independent Top 10 lists backed by stated methodology and transparent affiliate disclosure.',
-  bio: `Kuala Lumpur-based content and SEO specialist with more than a decade of experience in editorial work, content strategy, and search-led publishing for English and Bahasa Malaysia audiences. He founded TopBestBuy to publish scored Top 10 lists for Malaysia shoppers, with transparent methodology, cited sources, and no paid placement in rankings.`,
+    'Ooi Chia Shen founded TopBestBuy. He is a Kuala Lumpur–based digital marketing and content specialist with more than a decade of experience in SEO, editorial strategy, and multilingual publishing across Southeast Asia. He built TopBestBuy to give Malaysian shoppers clear, independent Top 10 lists backed by a public scorecard and transparent affiliate disclosure.',
+  /** Site-facing bio (not employer-specific). */
+  bio: `Ooi Chia Shen is based in Kuala Lumpur and has spent more than ten years on editorial work, content strategy, and search-led publishing in English and Bahasa Malaysia. He started TopBestBuy to publish scored Top 10 lists for Malaysia shoppers. Every ranking uses a public scorecard, names its sources, and is not for sale.`,
   oneLiner: 'Founder Ooi Chia Shen — SEO and content strategist, Kuala Lumpur.',
 } as const;

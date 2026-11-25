@@ -59,7 +59,7 @@ export const CATS = [
   {
     "id": "audio",
     "name": "Audio",
-    "desc": "Earbuds, headphones and speakers for commuting, gym and work.",
+    "desc": "Earbuds, headphones and speakers for commute, gym and desk work.",
     "lists": [
       "best-wireless-earbuds-malaysia"
     ],
