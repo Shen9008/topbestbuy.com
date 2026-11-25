@@ -9,7 +9,7 @@ function isCategoryActive(id: string) {
   return path === `/category/${id}` || path.startsWith(`/category/${id}/`);
 }
 
-function isListInCategory(id: string, lists: readonly string[]) {
+function isListInCategory(_categoryId: string, lists: readonly string[]) {
   if (path === '/') return false;
   const slug = path.replace(/^\//, '').split('/')[0];
   return lists.includes(slug);
