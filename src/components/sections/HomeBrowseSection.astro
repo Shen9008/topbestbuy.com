@@ -1,0 +1,63 @@
+---
+import Icon from '../ui/Icon.astro';
+import SectionHeader from './SectionHeader.astro';
+import { CATS } from '../../data/categories';
+import { LISTS } from '../../data/lists';
+import { RANKED, listSlugs } from '../../lib/catalog';
+import { productFullName } from '../../lib/format';
+import { CATEGORY_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
+---
+
+<section class="tb-section" aria-labelledby="home-browse-heading">
+  <SectionHeader titleId="home-browse-heading" eyebrow="Browse" title="What are you shopping for?" />
+  <div class="mt-4 flex flex-wrap gap-2">
+    {
+      CATS.map((c) => {
+        const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
+        return (
+          <a href={`/category/${c.id}`} class="tb-chip inline-flex items-center gap-1.5">
+            {icon ? <Icon name={icon} size={20} /> : null}
+            {c.name}
+            {c.lists.length ? ` (${c.lists.length})` : ''}
+          </a>
+        );
+      })
+    }
+  </div>
+  <SectionHeader
+    class="mt-12"
+    titleId="home-lists-heading"
+    title="Start with a list"
+    description="Every card opens a dated Top 10 with sources and trade-offs."
+  />
+  <div class="tb-studio-grid tb-reveal-stagger mt-6">
+    {
+      listSlugs().map((slug) => {
+        const L = LISTS[slug as keyof typeof LISTS];
+        const p = RANKED[slug]?.[0];
+        const icon = LIST_SLUG_ICONS[slug];
+        return (
+          <a href={`/${slug}`} class="tb-tile tb-studio-tile">
+            <span class="tb-pill">{CATS.find((c) => c.id === L.cat)?.name}</span>
+            <div class="tb-studio-tile__head">
+              {icon ? (
+                <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
+                  <Icon name={icon} size={20} />
+                </span>
+              ) : null}
+              <h3 class="m-0 font-display text-lg font-bold leading-snug">{L.short}: Top 10 in Malaysia</h3>
+            </div>
+            {
+              p && (
+                <p class="tb-tile__score m-0 mt-auto text-sm text-[var(--tb-muted)]">
+                  #1 {productFullName(p)}{' '}
+                  <span class="tb-num font-semibold text-[var(--tb-ink)]">({p.total.toFixed(1)}/100)</span>
+                </p>
+              )
+            }
+          </a>
+        );
+      })
+    }
+  </div>
+</section>

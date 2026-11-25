@@ -1,0 +1,35 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { POSTS } from '../../data/posts';
+
+const postIds = [
+  'blog-is-an-air-fryer-worth-it',
+  'blog-mattress-firmness-for-back-pain',
+  'blog-do-you-need-an-ionizer',
+];
+---
+
+<section class="tb-section" aria-labelledby="home-guides-heading">
+  <SectionHeader
+    titleId="home-guides-heading"
+    title="Guides and explainers"
+    description="Longer reads when you need context before you open a list."
+  />
+  <div class="tb-feature-grid tb-reveal-stagger mt-6">
+    {
+      postIds.map((id) => {
+        const p = POSTS[id as keyof typeof POSTS];
+        return (
+          <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile tb-guide-tile">
+            <span class="tb-pill">{p.type}</span>
+            <h3 class="m-0 font-display text-base font-bold leading-snug">{p.h1}</h3>
+            <p class="m-0 mt-auto flex items-center gap-2 text-xs text-[var(--tb-muted)]">
+              <span class="tb-guide-tile__dot" aria-hidden="true" />
+              {p.time} read
+            </p>
+          </a>
+        );
+      })
+    }
+  </div>
+</section>

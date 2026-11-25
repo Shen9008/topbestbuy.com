@@ -1,0 +1,23 @@
+﻿---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+  titleId?: string;
+  class?: string;
+}
+
+const { eyebrow, title, description, align = 'left', titleId, class: className = '' } = Astro.props;
+const alignClass = align === 'center' ? 'text-center mx-auto max-w-[40ch]' : 'max-w-[52ch]';
+---
+
+<header class:list={['tb-section__head', alignClass, className]}>
+  {eyebrow ? (
+    <p class="m-0 text-xs font-bold uppercase tracking-[0.14em] text-[var(--tb-muted)]">{eyebrow}</p>
+  ) : null}
+  <h2 id={titleId} class="m-0 mt-2 font-display text-2xl font-bold tracking-tight sm:text-[1.65rem]">
+    {title}
+  </h2>
+  {description ? <p class="m-0 mt-2 text-sm text-[var(--tb-muted)] sm:text-base">{description}</p> : null}
+</header>
