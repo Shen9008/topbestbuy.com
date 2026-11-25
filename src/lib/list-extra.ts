@@ -36,7 +36,7 @@ export function usageBlocks(slug: ListSlug, rows: RankedProduct[]): string {
         .sort((a, b) => b[1] - a[1]);
       const [a, aScore] = scored[0]!;
       const b = scored[1];
-      return `<h3>Best ${s} for ${u[0].toLowerCase()}</h3><p>The <strong>${productFullName(a)}</strong> scores ${aScore.toFixed(1)}/100 on our ${u[0].toLowerCase()} weighting at ${formatRM(a.price)}, as reported ${SITE_DATE}. ${b ? `The <strong>${productFullName(b[0])}</strong> is next at ${b[1].toFixed(1)}/100 (${formatRM(b[0].price)}).` : ''}</p>`;
+      return `<h3>Best ${s} for ${u[0].toLowerCase()}</h3><p><strong>${productFullName(a)}</strong> scores ${aScore.toFixed(1)}/100 on our ${u[0].toLowerCase()} weighting at ${formatRM(a.price)}, as reported ${SITE_DATE}. ${b ? `<strong>${productFullName(b[0])}</strong> is next at ${b[1].toFixed(1)}/100 (${formatRM(b[0].price)}).` : ''}</p>`;
     })
     .join('');
 }

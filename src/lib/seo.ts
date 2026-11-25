@@ -87,7 +87,7 @@ export function reviewMetaDescription(
   score: number,
 ): string {
   return clampMetaDescription(
-    `${productName} scores ${score.toFixed(1)}/100 on our Malaysia scorecard — specs, usage fit, pros, cons and where it ranks.`,
+    `${productName} scores ${score.toFixed(1)}/100 on our Malaysia scorecard: specs, usage fit, pros, cons and where it ranks.`,
   );
 }
 
@@ -278,7 +278,7 @@ export function normalizeGuideBodyHtml(html: string): string {
 export const HOME = {
   title: 'Best Top 10 Lists for Malaysia',
   description:
-    'Scored Top 10 lists for appliances, home and lifestyle in Malaysia. Transparent MYR prices, trade-offs and sources — no hype.',
+    'Scored Top 10 lists for appliances, home and lifestyle in Malaysia. Transparent MYR prices, trade-offs and sources. No hype.',
 } as const;
 
 export const TRUST_META: Record<string, { title: string; description: string }> = {
@@ -305,7 +305,7 @@ export const TRUST_META: Record<string, { title: string; description: string }> 
   team: {
     title: 'TopBestBuy editorial team',
     description:
-      'Meet founder Ooi Chia Shen and the editorial approach behind TopBestBuy Top 10 lists for Malaysia — methodology, sources, and how we score.',
+      'Meet founder Ooi Chia Shen and how TopBestBuy builds Top 10 lists for Malaysia: methodology, sources and scoring.',
   },
   privacy: {
     title: 'Privacy policy',
@@ -315,6 +315,6 @@ export const TRUST_META: Record<string, { title: string; description: string }> 
   terms: {
     title: 'Terms of use',
     description:
-      'Terms for using TopBestBuy lists, tools and reviews. Informational content only — confirm prices and specs with retailers in Malaysia.',
+      'Terms for using TopBestBuy lists, tools and reviews. Informational only. Confirm prices and specs with retailers in Malaysia.',
   },
 };

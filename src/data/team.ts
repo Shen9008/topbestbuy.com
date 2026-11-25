@@ -4,17 +4,17 @@ export const TEAM = [
   [
     "Editor-in-Chief",
     "[Your name]",
-    "Sets the editorial standard, signs off every Top 10, owns the corrections log. Replace with a real person, their background and a link to their professional profile."
+    "Sets the editorial standard, signs off every Top 10, and owns the corrections log. This stub will be replaced with a named editor and a link to their public profile."
   ],
   [
     "Research Editor",
     "[Name]",
-    "Builds the evidence sheets, checks prices and specs, and runs recall checks. Add real experience in consumer products or retail."
+    "Builds evidence sheets, checks prices and specs, and runs recall checks. We will add real consumer or retail background here when the role is filled."
   ],
   [
     "Category Specialist: Home",
     "[Name]",
-    "Writes and reviews kitchen, air and sleep lists. Add qualifications or hands-on background where it is true."
+    "Writes and reviews kitchen, air and sleep lists. Qualifications or hands-on background will appear here only when we can state them accurately."
   ]
 ] as const;
 
