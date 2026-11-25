@@ -1,0 +1,14 @@
+---
+import VisualWell from './VisualWell.astro';
+import { METHODOLOGY_STEP_VISUAL_IDS, type MethodologyStepVisualId } from '../../lib/feature-visuals';
+
+interface Props {
+  id: MethodologyStepVisualId;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const { id, size = 'xl' } = Astro.props;
+const asset = METHODOLOGY_STEP_VISUAL_IDS[id];
+---
+
+<VisualWell asset={asset} size={size} tone="raised" />

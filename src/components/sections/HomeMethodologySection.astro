@@ -1,23 +1,28 @@
 ---
+import MethodologyStepVisual from '../illustrations/MethodologyStepVisual.astro';
 import SectionHeader from './SectionHeader.astro';
+import type { MethodologyStepVisualId } from '../../lib/feature-visuals';
 
-const steps = [
+const steps: { visual: MethodologyStepVisualId; title: string; copy: string }[] = [
   {
+    visual: 'research',
     title: '1. Research',
     copy:
       'We build a long list, then filter by availability in Malaysia, recalls and enough evidence. Every spec and price gets a source and a date.',
   },
   {
+    visual: 'score',
     title: '2. Score',
     copy:
       'Seven criteria with fixed weights, plus use-case scores. Scores are locked before anyone opens an affiliate dashboard.',
   },
   {
+    visual: 'publish',
     title: '3. Publish and refresh',
     copy:
       'Prices monthly, full re-score quarterly, and a visible changelog. Mistakes go in the corrections log.',
   },
-] as const;
+];
 ---
 
 <section class="tb-section tb-reveal" aria-labelledby="home-method-heading">
@@ -29,13 +34,16 @@ const steps = [
     seeAllLabel="Read the full scorecard"
   />
   <div class="tb-studio-grid tb-reveal-stagger mt-8">
-  {
-    steps.map((step) => (
-      <article class="tb-card">
-        <h3 class="m-0 tb-h3">{step.title}</h3>
-        <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{step.copy}</p>
-      </article>
-    ))
-  }
+    {
+      steps.map((step) => (
+        <article class="tb-card">
+          <span class="tb-methodology-step__icon" aria-hidden="true">
+            <MethodologyStepVisual id={step.visual} />
+          </span>
+          <h3 class="m-0 tb-h3">{step.title}</h3>
+          <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{step.copy}</p>
+        </article>
+      ))
+    }
   </div>
 </section>

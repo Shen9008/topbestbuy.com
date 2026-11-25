@@ -4,7 +4,7 @@ import { join } from 'node:path';
 
 interface Props {
   asset: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   tone?: 'default' | 'raised';
   class?: string;
 }
@@ -25,6 +25,7 @@ try {
     'tb-visual-well',
     size === 'md' && 'tb-visual-well--md',
     size === 'lg' && 'tb-visual-well--lg',
+    size === 'xl' && 'tb-visual-well--xl',
     tone === 'raised' && 'tb-visual-well--raised',
     className,
   ]}
