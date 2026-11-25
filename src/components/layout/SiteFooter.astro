@@ -2,20 +2,11 @@
 import { CATS } from '../../data/categories';
 import { LISTS } from '../../data/lists';
 import { TRUST_ROUTES } from '../../lib/routes';
-import { CATEGORY_ICONS, TRUST_ROUTE_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
+import { TRUST_ROUTE_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
 import Icon from '../ui/Icon.astro';
 import SiteLogo from './SiteLogo.astro';
 
 const liveLists = CATS.flatMap((c) => c.lists).slice(0, 6);
-
-const hubLinks = [
-  { href: '/categories', label: 'All lists' },
-  { href: '/guides', label: 'Guides' },
-  { href: '/tools', label: 'Tools' },
-  { href: '/compare', label: 'Compare' },
-  { href: '/search', label: 'Search' },
-  { href: '/saved', label: 'Saved' },
-];
 
 const trustLinks = [
   ...TRUST_ROUTES.map((route) => ({ ...route, icon: TRUST_ROUTE_ICONS[route.href] })),
@@ -26,42 +17,6 @@ const trustLinks = [
 <footer
   class="border-t border-[var(--tb-line)] bg-[var(--tb-surface)] pb-[calc(var(--tabbar-height)+1rem)] text-sm lg:pb-8 lg:pl-[var(--rail-width)]"
 >
-  <nav
-    class="border-b border-[var(--tb-line)] bg-[var(--tb-band-bg)]"
-    aria-label="Site sections"
-  >
-    <div class="mx-auto flex max-w-[var(--content-max)] items-center gap-2 px-4 py-3 lg:pl-0">
-      <span class="hidden shrink-0 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[var(--tb-muted)] sm:inline">
-        Explore
-      </span>
-      <ul class="tb-scroll-strip m-0 flex list-none gap-1.5 p-0">
-        {
-          hubLinks.map((link) => (
-            <li class="shrink-0">
-              <a href={link.href} class="tb-category-pill">
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-        {
-          CATS.filter((c) => c.lists.length)
-            .slice(0, 4)
-            .map((c) => {
-              const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
-              return (
-                <li class="shrink-0">
-                  <a href={`/category/${c.id}`} class="tb-category-pill inline-flex items-center gap-1.5">
-                    {icon ? <Icon name={icon} size={16} decorative /> : null}
-                    {c.name}
-                  </a>
-                </li>
-              );
-            })
-        }
-      </ul>
-    </div>
-  </nav>
   <div class="mx-auto grid max-w-[var(--content-max)] gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
     <div>
       <SiteLogo variant="full" />
