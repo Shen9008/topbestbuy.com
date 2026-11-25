@@ -227,7 +227,15 @@
   }
 
   .tb-prose {
-    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-bold [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+  }
+
+  .tb-prose h2 {
+    @apply mt-8 font-display text-[1.625rem] font-bold leading-[1.2] text-[var(--tb-heading)] sm:text-[2rem];
+  }
+
+  .tb-prose h3 {
+    @apply mt-6 font-display text-lg font-semibold leading-snug text-[var(--tb-heading)] sm:text-xl;
   }
 
   .tb-tablewrap {
@@ -337,6 +345,10 @@
 
   .tb-search-hero .tb-btn {
     @apply shrink-0;
+  }
+
+  .tb-home-picks-grid > :last-child {
+    @apply flex min-h-0 flex-col;
   }
 
   @keyframes tb-reveal-up {

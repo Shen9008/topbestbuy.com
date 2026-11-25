@@ -50,7 +50,9 @@ const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
     });
   </script>
 
-  <section class="grid items-start gap-8 pb-6 lg:grid-cols-[1fr_0.9fr]">
+  <section
+    class="tb-home-picks-grid grid gap-8 pb-6 lg:grid-cols-[1fr_0.9fr] lg:items-stretch"
+  >
     <div class="tb-reveal-stagger space-y-2" aria-label="Current number one picks">
         {
           tops.slice(0, 5).map(
@@ -77,8 +79,8 @@ const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
         Scores are editor judgments from scorecard v1.0. <a href="/categories">See all lists</a>
       </p>
     </div>
-    <div class="hidden lg:block">
-      <ImageSlot slotId="home-hero" aspect="banner" label="Home hero banner" />
+    <div class="hidden h-full min-h-0 lg:block">
+      <ImageSlot slotId="home-hero" aspect="match" label="Home hero banner" class="h-full" />
     </div>
   </section>
 
