@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Refresh Project-store visual-asset-inventory.xlsx from repo manifest + PR #18 redesign map."""
+"""Refresh Project-store visual-asset-inventory.xlsx from manifest + redesign map (PR #18 live, #20 rail removal)."""
 from __future__ import annotations
 
+import csv
 import json
 import re
 from collections import Counter, defaultdict
+from datetime import datetime, timedelta, timezone
 from copy import copy
 from pathlib import Path
 
@@ -13,6 +15,7 @@ from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
 
 REPO = Path(__file__).resolve().parents[1]
+CSV_OUT = REPO / "docs" / "visual-asset-inventory.csv"
 STORE_XLSX = Path(
     r"C:\Users\Chia Shen\AppData\Local\Cursor\AgentStores\cursor_agent_stores"
     r"\bc-5a07edf9-c66f-485c-bff7-bd5280db5f21\files\docs\visual-asset-inventory.xlsx"
@@ -34,12 +37,21 @@ HEADERS = [
     "notes",
 ]
 
+HUB_HERO_MATCH_DIMS = "1200×1500 · 4:5 (match tb-hero--hub copy column)"
+HUB_HERO_MATCH_NOTE = (
+    "tb-hero--hub lg:grid-cols-[1.1fr_0.9fr]; ImageSlot aspect=match + h-full — art height tracks left copy column, not 21:9"
+)
+
 REDESIGN_BY_PREFIX = {
     "home-hero": {
-        "page/section": "Home / editorial picks grid (lg)",
-        "layout_note": "PR #18 P0: ImageSlot aspect=match in split hero; safe crop centre-right; tall column not 21:9 banner",
+        "page/section": "Home / hub hero (tb-hero--hub)",
+        "layout_note": (
+            "PR #18 live: split hub hero; aspect=match in right column (lg+, min-h ~14rem). "
+            "Manifest still 1680×720 — re-export master 4:5, centre-right safe crop. "
+            "Pending: cursor/hero-banner-match-left-list-2b92"
+        ),
         "needs_redesign": True,
-        "proposed_dims": "1200×1500 (flex master) or 4:5",
+        "proposed_dims": HUB_HERO_MATCH_DIMS,
     },
 }
 
@@ -60,66 +72,66 @@ NEW_REDESIGN_SLOTS = [
     {
         "slot_id": "hub-editorial-guides",
         "page/section": "Guides hub / tb-hero--hub",
-        "dimensions/aspect": "1680×720 · 21:9",
+        "dimensions/aspect": HUB_HERO_MATCH_DIMS,
         "format": "WebP",
         "file_path_proposed": "public/images/editorial/hub-guides.webp",
         "file_path_current": "",
         "status": "missing",
-        "notes": "PR #18 P2: guides/index featured scroll + type bands; optional banner behind hub",
+        "notes": f"PR #18 P2: typography hub today; optional right-column art — {HUB_HERO_MATCH_NOTE}",
     },
     {
         "slot_id": "hub-editorial-tools",
         "page/section": "Tools hub / tb-hero--hub",
-        "dimensions/aspect": "1680×720 · 21:9",
+        "dimensions/aspect": HUB_HERO_MATCH_DIMS,
         "format": "WebP",
         "file_path_proposed": "public/images/editorial/hub-tools.webp",
         "status": "missing",
-        "notes": "PR #18 P2: quick-tool strip + banded hub",
+        "notes": f"PR #18 P2: quick-tool strip + banded hub; optional art — {HUB_HERO_MATCH_NOTE}",
     },
     {
         "slot_id": "hub-editorial-compare",
         "page/section": "Compare / hub hero",
-        "dimensions/aspect": "1680×720 · 21:9",
+        "dimensions/aspect": HUB_HERO_MATCH_DIMS,
         "format": "WebP",
         "file_path_proposed": "public/images/editorial/hub-compare.webp",
         "status": "missing",
-        "notes": "PR #18 P2: editorial wrapper around ComparePicker",
+        "notes": f"PR #18 P2: ComparePicker wrapper; optional art — {HUB_HERO_MATCH_NOTE}",
     },
     {
         "slot_id": "hub-editorial-search",
         "page/section": "Search / hub hero",
-        "dimensions/aspect": "1680×720 · 21:9",
+        "dimensions/aspect": HUB_HERO_MATCH_DIMS,
         "format": "WebP",
         "file_path_proposed": "public/images/editorial/hub-search.webp",
         "status": "missing",
-        "notes": "PR #18 P2: feed-density results; optional hub art",
+        "notes": f"PR #18 P2: feed-density results; optional art — {HUB_HERO_MATCH_NOTE}",
     },
     {
         "slot_id": "hub-editorial-saved",
         "page/section": "Saved / hub hero",
-        "dimensions/aspect": "1680×720 · 21:9",
+        "dimensions/aspect": HUB_HERO_MATCH_DIMS,
         "format": "WebP",
         "file_path_proposed": "public/images/editorial/hub-saved.webp",
         "status": "missing",
-        "notes": "PR #18 P2: saved feed rows + empty state",
+        "notes": f"PR #18 P2: saved feed rows; optional art — {HUB_HERO_MATCH_NOTE}",
     },
     {
         "slot_id": "trust-hub-how-we-rank",
         "page/section": "How we rank / trust hub",
-        "dimensions/aspect": "1680×720 · 21:9",
+        "dimensions/aspect": HUB_HERO_MATCH_DIMS,
         "format": "WebP",
         "file_path_proposed": "public/images/editorial/trust-how-we-rank.webp",
         "status": "missing",
-        "notes": "PR #18 P3: trust sidebar + banded criteria table",
+        "notes": f"PR #18 P3: trust sidebar + criteria table; optional art — {HUB_HERO_MATCH_NOTE}",
     },
     {
         "slot_id": "trust-hub-editorial-policy",
         "page/section": "Editorial policy / trust hub",
-        "dimensions/aspect": "1680×720 · 21:9",
+        "dimensions/aspect": HUB_HERO_MATCH_DIMS,
         "format": "WebP",
         "file_path_proposed": "public/images/editorial/trust-editorial-policy.webp",
         "status": "missing",
-        "notes": "PR #18 P3: replaces StubShell-only layout",
+        "notes": f"PR #18 P3: trust hub layout; optional art — {HUB_HERO_MATCH_NOTE}",
     },
     {
         "slot_id": "guide-featured-is-an-air-fryer-worth-it",
@@ -155,9 +167,23 @@ NEW_REDESIGN_SLOTS = [
         "format": "SVG (Lucide)",
         "file_path_proposed": "src/icons — CATEGORY_ICONS",
         "status": "exists",
-        "notes": "PR #18 P0: horizontal category rail; Lucide via Icon.astro — not image-manifest raster",
+        "notes": "PR #18 P0: horizontal CategoryRail (not desktop left icon rail); Lucide via Icon.astro",
+    },
+    {
+        "slot_id": "chrome-desktop-left-icon-rail",
+        "page/section": "Global chrome / DesktopIconRail",
+        "dimensions/aspect": "n/a (Lucide + logo-mark)",
+        "format": "n/a",
+        "file_path_current": "src/components/layout/DesktopIconRail.astro (deleted PR #20)",
+        "file_path_proposed": "",
+        "status": "deprecated",
+        "notes": "PR #20 open: fixed left nav removed — no raster assets; logo-mark stays in SiteTopBar; nav → top bar + CategoryRail + mobile tab bar",
     },
 ]
+
+DEPRECATED_RAIL_LAYOUT_NOTES = {
+    "brand-logo-mark": "PR #20: logo-mark no longer in left rail; header/top bar only (still favicon source)",
+}
 
 
 def parse_manifest(path: Path) -> dict[str, dict]:
@@ -266,6 +292,9 @@ def row_from_json(
             f"Brand deliverable: {BRAND_SOURCE_ALIASES[slot]} (TopBestBuy.com lockup)"
         )
 
+    if slot in DEPRECATED_RAIL_LAYOUT_NOTES:
+        notes_parts.append(DEPRECATED_RAIL_LAYOUT_NOTES[slot])
+
     return {
         "slot_id": slot,
         "page/section": page,
@@ -369,8 +398,27 @@ def update_summary(ws_summary, rows: list[dict]) -> None:
     ws_summary.append(["Needs redesign", status_counts.get("needs redesign", 0)])
     ws_summary.append(["Deprecated", status_counts.get("deprecated", 0)])
     ws_summary.append([])
-    ws_summary.append(["Source", "topbestbuy.online main + PR #18 cursor/action-network-redesign-p0"])
-    ws_summary.append(["Updated", "2026-11-25"])
+    ws_summary.append(
+        [
+            "Source",
+            "main (PR #18 merged) + PR #20 remove-left-rail + hub-hero match-column spec",
+        ]
+    )
+    ws_summary.append(
+        [
+            "Updated",
+            datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M UTC+8"),
+        ]
+    )
+
+
+def write_csv(rows: list[dict]) -> None:
+    CSV_OUT.parent.mkdir(parents=True, exist_ok=True)
+    with CSV_OUT.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=HEADERS)
+        writer.writeheader()
+        for row in sorted(rows, key=lambda r: (r["page/section"], r["slot_id"])):
+            writer.writerow({h: row.get(h, "") for h in HEADERS})
 
 
 def copy_header_style(ws, src_row=1) -> None:
@@ -433,6 +481,7 @@ def main() -> dict:
         update_summary(wb.create_sheet("Summary"), rows)
 
     wb.save(STORE_XLSX)
+    write_csv(rows)
 
     new_slots = [s["slot_id"] for s in NEW_REDESIGN_SLOTS]
     stats = {
@@ -441,6 +490,7 @@ def main() -> dict:
         "missing": sum(1 for r in rows if r["status"] == "missing"),
         "needs_redesign": sum(1 for r in rows if r["status"] == "needs redesign"),
         "exists": sum(1 for r in rows if r["status"] == "exists"),
+        "deprecated": sum(1 for r in rows if r["status"] == "deprecated"),
     }
     return stats
 

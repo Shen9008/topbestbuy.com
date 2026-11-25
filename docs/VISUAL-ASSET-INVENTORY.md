@@ -1,14 +1,14 @@
 # Visual asset inventory (Action Network redesign)
 
-**Updated:** 2026-11-25 (Asia/Kuala_Lumpur)  
-**Sources:** `main` + PR [#18](https://github.com/Shen9008/topbestbuy.online/pull/18) (`cursor/action-network-redesign-p0`), `src/lib/image-manifest.ts`, `scripts/inventory-assets.json`, brand deliverables in `TopBestBuy.com`.
+**Updated:** 2026-11-25 (UTC+8)  
+**Sources:** `main` (PR [#18](https://github.com/Shen9008/topbestbuy.online/pull/18) merged), open PR [#20](https://github.com/Shen9008/topbestbuy.online/pull/20) (remove desktop left icon rail), pending hero crop branch `cursor/hero-banner-match-left-list-2b92`, `src/lib/image-manifest.ts`, `scripts/inventory-assets.json`, Project store `visual-asset-spec.md`, brand deliverables in `TopBestBuy.com`.
 
 **Authoritative workbook (Project store):**  
-`docs/visual-asset-inventory.xlsx` in the TopBestBuy.online Project Agent Store (sheet **All assets (2026)**).
+`C:\Users\Chia Shen\AppData\Local\Cursor\AgentStores\cursor_agent_stores\bc-5a07edf9-c66f-485c-bff7-bd5280db5f21\files\docs\visual-asset-inventory.xlsx` (sheet **All assets (2026)**).
 
 **CSV mirror:** [visual-asset-inventory.csv](./visual-asset-inventory.csv)
 
-**Regenerate workbook from repo:**
+**Regenerate workbook + CSV from repo:**
 
 ```bash
 python scripts/refresh-visual-asset-inventory.py
@@ -18,25 +18,29 @@ python scripts/refresh-visual-asset-inventory.py
 
 | Metric | Count |
 |--------|------:|
-| **Total rows** | 309 |
+| **Total rows** | 310 |
 | **Exists (on disk)** | 263 |
 | **Missing** | 35 |
 | **Needs redesign** (layout/aspect shift) | 11 |
-| **New slots added for PR #18** | 11 |
+| **Deprecated** | 1 |
+| **New / tracking slots (PR #18–#20)** | 12 |
 
-## What changed vs pre–PR #18 inventory (273 rows)
+## What changed in this refresh (post–PR #18 merge)
 
-1. **Column schema** — `slot_id`, page/section, dimensions/aspect, format, current + proposed paths, status, layout notes (CategoryRail, editorial bands, hub heroes, guide featured strip).
-2. **Layout-driven flags**
-   - `home-hero` → **needs redesign** (`aspect=match` in split hero grid, not 21:9 banner).
-   - `cat-*` (10) → **needs redesign** (categories index uses `aspect=video` 16:9 in editorial tiles; manifest still 600×600).
-3. **New proposed raster slots** — hub heroes (guides, tools, compare, search, saved), trust hubs (how-we-rank, editorial-policy), three guide featured card thumbs, plus `category-rail-icons` (Lucide, not manifest).
-4. **Premium SVG rows** — 25 `public/icons/premium/*.svg` slots (value/trust/tool/list VisualWell art); 3 reserved tool SVGs still missing.
-5. **Historical `category-tile-*` manifest aliases** — retained in data; marked **deprecated** where duplicated by `cat-*`.
+1. **Desktop left icon rail (PR #20)** — New row `chrome-desktop-left-icon-rail` → **deprecated** (Lucide + `logo-mark` only; no raster pack). `brand-logo-mark` notes updated: mark stays in **SiteTopBar**, not fixed left rail.
+2. **Hub hero art sizing** — `home-hero` and optional hub rows use **4:5 / match-column** spec (`tb-hero--hub` `1.1fr` copy + `0.9fr` `aspect=match` image), not 21:9 banner. Manifest file still 1680×720 until re-export.
+3. **Category rail** — `category-rail-icons` clarified: horizontal **CategoryRail** (retained), distinct from removed left rail.
+4. **Project store spec** — `visual-asset-spec.md` `home-hero` and logo-mark rows aligned with match-column hero + PR #20 chrome.
+
+## Layout-driven flags (unchanged logic, refreshed notes)
+
+- `home-hero` → **needs redesign** (right column match height; pending hero-banner branch).
+- `cat-*` (10) → **needs redesign** (categories index `aspect=video` 16:9; manifest squares 600×600).
+- Historical `category-tile-*` naming → absorbed by `cat-*` rows (spec alias in notes).
 
 ## Manifest
 
-No new `ImageSlot` IDs were wired on `main`; **`src/lib/image-manifest.ts` unchanged** on this branch. When hub/guide heroes are implemented, add slots here and re-run the refresh script.
+`src/lib/image-manifest.ts` unchanged on `main`; no new wired `ImageSlot` IDs. Re-run the refresh script after hub art or hero master files land.
 
 ## Related docs
 

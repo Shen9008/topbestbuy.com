@@ -12,7 +12,7 @@
     "List_Slug": null,
     "Product_Id": null,
     "Category_Id": null,
-    "Notes": "public/brand/logo-mark.png \u2014 favicon source, icon rail"
+    "Notes": "public/brand/logo-mark.png \u2014 favicon source; SiteTopBar (left icon rail removed PR #20)"
   },
   {
     "Section": "Global chrome",
