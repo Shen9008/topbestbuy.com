@@ -91,6 +91,16 @@
     scroll-snap-align: start;
   }
 
+  [data-category-rail] .tb-scroll-strip {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    @apply pb-0;
+  }
+
+  [data-category-rail] .tb-scroll-strip::-webkit-scrollbar {
+    display: none;
+  }
+
   .tb-brand-logo-strip {
     @apply flex items-center gap-8 overflow-x-auto overscroll-x-contain py-2;
     scroll-snap-type: x mandatory;
