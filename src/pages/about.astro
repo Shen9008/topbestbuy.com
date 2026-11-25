@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
-import { TRUST_META } from '../lib/seo';
+import { FOUNDER } from '../data/founder';
+import { TRUST_META, aboutPageJsonLd } from '../lib/seo';
 ---
 
 <BaseLayout
@@ -9,6 +10,7 @@ import { TRUST_META } from '../lib/seo';
   description={TRUST_META.about.description}
   canonical="/about"
   ogImage="/images/inventory-refresh/about-hero.webp"
+  jsonLd={aboutPageJsonLd()}
 >
   <Breadcrumbs items={[{ label: 'Trust', href: '/about' }, { label: 'About us' }]} />
   <h1 class="tb-h1">About us</h1>
@@ -29,5 +31,17 @@ import { TRUST_META } from '../lib/seo';
       <li>Every price and spec has a date and a source.</li>
       <li>Mistakes are fixed and logged.</li>
     </ul>
+    <h2>Who runs TopBestBuy</h2>
+    <p>
+      <strong>{FOUNDER.name}</strong> ({FOUNDER.jobTitle}) leads TopBestBuy from {FOUNDER.location}.
+      He publishes scored Top 10 lists for Malaysia shoppers with cited sources and a public
+      scorecard — see <a href="/team">team</a> for his background.
+    </p>
+    <p>
+      <a href="/team">Meet the team</a> ·{' '}
+      <a href={FOUNDER.linkedIn} rel="noopener noreferrer" target="_blank">
+        {FOUNDER.name} on LinkedIn
+      </a>
+    </p>
   </article>
 </BaseLayout>

@@ -1,4 +1,5 @@
 import { SITE_DATE } from '../data/meta';
+import { FOUNDER } from '../data/founder';
 
 export const SITE_ORIGIN = 'https://topbestbuy.online';
 export const BRAND_SUFFIX = ' · TopBestBuy';
@@ -105,6 +106,21 @@ export function categoryMetaDescription(
 
 export type JsonLd = Record<string, unknown> | Record<string, unknown>[];
 
+export const FOUNDER_ID = `${SITE_ORIGIN}/#founder`;
+
+export function founderPersonJsonLd(): Record<string, unknown> {
+  return {
+    '@type': 'Person',
+    '@id': FOUNDER_ID,
+    name: FOUNDER.name,
+    jobTitle: FOUNDER.jobTitle,
+    url: absoluteUrl('/team'),
+    description: FOUNDER.bio,
+    worksFor: { '@id': `${SITE_ORIGIN}/#organization` },
+    sameAs: [FOUNDER.linkedIn],
+  };
+}
+
 export function organizationJsonLd(): Record<string, unknown> {
   return {
     '@type': 'Organization',
@@ -114,6 +130,7 @@ export function organizationJsonLd(): Record<string, unknown> {
     logo: `${SITE_ORIGIN}/images/inventory-refresh/brand-wordmark-dark.png`,
     description:
       'TopBestBuy publishes scored Top 10 product lists for shoppers in Malaysia, with transparent methodology and MYR prices.',
+    founder: { '@id': FOUNDER_ID },
   };
 }
 
@@ -139,7 +156,49 @@ export function websiteJsonLd(): Record<string, unknown> {
 export function homePageJsonLd(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
-    '@graph': [organizationJsonLd(), websiteJsonLd()],
+    '@graph': [organizationJsonLd(), founderPersonJsonLd(), websiteJsonLd()],
+  };
+}
+
+export function aboutPageJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'AboutPage',
+        name: 'About TopBestBuy',
+        url: absoluteUrl('/about'),
+        inLanguage: 'en-MY',
+        mainEntity: { '@id': `${SITE_ORIGIN}/#organization` },
+      },
+      organizationJsonLd(),
+      founderPersonJsonLd(),
+      breadcrumbListJsonLd([
+        { label: 'Trust', href: '/about' },
+        { label: 'About us' },
+      ]),
+    ],
+  };
+}
+
+export function teamPageJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ProfilePage',
+        name: 'TopBestBuy team',
+        url: absoluteUrl('/team'),
+        inLanguage: 'en-MY',
+        mainEntity: { '@id': FOUNDER_ID },
+      },
+      founderPersonJsonLd(),
+      organizationJsonLd(),
+      breadcrumbListJsonLd([
+        { label: 'Trust', href: '/about' },
+        { label: 'Team' },
+      ]),
+    ],
   };
 }
 
@@ -246,7 +305,7 @@ export const TRUST_META: Record<string, { title: string; description: string }> 
   team: {
     title: 'TopBestBuy editorial team',
     description:
-      'Editors behind TopBestBuy Top 10 lists for Malaysia: who researches picks, how we score products and how to verify our work.',
+      'Meet founder Ooi Chia Shen and the editorial approach behind TopBestBuy Top 10 lists for Malaysia — methodology, sources, and how we score.',
   },
   privacy: {
     title: 'Privacy policy',
