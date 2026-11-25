@@ -61,6 +61,10 @@
   --tb-accent-ink: var(--color-brand-navy);
   --tb-cta-bg: oklch(0.99 0 0);
   --tb-cta-ink: var(--color-brand-navy);
+  /* Headings — PDF §3–4: navy on light surfaces; high-contrast flat on dark (#141414). No gradients on type. */
+  --tb-heading: #ffffff;
+  --tb-heading-muted: var(--tb-muted);
+  --tb-heading-accent: var(--color-brand-orange);
 }
 
 [data-theme='light'] {
@@ -75,6 +79,9 @@
   --tb-accent-ink: var(--color-brand-navy);
   --tb-cta-bg: var(--color-brand-navy);
   --tb-cta-ink: oklch(0.99 0 0);
+  --tb-heading: var(--color-brand-navy);
+  --tb-heading-muted: var(--color-brand-slate);
+  --tb-heading-accent: var(--color-brand-orange);
 }
 
 @media (prefers-color-scheme: light) {
@@ -90,6 +97,9 @@
     --tb-accent-ink: var(--color-brand-navy);
     --tb-cta-bg: var(--color-brand-navy);
     --tb-cta-ink: oklch(0.99 0 0);
+    --tb-heading: var(--color-brand-navy);
+    --tb-heading-muted: var(--color-brand-slate);
+    --tb-heading-accent: var(--color-brand-orange);
   }
 }
 
