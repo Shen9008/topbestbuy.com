@@ -1,0 +1,32 @@
+---
+import Icon from '../ui/Icon.astro';
+import type { IconMapKey } from '../../icons';
+
+const items: { icon: IconMapKey; title: string; copy: string; detail?: string }[] = [
+  { icon: 'trust.editorial', title: 'Researched, not tested', copy: 'We read specs, retailers and expert reviews.' },
+  { icon: 'trust.dated', title: 'Dated, sourced prices', copy: 'Verify at checkout.', detail: 'MYR as reported' },
+  { icon: 'trust.scorecard', title: 'Seven weighted criteria', copy: 'Published on every card.', detail: 'Scorecard v1.0' },
+];
+---
+
+<div class="tb-methodology-strip tb-reveal-stagger" aria-label="How this list was built">
+  {
+    items.map((item) => (
+      <article class="tb-methodology-card">
+        <span class="tb-methodology-card__icon" aria-hidden="true">
+          <Icon name={item.icon} size={20} />
+        </span>
+        <div>
+          <h3 class="m-0 font-display text-base font-bold">{item.title}</h3>
+          <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">{item.copy}</p>
+          {item.detail ? (
+            <p class="m-0 mt-2 flex items-center gap-2 text-xs font-semibold text-[var(--tb-ink)]">
+              <span class="tb-check-mark" aria-hidden="true" />
+              {item.detail}
+            </p>
+          ) : null}
+        </div>
+      </article>
+    ))
+  }
+</div>

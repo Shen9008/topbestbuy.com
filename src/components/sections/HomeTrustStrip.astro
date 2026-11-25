@@ -1,0 +1,26 @@
+---
+import Icon from '../ui/Icon.astro';
+import type { IconMapKey } from '../../icons';
+
+const items: { key: IconMapKey; label: string; href: string }[] = [
+  { key: 'trust.no-paid', label: 'No paid rankings', href: '/editorial-policy' },
+  { key: 'trust.dated', label: 'Dated prices and sources', href: '/how-we-rank' },
+  { key: 'trust.scorecard', label: 'Scorecard published', href: '/how-we-rank' },
+  { key: 'trust.log', label: 'Corrections log', href: '/corrections' },
+];
+---
+
+<section class="tb-trust-strip" aria-label="Editorial independence">
+  <div class="tb-trust-strip__grid tb-reveal-stagger">
+    {
+      items.map((item) => (
+        <a href={item.href} class="tb-trust-pill no-underline">
+          <span class="tb-trust-pill__icon" aria-hidden="true">
+            <Icon name={item.key} size={20} strokeWidth={2} />
+          </span>
+          <span>{item.label}</span>
+        </a>
+      ))
+    }
+  </div>
+</section>
