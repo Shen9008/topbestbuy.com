@@ -97,40 +97,56 @@ const postCards = ['blog-is-an-air-fryer-worth-it', 'blog-mattress-firmness-for-
     })}
   </div>
 
-  <section class="my-10 grid gap-3 sm:grid-cols-3">
-    {
-      [
-        ['Pick in 30 seconds', 'Top 3 summary, then ten scored picks.'],
-        ['Know the trade-offs', 'Every pick lists what it does badly.'],
-        ['Built for Malaysia', 'MYR prices, local warranty notes, local retailers.'],
-      ].map(([title, copy]) => (
-        <div class="tb-card">
-          <h3 class="m-0 tb-h3">{title}</h3>
-          <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{copy}</p>
-        </div>
-      ))
-    }
+  <section class="tb-home-value my-10" aria-labelledby="home-value-heading">
+    <h2 id="home-value-heading" class="sr-only">How we help you decide</h2>
+    <div class="tb-reveal-stagger grid gap-3 sm:grid-cols-3">
+      {
+        (
+          [
+            ['score.total', '01', 'Pick in 30 seconds', 'Top 3 summary, then ten scored picks.'],
+            ['product.con', '02', 'Know the trade-offs', 'Every pick lists what it does badly.'],
+            ['score.avail', '03', 'Built for Malaysia', 'MYR prices, local warranty notes, local retailers.'],
+          ] as const
+        ).map(([icon, step, title, copy]) => (
+          <article class="tb-value-card">
+            <div class="tb-value-card__head">
+              <span class="tb-value-card__step" aria-hidden="true">{step}</span>
+              <span class="tb-value-card__icon" aria-hidden="true">
+                <Icon name={icon} size={24} />
+              </span>
+            </div>
+            <div>
+              <h3 class="m-0 font-display text-base font-bold tracking-tight">{title}</h3>
+              <p class="m-0 mt-2 text-sm leading-relaxed text-[var(--tb-muted)]">{copy}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
   </section>
 
-  <div class="flex flex-wrap gap-4 border-y border-[var(--tb-line)] py-4 text-sm font-semibold">
-    {
-      (
-        [
-          ['trust.no-paid', 'No paid rankings'],
-          ['trust.dated', 'Dated prices and sources'],
-          ['trust.scorecard', 'Scorecard published'],
-          ['trust.log', 'Corrections log'],
-        ] as const
-      ).map(([key, label]) => (
-        <span class="inline-flex items-center gap-2">
-          <span class="tb-icon-slot tb-icon-slot-pad-16" aria-hidden="true">
-            <Icon name={key} size={32} />
-          </span>
-          {label}
-        </span>
-      ))
-    }
-  </div>
+  <section class="tb-trust-strip tb-reveal" aria-label="Editorial standards">
+    <div class="tb-trust-strip__grid tb-reveal-stagger">
+      {
+        (
+          [
+            ['trust.no-paid', '/editorial-policy', 'No paid rankings'],
+            ['trust.dated', '/how-we-rank', 'Dated prices and sources'],
+            ['trust.scorecard', '/how-we-rank', 'Scorecard published'],
+            ['trust.log', '/corrections', 'Corrections log'],
+          ] as const
+        ).map(([key, href, label]) => (
+          <a href={href} class="tb-trust-pill">
+            <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
+              <Icon name={key} size={20} />
+            </span>
+            <span class="min-w-0 text-pretty">{label}</span>
+            <Icon name="nav.chevron-right" size={16} class="tb-trust-pill__chevron" aria-hidden="true" />
+          </a>
+        ))
+      }
+    </div>
+  </section>
 
   <section class="py-10">
     <h2 class="tb-h2">What are you shopping for?</h2>
