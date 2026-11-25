@@ -92,8 +92,8 @@ const relatedGuides = Object.entries(POSTS)
       </div>
     </aside>
 
-    <div class="tb-editorial-main min-w-0 space-y-10">
-      <section aria-labelledby="cat-live-heading">
+    <div class="tb-editorial-main min-w-0 tb-page-bands tb-page-bands--nested">
+      <section class="tb-page-bands__section" aria-labelledby="cat-live-heading">
         <SectionHeader titleId="cat-live-heading" title="Live lists" seeAllHref="/categories" seeAllLabel="Index" />
         {
           category.lists.length ? (
@@ -124,7 +124,7 @@ const relatedGuides = Object.entries(POSTS)
         }
       </section>
 
-      <section aria-labelledby="cat-soon-heading">
+      <section class="tb-page-bands__section" aria-labelledby="cat-soon-heading">
         <SectionHeader titleId="cat-soon-heading" title="Coming next" seeAllHref="/coming-next" seeAllLabel="Vote" />
         <div class="tb-scroll-strip mt-3">
           {category.soon.map((s) => (
@@ -135,7 +135,7 @@ const relatedGuides = Object.entries(POSTS)
         </div>
       </section>
 
-      <section aria-labelledby="cat-guides-heading">
+      <section class="tb-page-bands__section" aria-labelledby="cat-guides-heading">
         <SectionHeader
           titleId="cat-guides-heading"
           title="Related guides"

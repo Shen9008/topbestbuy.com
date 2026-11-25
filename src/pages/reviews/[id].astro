@@ -164,8 +164,8 @@ const reviewSchema = {
       </div>
     </aside>
 
-    <div class="tb-editorial-main min-w-0 space-y-10">
-      <section id="review-verdict" class="scroll-mt-28">
+    <div class="tb-editorial-main min-w-0 space-y-0">
+      <section id="review-verdict" class="tb-band scroll-mt-28">
         <div class="tb-card tb-card--editorial">
           <p class="text-xs font-bold uppercase text-[var(--tb-muted)]">Verdict</p>
           <p class="tb-score text-4xl">
@@ -189,7 +189,7 @@ const reviewSchema = {
         </div>
       </section>
 
-      <section id="review-scorecard" class="scroll-mt-28">
+      <section id="review-scorecard" class="tb-band tb-band--navy scroll-mt-28">
         <SectionHeader title="Scorecard" description="Seven criteria, same weights on every list." />
         <div class="tb-card tb-card--editorial mt-4">
           <div class="tb-tablewrap">
@@ -217,7 +217,7 @@ const reviewSchema = {
         </div>
       </section>
 
-      <section id="review-usage" class="scroll-mt-28">
+      <section id="review-usage" class="tb-band scroll-mt-28">
         <SectionHeader title="Usage and trade-offs" seeAllHref="/how-we-rank" seeAllLabel="Weights" />
         <div class="mt-4 grid gap-4 lg:grid-cols-2">
           <div class="tb-card tb-card--editorial">
@@ -250,7 +250,7 @@ const reviewSchema = {
         </div>
       </section>
 
-      <section class="scroll-mt-28">
+      <section class="tb-band tb-band--navy scroll-mt-28">
         <div class="tb-prose">
           <h2>What experts agree on</h2>
           <p>
@@ -267,7 +267,7 @@ const reviewSchema = {
         </div>
       </section>
 
-      <section id="review-evidence" class="scroll-mt-28">
+      <section id="review-evidence" class="tb-band scroll-mt-28">
         <SectionHeader title="Evidence sheet" description="Specs and prices with sources and dates." />
         <div class="tb-card tb-card--editorial mt-4">
           <div class="tb-tablewrap">
@@ -317,7 +317,7 @@ const reviewSchema = {
         </div>
       </section>
 
-      <section id="review-alternatives" class="scroll-mt-28">
+      <section id="review-alternatives" class="tb-band tb-band--navy scroll-mt-28">
         <SectionHeader
           title="Alternatives"
           seeAllHref={`/${product.list}`}

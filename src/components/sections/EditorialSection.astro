@@ -1,6 +1,6 @@
 ---
 interface Props {
-  band?: 'default' | 'alt' | 'none';
+  band?: 'default' | 'alt' | 'navy' | 'auto' | 'none';
   class?: string;
   id?: string;
   'aria-labelledby'?: string;
@@ -16,7 +16,13 @@ const {
 } = Astro.props;
 
 const bandClass =
-  band === 'default' ? 'tb-band' : band === 'alt' ? 'tb-band tb-band--alt' : 'tb-section tb-section--editorial';
+  band === 'default'
+    ? 'tb-band'
+    : band === 'alt' || band === 'navy'
+      ? 'tb-band tb-band--navy'
+      : band === 'auto'
+        ? 'tb-page-bands__section'
+        : 'tb-section tb-section--editorial';
 const motionClass = band !== 'none' ? 'tb-reveal' : '';
 ---
 
