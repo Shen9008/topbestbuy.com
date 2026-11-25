@@ -1,6 +1,6 @@
 # Icon system
 
-TopBestBuy uses a single icon family: **[Lucide](https://lucide.dev/)** (ISC licence). Do not use Unicode emoji or ad‑hoc SVGs in UI components.
+TopBestBuy uses **[Lucide](https://lucide.dev/)** (ISC licence) for **navigation and functional UI**. Decorative **feature moments** (home list tiles, value strip, trust pills, tool cards) use premium custom SVGs — see [FEATURE-VISUALS.md](./FEATURE-VISUALS.md). Do not use Unicode emoji in UI components.
 
 ## Files
 
@@ -138,7 +138,7 @@ Rendered by `src/components/ui/ListVisual.astro` inside `.tb-list-visual-well` (
 `tests/icon-policy.test.ts` fails CI if:
 
 - Emoji appear under `src/` (excluding `src/data/`)
-- Raw `<svg>` appears outside `Icon.astro` / `Icon.tsx` (list illustrations live under `public/icons/premium/` and load via `ListVisual.astro`)
+- Raw `<svg>` appears outside `Icon.astro` / `Icon.tsx` (premium assets load via `VisualWell.astro` / `set:html` from `public/icons/premium/`)
 - Any `icon-map` key fails to resolve to Lucide nodes
 
 Run: `npm run test`

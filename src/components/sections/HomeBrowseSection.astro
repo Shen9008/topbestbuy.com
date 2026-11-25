@@ -1,11 +1,13 @@
 ---
 import Icon from '../ui/Icon.astro';
+import ListVisual from '../ui/ListVisual.astro';
+import { hasListVisual } from '../../lib/list-visuals';
 import SectionHeader from './SectionHeader.astro';
 import { CATS } from '../../data/categories';
 import { LISTS } from '../../data/lists';
 import { RANKED, listSlugs } from '../../lib/catalog';
 import { productFullName } from '../../lib/format';
-import { CATEGORY_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
+import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
 ---
 
 <section class="tb-section" aria-labelledby="home-browse-heading">
@@ -35,16 +37,11 @@ import { CATEGORY_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
       listSlugs().map((slug) => {
         const L = LISTS[slug as keyof typeof LISTS];
         const p = RANKED[slug]?.[0];
-        const icon = LIST_SLUG_ICONS[slug];
         return (
           <a href={`/${slug}`} class="tb-tile tb-studio-tile">
             <span class="tb-pill">{CATS.find((c) => c.id === L.cat)?.name}</span>
             <div class="tb-studio-tile__head">
-              {icon ? (
-                <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
-                  <Icon name={icon} size={20} />
-                </span>
-              ) : null}
+              {hasListVisual(slug) ? <ListVisual slug={slug} size="md" /> : null}
               <h3 class="m-0 font-display text-lg font-bold leading-snug">{L.short}: Top 10 in Malaysia</h3>
             </div>
             {

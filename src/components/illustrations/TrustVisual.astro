@@ -1,0 +1,14 @@
+---
+import VisualWell from './VisualWell.astro';
+import { TRUST_VISUAL_IDS, type TrustVisualId } from '../../lib/feature-visuals';
+
+interface Props {
+  id: TrustVisualId;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { id, size = 'sm' } = Astro.props;
+const asset = TRUST_VISUAL_IDS[id];
+---
+
+<VisualWell asset={asset} size={size} tone="raised" />

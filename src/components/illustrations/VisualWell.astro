@@ -1,0 +1,33 @@
+---
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+interface Props {
+  asset: string;
+  size?: 'sm' | 'md' | 'lg';
+  tone?: 'default' | 'raised';
+  class?: string;
+}
+
+const { asset, size = 'sm', tone = 'default', class: className } = Astro.props;
+
+const svgPath = join(process.cwd(), 'public', 'icons', 'premium', `${asset}.svg`);
+let markup = '';
+try {
+  markup = readFileSync(svgPath, 'utf-8');
+} catch {
+  return;
+}
+---
+
+<span
+  class:list={[
+    'tb-visual-well',
+    size === 'md' && 'tb-visual-well--md',
+    size === 'lg' && 'tb-visual-well--lg',
+    tone === 'raised' && 'tb-visual-well--raised',
+    className,
+  ]}
+  aria-hidden="true"
+  set:html={markup}
+/>

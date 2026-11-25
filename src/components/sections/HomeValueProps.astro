@@ -1,12 +1,12 @@
 ---
-import Icon from '../ui/Icon.astro';
+import ValueVisual from '../illustrations/ValueVisual.astro';
 import SectionHeader from './SectionHeader.astro';
-import type { IconMapKey } from '../../icons';
+import type { ValueVisualId } from '../../lib/feature-visuals';
 
-const items: { step: string; icon: IconMapKey; title: string; copy: string }[] = [
-  { step: '01', icon: 'tool.finder', title: 'Pick in 30 seconds', copy: 'Top 3 summary, then ten scored picks.' },
-  { step: '02', icon: 'trust.scorecard', title: 'Know the trade-offs', copy: 'Every pick lists what it does badly.' },
-  { step: '03', icon: 'trust.dated', title: 'Built for Malaysia', copy: 'MYR prices, local warranty notes, local retailers.' },
+const items: { step: string; visual: ValueVisualId; title: string; copy: string }[] = [
+  { step: '01', visual: 'pick', title: 'Pick in 30 seconds', copy: 'Top 3 summary, then ten scored picks.' },
+  { step: '02', visual: 'tradeoffs', title: 'Know the trade-offs', copy: 'Every pick lists what it does badly.' },
+  { step: '03', visual: 'malaysia', title: 'Built for Malaysia', copy: 'MYR prices, local warranty notes, local retailers.' },
 ];
 ---
 
@@ -25,7 +25,7 @@ const items: { step: string; icon: IconMapKey; title: string; copy: string }[] =
           <div class="tb-value-card__head">
             <span class="tb-value-card__step">{item.step}</span>
             <span class="tb-value-card__icon" aria-hidden="true">
-              <Icon name={item.icon} size={20} strokeWidth={2} />
+              <ValueVisual id={item.visual} size="lg" />
             </span>
           </div>
           <h3 class="m-0 font-display text-base font-bold">{item.title}</h3>

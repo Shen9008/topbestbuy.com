@@ -1,0 +1,14 @@
+---
+import VisualWell from './VisualWell.astro';
+import { VALUE_VISUAL_IDS, type ValueVisualId } from '../../lib/feature-visuals';
+
+interface Props {
+  id: ValueVisualId;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { id, size = 'lg' } = Astro.props;
+const asset = VALUE_VISUAL_IDS[id];
+---
+
+<VisualWell asset={asset} size={size} />
