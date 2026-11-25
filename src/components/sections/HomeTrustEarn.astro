@@ -1,0 +1,52 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+const items = [
+  {
+    title: 'Published scorecard',
+    copy: 'Seven weighted criteria, shown on every card.',
+    href: '/how-we-rank',
+    cta: 'Read how we rank',
+  },
+  {
+    title: 'Sources on every pick',
+    copy: 'Dated prices with linked sources and honest gaps.',
+    href: '/editorial-policy',
+    cta: 'Read our editorial policy',
+  },
+  {
+    title: 'Independent of commissions',
+    copy: 'Affiliate income never changes a rank.',
+    href: '/affiliate-disclosure',
+    cta: 'See how we make money',
+  },
+  {
+    title: 'Corrections in the open',
+    copy: 'Every fix is logged with a date.',
+    href: '/corrections',
+    cta: 'View corrections',
+  },
+] as const;
+---
+
+<section class="tb-section tb-reveal" aria-labelledby="home-trust-earn-heading">
+  <SectionHeader
+    titleId="home-trust-earn-heading"
+    eyebrow="Why trust TopBestBuy"
+    title="How we earn your trust"
+    align="center"
+  />
+  <div class="tb-feature-grid tb-reveal-stagger mt-8">
+    {
+      items.map((item) => (
+        <article class="tb-value-card">
+          <h3 class="m-0 font-display text-base font-bold">{item.title}</h3>
+          <p class="m-0 mt-2 text-sm leading-relaxed text-[var(--tb-muted)]">{item.copy}</p>
+          <a href={item.href} class="tb-section-link mt-4 justify-start px-0 text-sm">
+            {item.cta}
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</section>

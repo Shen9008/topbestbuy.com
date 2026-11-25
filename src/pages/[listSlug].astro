@@ -185,11 +185,9 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
         [
           ['sec-compare', 'Compare'],
           ['sec-picks', 'All 10'],
-          ['sec-best', 'Best for'],
-          ['sec-price', 'Price'],
+          ['sec-how', 'How we chose'],
           ['sec-guide', 'Guide'],
           ['sec-faq', 'FAQ'],
-          ['sec-sources', 'Sources'],
         ].map(([id, label]) => (
           <a href={`#${id}`} data-jump-sec={id} class="shrink-0 snap-start">
             {label}

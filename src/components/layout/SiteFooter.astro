@@ -57,6 +57,8 @@ const trustLinks = [
         <li><a href="/tools?tool=finder">Product finder</a></li>
         <li><a href="/tools?tool=airfryer">Air fryer size</a></li>
         <li><a href="/tools?tool=purifier">Purifier room size</a></li>
+        <li><a href="/tools?tool=vacuum">Vacuum chooser</a></li>
+        <li><a href="/tools?tool=cleanser">Cleanser matcher</a></li>
         <li>
           <a href="/compare" class="inline-flex items-center gap-2">
             <Icon name="tool.compare" size={16} />
@@ -68,6 +70,9 @@ const trustLinks = [
     <div>
       <p class="font-semibold uppercase tracking-wide text-[var(--tb-muted)]">Trust</p>
       <ul class="mt-3 list-none space-y-2 p-0">
+        <li>
+          <a href="/trust" class="font-semibold">Trust centre</a>
+        </li>
         {
           trustLinks.map((route) => {
             const icon = route.icon as IconMapKey | undefined;

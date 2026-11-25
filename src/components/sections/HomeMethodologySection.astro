@@ -1,0 +1,41 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+const steps = [
+  {
+    title: '1. Research',
+    copy:
+      'We build a long list, then filter by availability in Malaysia, recalls and enough evidence. Every spec and price gets a source and a date.',
+  },
+  {
+    title: '2. Score',
+    copy:
+      'Seven criteria with fixed weights, plus use-case scores. Scores are locked before anyone opens an affiliate dashboard.',
+  },
+  {
+    title: '3. Publish and refresh',
+    copy:
+      'Prices monthly, full re-score quarterly, and a visible changelog. Mistakes go in the corrections log.',
+  },
+] as const;
+---
+
+<section class="tb-section tb-reveal" aria-labelledby="home-method-heading">
+  <SectionHeader
+    titleId="home-method-heading"
+    eyebrow="How a list is made"
+    title="Three steps, all public"
+    seeAllHref="/how-we-rank"
+    seeAllLabel="Read the full scorecard"
+  />
+  <div class="tb-studio-grid tb-reveal-stagger mt-8">
+  {
+    steps.map((step) => (
+      <article class="tb-card">
+        <h3 class="m-0 tb-h3">{step.title}</h3>
+        <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{step.copy}</p>
+      </article>
+    ))
+  }
+  </div>
+</section>

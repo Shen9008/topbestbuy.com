@@ -1,0 +1,42 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { CATS } from '../../data/categories';
+import { LISTS } from '../../data/lists';
+import { listSlugs } from '../../lib/catalog';
+
+const listCount = listSlugs().length;
+const liveCats = CATS.filter((c) => c.lists.length);
+---
+
+<section class="tb-section tb-reveal" aria-labelledby="home-all-lists-heading">
+  <SectionHeader
+    titleId="home-all-lists-heading"
+    eyebrow="All Top 10 lists"
+    title={`${listCount} researched lists, one scorecard`}
+    description="Every live list uses the same published weights — jump straight into your category."
+  />
+  <div class="tb-studio-grid tb-reveal-stagger mt-8">
+    {
+      liveCats.map((c) => (
+        <article class="tb-card">
+          <h3 class="m-0 tb-h3">
+            <a href={`/category/${c.id}`} class="no-underline text-[var(--tb-ink)] hover:text-[var(--tb-accent)]">
+              {c.name}
+            </a>
+          </h3>
+          <ul class="m-0 mt-3 list-none space-y-2 p-0 text-sm">
+            {
+              c.lists.map((slug) => (
+                <li>
+                  <a href={`/${slug}`} class="font-semibold text-[var(--tb-accent)] no-underline hover:underline">
+                    {LISTS[slug as keyof typeof LISTS].short}: Top 10
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>
