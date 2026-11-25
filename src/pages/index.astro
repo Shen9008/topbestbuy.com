@@ -15,6 +15,7 @@ import { LISTS } from '../data/lists';
 import { listSlugs, topPick } from '../lib/catalog';
 import { productFullName } from '../lib/format';
 import { LIST_SLUG_ICONS } from '../icons';
+import TrustPathModule from '../components/sections/TrustPathModule.astro';
 
 const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
 ---
@@ -43,7 +44,8 @@ const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
         <button type="button" id="home-open-search" class="tb-btn">Search</button>
       </div>
       <p class="mt-3 text-xs text-[var(--tb-muted)]">
-        Or <a href="/tools?tool=finder">take the 3-question finder</a>
+        Or <a href="/tools?tool=finder">take the 3-question finder</a> ·{' '}
+        <a href="/compare">compare picks</a> · <a href="/guides">read guides</a>
       </p>
     </div>
     <div class="tb-hero__media">
@@ -111,6 +113,10 @@ const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
 
   <HomeValueProps />
   <HomeTrustStrip />
+
+  <EditorialSection band="default" aria-label="Trust and policies">
+    <TrustPathModule />
+  </EditorialSection>
 
   <EditorialSection band="alt">
     <HomeBrowseSection bare />

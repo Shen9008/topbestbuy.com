@@ -1,8 +1,52 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StubShell from '../components/pages/StubShell.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import TrustPathModule from '../components/sections/TrustPathModule.astro';
+import { FOUNDER } from '../data/founder';
 ---
 
-<BaseLayout title="Team" description="TopBestBuy editorial team (stub).">
-  <StubShell title="Team" kicker="Trust" />
+<BaseLayout
+  title="Editorial team"
+  description="Who runs TopBestBuy: founder-led product research for Malaysia with transparent scoring."
+  canonical="/team"
+>
+  <Breadcrumbs items={[{ label: 'Trust', href: '/about' }, { label: 'Team' }]} />
+
+  <h1 class="tb-h1">Team</h1>
+  <p class="mt-2 max-w-[52ch] text-lg text-[var(--tb-muted)]">
+    TopBestBuy is founder-led editorial research. Rankings use a published scorecard, not paid
+    placement.
+  </p>
+
+  <article class="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+    <a
+      href={FOUNDER.linkedIn}
+      target="_blank"
+      rel="noopener noreferrer me"
+      class="tb-card tb-card--editorial no-underline"
+    >
+      <p class="m-0 text-xs font-bold uppercase tracking-wide text-[var(--tb-muted)]">{FOUNDER.role}</p>
+      <h2 class="mt-2 mb-0 tb-h2">{FOUNDER.name}</h2>
+      <p class="mt-1 text-sm text-[var(--tb-muted)]">{FOUNDER.location}</p>
+      <p class="mt-3 text-sm font-semibold text-[var(--tb-accent)]">LinkedIn profile →</p>
+    </a>
+    <div class="tb-prose">
+      <p>{FOUNDER.shortBio}</p>
+      <p>
+        <a href="/about">About TopBestBuy</a> · <a href="/editorial-policy">Editorial policy</a> ·{' '}
+        <a href="/how-we-rank">How we rank</a>
+      </p>
+    </div>
+  </article>
+
+  <section class="tb-band tb-band--alt mt-10 py-8">
+    <div class="mx-auto max-w-[var(--content-max)] px-4">
+      <h2 class="mt-0 tb-h3">Policies and contact</h2>
+      <p class="max-w-[65ch] text-sm text-[var(--tb-muted)]">
+        Lists are researched from expert reviews, owner feedback and official specs — we do not
+        accept payment for rank. Every correction is logged.
+      </p>
+      <TrustPathModule />
+    </div>
+  </section>
 </BaseLayout>

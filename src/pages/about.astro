@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import TrustPathModule from '../components/sections/TrustPathModule.astro';
+import { FOUNDER } from '../data/founder';
 ---
 
 <BaseLayout title="About us" description="Why TopBestBuy exists: short, honest Top 10 lists for people in Malaysia." canonical="/about">
@@ -10,6 +12,12 @@ import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
     <p>
       TopBestBuy helps people in Malaysia pick a good product without reading fifty tabs. Each
       list is ten picks, ranked on a published scorecard, with trade-offs stated plainly.
+    </p>
+    <h2>Founder</h2>
+    <p>
+      {FOUNDER.shortBio}{' '}
+      <a href="/team">Meet the team</a> ·{' '}
+      <a href={FOUNDER.linkedIn} rel="noopener noreferrer me">LinkedIn</a>
     </p>
     <h2>Who we write for</h2>
     <p>
@@ -24,4 +32,7 @@ import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
       <li>Mistakes are fixed and logged.</li>
     </ul>
   </article>
+  <div class="mt-8 max-w-[var(--prose-max)]">
+    <TrustPathModule />
+  </div>
 </BaseLayout>

@@ -1,0 +1,32 @@
+# TopBestBuy — topbestbuy.online
+
+> Editorial Top 10 product lists for Malaysia. Scored on a published scorecard; prices in MYR; desk research with cited sources.
+
+## Primary content
+- Home: https://topbestbuy.online/
+- All categories: https://topbestbuy.online/categories
+- Guides: https://topbestbuy.online/guides
+- Tools: https://topbestbuy.online/tools
+- Compare: https://topbestbuy.online/compare
+
+## Trust and policies
+- About: https://topbestbuy.online/about
+- Team: https://topbestbuy.online/team
+- Editorial policy: https://topbestbuy.online/editorial-policy
+- How we rank: https://topbestbuy.online/how-we-rank
+- Affiliate disclosure: https://topbestbuy.online/affiliate-disclosure
+- Corrections: https://topbestbuy.online/corrections
+- Contact: https://topbestbuy.online/contact
+
+## Live Top 10 lists
+- https://topbestbuy.online/best-air-fryers-malaysia
+- https://topbestbuy.online/best-air-purifiers-malaysia
+- https://topbestbuy.online/best-mattress-malaysia
+- https://topbestbuy.online/best-vacuum-cleaners-malaysia
+- https://topbestbuy.online/best-wireless-earbuds-malaysia
+- https://topbestbuy.online/best-facial-cleansers-malaysia
+- https://topbestbuy.online/best-washing-machines-malaysia
+- https://topbestbuy.online/best-laptops-for-students-malaysia
+- https://topbestbuy.online/best-smart-watches-malaysia
+- https://topbestbuy.online/best-smart-tvs-malaysia
+- https://topbestbuy.online/best-running-shoes-malaysia

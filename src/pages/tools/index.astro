@@ -7,6 +7,8 @@ import EditorialSection from '../../components/sections/EditorialSection.astro';
 import SectionHeader from '../../components/sections/SectionHeader.astro';
 import ToolsHub from '../../components/islands/ToolsHub';
 import type { ToolVisualId } from '../../lib/feature-visuals';
+import TrustPathModule from '../../components/sections/TrustPathModule.astro';
+import { LISTS } from '../../data/lists';
 
 const initialTool = Astro.url.searchParams.get('tool') ?? undefined;
 
@@ -77,5 +79,26 @@ const quickTools: [ToolVisualId, string, string][] = [
         Compare products side by side
       </a>
     </p>
+  </EditorialSection>
+
+  <EditorialSection aria-labelledby="tools-lists-heading">
+    <SectionHeader
+      titleId="tools-lists-heading"
+      title="Lists these tools support"
+      seeAllHref="/categories"
+      seeAllLabel="All lists"
+    />
+    <div class="tb-scroll-strip mt-4">
+      {
+        Object.keys(LISTS).map((slug) => (
+          <a href={`/${slug}`} class="tb-chip shrink-0">
+            {LISTS[slug as keyof typeof LISTS].short}
+          </a>
+        ))
+      }
+    </div>
+    <div class="mt-8">
+      <TrustPathModule />
+    </div>
   </EditorialSection>
 </BaseLayout>

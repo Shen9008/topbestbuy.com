@@ -1,0 +1,37 @@
+---
+import { FOUNDER } from '../../data/founder';
+
+/** Compact E-E-A-T paths — reuse on home, lists, reviews, guides. */
+const links = [
+  { href: '/about', label: 'About' },
+  { href: '/team', label: 'Team' },
+  { href: '/editorial-policy', label: 'Editorial policy' },
+  { href: '/how-we-rank', label: 'How we rank' },
+  { href: '/affiliate-disclosure', label: 'Affiliate disclosure' },
+  { href: '/corrections', label: 'Corrections' },
+  { href: '/contact', label: 'Contact' },
+] as const;
+---
+
+<aside class="tb-eeat" aria-label="Editorial trust and policies">
+  <p class="m-0 text-xs font-bold uppercase tracking-[0.12em] text-[var(--tb-muted)]">How we work</p>
+  <p class="mt-2 mb-3 text-sm text-[var(--tb-muted)]">
+    Independent rankings, published scorecards, and a public corrections log.{' '}
+    <a href="/team" class="font-semibold text-[var(--tb-ink)] no-underline hover:text-[var(--tb-accent)]">
+      {FOUNDER.oneLiner}
+    </a>
+  </p>
+  <nav aria-label="Trust pages">
+    <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+      {
+        links.map((item) => (
+          <li>
+            <a href={item.href} class="tb-chip text-xs font-semibold no-underline">
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</aside>
