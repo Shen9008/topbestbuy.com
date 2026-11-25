@@ -1,0 +1,38 @@
+---
+import ToolVisual from '../illustrations/ToolVisual.astro';
+import type { ToolVisualId } from '../../lib/feature-visuals';
+
+interface Props {
+  id: ToolVisualId;
+  title: string;
+  description: string;
+  cta?: string;
+  class?: string;
+  heading?: 'h2' | 'h3';
+}
+
+const {
+  id,
+  title,
+  description,
+  cta = 'Open tool →',
+  class: className,
+  heading = 'h3',
+} = Astro.props;
+
+const HeadingTag = heading;
+---
+
+<a
+  href={`/tools?tool=${id}`}
+  class:list={['tb-tile', 'tb-utility-tile', className]}
+>
+  <div class="tb-utility-tile__icon" aria-hidden="true">
+    <ToolVisual id={id} size="md" />
+  </div>
+  <div>
+    <HeadingTag class="m-0 font-display text-base font-bold">{title}</HeadingTag>
+    <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">{description}</p>
+  </div>
+  <span class="tb-utility-tile__cta text-xs font-bold text-[var(--tb-accent)]">{cta}</span>
+</a>

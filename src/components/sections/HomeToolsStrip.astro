@@ -1,5 +1,5 @@
 ---
-import ToolVisual from '../illustrations/ToolVisual.astro';
+import HomeToolTile from './HomeToolTile.astro';
 import SectionHeader from './SectionHeader.astro';
 import type { ToolVisualId } from '../../lib/feature-visuals';
 
@@ -25,16 +25,7 @@ const tools: [ToolVisualId, string, string][] = [
   <div class="tb-utility-grid tb-reveal-stagger mt-8">
     {
       tools.map(([tool, title, desc]) => (
-          <a href={`/tools?tool=${tool}`} class="tb-tile tb-utility-tile">
-            <div class="tb-utility-tile__icon" aria-hidden="true">
-              <ToolVisual id={tool} size="md" />
-            </div>
-            <div>
-              <h3 class="m-0 font-display text-base font-bold">{title}</h3>
-              <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">{desc}</p>
-            </div>
-            <span class="tb-utility-tile__cta text-xs font-bold text-[var(--tb-accent)]">Open tool →</span>
-          </a>
+        <HomeToolTile id={tool} title={title} description={desc} />
       ))
     }
   </div>

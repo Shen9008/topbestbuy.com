@@ -37,12 +37,15 @@ describe('premium feature illustrations', () => {
 
 describe('home section wiring', () => {
   const root = join(import.meta.dirname, '..', 'src', 'components', 'sections');
+  const pages = join(import.meta.dirname, '..', 'src', 'pages');
 
   it('uses illustration components instead of Lucide in feature regions', () => {
     const value = readFileSync(join(root, 'HomeValueProps.astro'), 'utf8');
     const trust = readFileSync(join(root, 'HomeTrustStrip.astro'), 'utf8');
     const browse = readFileSync(join(root, 'HomeBrowseSection.astro'), 'utf8');
     const tools = readFileSync(join(root, 'HomeToolsStrip.astro'), 'utf8');
+    const tile = readFileSync(join(root, 'HomeToolTile.astro'), 'utf8');
+    const toolsPage = readFileSync(join(pages, 'tools', 'index.astro'), 'utf8');
 
     expect(value).toContain('ValueVisual');
     expect(value).not.toContain('<Icon');
@@ -50,8 +53,12 @@ describe('home section wiring', () => {
     expect(trust).not.toContain('<Icon');
     expect(browse).toContain('ListVisual');
     expect(browse).not.toContain('LIST_SLUG_ICONS');
-    expect(tools).toContain('ToolVisual');
+    expect(tools).toContain('HomeToolTile');
     expect(tools).not.toContain('TOOL_TAB_ICONS');
+    expect(tile).toContain('ToolVisual');
+    expect(tile).toContain('tb-utility-tile');
+    expect(toolsPage).toContain('HomeToolTile');
+    expect(toolsPage).not.toContain('tb-utility-tile__icon');
   });
 });
 

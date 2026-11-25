@@ -23,6 +23,7 @@ Brand tokens: canvas `#141414`, accent `#FF7900` at **15–25%** opacity in SVG 
 | `ValueVisual` | `src/components/illustrations/ValueVisual.astro` | `id`: `pick` \| `tradeoffs` \| `malaysia` |
 | `TrustVisual` | `src/components/illustrations/TrustVisual.astro` | `id`: `no-paid` \| `dated` \| `scorecard` \| `log` |
 | `ToolVisual` | `src/components/illustrations/ToolVisual.astro` | `id`: tool tab id (see `src/lib/feature-visuals.ts`) |
+| `HomeToolTile` | `src/components/sections/HomeToolTile.astro` | `id`, `title`, `description`, optional `cta` / `heading` |
 
 CSS: `.tb-visual-well` in `src/styles/components.css` (inset glow, 32px radius, hover accent on parent tiles).
 
