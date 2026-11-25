@@ -23,10 +23,9 @@ const { cat } = Astro.params;
 const category = getCategory(cat!);
 if (!category) throw new Error(`Unknown category ${cat}`);
 const catIcon = CATEGORY_ICONS[cat!] as IconMapKey | undefined;
+const liveListSlugs = new Set(category.lists as readonly string[]);
 const relatedGuides = Object.entries(POSTS)
-  .filter(([, p]) =>
-    (p.related as readonly string[]).some((slug) => category.lists.includes(slug)),
-  )
+  .filter(([, p]) => (p.related as readonly string[]).some((slug) => liveListSlugs.has(slug)))
   .slice(0, 3);
 ---
 
