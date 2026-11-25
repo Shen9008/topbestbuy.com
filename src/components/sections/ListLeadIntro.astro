@@ -1,0 +1,59 @@
+---
+import { productFullName } from '../../lib/format';
+import { introToParagraphs } from '../../lib/split-prose';
+import type { RankedProduct } from '../../lib/scoring';
+
+interface Props {
+  part: 'short' | 'intro';
+  top3?: RankedProduct[];
+  audience?: string;
+  introHtml?: string;
+}
+
+const { part, top3 = [], audience = '', introHtml = '' } = Astro.props;
+const first = top3[0];
+const introParagraphs = part === 'intro' ? introToParagraphs(introHtml) : [];
+const useIntroColumns = introParagraphs.length >= 3;
+---
+
+{
+  part === 'short' && (
+    <section class="tb-list-lead tb-list-lead--short" aria-label="Short answer">
+      <div class="tb-list-lead__short">
+        <p class="tb-list-lead__label">
+          <strong>Short answer:</strong>
+        </p>
+        {first && (
+          <p class="tb-list-lead__answer">
+            The top-scoring pick on our scorecard is {productFullName(first)} (
+            {first.total.toFixed(1)}/100).
+          </p>
+        )}
+        {top3[1] && (
+          <p class="tb-list-lead__answer">
+            {productFullName(top3[1])} is a close second
+            {top3[2] ? `, and ${productFullName(top3[2])} is third` : ''}.
+          </p>
+        )}
+        {!top3[1] && top3[2] && (
+          <p class="tb-list-lead__answer">{productFullName(top3[2])} is a close second.</p>
+        )}
+        {audience && <p class="tb-list-lead__answer">This guide is for {audience}.</p>}
+      </div>
+    </section>
+  )
+}
+
+{
+  part === 'intro' && introParagraphs.length > 0 && (
+    <section class="tb-list-lead tb-list-lead--intro" aria-label="How this list was built">
+      <div
+        class:list={['tb-list-lead__intro', { 'tb-list-lead__intro--columns': useIntroColumns }]}
+      >
+        {introParagraphs.map((para) => (
+          <p>{para}</p>
+        ))}
+      </div>
+    </section>
+  )
+}
