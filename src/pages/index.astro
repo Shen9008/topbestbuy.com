@@ -23,7 +23,7 @@ const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
   title="Top 10 best buys for Malaysia"
   description="Ten picks, clear reasons, no hype. Scored Top 10 lists for appliances, home and lifestyle in Malaysia."
 >
-  <section class="tb-hero tb-hero--hub tb-reveal" aria-label="Introduction">
+  <section class="tb-hero tb-hero--hub tb-hero--has-media tb-reveal" aria-label="Introduction">
     <div>
       <p class="m-0 text-xs font-semibold text-[var(--tb-muted)]">
         Malaysia edition · updated {SITE_DATE} · prices in MYR
@@ -46,8 +46,8 @@ const tops = listSlugs().map((slug) => topPick(slug)).filter(Boolean);
         Or <a href="/tools?tool=finder">take the 3-question finder</a>
       </p>
     </div>
-    <div class="mt-8 hidden min-h-[14rem] lg:mt-0 lg:block">
-      <ImageSlot slotId="home-hero" aspect="match" label="Home hero banner" class="h-full" />
+    <div class="tb-hero__media">
+      <ImageSlot slotId="home-hero" aspect="match" label="Home hero banner" class="h-full min-h-0 flex-1" />
     </div>
   </section>
 
