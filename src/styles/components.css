@@ -427,11 +427,11 @@
   }
 
   .tb-disclosure {
-    @apply my-4 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm;
+    @apply my-4 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm leading-[var(--leading-prose)];
   }
 
   .tb-prose {
-    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+    @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] leading-[var(--leading-prose)] [&_a]:text-[var(--tb-accent)] [&_a]:underline [&_a]:underline-offset-4 [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
   }
 
   .tb-prose h2 {
@@ -453,6 +453,11 @@
   .tb-table th,
   .tb-table td {
     @apply border-b border-[var(--tb-line)] px-3 py-2.5 text-left align-top;
+  }
+
+  .tb-table td,
+  .tb-table tbody th {
+    line-height: var(--leading-prose);
   }
 
   .tb-table th {
@@ -599,7 +604,7 @@
   }
 
   .tb-callout {
-    @apply my-4 rounded-[var(--radius-sm)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm;
+    @apply my-4 rounded-[var(--radius-sm)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm leading-[var(--leading-prose)];
   }
 
   .tb-icon {
