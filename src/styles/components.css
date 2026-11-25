@@ -142,15 +142,27 @@
   }
 
   .tb-hero--hub {
-    @apply relative max-w-none py-8 text-left sm:py-10 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10 lg:text-left;
-  }
-
-  .tb-hero--hub.tb-hero--has-media {
-    @apply lg:items-stretch;
+    @apply relative max-w-none py-8 text-left sm:py-10 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10 lg:text-left;
   }
 
   .tb-hero__media {
-    @apply mt-8 hidden min-h-0 lg:mt-0 lg:flex lg:h-full lg:min-h-full lg:flex-col;
+    @apply mx-auto mt-8 flex w-full max-w-[500px] flex-col lg:mx-0 lg:mt-0 lg:h-[400px] lg:w-[500px] lg:max-w-none lg:shrink-0;
+    aspect-ratio: 500 / 400;
+  }
+
+  @media (min-width: 1024px) {
+    .tb-hero__media {
+      aspect-ratio: auto;
+    }
+  }
+
+  .tb-hero-banner {
+    @apply mx-auto w-full max-w-[500px];
+    aspect-ratio: 500 / 400;
+  }
+
+  .tb-hero__media :global(figure) {
+    @apply h-full min-h-0 w-full;
   }
 
   .tb-hero--hub::before {
