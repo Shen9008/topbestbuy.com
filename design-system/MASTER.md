@@ -22,7 +22,7 @@
 | Nav height | Logo ~36–44 px tall on desktop |
 | Don’t | Stretch, rotate, arbitrary recolour, drop shadows, gradients on logo |
 
-**Repo assets:** `public/brand/logo-mark.png`, `logo-wordmark.svg`, `logo-wordmark-dark.png`, `public/favicon.svg`.
+**Repo assets:** `public/brand/logo-mark.png`, `logo-wordmark.svg`, `logo-wordmark-dark.svg`, `public/favicon.svg`. Sync from `TopBestBuy.com` via `npm run brand:sync`.
 
 ## Global Rules
 
