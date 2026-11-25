@@ -1,101 +1,92 @@
-# Action Network–inspired redesign map (P0)
+# Action Network–inspired redesign map
 
-Phase 0 shell + home + list/category hub templates for **topbestbuy.online**. Layout and information rhythm borrow from [Action Network](https://www.actionnetwork.com/) (dense editorial hub, section bands, card grids, sticky wayfinding, horizontal category discoverability). **Colour and type stay TopBestBuy** (navy `#061D32`, orange `#FF7900`, dark canvas `#141414` default) per `docs/brand-guidelines.md`.
+Layout and information rhythm borrow from [Action Network](https://www.actionnetwork.com/) (dense editorial hub, section bands, card grids, sticky wayfinding, horizontal category discoverability). **Colour and type stay TopBestBuy** (navy `#061D32`, orange `#FF7900`, dark canvas `#141414` default) per `docs/brand-guidelines.md`.
 
-## Skill choices (applied in this PR)
+## Skill choices
 
-| Skill | How it shaped P0 |
-|-------|------------------|
-| **frontend-design** | Editorial/magazine direction: left-aligned hub hero, banded sections, orange accent budget on rails and CTAs only. |
-| **impeccable** | 44px hit targets on pills, chips, jump links; flat heading tokens; no gradient type; reduced-motion already in `tokens.css`. |
-| **ui-craft** | Sentence-case section titles; one accent colour; layered card shadows; horizontal scroll strips on mobile (not nested cards). |
-| **ui-ux-pro-max** | Mobile-first nav kept as **bottom tab bar** (existing pattern); desktop **category rail** + sticky stack for wayfinding. |
+| Skill | P0 | P2 (this phase) |
+|-------|-----|------------------|
+| **frontend-design** | Editorial hub hero, banded home | Hub heroes on guides/tools/compare/search/saved; type-grouped guide index |
+| **impeccable** | 44px hits on pills/jump links | 44px on tool tabs, compare selects, overlay inputs; reduced-motion preserved |
+| **ui-craft** | See-all headers, scroll strips | Feed-density shortlist + search results; `tb-card--editorial` on tool panels |
+| **ui-ux-pro-max** | Bottom tab bar + category rail | Footer **Explore** strip mirrors CategoryRail; sticky guide subnav |
 
 ## IA comparison
 
-| Action Network hub | TopBestBuy (current → P0) |
-|--------------------|---------------------------|
+| Action Network hub | TopBestBuy |
+|--------------------|------------|
 | Sport/league horizontal rail | **Category rail** (`CategoryRail.astro`) — Kitchen, Air, Sleep, … |
 | Section headers + “See all” | **`SectionHeader`** `seeAllHref` / `seeAllLabel` |
-| Score / game cards in dense feed | **`tb-feed-row`** #1 picks on home |
-| Sticky subnav under main header | **`tb-sticky-subnav`** + list jump bar |
-| Two-column article + rail (desktop) | **`tb-editorial-layout`** on list + category hubs |
-| Light section bands | **`tb-band`** / **`tb-band--alt`** on trust, browse, tools |
+| Score / game cards in dense feed | **`tb-feed-row`** on home, search, saved |
+| Sticky subnav under main header | **`tb-sticky-subnav`** on lists + guide articles |
+| Two-column article + rail (desktop) | **`tb-editorial-layout`** on lists, categories, guide articles |
+| Light section bands | **`tb-band`** / **`tb-band--alt`** via `EditorialSection` |
 
-### What stays unchanged (P0)
+### Shared invariants (P0–P2)
 
 - All SEO URLs, `getStaticPaths`, list slugs, `RANKED` data, scorecard v1.0 logic, `ProductCard` inner structure and `VisualWell` usage.
 - Astro 5, Tailwind v4, Lucide in chrome, Preact islands (`AppChrome`, tools, save).
-- Desktop **icon rail** (home, search, categories, saved, tools) + mobile **5-tab bar** (no hamburger added in P0).
+- Desktop **icon rail** + mobile **5-tab bar**.
 
 ## Breakpoints
 
-| Token | px | Use in P0 |
-|-------|-----|-----------|
+| Token | px | Use |
+|-------|-----|-----|
 | `--bp-sm` | 360 | Minimum phone width (QA target) |
-| `--bp-md` | 768 | Category rail scroll; mega menu; 2-col tiles |
+| `--bp-md` | 768 | Category rail scroll; 2-col tiles |
 | `--bp-lg` | 1280 | Editorial sidebar, hub hero 2-col, rail offset |
-
-Tailwind: `sm` 640, `md` 768, `lg` 1024, `xl` 1280 — layout primitives tested at **360 / 768 / 1280**.
 
 ## Component inventory
 
-### New
+### Shell (P0)
 
-- `src/components/layout/CategoryRail.astro` — sticky stack under top bar
-- `src/components/sections/EditorialSection.astro` — band wrapper + inner max-width
+- `CategoryRail.astro`, `EditorialSection.astro`, `SectionHeader.astro`
+- Tokens + `components.css` bands, feed rows, editorial layout, sticky stack
 
-### Updated (P0)
+### Phase 2 surfaces (done)
 
-| File | Change |
-|------|--------|
-| `tokens.css` | Band bg, sticky stack, density tiers, breakpoints, hit target |
-| `components.css` | `.tb-band`, `.tb-feed-row`, `.tb-editorial-*`, `.tb-h1`–`.tb-h4`, scroll strip |
-| `SectionHeader.astro` | See-all row pattern |
-| `SiteTopBar.astro` | Logo always visible; sticky moved to layout wrapper |
-| `BaseLayout.astro` | Sticky header stack = top bar + category rail |
-| `index.astro` | Hub hero, picks feed, scroll chips, banded sections |
-| `[listSlug].astro` | Sticky jump nav + editorial two-column body |
-| `category/[cat].astro` | Sidebar category index + section bands |
-| `ProductCard.astro` | `tb-card--editorial` container only |
-| Home sections | See-all links, bands, scroll strips |
-
-### Unchanged shell islands
-
-- `AppChrome.tsx` — search + shortlist (keyboard `/` and ⌘K)
+| Surface | Files | Pattern |
+|---------|-------|---------|
+| **Guides hub** | `guides/index.astro` | Hub hero, featured scroll strip, type bands |
+| **Guide article** | `guides/[slug].astro` | Sticky subnav, editorial sidebar, TLDR card |
+| **Tools hub** | `tools/index.astro`, `ToolsHub.tsx` | Quick-tool strip + banded hub; scroll tab list |
+| **Compare** | `compare.astro`, `ComparePicker.tsx` | Hub hero, editorial wrapper, 44px selects |
+| **Search** | `search.astro`, `SearchPage.tsx`, `AppChrome.tsx` | Hub + feed results; overlay feed density |
+| **Saved** | `saved.astro`, `SavedPage.tsx`, `AppChrome.tsx` | Hub + feed rows; richer empty state |
+| **Footer** | `SiteFooter.astro` | Explore strip (CategoryRail-style pills) |
 
 ## Mobile nav decision
 
-**Bottom tab bar** retained (5 tabs). Category discoverability on mobile comes from the **category rail** (horizontal scroll under header), not a hamburger. Rationale: thumb reach, matches existing saved/search habits, aligns with ui-ux-pro-max mobile primary-nav guidance.
+**Bottom tab bar** retained (5 tabs). Category discoverability on mobile: **category rail** under header + footer Explore strip — no hamburger.
 
-## P1 / P2 (out of scope for this PR)
+## P3 (next)
 
 | Phase | Surfaces | Notes |
 |-------|----------|--------|
-| **P1** | `/guides/*`, `/tools/*`, `/compare` | Same band + section header pattern; tool hub density tier |
-| **P1** | `/reviews/[id]` | Editorial hero + sticky spec jump |
-| **P2** | `/search`, `/saved` | Feed density for results; empty states |
-| **P2** | Mega menu | Optional collapse into rail-only on xl |
+| **P3** | `/reviews/[id]` | Editorial hero + sticky spec jump |
+| **P3** | Mega menu | Optional collapse into rail-only on xl |
+| **P3** | `/categories` index | Band + sidebar parity with category hub |
 
 ## QA screenshot checklist
 
-- [ ] Home 360px: category rail scroll, picks strip, tab bar clear of content
-- [ ] Home 1280px: hub hero 2-col, browse grid, rail + sidebar offset
-- [ ] List 768px: sticky jump bar below header stack
-- [ ] List 1280px: left “On this page” sticky sidebar
-- [ ] Category hub: sidebar category list + live list cards
-- [ ] Focus visible on category pills, jump links, See all
+- [ ] Guides hub 360px: featured scroll strip
+- [ ] Guide article 1280px: sticky subnav + sidebar
+- [ ] Tools hub: horizontal tabs on mobile
+- [ ] Compare: table scroll + picker in editorial card
+- [ ] Search/Saved: feed row density
+- [ ] Footer Explore strip scroll on mobile
 - [ ] `prefers-reduced-motion`: no reliance on reveal for content visibility
 
-## Before / after (summary)
+## Before / after (P2 summary)
 
-| Area | Before | After (P0) |
+| Area | Before | After (P2) |
 |------|--------|------------|
-| Header | Logo mobile-only; categories in mega menu only | Logo + **category rail** on every page |
-| Home | Centered hero, static picks grid | **Left hub hero**, banded sections, **See all** headers, horizontal strips |
-| List | Mobile-only jump bar; narrow sidebar | **Sticky subnav** + editorial sidebar on desktop |
-| Category | Single column stack | **Two-column** hub with category index |
-| Tokens | Section padding only | **Bands**, density tiers, sticky stack math |
+| Guides | Plain grid | Hub hero, featured strip, type bands, article sticky nav |
+| Tools | Title + tabs | Tool quick strip, banded hub, editorial tool panel |
+| Compare | Plain form | Hub + section header + editorial card |
+| Search/Saved | Basic cards | Feed rows, empty states, hub copy |
+| Footer | Grid only | CategoryRail-style Explore strip |
+| Overlays | Card list | Feed-density search + shortlist in `AppChrome` |
 
 ## Verification commands
 

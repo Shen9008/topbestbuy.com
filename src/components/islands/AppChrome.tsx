@@ -140,29 +140,29 @@ export default function AppChrome() {
           Saved on this device only. Compare up to 3 products.
         </p>
         {shortlist.length === 0 ? (
-          <div class="tb-callout mt-4 flex items-start gap-3">
+          <div class="tb-callout tb-card--editorial mt-4 flex items-start gap-3">
             <Icon name="state.empty-saved" size={32} class="shrink-0 opacity-80" />
-            <p class="m-0">Nothing saved yet. Tap Save on any product.</p>
+            <p class="m-0 text-sm">Nothing saved yet. Tap Save on any product card.</p>
           </div>
         ) : (
-          <div class="mt-4 space-y-3">
+          <div class="mt-4 space-y-2">
             {shortlist.map((id) => {
               const p = catalog[id];
               if (!p) return null;
               return (
-                <div
-                  class="tb-card flex items-center gap-3"
-                  key={id}
-                >
-                  <div class="min-w-0 flex-1">
-                    <strong class="block text-sm">{productFullName(p)}</strong>
+                <div class="tb-feed-row" key={id}>
+                  <span class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)]">
+                    <Icon name="nav.saved" size={20} strokeWidth={2} />
+                  </span>
+                  <div class="min-w-0">
+                    <strong class="block truncate text-sm">{productFullName(p)}</strong>
                     <small class="tb-num text-[var(--tb-muted)]">
                       {formatRM(p.price)} · {p.total.toFixed(1)}/100
                     </small>
                   </div>
                   <button
                     type="button"
-                    class="tb-btn tb-btn-ghost tb-btn-sm"
+                    class="tb-btn tb-btn-ghost tb-btn-sm min-h-11 shrink-0"
                     onClick={() => {
                       const next = shortlist.filter((x) => x !== id);
                       writeShortlist(next);
@@ -174,7 +174,10 @@ export default function AppChrome() {
                 </div>
               );
             })}
-            <a href="/compare" class="tb-btn inline-flex w-full items-center justify-center gap-2">
+            <a
+              href="/compare"
+              class="tb-btn mt-2 inline-flex w-full min-h-11 items-center justify-center gap-2"
+            >
               <Icon name="tool.compare" size={20} strokeWidth={2} />
               Compare these
             </a>
@@ -196,7 +199,7 @@ export default function AppChrome() {
           value={query}
           onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
           placeholder="Try: air fryer, haze, back pain"
-          class="w-full rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-bg)] px-3 py-2.5 text-base text-[var(--tb-ink)]"
+          class="w-full min-h-11 rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-bg)] px-3 py-2.5 text-base text-[var(--tb-ink)]"
           autoComplete="off"
         />
         <div class="mt-4 space-y-2" aria-live="polite">
@@ -210,10 +213,14 @@ export default function AppChrome() {
               <a
                 key={hit.href}
                 href={hit.href}
-                class="tb-card block p-3 text-sm font-semibold no-underline"
+                class="tb-feed-row text-sm no-underline"
                 onClick={() => setSearchOpen(false)}
               >
-                {hit.title}
+                <span class="inline-flex min-h-10 min-w-10 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)]">
+                  <Icon name="nav.search" size={16} strokeWidth={2} />
+                </span>
+                <span class="min-w-0 font-semibold text-[var(--tb-ink)]">{hit.title}</span>
+                <span class="text-xs font-bold text-[var(--tb-accent)]">→</span>
               </a>
             ))
           )}

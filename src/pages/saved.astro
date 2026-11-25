@@ -1,10 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import EditorialSection from '../components/sections/EditorialSection.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
 import SavedPage from '../components/islands/SavedPage';
 ---
 
-<BaseLayout title="My shortlist" description="Products saved on this device for comparison.">
-  <h1 class="tb-h1">My shortlist</h1>
-  <p class="text-[var(--tb-muted)]">Saved on this device. Open compare when you have up to three picks.</p>
-  <SavedPage client:load />
+<BaseLayout title="My shortlist" description="Products saved on this device for comparison." canonical="/saved">
+  <Breadcrumbs items={[{ label: 'My shortlist' }]} />
+
+  <header class="tb-hero tb-hero--hub tb-reveal">
+    <div>
+      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">On this device</p>
+      <h1 class="tb-h1 mt-3 max-w-[14ch]">My shortlist</h1>
+      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+        Saved products stay here until you remove them. Open compare when you have up to three picks.
+      </p>
+    </div>
+  </header>
+
+  <EditorialSection band="default" aria-labelledby="saved-list-heading">
+    <SectionHeader
+      titleId="saved-list-heading"
+      title="Saved products"
+      seeAllHref="/compare"
+      seeAllLabel="Compare"
+    />
+    <SavedPage client:load />
+  </EditorialSection>
 </BaseLayout>

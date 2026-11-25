@@ -29,11 +29,22 @@ export default function SearchPage() {
         />
       </div>
       <div class="mt-4 space-y-2" aria-live="polite">
-        {results.map((hit) => (
-          <a key={hit.href} href={hit.href} class="tb-card block p-3 font-semibold no-underline">
-            {hit.title}
-          </a>
-        ))}
+        {query.length > 0 && results.length === 0 ? (
+          <div class="tb-callout flex items-start gap-3">
+            <Icon name="state.empty-search" size={32} class="shrink-0 opacity-80" />
+            <p class="m-0 text-sm">No match. Try a product type like air fryer or mattress.</p>
+          </div>
+        ) : (
+          results.map((hit) => (
+            <a key={hit.href} href={hit.href} class="tb-feed-row no-underline">
+              <span class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)]">
+                <Icon name="nav.search" size={20} strokeWidth={2} />
+              </span>
+              <span class="min-w-0 font-semibold text-[var(--tb-ink)]">{hit.title}</span>
+              <span class="text-xs font-bold text-[var(--tb-accent)]">Open →</span>
+            </a>
+          ))
+        )}
       </div>
     </div>
   );
