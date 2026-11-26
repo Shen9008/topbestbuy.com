@@ -32,7 +32,7 @@ export default function SaveButton({ productId }: { productId: string }) {
   return (
     <button
       type="button"
-      class={`tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5 ${saved ? '!border-[var(--tb-accent)] !bg-[var(--tb-accent)] !text-[var(--tb-accent-ink)]' : ''}`}
+      class={`tb-btn tb-btn-ghost tb-btn-sm inline-flex min-h-11 items-center gap-1.5 ${saved ? '!border-[var(--accent-line)] !bg-[var(--accent-soft)] !text-[var(--tb-accent-fg)]' : ''}`}
       aria-pressed={saved}
       onClick={() => dispatchToggleSave(productId)}
     >

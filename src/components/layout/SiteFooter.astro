@@ -34,7 +34,7 @@ const trustLinks = [
               <li>
                 <a
                   href={`/${slug}`}
-                  class="inline-flex items-center gap-2 text-[var(--tb-ink)] transition-colors duration-150 hover:text-[var(--tb-accent)]"
+                  class="inline-flex items-center gap-2 text-[var(--tb-ink)] transition-colors duration-150 hover:text-[var(--tb-accent-fg)]"
                 >
                   {icon ? <Icon name={icon} size={16} class="opacity-80" /> : null}
                   Best {LISTS[slug as keyof typeof LISTS].short.toLowerCase()}
@@ -80,7 +80,7 @@ const trustLinks = [
               <li>
                 <a
                   href={route.href}
-                  class="inline-flex items-center gap-2 transition-colors duration-150 hover:text-[var(--tb-accent)]"
+                  class="inline-flex items-center gap-2 transition-colors duration-150 hover:text-[var(--tb-accent-fg)]"
                 >
                   {icon ? <Icon name={icon} size={20} class="opacity-80" /> : null}
                   {route.label}

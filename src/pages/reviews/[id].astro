@@ -123,7 +123,7 @@ const reviewSchema = {
         <p class="tb-h4 m-0">On this list</p>
         <a
           href={`/${product.list}`}
-          class="mt-2 block text-sm font-bold text-[var(--tb-accent)] no-underline hover:text-[var(--tb-ink)]"
+          class="mt-2 block text-sm font-bold text-[var(--tb-accent-fg)] no-underline hover:text-[var(--tb-ink)]"
         >
           {list.h1.split(':')[0]}
         </a>
@@ -137,7 +137,7 @@ const reviewSchema = {
                     class:list={[
                       'block min-h-10 rounded-[var(--radius-sm)] px-2 py-2 font-semibold no-underline',
                       p.id === product.id
-                        ? 'bg-[var(--tb-surface-raised)] text-[var(--tb-accent)]'
+                        ? 'bg-[var(--tb-surface-raised)] text-[var(--tb-accent-fg)]'
                         : 'text-[var(--tb-muted)] hover:text-[var(--tb-ink)]',
                     ]}
                     aria-current={p.id === product.id ? 'page' : undefined}
@@ -244,7 +244,7 @@ const reviewSchema = {
             <h3 class="mt-0 text-lg font-bold">Pros and trade-offs</h3>
             <h4 class="text-sm font-bold text-[var(--color-good)]">Pros</h4>
             <ul class="tb-pros text-sm">{product.pros.map((x) => <li>{x}</li>)}</ul>
-            <h4 class="text-sm font-bold text-[var(--tb-accent)]">Trade-offs</h4>
+            <h4 class="text-sm font-bold text-[var(--tb-accent-fg)]">Trade-offs</h4>
             <ul class="tb-cons text-sm">{product.cons.map((x) => <li>{x}</li>)}</ul>
           </div>
         </div>

@@ -68,7 +68,7 @@ export default function ListPageClient({
         : filtered
             .map(
               (p) =>
-                `<tr><td><span class="tb-rank">${p.rank}</span></td><td><a href="#${p.id}" class="font-semibold text-[var(--tb-accent)]">${productFullName(p)}</a><br/><small>${p.tag}</small></td><td class="tb-num"><strong>${p.total.toFixed(1)}</strong></td><td class="tb-num">${p.price.toLocaleString('en-MY')}</td>${p.specs.map((s) => `<td>${s}</td>`).join('')}<td>${p.best}</td></tr>`,
+                `<tr><td><span class="tb-rank">${p.rank}</span></td><td><a href="#${p.id}" class="font-semibold text-[var(--tb-accent-fg)]">${productFullName(p)}</a><br/><small>${p.tag}</small></td><td class="tb-num"><strong>${p.total.toFixed(1)}</strong></td><td class="tb-num">${p.price.toLocaleString('en-MY')}</td>${p.specs.map((s) => `<td>${s}</td>`).join('')}<td>${p.best}</td></tr>`,
             )
             .join('');
   }, [filtered]);

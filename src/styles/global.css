@@ -28,8 +28,19 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--tb-accent);
+    outline: 2px solid var(--accent-fg);
     outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--text-strong);
+  }
+
+  input,
+  textarea,
+  [contenteditable='true'] {
+    caret-color: var(--accent-fg);
   }
 
   .skip-link {
@@ -42,8 +53,8 @@
     z-index: var(--z-toast);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-sm);
-    background: var(--tb-accent);
-    color: var(--tb-accent-ink);
+    background: var(--accent);
+    color: var(--on-accent);
     font-weight: 600;
   }
 }
