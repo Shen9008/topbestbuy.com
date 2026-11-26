@@ -50,6 +50,9 @@
 
   --content-max: 1180px;
   --prose-max: 70ch;
+  /* Readable copy vs compact UI (nav, pills, buttons stay on --leading-ui via body) */
+  --leading-ui: 1.5;
+  --leading-prose: 1.7;
   --topbar-height: 3.75rem;
   --tabbar-height: 4rem;
   --category-rail-height: 2.5rem;
