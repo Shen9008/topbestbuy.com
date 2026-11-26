@@ -88,10 +88,10 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
 >
   <Breadcrumbs items={crumbItems} />
 
-  <div class="tb-reveal tb-reveal--hero">
+  <section class="tb-band tb-reveal tb-reveal--hero" aria-labelledby="list-hero-title">
     <ImageSlot slotId={`list-hero-${listSlug}`} aspect="banner" label={`List hero: ${list.short}`} />
 
-    <h1 class="tb-h1 flex flex-wrap items-center gap-3">
+    <h1 id="list-hero-title" class="tb-h1 flex flex-wrap items-center gap-3">
     {
       LIST_SLUG_ICONS[listSlug!] ? (
         <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
@@ -140,7 +140,6 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
   <ListLeadIntro part="intro" introHtml={list.intro} />
 
   <ListMethodologyStrip />
-  </div>
 
   <div class="tb-callout tb-spotlight border-2 border-[var(--tb-ink)]">
     <strong>Key takeaways</strong>
@@ -174,6 +173,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
       ))
     }
   </div>
+  </section>
 
   <nav class="tb-sticky-subnav" aria-label="Jump to section">
     <div class="tb-jumpbar mx-auto max-w-[var(--content-max)]">
@@ -225,8 +225,8 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
       </div>
     </aside>
 
-    <div class="tb-editorial-main min-w-0">
-      <section id="sec-compare" class="tb-reveal scroll-mt-28">
+    <div class="tb-editorial-main min-w-0 space-y-0">
+      <section id="sec-compare" class="tb-band tb-band--navy tb-reveal scroll-mt-28">
         <h2 class="tb-h2">Compare at a glance</h2>
         <ListPageClient
           client:load
@@ -287,14 +287,13 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
         </p>
       </section>
 
-      <section id="sec-picks" class="mt-10 scroll-mt-28">
+      <section id="sec-picks" class="tb-band scroll-mt-28">
         <h2 class="tb-h2">All 10 picks</h2>
         <div id="prods">
           {rows.map((p) => (
             <ProductCard product={p} list={list} />
           ))}
         </div>
-      </section>
 
       <section id="sec-best" class="tb-prose mt-10 scroll-mt-28">
         <h2>Best {list.short.toLowerCase()} in Malaysia by need and budget</h2>
@@ -333,8 +332,9 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
           ))
         }
       </section>
+      </section>
 
-      <section id="sec-faq" class="mt-10 scroll-mt-28">
+      <section id="sec-faq" class="tb-band tb-band--navy mt-10 scroll-mt-28">
         <h2 class="tb-h2">FAQ</h2>
         {
           list.faq.map((f) => (
@@ -344,9 +344,8 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
             </details>
           ))
         }
-      </section>
 
-      <section id="sec-sources" class="tb-prose mt-10 scroll-mt-28">
+      <div id="sec-sources" class="tb-prose mt-10 scroll-mt-28">
         <h2>Sources and fact-check notes</h2>
         <p>
           We did not test any product. Each pick cites the pages below, re-read on {SITE_DATE}.
@@ -367,6 +366,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
           products have warranty gaps, and {sources.gapPrice} have price estimates.{' '}
           <a href="/contact">Tell us</a> or see <a href="/corrections">corrections</a>.
         </div>
+      </div>
       </section>
 
       <section class="mt-10">

@@ -53,10 +53,49 @@
   .tb-band {
     @apply -mx-4 border-y border-[var(--tb-line)] px-4 py-12;
     background: var(--tb-band-bg);
+    color: var(--tb-band-on-light-ink);
+    --tb-ink: var(--tb-band-on-light-ink);
+    --tb-muted: var(--tb-band-on-light-muted);
+    --tb-heading: var(--tb-band-on-light-heading);
+    --tb-heading-muted: var(--tb-band-on-light-muted);
   }
 
-  .tb-band--alt {
+  .tb-band--alt,
+  .tb-band--navy {
     background: var(--tb-band-bg-alt);
+    color: var(--tb-band-on-navy-ink);
+    --tb-ink: var(--tb-band-on-navy-ink);
+    --tb-muted: var(--tb-band-on-navy-muted);
+    --tb-heading: var(--tb-band-on-navy-heading);
+    --tb-heading-muted: var(--tb-band-on-navy-muted);
+    border-color: color-mix(in oklch, var(--tb-band-on-navy-muted) 35%, transparent);
+  }
+
+  .tb-page-bands__section {
+    @apply -mx-4 border-y border-[var(--tb-line)] px-4 py-12;
+  }
+
+  .tb-page-bands > .tb-page-bands__section:nth-child(odd) {
+    background: var(--tb-band-bg);
+    color: var(--tb-band-on-light-ink);
+    --tb-ink: var(--tb-band-on-light-ink);
+    --tb-muted: var(--tb-band-on-light-muted);
+    --tb-heading: var(--tb-band-on-light-heading);
+    --tb-heading-muted: var(--tb-band-on-light-muted);
+  }
+
+  .tb-page-bands > .tb-page-bands__section:nth-child(even) {
+    background: var(--tb-band-bg-alt);
+    color: var(--tb-band-on-navy-ink);
+    --tb-ink: var(--tb-band-on-navy-ink);
+    --tb-muted: var(--tb-band-on-navy-muted);
+    --tb-heading: var(--tb-band-on-navy-heading);
+    --tb-heading-muted: var(--tb-band-on-navy-muted);
+    border-color: color-mix(in oklch, var(--tb-band-on-navy-muted) 35%, transparent);
+  }
+
+  .tb-page-bands--nested > .tb-page-bands__section {
+    @apply -mx-4;
   }
 
   .tb-section__bar {

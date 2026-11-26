@@ -105,38 +105,40 @@ const listCount = listSlugs().length;
     });
   </script>
 
-  <BrandLogoStrip />
+  <div class="tb-page-bands -mt-4">
+    <BrandLogoStrip />
 
-  <HomeValueProps />
-  <HomeTrustStrip />
+    <HomeValueProps />
+    <HomeTrustStrip />
 
-  <EditorialSection band="default" aria-label="Lists by category">
-    <HomeListsByCategory />
-  </EditorialSection>
+    <EditorialSection band="auto" aria-label="Lists by category">
+      <HomeListsByCategory />
+    </EditorialSection>
 
-  <EditorialSection band="alt" aria-label="Trust principles">
-    <HomeTrustEarn />
-  </EditorialSection>
+    <EditorialSection band="auto" aria-label="Trust principles">
+      <HomeTrustEarn />
+    </EditorialSection>
 
-  <EditorialSection band="default">
-    <HomeBrowseSection bare />
-  </EditorialSection>
+    <EditorialSection band="auto">
+      <HomeBrowseSection bare />
+    </EditorialSection>
 
-  <HomeToolsStrip />
-  <HomeMethodologySection />
-  <HomeGuidesSection />
+    <HomeToolsStrip />
+    <HomeMethodologySection />
+    <HomeGuidesSection />
 
-  <EditorialSection band="default">
-    <div class="grid gap-6 lg:grid-cols-2">
-      <div class="tb-card">
-        <p class="text-xs font-bold uppercase tracking-wide text-[var(--tb-muted)]">You decide</p>
-        <h2 class="mt-2 tb-h3">What should we rank next?</h2>
-        <p class="text-sm text-[var(--tb-muted)]">
-          Vote on the next Top 10. Demand also guides our research queue.
-        </p>
-        <a href="/coming-next" class="tb-btn mt-3">Vote now</a>
+    <EditorialSection band="auto">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="tb-card">
+          <p class="text-xs font-bold uppercase tracking-wide text-[var(--tb-muted)]">You decide</p>
+          <h2 class="mt-2 tb-h3">What should we rank next?</h2>
+          <p class="text-sm text-[var(--tb-muted)]">
+            Vote on the next Top 10. Demand also guides our research queue.
+          </p>
+          <a href="/coming-next" class="tb-btn mt-3">Vote now</a>
+        </div>
+        <PriceAlertForm client:idle listKey="home" />
       </div>
-      <PriceAlertForm client:idle listKey="home" />
-    </div>
-  </EditorialSection>
+    </EditorialSection>
+  </div>
 </BaseLayout>
