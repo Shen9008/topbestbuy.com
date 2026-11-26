@@ -135,11 +135,11 @@ import { CATEGORY_ICONS, LIST_SLUG_ICONS, type IconMapKey } from '../../icons';
 </section>
 `,
   'HomeToolsStrip.astro': `---
-import Icon from '../ui/Icon.astro';
+import HomeToolTile from './HomeToolTile.astro';
 import SectionHeader from './SectionHeader.astro';
-import { TOOL_TAB_ICONS, type IconMapKey } from '../../icons';
+import type { ToolVisualId } from '../../lib/feature-visuals';
 
-const tools: [string, string, string][] = [
+const tools: [ToolVisualId, string, string][] = [
   ['finder', 'Product finder', 'Three questions, three picks.'],
   ['vacuum', 'Vacuum type chooser', 'Robot, cordless or corded.'],
   ['cleanser', 'Cleanser matcher', 'Filter by skin type.'],
@@ -147,36 +147,25 @@ const tools: [string, string, string][] = [
 ];
 ---
 
-<section class="tb-section tb-section--band" aria-labelledby="home-tools-heading">
+<section class="tb-band" aria-labelledby="home-tools-heading">
+  <div class="tb-section__inner">
   <SectionHeader
     titleId="home-tools-heading"
     align="center"
     eyebrow="Tools"
     title="Narrow it down in a minute"
-    description="Short calculators and choosers — estimates only; verify before you buy."
+    description="Short calculators and choosers. Estimates only; verify before you buy."
+    seeAllHref="/tools"
+    seeAllLabel="See all tools"
   />
   <div class="tb-utility-grid tb-reveal-stagger mt-8">
     {
-      tools.map(([tool, title, desc]) => {
-        const icon = TOOL_TAB_ICONS[tool] as IconMapKey | undefined;
-        return (
-          <a href={\`/tools?tool=\${tool}\`} class="tb-tile tb-utility-tile">
-            <div class="tb-utility-tile__icon" aria-hidden="true">
-              {icon ? <Icon name={icon} size={20} strokeWidth={2} /> : null}
-            </div>
-            <div>
-              <h3 class="m-0 font-display text-base font-bold">{title}</h3>
-              <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">{desc}</p>
-            </div>
-            <span class="tb-utility-tile__cta text-xs font-bold text-[var(--tb-accent)]">Open tool →</span>
-          </a>
-        );
-      })
+      tools.map(([tool, title, desc]) => (
+        <HomeToolTile id={tool} title={title} description={desc} />
+      ))
     }
   </div>
-  <p class="mt-6 text-center text-sm">
-    <a href="/tools" class="font-semibold text-[var(--tb-accent)]">See all buying tools</a>
-  </p>
+  </div>
 </section>
 `,
   'HomeGuidesSection.astro': `---

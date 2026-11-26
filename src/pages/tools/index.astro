@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import Icon from '../../components/ui/Icon.astro';
-import ToolVisual from '../../components/illustrations/ToolVisual.astro';
+import HomeToolTile from '../../components/sections/HomeToolTile.astro';
 import EditorialSection from '../../components/sections/EditorialSection.astro';
 import SectionHeader from '../../components/sections/SectionHeader.astro';
 import ToolsHub from '../../components/islands/ToolsHub';
@@ -56,19 +56,14 @@ const quickTools: [ToolVisualId, string, string][] = [
     <div class="tb-scroll-strip tb-reveal-stagger mt-6 gap-3 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0">
       {
         quickTools.map(([tool, title, desc]) => (
-          <a
-            href={`/tools?tool=${tool}`}
-            class="tb-tile tb-utility-tile min-w-[min(100%,14rem)] shrink-0 lg:min-w-0"
-          >
-            <div class="tb-utility-tile__icon" aria-hidden="true">
-              <ToolVisual id={tool} size="md" />
-            </div>
-            <div>
-              <h2 class="m-0 font-display text-base font-bold">{title}</h2>
-              <p class="m-0 mt-1 text-sm text-[var(--tb-muted)]">{desc}</p>
-            </div>
-            <span class="tb-utility-tile__cta text-xs font-bold text-[var(--tb-accent-fg)]">Open →</span>
-          </a>
+          <HomeToolTile
+            id={tool}
+            title={title}
+            description={desc}
+            cta="Open →"
+            heading="h2"
+            class="min-w-[min(100%,14rem)] shrink-0 lg:min-w-0"
+          />
         ))
       }
     </div>
