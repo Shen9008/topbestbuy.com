@@ -34,6 +34,7 @@ import { relatedListsInCategory } from '../lib/internal-links';
 import TrustPathModule from '../components/sections/TrustPathModule.astro';
 import RelatedListsSection from '../components/sections/RelatedListsSection.astro';
 import TopReviewsStrip from '../components/sections/TopReviewsStrip.astro';
+import ListLeadIntro from '../components/sections/ListLeadIntro.astro';
 
 export function getStaticPaths() {
   return LIST_SLUGS.map((listSlug) => ({ params: { listSlug } }));
@@ -123,12 +124,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
     )
   }
 
-  <p class="mt-4 max-w-[68ch] text-lg">
-    <strong>Short answer:</strong> the top-scoring pick is {productFullName(top3[0]!)} (
-    {top3[0]!.total.toFixed(1)}/100).
-    {top3[1] && ` ${productFullName(top3[1])} is a close second`}
-    {top3[2] && `, and ${productFullName(top3[2])} is third`}. This guide is for {list.audience}.
-  </p>
+  <ListLeadIntro part="short" top3={top3} audience={list.audience} />
 
   <aside class="tb-eeat" aria-label="Authors and fact-check">
     <p class="text-sm">
@@ -141,7 +137,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
     <TopReviewsStrip rows={rows} listShort={list.short} />
   </div>
 
-  <div class="tb-prose mt-4" set:html={list.intro} />
+  <ListLeadIntro part="intro" introHtml={list.intro} />
 
   <ListMethodologyStrip />
   </div>

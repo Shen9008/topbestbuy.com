@@ -733,4 +733,101 @@
   .tb-cons li::marker {
     color: var(--danger);
   }
+
+  .tb-list-lead {
+    @apply w-full max-w-none text-[var(--tb-ink)];
+  }
+
+  .tb-list-lead--short {
+    @apply mt-4;
+  }
+
+  .tb-list-lead--intro {
+    @apply mt-4;
+  }
+
+  .tb-list-lead__short {
+    @apply space-y-3;
+  }
+
+  .tb-list-lead__label {
+    @apply m-0 text-lg font-semibold leading-snug;
+  }
+
+  .tb-list-lead__answer {
+    @apply m-0 text-lg leading-relaxed;
+  }
+
+  .tb-list-lead__intro {
+    @apply mt-5 space-y-4 text-base leading-relaxed;
+  }
+
+  @media (min-width: 64rem) {
+    .tb-list-lead__intro--columns {
+      column-count: 2;
+      column-gap: 2.5rem;
+    }
+
+    .tb-list-lead__intro--columns p {
+      break-inside: avoid;
+    }
+  }
+
+  .tb-pick-card__head .tb-rank {
+    @apply shrink-0;
+  }
+
+  .tb-pick-details {
+    @apply overflow-hidden rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface)];
+  }
+
+  .tb-pick-details__summary {
+    @apply flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-bold leading-snug [&::-webkit-details-marker]:hidden;
+  }
+
+  .tb-pick-details__body {
+    @apply space-y-5 border-t border-[var(--tb-line)] px-4 py-4;
+  }
+
+  .tb-pick-details__body--tight {
+    @apply space-y-2;
+  }
+
+  .tb-pick-details__label {
+    @apply m-0 text-sm font-bold leading-snug;
+  }
+
+  .tb-pick-card__price {
+    @apply rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] px-4 py-3;
+  }
+
+  .tb-pick-card__meta {
+    @apply rounded-[var(--radius-sm)] border border-dashed border-[var(--tb-line)] px-4 py-3;
+  }
+
+  .tb-pick-card__actions {
+    @apply flex flex-col gap-2;
+  }
+
+  .tb-pick-card__actions-primary {
+    @apply grid grid-cols-1 gap-2 sm:grid-cols-3;
+  }
+
+  .tb-pick-card__actions-primary .tb-btn {
+    @apply w-full justify-center;
+  }
+
+  .tb-pick-card__actions-secondary .tb-btn {
+    @apply w-full justify-center sm:w-auto;
+  }
+
+  .tb-pick-card__specs {
+    @apply mt-1;
+  }
+
+  @media (max-width: 63.99rem) {
+    .tb-pick-card__specs {
+      @apply mt-2;
+    }
+  }
 }
