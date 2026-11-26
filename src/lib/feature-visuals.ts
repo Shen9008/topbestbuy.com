@@ -28,3 +28,11 @@ export const TOOL_VISUAL_IDS = {
 } as const;
 
 export type ToolVisualId = keyof typeof TOOL_VISUAL_IDS;
+
+export const METHODOLOGY_STEP_VISUAL_IDS = {
+  research: 'method-research',
+  score: 'method-score',
+  publish: 'method-publish',
+} as const;
+
+export type MethodologyStepVisualId = keyof typeof METHODOLOGY_STEP_VISUAL_IDS;

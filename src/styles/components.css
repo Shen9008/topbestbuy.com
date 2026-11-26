@@ -572,6 +572,12 @@
     padding: 0.75rem;
   }
 
+  .tb-visual-well--xl {
+    min-height: 5.5rem;
+    min-width: 5.5rem;
+    padding: 1rem;
+  }
+
   .tb-visual-well :global(svg),
   .tb-list-visual-well :global(svg) {
     display: block;
@@ -588,6 +594,19 @@
   .tb-visual-well--lg :global(svg) {
     width: 32px;
     height: 32px;
+  }
+
+  .tb-visual-well--xl :global(svg) {
+    width: 56px;
+    height: 56px;
+  }
+
+  .tb-methodology-step__icon {
+    @apply mb-4 inline-flex;
+  }
+
+  .tb-methodology-step__icon:has(> .tb-visual-well) {
+    @apply mb-4;
   }
 
   .tb-eeat {
