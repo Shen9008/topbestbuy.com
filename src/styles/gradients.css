@@ -1,0 +1,13 @@
+/**
+ * Shared canvas washes (band surfaces live in components.css).
+ */
+
+@layer components {
+  .tb-page-bands {
+    background: radial-gradient(
+      ellipse 120% 80% at 50% -20%,
+      color-mix(in oklch, var(--accent) 6%, transparent),
+      transparent 55%
+    );
+  }
+}

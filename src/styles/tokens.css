@@ -72,6 +72,7 @@
 
   --color-brand-navy: #061d32;
   --color-brand-slate: #526273;
+  --color-brand-orange: #ff7900;
 }
 
 /* ── Dark theme (default) ── */
@@ -113,11 +114,14 @@
   --tb-accent-ink: var(--on-accent);
   --tb-heading: var(--text-strong);
   --tb-heading-muted: var(--text-muted);
-  --tb-heading-accent: var(--accent-fg);
+  --tb-heading-accent: var(--color-brand-orange);
   --tb-cta-bg: var(--accent);
   --tb-cta-ink: var(--on-accent);
   --tb-band-bg: var(--tb-surface-raised);
   --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 92%, black);
+  --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 58%, transparent);
+  --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 72%, transparent);
+  --tb-band-edge-fade: 4.5rem;
   --tb-band-on-light-ink: var(--tb-ink);
   --tb-band-on-light-muted: var(--tb-muted);
   --tb-band-on-light-heading: var(--tb-heading);
@@ -168,11 +172,14 @@
   --tb-accent-ink: var(--on-accent);
   --tb-heading: var(--text-strong);
   --tb-heading-muted: var(--text-muted);
-  --tb-heading-accent: var(--accent-fg);
+  --tb-heading-accent: var(--color-brand-orange);
   --tb-cta-bg: var(--accent);
   --tb-cta-ink: var(--on-accent);
   --tb-band-bg: var(--surface);
   --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 94%, white);
+  --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 72%, transparent);
+  --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 78%, transparent);
+  --tb-band-edge-fade: 4.5rem;
   --tb-band-on-light-ink: var(--tb-ink);
   --tb-band-on-light-muted: var(--tb-muted);
   --tb-band-on-light-heading: var(--tb-heading);
@@ -219,11 +226,14 @@
     --tb-accent-ink: var(--on-accent);
     --tb-heading: var(--text-strong);
     --tb-heading-muted: var(--text-muted);
-    --tb-heading-accent: var(--accent-fg);
+    --tb-heading-accent: var(--color-brand-orange);
     --tb-cta-bg: var(--accent);
     --tb-cta-ink: var(--on-accent);
     --tb-band-bg: var(--surface);
     --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 94%, white);
+    --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 72%, transparent);
+    --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 78%, transparent);
+    --tb-band-edge-fade: 4.5rem;
     --tb-band-on-light-ink: var(--tb-ink);
     --tb-band-on-light-muted: var(--tb-muted);
     --tb-band-on-light-heading: var(--tb-heading);
