@@ -119,8 +119,8 @@
   --tb-cta-ink: var(--on-accent);
   --tb-band-bg: var(--tb-surface-raised);
   --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 92%, black);
-  --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 58%, transparent);
-  --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 72%, transparent);
+  --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 62%, transparent);
+  --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 76%, transparent);
   --tb-band-edge-fade: 4.5rem;
   --tb-band-on-light-ink: var(--tb-ink);
   --tb-band-on-light-muted: var(--tb-muted);
@@ -136,8 +136,19 @@
   --tb-gradient-navy-lift: color-mix(in srgb, var(--color-brand-slate) 18%, var(--color-brand-navy));
   --tb-gradient-lime-05: color-mix(in srgb, var(--accent) 5%, transparent);
   --tb-gradient-lime-08: color-mix(in srgb, var(--accent) 8%, transparent);
+  --tb-gradient-lime-10: color-mix(in srgb, var(--accent) 10%, transparent);
   --tb-gradient-lime-12: color-mix(in srgb, var(--accent) 12%, transparent);
+  --tb-gradient-lime-16: color-mix(in srgb, var(--accent) 16%, transparent);
+  --tb-gradient-lime-20: color-mix(in srgb, var(--accent) 20%, transparent);
+  --tb-gradient-orange-05: color-mix(in srgb, var(--color-brand-orange) 5%, transparent);
+  --tb-gradient-orange-06: color-mix(in srgb, var(--color-brand-orange) 6%, transparent);
+  --tb-gradient-orange-08: color-mix(in srgb, var(--color-brand-orange) 8%, transparent);
+  --tb-gradient-orange-10: color-mix(in srgb, var(--color-brand-orange) 10%, transparent);
   --tb-gradient-teal-06: color-mix(in srgb, var(--info) 6%, transparent);
+  --tb-gradient-dur-ambient: 48s;
+  --tb-gradient-dur-hero: 42s;
+  --tb-gradient-dur-band: 55s;
+  --tb-gradient-ease: cubic-bezier(0.45, 0.05, 0.55, 0.95);
 
   /* Deprecated shadcn-style aliases → semantic state tokens */
   --color-good: var(--success);

@@ -88,7 +88,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
 >
   <Breadcrumbs items={crumbItems} />
 
-  <section class="tb-band tb-reveal tb-reveal--hero" aria-labelledby="list-hero-title">
+  <section class="tb-band tb-band--gradient-hero tb-reveal tb-reveal--hero" aria-labelledby="list-hero-title">
     <ImageSlot slotId={`list-hero-${listSlug}`} aspect="banner" label={`List hero: ${list.short}`} />
 
     <h1 id="list-hero-title" class="tb-h1 flex flex-wrap items-center gap-3">
@@ -225,8 +225,8 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
       </div>
     </aside>
 
-    <div class="tb-editorial-main min-w-0 space-y-0">
-      <section id="sec-compare" class="tb-band tb-band--navy tb-reveal scroll-mt-28">
+    <div class="tb-editorial-main tb-editorial-main--gradient min-w-0 space-y-0">
+      <section id="sec-compare" class="tb-band tb-band--navy tb-band--wash tb-reveal scroll-mt-28">
         <h2 class="tb-h2">Compare at a glance</h2>
         <ListPageClient
           client:load
@@ -287,7 +287,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
         </p>
       </section>
 
-      <section id="sec-picks" class="tb-band scroll-mt-28">
+      <section id="sec-picks" class="tb-band tb-band--wash-light scroll-mt-28">
         <h2 class="tb-h2">All 10 picks</h2>
         <div id="prods">
           {rows.map((p) => (
