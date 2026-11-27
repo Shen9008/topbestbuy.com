@@ -1,32 +1,48 @@
 ---
+import TrustVisual from '../illustrations/TrustVisual.astro';
+import ResponsivePicture from '../media/ResponsivePicture.astro';
 import SectionHeader from './SectionHeader.astro';
+import { TRUST_BENTO_IMAGES } from '../../lib/trust-bento-images';
+import type { TrustVisualId } from '../../lib/feature-visuals';
 
-const items = [
+const topItems = [
   {
     title: 'Published scorecard',
     copy: 'Seven weighted criteria, shown on every card.',
     href: '/how-we-rank',
     cta: 'Read how we rank',
+    visual: 'scorecard' as TrustVisualId,
+    image: TRUST_BENTO_IMAGES.scorecard,
   },
   {
     title: 'Sources on every pick',
     copy: 'Dated prices with linked sources and honest gaps.',
     href: '/editorial-policy',
     cta: 'Read our editorial policy',
+    visual: 'dated' as TrustVisualId,
+    image: TRUST_BENTO_IMAGES.sources,
   },
+] as const;
+
+const bottomItems = [
   {
     title: 'Independent of commissions',
     copy: 'Affiliate income never changes a rank.',
     href: '/affiliate-disclosure',
     cta: 'See how we make money',
+    visual: 'no-paid' as TrustVisualId,
   },
   {
     title: 'Corrections in the open',
     copy: 'Every fix is logged with a date.',
     href: '/corrections',
     cta: 'View corrections',
+    visual: 'log' as TrustVisualId,
+    image: TRUST_BENTO_IMAGES.correctionsPanel,
   },
 ] as const;
+
+const hero = TRUST_BENTO_IMAGES.independenceHero;
 ---
 
 <section class="tb-section tb-reveal" aria-labelledby="home-trust-earn-heading">
@@ -36,17 +52,70 @@ const items = [
     title="How we earn your trust"
     align="center"
   />
-  <div class="tb-feature-grid tb-reveal-stagger mt-8">
+  <div class="tb-trust-bento tb-reveal-stagger mt-8">
     {
-      items.map((item) => (
-        <article class="tb-value-card">
-          <h3 class="m-0 font-display text-base font-bold">{item.title}</h3>
-          <p class="m-0 mt-2 text-sm text-[var(--tb-muted)]">{item.copy}</p>
-          <a href={item.href} class="tb-section-link mt-4 justify-start px-0 text-sm">
-            {item.cta}
-          </a>
+      topItems.map((item) => (
+        <article class="tb-trust-bento__card">
+          <div class="tb-trust-bento__media">
+            <ResponsivePicture
+              {...item.image}
+              class="h-full min-h-[11rem] w-full sm:min-h-[12.5rem]"
+              sizes="(min-width: 640px) 50vw, 100vw"
+            />
+            <span class="tb-trust-bento__scrim" aria-hidden="true" />
+            <span class="tb-trust-bento__badge" aria-hidden="true">
+              <TrustVisual id={item.visual} size="md" />
+            </span>
+          </div>
+          <div class="tb-trust-bento__body">
+            <h3 class="m-0 font-display text-base font-bold tracking-tight sm:text-lg">{item.title}</h3>
+            <p class="m-0 mt-2 text-sm leading-relaxed text-[var(--tb-muted)]">{item.copy}</p>
+            <a href={item.href} class="tb-section-link mt-4 justify-start px-0 text-sm">
+              {item.cta}
+            </a>
+          </div>
         </article>
       ))
     }
+
+    <article class="tb-trust-bento__cinematic">
+      <ResponsivePicture
+        {...hero}
+        class="tb-trust-bento__cinematic-bg"
+        sizes="100vw"
+        loading="lazy"
+      />
+      <span class="tb-trust-bento__cinematic-scrim" aria-hidden="true" />
+      <div class="tb-trust-bento__cinematic-panel">
+        {
+          bottomItems.map((item) => (
+            <div class="tb-trust-bento__cinematic-zone">
+              {
+                item.image ? (
+                  <div class="tb-trust-bento__zone-thumb">
+                    <ResponsivePicture
+                      {...item.image}
+                      class="h-full w-full"
+                      sizes="(min-width: 640px) 200px, 120px"
+                    />
+                  </div>
+                ) : (
+                  <span class="tb-trust-bento__zone-icon" aria-hidden="true">
+                    <TrustVisual id={item.visual} size="md" />
+                  </span>
+                )
+              }
+              <div class="min-w-0 flex-1">
+                <h3 class="m-0 font-display text-base font-bold tracking-tight sm:text-lg">{item.title}</h3>
+                <p class="m-0 mt-2 text-sm leading-relaxed text-[var(--tb-muted)]">{item.copy}</p>
+                <a href={item.href} class="tb-section-link mt-3 justify-start px-0 text-sm">
+                  {item.cta}
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </article>
   </div>
 </section>

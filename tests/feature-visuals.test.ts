@@ -60,6 +60,16 @@ describe('home section wiring', () => {
     expect(toolsPage).toContain('HomeToolTile');
     expect(toolsPage).not.toContain('tb-utility-tile__icon');
   });
+
+  it('trust earn bento uses editorial photos and TrustVisual', () => {
+    const earn = readFileSync(join(root, 'HomeTrustEarn.astro'), 'utf8');
+    expect(earn).toContain('tb-trust-bento');
+    expect(earn).toContain('TrustVisual');
+    expect(earn).toContain('ResponsivePicture');
+    expect(earn).toContain('TRUST_BENTO_IMAGES');
+    expect(earn).toContain('Read how we rank');
+    expect(earn).toContain('View corrections');
+  });
 });
 
 describe('static build embeds premium paths', () => {

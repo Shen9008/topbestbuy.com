@@ -1,0 +1,44 @@
+---
+export interface Props {
+  avif: string;
+  webp: string;
+  jpg: string;
+  alt: string;
+  width: number;
+  height: number;
+  class?: string;
+  imgClass?: string;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  avif,
+  webp,
+  jpg,
+  alt,
+  width,
+  height,
+  class: className = '',
+  imgClass = 'h-full w-full object-cover',
+  sizes,
+  loading = 'lazy',
+  fetchpriority,
+} = Astro.props;
+---
+
+<picture class:list={['block', className]}>
+  <source type="image/avif" srcset={avif} sizes={sizes} />
+  <source type="image/webp" srcset={webp} sizes={sizes} />
+  <img
+    src={jpg}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding="async"
+    fetchpriority={fetchpriority}
+    class={imgClass}
+  />
+</picture>
