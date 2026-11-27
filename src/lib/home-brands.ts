@@ -13,6 +13,17 @@ function brandSlug(name: string): string {
     .replace(/^-|-$/g, '');
 }
 
+/** Raster masters when a clean vector source isn't available. */
+const BRAND_LOGO_SRC: Partial<Record<string, string>> = {
+  cetaphil: '/images/brands/cetaphil.webp',
+  origin: '/images/brands/origin.webp',
+  tcl: '/images/brands/tcl.webp',
+};
+
+function brandLogoSrc(slug: string): string {
+  return BRAND_LOGO_SRC[slug] ?? `/images/brands/${slug}.svg`;
+}
+
 /** Unique manufacturers from the current #1 pick in each published list (homepage order). */
 export function homeTopBrands(): HomeBrand[] {
   const seen = new Set<string>();
@@ -26,7 +37,7 @@ export function homeTopBrands(): HomeBrand[] {
     brands.push({
       name: pick.brand,
       slug,
-      src: `/images/brands/${slug}.svg`,
+      src: brandLogoSrc(slug),
     });
   }
 
