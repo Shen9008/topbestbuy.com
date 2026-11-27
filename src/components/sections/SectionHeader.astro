@@ -26,9 +26,7 @@ const barClass = align === 'center' ? 'justify-center' : '';
 
 <div class:list={['tb-section__bar', barClass, className]}>
   <header class:list={['tb-section__head', alignClass]}>
-    {eyebrow ? (
-      <p class="m-0 text-xs font-bold uppercase tracking-[0.14em] text-[var(--tb-muted)]">{eyebrow}</p>
-    ) : null}
+    {eyebrow ? <p class="tb-section-eyebrow">{eyebrow}</p> : null}
     <h2 id={titleId} class="m-0 mt-2 tb-h2">
       {title}
     </h2>

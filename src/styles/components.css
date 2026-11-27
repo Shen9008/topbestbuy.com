@@ -34,6 +34,11 @@
     @apply font-display text-xs font-bold uppercase tracking-[0.12em] text-[var(--tb-heading-muted)];
   }
 
+  .tb-section-eyebrow {
+    @apply m-0 text-xs font-bold uppercase tracking-[0.14em];
+    color: var(--tb-heading-accent);
+  }
+
   .tb-heading-accent {
     color: var(--tb-heading-accent);
   }
@@ -50,34 +55,61 @@
     @apply mx-auto w-full max-w-[var(--content-max)];
   }
 
+  .tb-band,
+  .tb-page-bands__section {
+    @apply relative isolate -mx-4 border-0 px-4 py-12;
+    background: transparent;
+  }
+
+  .tb-band::before,
+  .tb-page-bands__section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(18px) saturate(1.08);
+    backdrop-filter: blur(18px) saturate(1.08);
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 14%,
+      black 86%,
+      transparent 100%
+    );
+  }
+
   .tb-band {
-    @apply -mx-4 border-y border-[var(--tb-line)] px-4 py-12;
-    background: var(--tb-band-bg);
     color: var(--tb-band-on-light-ink);
     --tb-ink: var(--tb-band-on-light-ink);
     --tb-muted: var(--tb-band-on-light-muted);
     --tb-heading: var(--tb-band-on-light-heading);
     --tb-heading-muted: var(--tb-band-on-light-muted);
+  }
+
+  .tb-band::before {
+    background: var(--tb-band-glass-light);
   }
 
   .tb-band--alt,
   .tb-band--navy {
-    background-color: var(--tb-band-bg-alt);
-    background-image: var(--tb-gradient-band-wash);
     color: var(--tb-band-on-navy-ink);
     --tb-ink: var(--tb-band-on-navy-ink);
     --tb-muted: var(--tb-band-on-navy-muted);
     --tb-heading: var(--tb-band-on-navy-heading);
     --tb-heading-muted: var(--tb-band-on-navy-muted);
-    border-color: color-mix(in oklch, var(--tb-band-on-navy-muted) 35%, transparent);
   }
 
-  .tb-page-bands__section {
-    @apply -mx-4 border-y border-[var(--tb-line)] px-4 py-12;
+  .tb-band--alt::before,
+  .tb-band--navy::before {
+    background: var(--tb-band-glass-navy);
+  }
+
+  .tb-page-bands {
+    @apply relative;
   }
 
   .tb-page-bands > .tb-page-bands__section:nth-child(odd) {
-    background: var(--tb-band-bg);
     color: var(--tb-band-on-light-ink);
     --tb-ink: var(--tb-band-on-light-ink);
     --tb-muted: var(--tb-band-on-light-muted);
@@ -85,15 +117,46 @@
     --tb-heading-muted: var(--tb-band-on-light-muted);
   }
 
+  .tb-page-bands > .tb-page-bands__section:nth-child(odd)::before {
+    background: var(--tb-band-glass-light);
+  }
+
   .tb-page-bands > .tb-page-bands__section:nth-child(even) {
-    background-color: var(--tb-band-bg-alt);
-    background-image: var(--tb-gradient-band-wash);
     color: var(--tb-band-on-navy-ink);
     --tb-ink: var(--tb-band-on-navy-ink);
     --tb-muted: var(--tb-band-on-navy-muted);
     --tb-heading: var(--tb-band-on-navy-heading);
     --tb-heading-muted: var(--tb-band-on-navy-muted);
-    border-color: color-mix(in oklch, var(--tb-band-on-navy-muted) 35%, transparent);
+  }
+
+  .tb-page-bands > .tb-page-bands__section:nth-child(even)::before {
+    background: var(--tb-band-glass-navy);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .tb-band::before,
+    .tb-page-bands__section::before {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      mask-image: none;
+    }
+
+    .tb-band::before {
+      background: var(--tb-band-bg);
+    }
+
+    .tb-band--alt::before,
+    .tb-band--navy::before {
+      background: var(--tb-band-bg-alt);
+    }
+
+    .tb-page-bands > .tb-page-bands__section:nth-child(odd)::before {
+      background: var(--tb-band-bg);
+    }
+
+    .tb-page-bands > .tb-page-bands__section:nth-child(even)::before {
+      background: var(--tb-band-bg-alt);
+    }
   }
 
   .tb-page-bands--nested > .tb-page-bands__section {
@@ -118,7 +181,7 @@
   }
 
   .tb-section--band {
-    @apply border-y border-[var(--tb-line)] py-12;
+    @apply border-0 py-12;
   }
 
   .tb-scroll-strip {
@@ -349,15 +412,15 @@
   .tb-trust-strip::after {
     content: '';
     position: absolute;
-    inset-inline: 0;
+    inset-inline: 10%;
     height: 1px;
     background: linear-gradient(
       90deg,
       transparent,
-      color-mix(in oklch, var(--tb-line) 90%, transparent) 15%,
-      color-mix(in oklch, var(--tb-line) 90%, transparent) 85%,
+      color-mix(in oklch, var(--tb-heading-accent) 35%, var(--tb-line)) 50%,
       transparent
     );
+    opacity: 0.65;
   }
 
   .tb-trust-strip::before {

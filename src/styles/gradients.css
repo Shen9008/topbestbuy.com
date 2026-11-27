@@ -1,5 +1,6 @@
 /**
  * Reusable atmospheric gradients — palette stops only (tokens.css).
+ * Shared canvas washes for home bands; band glass surfaces live in components.css.
  * Static layers; no animation (safe with prefers-reduced-motion).
  */
 
@@ -61,5 +62,13 @@
     background: var(--tb-gradient-page-bg);
     background-color: var(--tb-bg);
     background-attachment: fixed;
+  }
+
+  .tb-page-bands {
+    background: radial-gradient(
+      ellipse 120% 80% at 50% -20%,
+      color-mix(in oklch, var(--accent) 6%, transparent),
+      transparent 55%
+    );
   }
 }

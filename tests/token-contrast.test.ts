@@ -101,11 +101,12 @@ function assertPairs(theme: ThemeTokens, themeName: string) {
 }
 
 describe('design token contrast (WCAG)', () => {
-  it('tokens.css defines lime accent', () => {
+  it('tokens.css defines lime CTA and brand-orange typography accent', () => {
     const css = readFileSync(join(ROOT, 'src/styles/tokens.css'), 'utf8');
     expect(css).toContain('--accent: #c6ff3d');
     expect(css).toContain('--accent-fg');
-    expect(css).not.toContain('#ff7900');
+    expect(css).toContain('--color-brand-orange: #ff7900');
+    expect(css).toContain('--tb-heading-accent: var(--color-brand-orange)');
     expect(css).not.toContain('#FF7A3D');
   });
 
