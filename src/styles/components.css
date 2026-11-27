@@ -328,9 +328,44 @@
     @apply inline-flex shrink-0 items-center justify-center rounded-[var(--radius-lg)] border border-[var(--tb-line)] bg-[var(--tb-surface)] min-h-14 min-w-14 p-2;
   }
 
+  .tb-value-card__icon > .tb-visual-well {
+    padding: 0.375rem;
+  }
+
+  .tb-value-card__icon svg {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .tb-trust-pill__icon > .tb-visual-well {
+    padding: 0.25rem;
+  }
+
+  .tb-trust-pill__icon svg {
+    width: 2.125rem;
+    height: 2.125rem;
+  }
+
+  .tb-card-art__accent {
+    stroke: var(--tb-accent-fg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-value-card__icon svg,
+    .tb-trust-pill__icon svg {
+      transition: transform var(--dur-fast) var(--ease-out);
+    }
+
+    .tb-value-card:hover .tb-value-card__icon svg,
+    .tb-trust-pill:is(:hover, :focus-visible) .tb-trust-pill__icon svg {
+      transform: translateY(-2px) scale(1.05);
+    }
+  }
+
   .tb-value-card__icon:has(> .tb-visual-well),
   .tb-trust-pill__icon:has(> .tb-visual-well),
-  .tb-utility-tile__icon:has(> .tb-visual-well) {
+  .tb-utility-tile__icon:has(> .tb-visual-well),
+  .tb-methodology-card__icon:has(> .tb-visual-well) {
     @apply border-0 bg-transparent p-0 min-h-0 min-w-0;
   }
 
