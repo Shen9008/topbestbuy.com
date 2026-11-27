@@ -7,6 +7,7 @@ import { matchesFragrancePreference } from '../../lib/scoring';
 import type { RankedProduct } from '../../lib/scoring';
 import { TOOL_TAB_ICONS, type IconMapKey } from '../../icons';
 import Icon from '../ui/Icon';
+import ProductThumbImg from '../ui/ProductThumbImg';
 
 const TABS = [
   ['finder', 'Product finder'],
@@ -312,6 +313,7 @@ function ProductPickList({ products }: { products: RankedProduct[] }) {
       {products.map((p) => (
         <div class="tb-card flex flex-wrap items-center gap-3" key={p.id}>
           <span class="tb-rank">{p.rank}</span>
+          <ProductThumbImg productId={p.id} alt={productFullName(p)} size="sm" />
           <div class="min-w-[12rem] flex-1">
             <strong>{productFullName(p)}</strong>
             <br />

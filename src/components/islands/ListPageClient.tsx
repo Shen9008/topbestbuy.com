@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'preact/hooks';
 import { scoreForUsage, type RankedProduct } from '../../lib/scoring';
 import type { ScoreWeights } from '../../data/scorecard';
 import { formatRM, productFullName } from '../../lib/format';
+import { compareProductCellMarkup, escapeHtml } from '../../lib/product-thumb';
 
 export type ListClientProps = {
   listSlug: string;
@@ -66,10 +67,13 @@ export default function ListPageClient({
       filtered.length === 0
         ? '<tr><td colspan="99">No products in this band. Try another filter.</td></tr>'
         : filtered
-            .map(
-              (p) =>
-                `<tr><td><span class="tb-rank">${p.rank}</span></td><td><a href="#${p.id}" class="font-semibold text-[var(--tb-accent-fg)]">${productFullName(p)}</a><br/><small>${p.tag}</small></td><td class="tb-num"><strong>${p.total.toFixed(1)}</strong></td><td class="tb-num">${p.price.toLocaleString('en-MY')}</td>${p.specs.map((s) => `<td>${s}</td>`).join('')}<td>${p.best}</td></tr>`,
-            )
+            .map((p) => {
+              const name = escapeHtml(productFullName(p));
+              const nameHtml = `<a href="#${p.id}" class="font-semibold text-[var(--tb-accent-fg)]">${name}</a>`;
+              const subHtml = `<br/><small>${escapeHtml(p.tag)}</small>`;
+              const productCell = compareProductCellMarkup(p.id, productFullName(p), nameHtml, subHtml);
+              return `<tr><td><span class="tb-rank">${p.rank}</span></td><td>${productCell}</td><td class="tb-num"><strong>${p.total.toFixed(1)}</strong></td><td class="tb-num">${p.price.toLocaleString('en-MY')}</td>${p.specs.map((s) => `<td>${escapeHtml(s)}</td>`).join('')}<td>${escapeHtml(p.best)}</td></tr>`;
+            })
             .join('');
   }, [filtered]);
 

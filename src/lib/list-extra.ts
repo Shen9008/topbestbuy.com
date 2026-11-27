@@ -3,6 +3,7 @@ import { SITE_DATE } from '../data/meta';
 import type { RankedProduct } from './scoring';
 import { scoreForUsage, scoreTotal } from './scoring';
 import { formatRM, productFullName } from './format';
+import { escapeHtml, productThumbMarkup } from './product-thumb';
 import type { ListSlug } from './catalog';
 import { LISTS } from '../data/lists';
 import { resolveSources } from './sources';
@@ -20,8 +21,13 @@ export function quickPicksTable(rows: RankedProduct[], listShort: string): strin
   )[0]!;
   const cheapest = [...rows].sort((a, b) => a.price - b.price)[0]!;
   const premium = [...top5].sort((a, b) => b.price - a.price)[0]!;
+  const productCell = (p: RankedProduct) => {
+    const name = productFullName(p);
+    const thumb = productThumbMarkup(p.id, name, 'sm', { decorative: true });
+    return `<div class="tb-compare-product">${thumb}<span class="tb-compare-product__copy">${escapeHtml(name)}</span></div>`;
+  };
   const row = (label: string, p: RankedProduct) =>
-    `<tr><th scope="row">${label}</th><td>${productFullName(p)}</td><td class="tb-num">${p.total.toFixed(1)}</td><td class="tb-num">${formatRM(p.price)}</td></tr>`;
+    `<tr><th scope="row">${label}</th><td>${productCell(p)}</td><td class="tb-num">${p.total.toFixed(1)}</td><td class="tb-num">${formatRM(p.price)}</td></tr>`;
   return `<table class="tb-table tb-qp"><caption class="sr-only">Quick picks for ${listShort.toLowerCase()} in Malaysia</caption><thead><tr><th>Pick</th><th>Product</th><th>Score</th><th>Price</th></tr></thead><tbody>${row('Best overall', rows[0]!)}${row('Best value (top 5)', bestValue)}${row('Cheapest listed', cheapest)}${row('Premium choice (top 5)', premium)}</tbody></table>`;
 }
 

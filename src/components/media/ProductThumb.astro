@@ -1,0 +1,46 @@
+---
+import { resolveProductThumb, type ProductThumbSize } from '../../lib/product-thumb';
+
+interface Props {
+  productId: string;
+  alt: string;
+  size?: ProductThumbSize;
+  decorative?: boolean;
+  class?: string;
+}
+
+const {
+  productId,
+  alt,
+  size = 'sm',
+  decorative = false,
+  class: className = '',
+} = Astro.props;
+
+const thumb = resolveProductThumb(productId, alt);
+const sizeClass = size === 'md' ? 'tb-product-thumb--md' : 'tb-product-thumb--sm';
+---
+
+<span
+  class:list={[
+    'tb-product-thumb',
+    sizeClass,
+    !thumb && 'tb-product-thumb--empty',
+    className,
+  ]}
+  aria-hidden={decorative ? 'true' : undefined}
+>
+  {
+    thumb ? (
+      <img
+        src={thumb.src}
+        alt={decorative ? '' : thumb.alt}
+        width={thumb.width}
+        height={thumb.height}
+        loading="lazy"
+        decoding="async"
+        class="tb-product-thumb__img"
+      />
+    ) : null
+  }
+</span>

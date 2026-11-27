@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type Dispatch, type StateUpdater } fr
 import { searchSite, type SearchHit } from '../../lib/search-index';
 import { allProductsMap } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
+import ProductThumbImg from '../ui/ProductThumbImg';
 import Icon from '../ui/Icon';
 
 const STORAGE_KEY = 'tb-shortlist';
@@ -150,10 +151,8 @@ export default function AppChrome() {
               const p = catalog[id];
               if (!p) return null;
               return (
-                <div class="tb-feed-row" key={id}>
-                  <span class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)]">
-                    <Icon name="nav.saved" size={20} strokeWidth={2} />
-                  </span>
+                <div class="tb-feed-row tb-feed-row--thumb" key={id}>
+                  <ProductThumbImg productId={id} alt={productFullName(p)} size="sm" />
                   <div class="min-w-0">
                     <strong class="block truncate text-sm">{productFullName(p)}</strong>
                     <small class="tb-num text-[var(--tb-muted)]">

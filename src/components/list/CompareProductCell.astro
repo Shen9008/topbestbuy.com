@@ -1,0 +1,36 @@
+---
+import ProductThumb from '../media/ProductThumb.astro';
+import { productFullName } from '../../lib/format';
+import type { RankedProduct } from '../../lib/scoring';
+
+interface Props {
+  product: RankedProduct;
+  showOnPageLink?: boolean;
+}
+
+const { product, showOnPageLink = true } = Astro.props;
+const name = productFullName(product);
+---
+
+<div class="tb-compare-product">
+  <ProductThumb
+    productId={product.id}
+    alt={name}
+    size="md"
+    class="tb-compare-product__thumb"
+  />
+  <div class="tb-compare-product__copy">
+    <a href={`/reviews/${product.id}`} class="font-semibold text-[var(--tb-accent-fg)]">
+      {name}
+    </a>
+    {
+      showOnPageLink && (
+        <a href={`#${product.id}`} class="ml-2 text-xs text-[var(--tb-muted)]">
+          On this page
+        </a>
+      )
+    }
+    <br />
+    <small>{product.tag}</small>
+  </div>
+</div>
