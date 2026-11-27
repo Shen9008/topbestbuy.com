@@ -4,3 +4,5 @@ http://www.topbestbuy.online/* https://topbestbuy.online/:splat 301
 /how-we-make-money /affiliate-disclosure 301
 /methodology /how-we-rank 301
 /how-we-score /how-we-rank 301
+# Enforce trailingSlash: never — directory-style URLs from older deploys
+/*/  /:splat  301
