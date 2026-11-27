@@ -90,7 +90,7 @@ const hero = TRUST_BENTO_IMAGES.independenceHero;
           bottomItems.map((item) => (
             <div class="tb-trust-bento__cinematic-zone">
               {
-                item.image ? (
+                'image' in item && item.image ? (
                   <div class="tb-trust-bento__zone-thumb">
                     <ResponsivePicture
                       {...item.image}
