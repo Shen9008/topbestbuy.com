@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
+  METHODOLOGY_STEP_VISUAL_IDS,
   TOOL_VISUAL_IDS,
   TRUST_VISUAL_IDS,
   VALUE_VISUAL_IDS,
@@ -33,6 +34,10 @@ describe('premium feature illustrations', () => {
       assertPremiumSvg(TOOL_VISUAL_IDS[id]);
     }
   });
+
+  it('ships methodology step assets', () => {
+    for (const file of Object.values(METHODOLOGY_STEP_VISUAL_IDS)) assertPremiumSvg(file);
+  });
 });
 
 describe('home section wiring', () => {
@@ -59,6 +64,11 @@ describe('home section wiring', () => {
     expect(tile).toContain('tb-utility-tile');
     expect(toolsPage).toContain('HomeToolTile');
     expect(toolsPage).not.toContain('tb-utility-tile__icon');
+
+    const listMethod = readFileSync(join(root, 'ListMethodologyStrip.astro'), 'utf8');
+    expect(listMethod).toContain('TrustVisual');
+    expect(listMethod).toContain('MethodologyStepVisual');
+    expect(listMethod).not.toContain('<Icon');
   });
 
   it('trust earn bento uses editorial photos and TrustVisual', () => {

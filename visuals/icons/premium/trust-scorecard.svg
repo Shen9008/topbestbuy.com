@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M14 8h16l6 6v26a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M30 8v6h6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 22h14M16 28h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.35"/><rect x="16" y="32" width="4" height="8" rx="1" fill="#FF7900" fill-opacity="0.3" stroke="currentColor" stroke-width="1.5"/><rect x="22" y="28" width="4" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="28" y="24" width="4" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" style="color:var(--tb-ink, #172542)" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M11 8h17l9 9v20a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3Zm17 0v9h9"/>
+  <path d="M14 19h8m-8 16h17M16 31v-4m6 4v-7m6 7v-11" opacity=".7"/>
+  <path d="m34 29 3 3 6-7" class="tb-card-art__accent" stroke="#FF7900"/>
+  </g>
+</svg>
