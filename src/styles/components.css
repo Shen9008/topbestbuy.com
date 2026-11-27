@@ -374,6 +374,23 @@
     top: var(--tb-sticky-stack);
   }
 
+  .tb-hero--hub {
+    @apply relative max-w-none py-8 text-left sm:py-10 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10 lg:text-left;
+  }
+
+  .tb-hero--editorial,
+  .tb-hero--editorial.tb-hero--hub {
+    @apply text-center lg:text-center;
+  }
+
+  .tb-hero--editorial .tb-h1,
+  .tb-hero--editorial > div > p {
+    @apply mx-auto;
+  }
+
+  .tb-hero--editorial .tb-search-hero {
+    @apply mx-auto;
+  }
   .tb-hero__media {
     @apply mx-auto mt-8 flex w-full max-w-[500px] flex-col lg:mx-0 lg:mt-0 lg:h-[400px] lg:w-[500px] lg:max-w-none lg:shrink-0;
     aspect-ratio: 500 / 400;
@@ -765,8 +782,39 @@
     @apply my-4 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] px-4 py-3 text-sm leading-[var(--leading-prose)];
   }
 
+  .tb-disclosure.tb-editorial-center {
+    @apply mx-auto max-w-[var(--prose-max)] text-center;
+  }
+
+  .tb-editorial-center {
+    @apply mx-auto w-full max-w-[var(--prose-max)] text-center;
+  }
+
+  .tb-editorial-heading {
+    @apply mx-auto max-w-[var(--prose-max)] text-center;
+  }
+
+  .tb-editorial-scan {
+    @apply text-left;
+  }
+
   .tb-prose {
     @apply max-w-[var(--prose-max)] text-[var(--tb-ink)] leading-[var(--leading-prose)] [&_a]:text-[var(--tb-accent-fg)] [&_a]:underline [&_a]:underline-offset-4 [&_li]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5;
+  }
+
+  .tb-prose--center {
+    @apply mx-auto max-w-[var(--prose-max)] text-center;
+  }
+
+  .tb-prose--center :where(ul, ol) {
+    display: inline-block;
+    text-align: left;
+  }
+
+  .tb-prose--center .not-prose,
+  .tb-prose--center .tb-tablewrap,
+  .tb-prose--center .tb-editorial-scan {
+    @apply text-left;
   }
 
   .tb-prose h2 {
@@ -924,6 +972,10 @@
     @apply my-4 rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-4;
   }
 
+  .tb-eeat.tb-editorial-center {
+    @apply mx-auto max-w-[var(--prose-max)] text-center;
+  }
+
   .tb-hero {
     @apply relative mx-auto max-w-[42rem] py-10 text-center;
   }
@@ -1055,7 +1107,7 @@
   }
 
   .tb-list-lead {
-    @apply w-full max-w-none text-[var(--tb-ink)];
+    @apply mx-auto w-full max-w-[var(--prose-max)] text-center text-[var(--tb-ink)];
   }
 
   .tb-list-lead--short {

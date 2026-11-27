@@ -29,7 +29,7 @@ const trustLinks = [
 >
   <Breadcrumbs items={[{ label: 'How we score' }]} />
 
-  <header class="tb-hero tb-hero--hub tb-reveal" aria-label="Methodology">
+  <header class="tb-hero tb-hero--editorial tb-hero--hub tb-reveal" aria-label="Methodology">
     <div>
       <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Trust</p>
       <h1 class="tb-h1 mt-3 max-w-[16ch]">How we score</h1>
@@ -69,7 +69,7 @@ const trustLinks = [
     </aside>
 
     <div class="tb-editorial-main min-w-0 space-y-2">
-      <div class="tb-callout tb-card--editorial">
+      <div class="tb-callout tb-card--editorial tb-editorial-center">
         <strong>What we do and do not do.</strong> We research and aggregate expert reviews, owner reviews,
         official specs and dated retailer prices. We do not test products ourselves.
       </div>
@@ -115,7 +115,7 @@ const trustLinks = [
       </EditorialSection>
 
       <EditorialSection band="alt" class="!py-8">
-        <article class="tb-prose max-w-[var(--prose-max)]">
+        <article class="tb-prose tb-prose--center">
           <h2>The maths</h2>
           <p>
             Each criterion gets a sub-score from 0 to 5. The total is the sum of weight × score ÷ 5,
