@@ -50,7 +50,7 @@ const bodyHtml = normalizeGuideBodyHtml(post.body);
 >
   <Breadcrumbs items={crumbItems} />
 
-  <header class="mt-2 max-w-[var(--prose-max)]">
+  <header class="tb-editorial-center mt-2">
     <span class="tb-pill">{post.type}</span>
     <h1 class="mt-2 tb-h1">{post.h1}</h1>
     <div class="mt-2">
@@ -61,7 +61,7 @@ const bodyHtml = normalizeGuideBodyHtml(post.body);
     </p>
   </header>
 
-  <div class="tb-disclosure max-w-[var(--prose-max)]">
+  <div class="tb-disclosure tb-editorial-center">
     <strong>How we make money:</strong> we may earn a commission from links on this page. This
     never affects our rankings. <a href="/how-we-rank">How we rank</a>
   </div>
@@ -105,14 +105,14 @@ const bodyHtml = normalizeGuideBodyHtml(post.body);
 
     <div class="tb-editorial-main min-w-0">
       <section id="guide-tldr" class="scroll-mt-28">
-        <div class="tb-callout tb-card--editorial border-2 border-[var(--tb-ink)]">
+        <div class="tb-callout tb-card--editorial tb-editorial-center border-2 border-[var(--tb-ink)]">
           <strong>Short answer</strong>
           <p class="m-0 mt-2">{post.tldr}</p>
         </div>
       </section>
 
       <section id="guide-body" class="scroll-mt-28">
-        <article class="tb-prose mt-6" set:html={bodyHtml} />
+        <article class="tb-prose tb-prose--center mt-6" set:html={bodyHtml} />
       </section>
 
       <section id="guide-more" class="scroll-mt-28 mt-10">

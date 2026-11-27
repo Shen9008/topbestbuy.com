@@ -91,7 +91,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
   <section class="tb-band tb-reveal tb-reveal--hero" aria-labelledby="list-hero-title">
     <ImageSlot slotId={`list-hero-${listSlug}`} aspect="banner" label={`List hero: ${list.short}`} />
 
-    <h1 id="list-hero-title" class="tb-h1 flex flex-wrap items-center gap-3">
+    <h1 id="list-hero-title" class="tb-h1 tb-editorial-heading flex flex-wrap items-center justify-center gap-3 text-center">
     {
       LIST_SLUG_ICONS[listSlug!] ? (
         <span class="tb-icon-slot tb-icon-slot-pad-16 shrink-0" aria-hidden="true">
@@ -102,14 +102,14 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
     <span>{list.h1}</span>
   </h1>
 
-  <div class="mt-3 flex flex-col gap-2">
+  <div class="tb-editorial-center mt-3 flex flex-col items-center gap-2">
     <EditorialByline extra={`Prices checked ${SITE_DATE} · Scorecard v1.0`} />
-    <p class="m-0 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--tb-muted)]">
+    <p class="m-0 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm text-[var(--tb-muted)]">
       <span class="tb-pill tb-pill-sample">Prices as reported, verify</span>
     </p>
   </div>
 
-  <div class="tb-disclosure">
+  <div class="tb-disclosure tb-editorial-center">
     <strong>How we make money:</strong> we may earn a commission if you buy through links on
     this page, at no extra cost to you. This never affects our rankings.
     <a href="/how-we-rank">How we rank</a>
@@ -126,7 +126,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
 
   <ListLeadIntro part="short" top3={top3} audience={list.audience} />
 
-  <aside class="tb-eeat" aria-label="Authors and fact-check">
+  <aside class="tb-eeat tb-editorial-center" aria-label="Authors and fact-check">
     <p class="text-sm">
       Fact-checked {SITE_DATE} · <a href="/how-we-rank">Scorecard v1.0</a> ·{' '}
       <a href="/affiliate-disclosure">Independence</a>
@@ -141,9 +141,9 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
 
   <ListMethodologyStrip />
 
-  <div class="tb-callout tb-spotlight border-2 border-[var(--tb-ink)]">
+  <div class="tb-callout tb-editorial-center tb-spotlight border-2 border-[var(--tb-ink)]">
     <strong>Key takeaways</strong>
-    <ul class="mb-0 mt-2 list-disc pl-5 text-sm">
+    <ul class="tb-editorial-scan mb-0 mt-2 inline-block list-disc pl-5 text-left text-sm">
       <li>Scored on 7 criteria; weights on <a href="/how-we-rank">How we rank</a>.</li>
       <li>Prices are third-party reported and dated. Verify at checkout.</li>
       <li>
@@ -153,7 +153,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
     </ul>
   </div>
 
-  <div class="my-4 grid gap-2" aria-label="Top 3">
+  <div class="tb-editorial-scan mx-auto my-4 grid max-w-[var(--prose-max)] gap-2" aria-label="Top 3">
     {
       top3.map((p) => (
         <a
@@ -227,7 +227,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
 
     <div class="tb-editorial-main min-w-0 space-y-0">
       <section id="sec-compare" class="tb-band tb-band--navy tb-reveal scroll-mt-28">
-        <h2 class="tb-h2">Compare at a glance</h2>
+        <h2 class="tb-h2 tb-editorial-heading">Compare at a glance</h2>
         <ListPageClient
           client:load
           listSlug={listSlug!}
@@ -288,14 +288,14 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
       </section>
 
       <section id="sec-picks" class="tb-band scroll-mt-28">
-        <h2 class="tb-h2">All 10 picks</h2>
+        <h2 class="tb-h2 tb-editorial-heading">All 10 picks</h2>
         <div id="prods">
           {rows.map((p) => (
             <ProductCard product={p} list={list} />
           ))}
         </div>
 
-      <section id="sec-best" class="tb-prose mt-10 scroll-mt-28">
+      <section id="sec-best" class="tb-prose tb-prose--center mt-10 scroll-mt-28">
         <h2>Best {list.short.toLowerCase()} in Malaysia by need and budget</h2>
         <p>
           Different households weigh price, performance and support differently, so we
@@ -305,12 +305,12 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
         <div set:html={usageBlocks(slug, rows)} />
       </section>
 
-      <section id="sec-price" class="tb-prose mt-10 scroll-mt-28">
+      <section id="sec-price" class="tb-prose tb-prose--center mt-10 scroll-mt-28">
         <h2>{list.short} price in Malaysia: what to expect</h2>
         <div set:html={priceBandCopy(slug, rows)} />
       </section>
 
-      <section id="sec-how" class="tb-prose mt-10 scroll-mt-28">
+      <section id="sec-how" class="tb-prose tb-prose--center mt-10 scroll-mt-28">
         <h2>How we chose</h2>
         <div set:html={list.how} />
         <p>
@@ -321,7 +321,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
         </p>
       </section>
 
-      <section id="sec-guide" class="tb-prose mt-10 scroll-mt-28">
+      <section id="sec-guide" class="tb-prose tb-prose--center mt-10 scroll-mt-28">
         <h2>Buying guide: what to check</h2>
         {
           list.guide.map((g) => (
@@ -335,7 +335,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
       </section>
 
       <section id="sec-faq" class="tb-band tb-band--navy mt-10 scroll-mt-28">
-        <h2 class="tb-h2">FAQ</h2>
+        <h2 class="tb-h2 tb-editorial-heading">FAQ</h2>
         {
           list.faq.map((f) => (
             <details class="my-2 rounded-[var(--radius-sm)] border border-[var(--tb-line)]">
@@ -345,7 +345,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
           ))
         }
 
-      <div id="sec-sources" class="tb-prose mt-10 scroll-mt-28">
+      <div id="sec-sources" class="tb-prose tb-prose--center mt-10 scroll-mt-28">
         <h2>Sources and fact-check notes</h2>
         <p>
           We did not test any product. Each pick cites the pages below, re-read on {SITE_DATE}.
