@@ -1,0 +1,47 @@
+---
+import { formatRM } from '../../lib/format';
+import { siblingReviewAnchor } from '../../lib/internal-links';
+import type { RankedProduct } from '../../lib/scoring';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  siblings: RankedProduct[];
+  listShort: string;
+  listHref: string;
+}
+
+const { siblings, listShort, listHref } = Astro.props;
+---
+
+{
+  siblings.length > 0 && (
+    <section class="tb-band scroll-mt-28" aria-labelledby="also-ranked-heading">
+      <SectionHeader
+        titleId="also-ranked-heading"
+        title="Also ranked on this list"
+        description={`Nearby picks from ${listShort} — same scorecard, full review pages.`}
+        seeAllHref={listHref}
+        seeAllLabel="Full Top 10"
+      />
+      <ul class="m-0 mt-4 list-none space-y-2 p-0">
+        {siblings.map((p, i) => (
+          <li>
+            <a
+              href={`/reviews/${p.id}`}
+              class="tb-tile tb-card--editorial flex flex-wrap items-baseline justify-between gap-2 no-underline"
+            >
+              <span>
+                <span class="tb-num text-xs font-bold text-[var(--tb-muted)]">#{p.rank}</span>{' '}
+                <strong>{siblingReviewAnchor(p, i)}</strong>
+                <span class="block text-sm text-[var(--tb-muted)]">{p.tag}</span>
+              </span>
+              <span class="tb-num text-sm text-[var(--tb-muted)]">
+                {p.total.toFixed(1)}/100 · {formatRM(p.price)}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

@@ -1,0 +1,44 @@
+---
+import { getList } from '../../lib/catalog';
+import { productFullName } from '../../lib/format';
+import type { RankedProduct } from '../../lib/scoring';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  picks: RankedProduct[];
+  categoryName: string;
+}
+
+const { picks, categoryName } = Astro.props;
+---
+
+{
+  picks.length > 0 && (
+    <section class="tb-page-bands__section" aria-labelledby="cat-top-reviewed-heading">
+      <SectionHeader
+        titleId="cat-top-reviewed-heading"
+        title="Top reviewed"
+        description={`Rank #1–#3 full reviews across ${categoryName} lists.`}
+      />
+      <ul class="m-0 mt-3 list-none space-y-2 p-0 sm:columns-2">
+        {picks.map((p) => {
+          const L = getList(p.list);
+          return (
+            <li class="break-inside-avoid pb-2">
+              <a
+                href={`/reviews/${p.id}`}
+                class="tb-tile block no-underline"
+              >
+                <span class="tb-num text-xs font-bold text-[var(--tb-muted)]">
+                  #{p.rank} · {L.short}
+                </span>
+                <strong class="block">{productFullName(p)}</strong>
+                <span class="tb-num text-sm text-[var(--tb-muted)]">{p.total.toFixed(1)}/100</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )
+}
