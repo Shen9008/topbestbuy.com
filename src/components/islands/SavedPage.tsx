@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { allProductsMap } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
 import Icon from '../ui/Icon';
+import ProductThumbImg from '../ui/ProductThumbImg';
 
 const STORAGE_KEY = 'tb-shortlist';
 
@@ -48,13 +49,8 @@ export default function SavedPage() {
         const p = catalog[id];
         if (!p) return null;
         return (
-          <div class="tb-feed-row" key={id}>
-            <span
-              class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)]"
-              aria-hidden="true"
-            >
-              <Icon name="nav.saved" size={20} strokeWidth={2} />
-            </span>
+          <div class="tb-feed-row tb-feed-row--thumb" key={id}>
+            <ProductThumbImg productId={id} alt={productFullName(p)} size="sm" />
             <span class="min-w-0">
               <strong class="block truncate text-[var(--tb-ink)]">{productFullName(p)}</strong>
               <small class="text-[var(--tb-muted)]">

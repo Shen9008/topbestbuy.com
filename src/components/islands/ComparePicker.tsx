@@ -3,6 +3,7 @@ import { CRIT } from '../../data/scorecard';
 import { LISTS } from '../../data/lists';
 import { allProductsMap } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
+import ProductThumbImg from '../ui/ProductThumbImg';
 import { scoreForUsage } from '../../lib/scoring';
 
 export default function ComparePicker({ initialIds }: { initialIds?: string[] }) {
@@ -83,9 +84,20 @@ export default function ComparePicker({ initialIds }: { initialIds?: string[] })
                   <th />
                   {products.map((p) => (
                     <th scope="col" key={p.id}>
-                      {productFullName(p)}
-                      <br />
-                      <small>{p.tag}</small>
+                      <div class="tb-compare-product flex-col items-center sm:flex-row sm:items-start">
+                        <ProductThumbImg
+                          productId={p.id}
+                          alt={productFullName(p)}
+                          size="md"
+                          className="tb-compare-product__thumb !inline-flex"
+                          decorative={false}
+                        />
+                        <span class="tb-compare-product__copy text-left">
+                          {productFullName(p)}
+                          <br />
+                          <small>{p.tag}</small>
+                        </span>
+                      </div>
                     </th>
                   ))}
                 </tr>

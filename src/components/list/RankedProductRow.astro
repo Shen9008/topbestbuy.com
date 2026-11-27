@@ -1,0 +1,29 @@
+---
+import ProductThumb from '../media/ProductThumb.astro';
+import { productFullName } from '../../lib/format';
+import type { RankedProduct } from '../../lib/scoring';
+
+interface Props {
+  product: RankedProduct;
+  href: string;
+  /** Secondary line under the title (defaults to tag + best). */
+  detail?: string;
+  class?: string;
+  thumbSize?: 'sm' | 'md';
+}
+
+const { product, href, detail, class: className = '', thumbSize = 'sm' } = Astro.props;
+const name = productFullName(product);
+const secondary = detail ?? `${product.tag}: ${product.best}`;
+---
+
+<a href={href} class:list={['tb-ranked-row', className]}>
+  <span class="tb-rank">{product.rank}</span>
+  <ProductThumb productId={product.id} alt={name} size={thumbSize} decorative />
+  <span class="tb-ranked-row__copy min-w-0">
+    <b class="text-[var(--tb-ink)]">{name}</b>
+    <br />
+    <small class="text-[var(--tb-muted)]">{secondary}</small>
+  </span>
+  <span class="tb-score text-xl">{product.total.toFixed(1)}</span>
+</a>

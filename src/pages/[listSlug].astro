@@ -35,6 +35,8 @@ import TrustPathModule from '../components/sections/TrustPathModule.astro';
 import RelatedListsSection from '../components/sections/RelatedListsSection.astro';
 import TopReviewsStrip from '../components/sections/TopReviewsStrip.astro';
 import ListLeadIntro from '../components/sections/ListLeadIntro.astro';
+import RankedProductRow from '../components/list/RankedProductRow.astro';
+import CompareProductCell from '../components/list/CompareProductCell.astro';
 
 export function getStaticPaths() {
   return LIST_SLUGS.map((listSlug) => ({ params: { listSlug } }));
@@ -154,24 +156,11 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
   </div>
 
   <div class="my-4 grid gap-2" aria-label="Top 3">
-    {
-      top3.map((p) => (
-        <a
-          href={`/reviews/${p.id}`}
-          class="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-3 no-underline"
-        >
-          <span class="tb-rank">{p.rank}</span>
-          <span>
-            <b class="text-[var(--tb-ink)]">{productFullName(p)}</b>
-            <br />
-            <small class="text-[var(--tb-muted)]">
-              {p.tag}: {p.best}
-            </small>
-          </span>
-          <span class="tb-score text-xl">{p.total.toFixed(1)}</span>
-        </a>
-      ))
-    }
+  {
+    top3.map((p) => (
+      <RankedProductRow product={p} href={`/reviews/${p.id}`} />
+    ))
+  }
   </div>
   </section>
 
@@ -259,14 +248,7 @@ const siblingLists = relatedListsInCategory(list.cat, listSlug!, 3);
                       <span class="tb-rank">{p.rank}</span>
                     </td>
                     <td>
-                      <a href={`/reviews/${p.id}`} class="font-semibold text-[var(--tb-accent-fg)]">
-                        {productFullName(p)}
-                      </a>
-                      <a href={`#${p.id}`} class="ml-2 text-xs text-[var(--tb-muted)]">
-                        On this page
-                      </a>
-                      <br />
-                      <small>{p.tag}</small>
+                      <CompareProductCell product={p} />
                     </td>
                     <td class="tb-num">
                       <strong>{p.total.toFixed(1)}</strong>

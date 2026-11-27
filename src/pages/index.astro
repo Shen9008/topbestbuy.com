@@ -17,6 +17,7 @@ import { SITE_DATE } from '../data/meta';
 import { LISTS } from '../data/lists';
 import { listSlugs, topPick } from '../lib/catalog';
 import { productFullName } from '../lib/format';
+import ProductThumb from '../components/media/ProductThumb.astro';
 import { LIST_SLUG_ICONS } from '../icons';
 import { HOME, homePageJsonLd } from '../lib/seo';
 
@@ -80,8 +81,9 @@ const listCount = listSlugs().length;
           heroPicks.map(
             (p) =>
               p && (
-                <a href={`/${p.list}`} class="tb-feed-row">
+                <a href={`/${p.list}`} class="tb-feed-row tb-feed-row--product">
                   <span class="tb-rank">1</span>
+                  <ProductThumb productId={p.id} alt={productFullName(p)} size="sm" decorative />
                   <span class="min-w-0">
                     <strong class="block truncate text-[var(--tb-ink)]">{productFullName(p)}</strong>
                     <small class="text-[var(--tb-muted)]">
