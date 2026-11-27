@@ -1264,7 +1264,7 @@
   }
 
   .tb-list-lead--intro {
-    @apply mt-4;
+    @apply mt-4 max-w-none text-left;
   }
 
   .tb-list-lead__short {
@@ -1280,18 +1280,15 @@
   }
 
   .tb-list-lead__intro {
-    @apply mt-5 space-y-4 text-base leading-relaxed;
+    @apply mt-5 space-y-4 text-left text-base leading-relaxed;
   }
 
-  @media (min-width: 64rem) {
-    .tb-list-lead__intro--columns {
-      column-count: 2;
-      column-gap: 2.5rem;
-    }
+  .tb-list-lead__intro--grid {
+    @apply grid gap-3 space-y-0 sm:grid-cols-3;
+  }
 
-    .tb-list-lead__intro--columns p {
-      break-inside: avoid;
-    }
+  .tb-list-lead__note {
+    @apply rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] p-4 text-sm leading-relaxed shadow-[0_1px_0_rgb(0_0_0/0.12)] sm:text-base;
   }
 
   .tb-pick-card__head .tb-rank {

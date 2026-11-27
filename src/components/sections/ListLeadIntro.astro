@@ -13,7 +13,7 @@ interface Props {
 const { part, top3 = [], audience = '', introHtml = '' } = Astro.props;
 const first = top3[0];
 const introParagraphs = part === 'intro' ? introToParagraphs(introHtml) : [];
-const useIntroColumns = introParagraphs.length >= 3;
+const useIntroGrid = introParagraphs.length >= 3;
 ---
 
 {
@@ -70,11 +70,20 @@ const useIntroColumns = introParagraphs.length >= 3;
   part === 'intro' && introParagraphs.length > 0 && (
     <section class="tb-list-lead tb-list-lead--intro" aria-label="How this list was built">
       <div
-        class:list={['tb-list-lead__intro', { 'tb-list-lead__intro--columns': useIntroColumns }]}
+        class:list={[
+          'tb-list-lead__intro',
+          { 'tb-list-lead__intro--grid': useIntroGrid },
+        ]}
       >
-        {introParagraphs.map((para) => (
-          <p>{para}</p>
-        ))}
+        {introParagraphs.map((para) =>
+          useIntroGrid ? (
+            <article class="tb-list-lead__note">
+              <p class="m-0">{para}</p>
+            </article>
+          ) : (
+            <p>{para}</p>
+          ),
+        )}
       </div>
     </section>
   )
