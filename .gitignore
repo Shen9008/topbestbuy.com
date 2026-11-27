@@ -25,3 +25,4 @@ scripts/.asset-generation-state*.json
 
 # jetbrains setting folder
 .idea/
+test-results/
