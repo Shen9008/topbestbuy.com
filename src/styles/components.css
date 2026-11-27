@@ -91,6 +91,79 @@
     background: var(--tb-band-glass-light);
   }
 
+  .tb-band--gradient-hero::after,
+  .tb-band--wash::after,
+  .tb-band--wash-light::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+    will-change: transform, opacity;
+  }
+
+  .tb-band--gradient-hero::after {
+    inset: -1.5rem -1rem 0;
+    background: var(--tb-gradient-hero-mesh);
+    mask-image: linear-gradient(to bottom, black 0%, transparent 94%);
+  }
+
+  .tb-band--wash::after {
+    background-image: var(--tb-gradient-band-wash);
+    background-color: transparent;
+  }
+
+  .tb-band--wash-light::after {
+    background-image: var(--tb-gradient-band-wash-light);
+    background-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-band--wash::after,
+    .tb-band--wash-light::after {
+      animation: tb-gradient-band-shift var(--tb-gradient-dur-band) var(--tb-gradient-ease) infinite alternate;
+    }
+  }
+
+  .tb-editorial-main--gradient {
+    @apply relative isolate;
+  }
+
+  .tb-editorial-main--gradient::before {
+    content: '';
+    position: absolute;
+    inset: -2rem -1.5rem 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--tb-gradient-list-column);
+    mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+    opacity: 0.9;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-editorial-main--gradient::before {
+      animation: tb-gradient-band-shift var(--tb-gradient-dur-band) var(--tb-gradient-ease) infinite alternate-reverse;
+    }
+
+    .tb-page-bands::before {
+      content: '';
+      position: absolute;
+      inset: -10% 0 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(ellipse 60% 40% at 30% 0%, var(--tb-gradient-lime-10), transparent 55%);
+      opacity: 0.7;
+      animation: tb-gradient-ambient-drift var(--tb-gradient-dur-ambient) var(--tb-gradient-ease) infinite alternate;
+    }
+  }
+
   .tb-band--alt,
   .tb-band--navy {
     color: var(--tb-band-on-navy-ink);
@@ -1045,6 +1118,29 @@
       28px 28px,
       28px 28px;
     mask-image: linear-gradient(to bottom, black 0%, transparent 88%);
+  }
+
+  .tb-hero::after {
+    content: '';
+    position: absolute;
+    inset: -4rem -2rem 0;
+    z-index: -2;
+    pointer-events: none;
+    background: radial-gradient(ellipse 75% 55% at 22% -5%, var(--tb-gradient-lime-16), transparent 52%);
+    mask-image: linear-gradient(to bottom, black 0%, transparent 86%);
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-hero::after {
+      animation: tb-gradient-hero-pulse var(--tb-gradient-dur-hero) var(--tb-gradient-ease) infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tb-hero::after {
+      opacity: 0.4;
+    }
   }
 
   .tb-hero.tb-hero--hub {

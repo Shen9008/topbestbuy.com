@@ -1,63 +1,110 @@
 /**
- * Reusable atmospheric gradients — palette stops only (tokens.css).
- * Shared canvas washes for home bands; band glass surfaces live in components.css.
- * Static layers; no animation (safe with prefers-reduced-motion).
+ * Atmospheric gradients — palette stops from tokens.css; motion in motion-safe block.
+ * Page wash (html + body ambient), hero mesh, band washes for glass bands in components.css.
  */
 
 @layer components {
   :root {
     --tb-gradient-page-bg:
-      radial-gradient(ellipse 110% 70% at 50% -12%, var(--tb-gradient-lime-08), transparent 55%),
-      radial-gradient(ellipse 55% 45% at 100% 8%, color-mix(in srgb, var(--tb-gradient-navy-mid) 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 45% 40% at -5% 65%, color-mix(in srgb, var(--tb-gradient-navy-lift) 18%, transparent), transparent 65%),
-      linear-gradient(180deg, color-mix(in srgb, var(--tb-gradient-navy-deep) 8%, var(--bg)) 0%, var(--bg) 28%, var(--bg) 100%);
+      radial-gradient(ellipse 125% 78% at 50% -14%, var(--tb-gradient-lime-16), transparent 52%),
+      radial-gradient(ellipse 62% 48% at 100% 6%, var(--tb-gradient-orange-08), transparent 68%),
+      radial-gradient(ellipse 58% 46% at -8% 38%, color-mix(in srgb, var(--tb-gradient-navy-mid) 32%, transparent), transparent 62%),
+      radial-gradient(ellipse 48% 42% at 92% 72%, var(--tb-gradient-teal-06), transparent 65%),
+      radial-gradient(ellipse 50% 40% at 8% 88%, color-mix(in srgb, var(--tb-gradient-navy-lift) 28%, transparent), transparent 64%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--tb-gradient-navy-deep) 14%, var(--bg)) 0%,
+        color-mix(in srgb, var(--tb-gradient-navy-deep) 6%, var(--bg)) 18%,
+        var(--bg) 38%,
+        var(--bg) 100%
+      );
 
     --tb-gradient-hero-mesh:
-      radial-gradient(ellipse 90% 55% at 22% -8%, var(--tb-gradient-lime-12), transparent 58%),
-      radial-gradient(ellipse 70% 50% at 88% 15%, var(--tb-gradient-teal-06), transparent 62%),
-      radial-gradient(ellipse 55% 40% at 50% 100%, color-mix(in srgb, var(--tb-gradient-navy-mid) 20%, transparent), transparent 70%);
+      radial-gradient(ellipse 95% 58% at 20% -10%, var(--tb-gradient-lime-20), transparent 54%),
+      radial-gradient(ellipse 72% 52% at 92% 8%, var(--tb-gradient-orange-10), transparent 58%),
+      radial-gradient(ellipse 68% 48% at 88% 22%, var(--tb-gradient-teal-06), transparent 62%),
+      radial-gradient(ellipse 60% 44% at 42% 105%, color-mix(in srgb, var(--tb-gradient-navy-mid) 32%, transparent), transparent 68%),
+      radial-gradient(ellipse 45% 38% at 8% 55%, color-mix(in srgb, var(--tb-gradient-navy-lift) 22%, transparent), transparent 66%);
 
     --tb-gradient-hero-grid:
-      linear-gradient(color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px);
+      linear-gradient(color-mix(in oklch, var(--tb-line) 38%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklch, var(--tb-line) 38%, transparent) 1px, transparent 1px);
 
-    --tb-gradient-hero-bg:
-      var(--tb-gradient-hero-mesh), var(--tb-gradient-hero-grid);
+    --tb-gradient-hero-bg: var(--tb-gradient-hero-mesh), var(--tb-gradient-hero-grid);
 
     --tb-gradient-band-wash:
-      radial-gradient(ellipse 80% 100% at 50% 0%, color-mix(in srgb, var(--tb-gradient-navy-lift) 28%, transparent), transparent 72%),
-      radial-gradient(ellipse 40% 60% at 100% 100%, var(--tb-gradient-lime-05), transparent 70%);
+      radial-gradient(ellipse 92% 110% at 50% -8%, color-mix(in srgb, var(--tb-gradient-navy-lift) 42%, transparent), transparent 68%),
+      radial-gradient(ellipse 48% 70% at 100% 95%, var(--tb-gradient-lime-10), transparent 65%),
+      radial-gradient(ellipse 40% 55% at 0% 85%, var(--tb-gradient-orange-08), transparent 62%);
+
+    --tb-gradient-band-wash-light:
+      radial-gradient(ellipse 100% 85% at 50% -5%, var(--tb-gradient-lime-12), transparent 58%),
+      radial-gradient(ellipse 55% 60% at 100% 50%, var(--tb-gradient-orange-06), transparent 68%),
+      radial-gradient(ellipse 45% 50% at -5% 100%, color-mix(in srgb, var(--tb-gradient-navy-mid) 16%, transparent), transparent 70%);
+
+    --tb-gradient-list-column:
+      radial-gradient(ellipse 80% 45% at 50% 0%, var(--tb-gradient-lime-08), transparent 55%),
+      radial-gradient(ellipse 50% 60% at 100% 40%, color-mix(in srgb, var(--tb-gradient-navy-mid) 14%, transparent), transparent 70%);
   }
 
   [data-theme='light'] {
     --tb-gradient-page-bg:
-      radial-gradient(ellipse 100% 60% at 50% -8%, var(--tb-gradient-lime-05), transparent 50%),
-      linear-gradient(180deg, color-mix(in srgb, var(--tb-gradient-navy-deep) 4%, var(--bg)) 0%, var(--bg) 22%, var(--bg) 100%);
+      radial-gradient(ellipse 110% 65% at 50% -10%, var(--tb-gradient-lime-10), transparent 48%),
+      radial-gradient(ellipse 55% 40% at 100% 5%, var(--tb-gradient-orange-06), transparent 62%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--tb-gradient-navy-deep) 8%, var(--bg)) 0%,
+        var(--bg) 26%,
+        var(--bg) 100%
+      );
 
     --tb-gradient-hero-mesh:
-      radial-gradient(ellipse 85% 50% at 30% -5%, var(--tb-gradient-lime-08), transparent 55%),
-      radial-gradient(ellipse 50% 35% at 100% 20%, color-mix(in srgb, var(--tb-gradient-navy-mid) 10%, transparent), transparent 65%);
+      radial-gradient(ellipse 90% 52% at 28% -6%, var(--tb-gradient-lime-12), transparent 52%),
+      radial-gradient(ellipse 52% 38% at 100% 18%, var(--tb-gradient-orange-08), transparent 62%),
+      radial-gradient(ellipse 48% 36% at 75% 100%, color-mix(in srgb, var(--tb-gradient-navy-mid) 14%, transparent), transparent 65%);
 
     --tb-gradient-band-wash:
-      radial-gradient(ellipse 75% 90% at 50% 0%, color-mix(in srgb, var(--tb-gradient-navy-deep) 12%, transparent), transparent 70%);
+      radial-gradient(ellipse 80% 95% at 50% 0%, color-mix(in srgb, var(--tb-gradient-navy-deep) 20%, transparent), transparent 68%),
+      radial-gradient(ellipse 42% 55% at 100% 100%, var(--tb-gradient-lime-08), transparent 65%);
+
+    --tb-gradient-band-wash-light:
+      radial-gradient(ellipse 95% 80% at 50% -5%, var(--tb-gradient-lime-10), transparent 52%),
+      radial-gradient(ellipse 40% 45% at 0% 90%, var(--tb-gradient-orange-05), transparent 65%);
+
+    --tb-gradient-list-column:
+      radial-gradient(ellipse 75% 40% at 50% 0%, var(--tb-gradient-lime-08), transparent 50%);
   }
 
   @media (prefers-color-scheme: light) {
     :root:not([data-theme='dark']) {
       --tb-gradient-page-bg:
-        radial-gradient(ellipse 100% 60% at 50% -8%, var(--tb-gradient-lime-05), transparent 50%),
-        linear-gradient(180deg, color-mix(in srgb, var(--tb-gradient-navy-deep) 4%, var(--bg)) 0%, var(--bg) 22%, var(--bg) 100%);
+        radial-gradient(ellipse 110% 65% at 50% -10%, var(--tb-gradient-lime-10), transparent 48%),
+        radial-gradient(ellipse 55% 40% at 100% 5%, var(--tb-gradient-orange-06), transparent 62%),
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--tb-gradient-navy-deep) 8%, var(--bg)) 0%,
+          var(--bg) 26%,
+          var(--bg) 100%
+        );
 
       --tb-gradient-hero-mesh:
-        radial-gradient(ellipse 85% 50% at 30% -5%, var(--tb-gradient-lime-08), transparent 55%),
-        radial-gradient(ellipse 50% 35% at 100% 20%, color-mix(in srgb, var(--tb-gradient-navy-mid) 10%, transparent), transparent 65%);
+        radial-gradient(ellipse 90% 52% at 28% -6%, var(--tb-gradient-lime-12), transparent 52%),
+        radial-gradient(ellipse 52% 38% at 100% 18%, var(--tb-gradient-orange-08), transparent 62%),
+        radial-gradient(ellipse 48% 36% at 75% 100%, color-mix(in srgb, var(--tb-gradient-navy-mid) 14%, transparent), transparent 65%);
 
       --tb-gradient-band-wash:
-        radial-gradient(ellipse 75% 90% at 50% 0%, color-mix(in srgb, var(--tb-gradient-navy-deep) 12%, transparent), transparent 70%);
+        radial-gradient(ellipse 80% 95% at 50% 0%, color-mix(in srgb, var(--tb-gradient-navy-deep) 20%, transparent), transparent 68%),
+        radial-gradient(ellipse 42% 55% at 100% 100%, var(--tb-gradient-lime-08), transparent 65%);
+
+      --tb-gradient-band-wash-light:
+        radial-gradient(ellipse 95% 80% at 50% -5%, var(--tb-gradient-lime-10), transparent 52%),
+        radial-gradient(ellipse 40% 45% at 0% 90%, var(--tb-gradient-orange-05), transparent 65%);
+
+      --tb-gradient-list-column:
+        radial-gradient(ellipse 75% 40% at 50% 0%, var(--tb-gradient-lime-08), transparent 50%);
     }
   }
 
-  /* Optional: pin mesh to viewport on long pages (html uses --tb-gradient-page-bg by default) */
   .tb-gradient-page {
     background: var(--tb-gradient-page-bg);
     background-color: var(--tb-bg);
@@ -65,10 +112,81 @@
   }
 
   .tb-page-bands {
-    background: radial-gradient(
-      ellipse 120% 80% at 50% -20%,
-      color-mix(in oklch, var(--accent) 6%, transparent),
-      transparent 55%
-    );
+    background:
+      radial-gradient(ellipse 140% 90% at 50% -25%, var(--tb-gradient-lime-10), transparent 52%),
+      radial-gradient(ellipse 70% 50% at 100% 15%, var(--tb-gradient-orange-06), transparent 60%);
+  }
+
+  /* Fixed ambient layer — drifts under page gradient on html */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -25% -15%;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.55;
+    background:
+      radial-gradient(ellipse 55% 45% at 18% 12%, var(--tb-gradient-lime-12), transparent 62%),
+      radial-gradient(ellipse 48% 42% at 82% 28%, var(--tb-gradient-orange-08), transparent 60%),
+      radial-gradient(ellipse 50% 48% at 55% 78%, color-mix(in srgb, var(--tb-gradient-navy-mid) 28%, transparent), transparent 68%);
+    will-change: transform, opacity;
+  }
+
+  @keyframes tb-gradient-ambient-drift {
+    0% {
+      transform: translate3d(-3%, -2%, 0) scale(1);
+      opacity: 0.48;
+    }
+    33% {
+      transform: translate3d(2.5%, 1%, 0) scale(1.05);
+      opacity: 0.62;
+    }
+    66% {
+      transform: translate3d(-1.5%, 2.5%, 0) scale(1.02);
+      opacity: 0.55;
+    }
+    100% {
+      transform: translate3d(2%, -1%, 0) scale(1.04);
+      opacity: 0.58;
+    }
+  }
+
+  @keyframes tb-gradient-band-shift {
+    0% {
+      transform: translate3d(-2%, 0, 0) scale(1);
+      opacity: 0.88;
+    }
+    50% {
+      transform: translate3d(2%, 1.5%, 0) scale(1.03);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(-1%, 2%, 0) scale(1.01);
+      opacity: 0.92;
+    }
+  }
+
+  @keyframes tb-gradient-hero-pulse {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.72;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body::before {
+      animation: tb-gradient-ambient-drift var(--tb-gradient-dur-ambient) var(--tb-gradient-ease) infinite alternate;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before {
+      animation: none;
+      opacity: 0.5;
+      transform: none;
+    }
   }
 }

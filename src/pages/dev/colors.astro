@@ -58,27 +58,52 @@ import { CONTRAST_PAIRS, TOKEN_SWATCHES } from '../../lib/color-contrast';
   <section class="mt-10">
     <h2 class="tb-h3">Atmospheric gradients</h2>
     <p class="text-sm text-[var(--tb-muted)]">
-      Page backdrop, hero mesh, and navy-band wash — palette stops from <code>tokens.css</code> /{' '}
-      <code>gradients.css</code>.
+      Navy · lime <code>#C6FF3D</code> · orange <code>#ff7900</code> — tokens in <code>tokens.css</code>, meshes in{' '}
+      <code>gradients.css</code>. Ambient drift: <code>--tb-gradient-dur-ambient</code> (48s), hero lime pulse:{' '}
+      <code>--tb-gradient-dur-hero</code> (42s), band wash shift: <code>--tb-gradient-dur-band</code> (55s). With{' '}
+      <code>prefers-reduced-motion</code>, animations stop; static washes remain.
     </p>
-    <ul class="mt-4 grid list-none gap-3 p-0 sm:grid-cols-3">
+    <ul class="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
       <li class="tb-card overflow-hidden p-0">
         <div
-          class="h-28 w-full border-b border-[var(--tb-line)]"
+          class="gradient-swatch h-32 w-full border-b border-[var(--tb-line)]"
           style="background: var(--tb-gradient-page-bg); background-color: var(--tb-bg);"
         />
-        <p class="m-0 px-3 py-2 text-sm font-semibold">Page backdrop</p>
-      </li>
-      <li class="tb-card overflow-hidden p-0">
-        <div class="h-28 w-full border-b border-[var(--tb-line)]" style="background: var(--tb-gradient-hero-mesh);" />
-        <p class="m-0 px-3 py-2 text-sm font-semibold">Hero mesh</p>
+        <p class="m-0 px-3 py-2 text-sm font-semibold">Page backdrop (+ body ambient)</p>
       </li>
       <li class="tb-card overflow-hidden p-0">
         <div
-          class="h-28 w-full border-b border-[var(--tb-line)]"
+          class="gradient-swatch gradient-swatch--pulse h-32 w-full border-b border-[var(--tb-line)]"
+          style="background: var(--tb-gradient-hero-mesh);"
+        />
+        <p class="m-0 px-3 py-2 text-sm font-semibold">Hero mesh (+ lime pulse layer)</p>
+      </li>
+      <li class="tb-card overflow-hidden p-0">
+        <div
+          class="gradient-swatch gradient-swatch--drift h-32 w-full border-b border-[var(--tb-line)]"
           style="background-image: var(--tb-gradient-band-wash); background-color: var(--tb-band-bg-alt);"
         />
         <p class="m-0 px-3 py-2 text-sm font-semibold">Navy band wash</p>
+      </li>
+      <li class="tb-card overflow-hidden p-0">
+        <div
+          class="gradient-swatch h-32 w-full border-b border-[var(--tb-line)]"
+          style="background-image: var(--tb-gradient-band-wash-light); background-color: var(--tb-band-bg);"
+        />
+        <p class="m-0 px-3 py-2 text-sm font-semibold">Light band wash (picks)</p>
+      </li>
+      <li class="tb-card overflow-hidden p-0">
+        <div
+          class="gradient-swatch h-32 w-full border-b border-[var(--tb-line)]"
+          style="background: var(--tb-gradient-list-column); background-color: var(--tb-bg);"
+        />
+        <p class="m-0 px-3 py-2 text-sm font-semibold">List column wash</p>
+      </li>
+      <li class="tb-card overflow-hidden p-0">
+        <div class="tb-band tb-band--navy tb-band--wash relative h-32 px-3 py-4">
+          <p class="relative m-0 text-sm font-semibold text-[var(--tb-heading)]">Glass navy band (live)</p>
+          <p class="relative m-0 mt-1 max-w-none text-xs text-[var(--tb-muted)]">Wash under glass — text contrast check</p>
+        </div>
       </li>
     </ul>
   </section>
@@ -106,5 +131,24 @@ import { CONTRAST_PAIRS, TOKEN_SWATCHES } from '../../lib/color-contrast';
 <style>
   .tb-card:hover {
     border-color: var(--accent-line);
+  }
+
+  .gradient-swatch {
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gradient-swatch--pulse::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 25% 0%, var(--tb-gradient-lime-16), transparent 55%);
+      animation: tb-gradient-hero-pulse var(--tb-gradient-dur-hero) var(--tb-gradient-ease) infinite;
+    }
+
+    .gradient-swatch--drift {
+      animation: tb-gradient-band-shift var(--tb-gradient-dur-band) var(--tb-gradient-ease) infinite alternate;
+    }
   }
 </style>
