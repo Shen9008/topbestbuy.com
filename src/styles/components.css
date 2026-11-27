@@ -62,7 +62,8 @@
 
   .tb-band--alt,
   .tb-band--navy {
-    background: var(--tb-band-bg-alt);
+    background-color: var(--tb-band-bg-alt);
+    background-image: var(--tb-gradient-band-wash);
     color: var(--tb-band-on-navy-ink);
     --tb-ink: var(--tb-band-on-navy-ink);
     --tb-muted: var(--tb-band-on-navy-muted);
@@ -85,7 +86,8 @@
   }
 
   .tb-page-bands > .tb-page-bands__section:nth-child(even) {
-    background: var(--tb-band-bg-alt);
+    background-color: var(--tb-band-bg-alt);
+    background-image: var(--tb-gradient-band-wash);
     color: var(--tb-band-on-navy-ink);
     --tb-ink: var(--tb-band-on-navy-ink);
     --tb-muted: var(--tb-band-on-navy-muted);
@@ -264,6 +266,20 @@
     @apply h-full min-h-0 w-full;
   }
 
+  .tb-hero--hub::before {
+    inset: -2rem -1rem 0;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 92%);
+  }
+
+  .tb-hero--has-media::before {
+    inset: -3rem -2rem 0 -1rem;
+    background: var(--tb-gradient-hero-bg);
+    background-size:
+      auto,
+      28px 28px,
+      28px 28px;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 94%);
+  }
   .tb-feature-grid {
     @apply grid gap-3 sm:grid-cols-3;
   }
@@ -658,10 +674,7 @@
     inset: -4rem -2rem 0;
     z-index: -1;
     pointer-events: none;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(198, 255, 61, 0.08), transparent),
-      linear-gradient(color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in oklch, var(--tb-line) 35%, transparent) 1px, transparent 1px);
+    background: var(--tb-gradient-hero-bg);
     background-size:
       auto,
       28px 28px,

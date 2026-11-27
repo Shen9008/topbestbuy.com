@@ -126,6 +126,15 @@
   --tb-band-on-navy-heading: oklch(0.99 0 0);
   --tb-sticky-stack: calc(var(--topbar-height) + var(--category-rail-height));
 
+  /* Palette-derived gradient stops (navy depth + low-opacity lime wash) */
+  --tb-gradient-navy-deep: var(--color-brand-navy);
+  --tb-gradient-navy-mid: color-mix(in srgb, var(--color-brand-navy) 55%, var(--surface-2));
+  --tb-gradient-navy-lift: color-mix(in srgb, var(--color-brand-slate) 18%, var(--color-brand-navy));
+  --tb-gradient-lime-05: color-mix(in srgb, var(--accent) 5%, transparent);
+  --tb-gradient-lime-08: color-mix(in srgb, var(--accent) 8%, transparent);
+  --tb-gradient-lime-12: color-mix(in srgb, var(--accent) 12%, transparent);
+  --tb-gradient-teal-06: color-mix(in srgb, var(--info) 6%, transparent);
+
   /* Deprecated shadcn-style aliases → semantic state tokens */
   --color-good: var(--success);
   --color-warn: var(--warning);

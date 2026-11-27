@@ -55,6 +55,34 @@ import { CONTRAST_PAIRS, TOKEN_SWATCHES } from '../../lib/color-contrast';
   </section>
 
   <section class="mt-10">
+    <h2 class="tb-h3">Atmospheric gradients</h2>
+    <p class="text-sm text-[var(--tb-muted)]">
+      Page backdrop, hero mesh, and navy-band wash — palette stops from <code>tokens.css</code> /{' '}
+      <code>gradients.css</code>.
+    </p>
+    <ul class="mt-4 grid list-none gap-3 p-0 sm:grid-cols-3">
+      <li class="tb-card overflow-hidden p-0">
+        <div
+          class="h-28 w-full border-b border-[var(--tb-line)]"
+          style="background: var(--tb-gradient-page-bg); background-color: var(--tb-bg);"
+        />
+        <p class="m-0 px-3 py-2 text-sm font-semibold">Page backdrop</p>
+      </li>
+      <li class="tb-card overflow-hidden p-0">
+        <div class="h-28 w-full border-b border-[var(--tb-line)]" style="background: var(--tb-gradient-hero-mesh);" />
+        <p class="m-0 px-3 py-2 text-sm font-semibold">Hero mesh</p>
+      </li>
+      <li class="tb-card overflow-hidden p-0">
+        <div
+          class="h-28 w-full border-b border-[var(--tb-line)]"
+          style="background-image: var(--tb-gradient-band-wash); background-color: var(--tb-band-bg-alt);"
+        />
+        <p class="m-0 px-3 py-2 text-sm font-semibold">Navy band wash</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="mt-10">
     <h2 class="tb-h3">Buttons & states</h2>
     <div class="mt-4 flex flex-wrap gap-3">
       <button type="button" class="tb-btn">Primary CTA</button>

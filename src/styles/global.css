@@ -1,13 +1,15 @@
 @import 'tailwindcss';
 @import './fonts.css';
 @import './tokens.css';
+@import './gradients.css';
 @import './components.css';
 @import './motion.css';
 
 @layer base {
   html {
     font-family: var(--font-body);
-    background: var(--tb-bg);
+    background: var(--tb-gradient-page-bg, var(--tb-bg));
+    background-color: var(--tb-bg);
     color: var(--tb-ink);
   }
 
