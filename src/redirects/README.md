@@ -8,4 +8,4 @@ Production redirects live in `public/_redirects` for Cloudflare Pages.
 | `/how-we-make-money` | `/affiliate-disclosure` | 301 | Mockup hash rename |
 | `/methodology`, `/how-we-score` | `/how-we-rank` | 301 | Canonical methodology slug TBD with user |
 
-Trailing slash policy: **never** (`astro.config.mjs` → `trailingSlash: 'never'`).
+Trailing slash policy: **never** (`astro.config.mjs` → `trailingSlash: 'never'`, `build.format: 'file'`). `_redirects` also 301s `/*/ → /:splat` for legacy directory URLs.

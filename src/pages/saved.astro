@@ -6,7 +6,12 @@ import SectionHeader from '../components/sections/SectionHeader.astro';
 import SavedPage from '../components/islands/SavedPage';
 ---
 
-<BaseLayout title="My shortlist" description="Products saved on this device for comparison." canonical="/saved">
+<BaseLayout
+  title="My shortlist"
+  description="Products saved on this device for comparison."
+  canonical="/saved"
+  noindex
+>
   <Breadcrumbs items={[{ label: 'My shortlist' }]} />
 
   <header class="tb-hero tb-hero--hub tb-reveal">

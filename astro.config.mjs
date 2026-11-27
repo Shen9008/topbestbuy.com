@@ -6,10 +6,22 @@ import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
+const SITEMAP_EXCLUDE = new Set([
+  '/contact',
+  '/corrections',
+  '/privacy',
+  '/terms',
+  '/saved',
+]);
+
 export default defineConfig({
   site: 'https://topbestbuy.online',
   output: 'static',
   trailingSlash: 'never',
+  build: {
+    // Flat .html files so Cloudflare Pages does not 308 to a trailing slash.
+    format: 'file',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
@@ -22,7 +34,14 @@ export default defineConfig({
         image: false,
         video: false,
       },
-      filter: (page) => !page.includes('/dev/') && !page.endsWith('/404'),
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return (
+          !path.startsWith('/dev/') &&
+          !path.endsWith('/404') &&
+          !SITEMAP_EXCLUDE.has(path)
+        );
+      },
       serialize(item) {
         return {
           ...item,
