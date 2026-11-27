@@ -21,7 +21,8 @@ import {
 import SourceLink from '../../components/ui/SourceLink.astro';
 import EditorialByline from '../../components/sections/EditorialByline.astro';
 import TrustPathModule from '../../components/sections/TrustPathModule.astro';
-import { categorySpotlightReviews } from '../../lib/internal-links';
+import { categorySpotlightReviews, nearbySiblingReviews } from '../../lib/internal-links';
+import AlsoRankedSection from '../../components/sections/AlsoRankedSection.astro';
 
 export function getStaticPaths() {
   return Object.keys(allProductsMap()).map((id) => ({ params: { id } }));
@@ -47,6 +48,7 @@ const reviewPath = `/reviews/${id}`;
 const reviewTitle = reviewDocumentTitle(fullName);
 const reviewDesc = reviewMetaDescription(fullName, product.total);
 const categoryReviews = categorySpotlightReviews(list.cat, product.list, 2);
+const alsoRanked = nearbySiblingReviews(product.list, product, 3, 3);
 const reviewSchema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -113,6 +115,7 @@ const reviewSchema = {
       <a href="#review-scorecard" class="shrink-0 snap-start">Scorecard</a>
       <a href="#review-usage" class="shrink-0 snap-start">Usage</a>
       <a href="#review-evidence" class="shrink-0 snap-start">Evidence</a>
+      <a href="#review-also-ranked" class="shrink-0 snap-start">Also ranked</a>
       <a href="#review-alternatives" class="shrink-0 snap-start">Alternatives</a>
     </div>
   </nav>
@@ -252,20 +255,21 @@ const reviewSchema = {
 
       <section class="tb-band tb-band--navy scroll-mt-28">
         <div class="tb-prose">
-          <h2>What experts agree on</h2>
-          <p>
-            [Summarise what two or more independent expert reviews say, naming each source and
-            linking to it. Do not copy their text.]
-          </p>
-          <h2>What owners report</h2>
-          <p>
-            [Summarise recurring themes from verified-purchase reviews on named retailers, with the
-            date and number of reviews you read.]
-          </p>
           <h2>Who should skip it</h2>
-          <p>Be explicit. For this product: {product.cons[0]?.toLowerCase() ?? 'see trade-offs above'}.</p>
+          <p>
+            Be explicit. For this product:{' '}
+            {product.cons[0]?.toLowerCase() ?? 'see trade-offs above'}.
+          </p>
         </div>
       </section>
+
+      <div id="review-also-ranked">
+        <AlsoRankedSection
+          siblings={alsoRanked}
+          listShort={list.short}
+          listHref={`/${product.list}`}
+        />
+      </div>
 
       <section id="review-evidence" class="tb-band scroll-mt-28">
         <SectionHeader title="Evidence sheet" description="Specs and prices with sources and dates." />

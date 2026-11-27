@@ -25,18 +25,40 @@ const useIntroColumns = introParagraphs.length >= 3;
         </p>
         {first && (
           <p class="tb-list-lead__answer">
-            The top-scoring pick on our scorecard is {productFullName(first)} (
-            {first.total.toFixed(1)}/100).
+            The top-scoring pick on our scorecard is{' '}
+            <a href={`/reviews/${first.id}`} class="font-semibold text-[var(--tb-accent-fg)]">
+              {productFullName(first)}
+            </a>{' '}
+            ({first.total.toFixed(1)}/100).
           </p>
         )}
         {top3[1] && (
           <p class="tb-list-lead__answer">
-            {productFullName(top3[1])} is a close second
-            {top3[2] ? `, and ${productFullName(top3[2])} is third` : ''}.
+            <a href={`/reviews/${top3[1].id}`} class="font-semibold text-[var(--tb-accent-fg)]">
+              {productFullName(top3[1])}
+            </a>{' '}
+            is a close second
+            {top3[2] ? (
+              <>
+                , and{' '}
+                <a href={`/reviews/${top3[2].id}`} class="font-semibold text-[var(--tb-accent-fg)]">
+                  {productFullName(top3[2])}
+                </a>{' '}
+                is third
+              </>
+            ) : (
+              ''
+            )}
+            .
           </p>
         )}
         {!top3[1] && top3[2] && (
-          <p class="tb-list-lead__answer">{productFullName(top3[2])} is a close second.</p>
+          <p class="tb-list-lead__answer">
+            <a href={`/reviews/${top3[2].id}`} class="font-semibold text-[var(--tb-accent-fg)]">
+              {productFullName(top3[2])}
+            </a>{' '}
+            is a close second.
+          </p>
         )}
         {audience && <p class="tb-list-lead__answer">This guide is for {audience}.</p>}
       </div>

@@ -19,6 +19,8 @@ import {
 import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
 import { CATS } from '../../data/categories';
 import TrustPathModule from '../../components/sections/TrustPathModule.astro';
+import { categoryTopReviewed } from '../../lib/internal-links';
+import CategoryTopReviewed from '../../components/sections/CategoryTopReviewed.astro';
 
 export function getStaticPaths() {
   return CATEGORY_IDS.map((cat) => ({ params: { cat } }));
@@ -37,6 +39,7 @@ const liveListSlugs = new Set(category.lists as readonly string[]);
 const relatedGuides = Object.entries(POSTS)
   .filter(([, p]) => (p.related as readonly string[]).some((slug) => liveListSlugs.has(slug)))
   .slice(0, 3);
+const topReviewed = categoryTopReviewed(cat!, 3, 6);
 ---
 
 <BaseLayout
@@ -93,6 +96,8 @@ const relatedGuides = Object.entries(POSTS)
     </aside>
 
     <div class="tb-editorial-main min-w-0 tb-page-bands tb-page-bands--nested">
+      <CategoryTopReviewed picks={topReviewed} categoryName={category.name} />
+
       <section class="tb-page-bands__section" aria-labelledby="cat-live-heading">
         <SectionHeader titleId="cat-live-heading" title="Live lists" seeAllHref="/categories" seeAllLabel="Index" />
         {
