@@ -40,10 +40,16 @@ export const TRUST_ROUTES = [
 export const MOBILE_TABS = [
   { href: '/', label: 'Home', icon: 'home' },
   { href: '/search', label: 'Search', icon: 'search' },
-  { href: '/category/kitchen', label: 'Browse', icon: 'grid' },
+  { href: '/categories', label: 'Browse', icon: 'grid' },
   { href: '/saved', label: 'Saved', icon: 'bookmark' },
   { href: '/tools', label: 'Tools', icon: 'tools' },
 ] as const;
+
+export function shortlistCompareHref(ids: readonly string[]) {
+  const query = new URLSearchParams();
+  for (const id of [...new Set(ids)].slice(0, 3)) query.append('product', id);
+  return query.size ? `/compare?${query}` : '/compare';
+}
 
 export const REVIEW_STUB_IDS = ['sample-product-a', 'sample-product-b'] as const;
 

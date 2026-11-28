@@ -11,6 +11,7 @@
     background: var(--tb-gradient-page-bg, var(--tb-bg));
     background-color: var(--tb-bg);
     color: var(--tb-ink);
+    scroll-padding-block-start: var(--tb-sticky-stack);
   }
 
   body {
@@ -49,9 +50,6 @@
     caret-color: var(--accent-fg);
   }
 
-  .skip-link {
-  }
-
   .skip-link:focus {
     position: fixed;
     top: 0.5rem;
@@ -63,6 +61,20 @@
     color: var(--on-accent);
     font-weight: 600;
   }
+}
+
+@media (width < 64rem) {
+  html {
+    scroll-padding-block-end: var(--tabbar-height);
+  }
+}
+
+.tb-sticky-subnav ~ .tb-editorial-layout .scroll-mt-28 {
+  scroll-margin-block-start: var(--subnav-height);
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
 }
 
 /* Above @layer utilities so text-sm/text-lg do not tighten readable copy */

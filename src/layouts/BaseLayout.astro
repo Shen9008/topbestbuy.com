@@ -61,7 +61,8 @@ const { title, description, canonical, ogImage, ogType, noindex, jsonLd } = Astr
       </div>
       <main
         id="main"
-        class="mx-auto w-full max-w-[var(--content-max)] flex-1 px-4 py-8 pb-[calc(var(--tabbar-height)+2rem)] lg:pb-12"
+        tabindex="-1"
+        class="mx-auto w-full max-w-[var(--content-max)] flex-1 overflow-x-clip px-4 py-8 pb-[calc(var(--tabbar-height)+2rem)] lg:pb-12"
       >
         <slot />
       </main>

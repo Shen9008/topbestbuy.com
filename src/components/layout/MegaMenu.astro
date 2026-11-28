@@ -7,7 +7,7 @@ import { hasListVisual } from '../../lib/list-visuals';
 import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
 ---
 
-<div class="relative hidden md:block xl:hidden">
+<div class="hidden md:block xl:hidden">
   <button
     type="button"
     id="mega-trigger"
@@ -20,7 +20,7 @@ import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
   </button>
   <div
     id="mega-panel"
-    class="absolute left-0 top-[calc(100%+0.5rem)] z-[var(--z-dropdown)] hidden w-[min(100vw-2rem,52rem)] rounded-[var(--radius-lg)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] p-4 shadow-lg"
+    class="absolute inset-x-4 top-full z-[var(--z-dropdown)] hidden max-h-[calc(100dvh-var(--tb-sticky-stack))] max-w-[52rem] overflow-y-auto rounded-[var(--radius-lg)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] p-4 shadow-lg"
     role="region"
     aria-label="Top 10 lists"
     hidden

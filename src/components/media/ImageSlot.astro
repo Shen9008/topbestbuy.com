@@ -7,6 +7,7 @@ export interface Props {
   aspect?: 'square' | 'video' | 'banner' | 'match';
   label?: string;
   class?: string;
+  loading?: 'lazy' | 'eager';
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   aspect = 'square',
   label = 'Image placeholder',
   class: className = '',
+  loading = 'lazy',
 } = Astro.props;
 
 const entry = resolveManifestSlot(slotId);
@@ -48,7 +50,8 @@ const imgFitClass = isProductSquare ? 'object-contain p-3' : 'object-cover';
         alt={resolvedAlt}
         width={entry.width}
         height={entry.height}
-        loading="lazy"
+        loading={loading}
+        fetchpriority={loading === 'eager' ? 'high' : undefined}
         decoding="async"
         class:list={['h-full w-full', imgFitClass]}
       />

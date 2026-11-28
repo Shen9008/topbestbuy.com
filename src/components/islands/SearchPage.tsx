@@ -9,10 +9,7 @@ export default function SearchPage() {
   return (
     <div class="mt-6">
       <label class="block text-sm font-bold" for="search-page-q">
-        <span class="inline-flex items-center gap-2">
-          <Icon name="nav.search" size={20} strokeWidth={2} />
-          Search lists, guides and tools
-        </span>
+        Search lists, guides and tools
       </label>
       <div class="relative mt-2">
         <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--tb-muted)]">
@@ -28,8 +25,10 @@ export default function SearchPage() {
           autoComplete="off"
         />
       </div>
-      <div class="mt-4 space-y-2" aria-live="polite">
-        {query.length > 0 && results.length === 0 ? (
+      <p class="sr-only" role="status">{query.trim() ? `${results.length} results shown` : ''}</p>
+      <h2 class="tb-h4 mt-6">{query.trim() ? 'Search results' : 'Suggested lists'}</h2>
+      <div class="mt-3 space-y-2">
+        {results.length === 0 ? (
           <div class="tb-callout flex items-start gap-3">
             <Icon name="state.empty-search" size={32} class="shrink-0 opacity-80" />
             <p class="m-0 text-sm">No match. Try a product type like air fryer or mattress.</p>
@@ -41,7 +40,7 @@ export default function SearchPage() {
                 <Icon name="nav.search" size={20} strokeWidth={2} />
               </span>
               <span class="min-w-0 font-semibold text-[var(--tb-ink)]">{hit.title}</span>
-              <span class="text-xs font-bold text-[var(--tb-accent-fg)]">Open →</span>
+              <span class="text-xs font-bold text-[var(--tb-accent-fg)]" aria-hidden="true">→</span>
             </a>
           ))
         )}

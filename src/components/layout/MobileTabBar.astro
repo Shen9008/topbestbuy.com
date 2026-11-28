@@ -1,6 +1,6 @@
 ---
 import Icon from '../ui/Icon.astro';
-import { MOBILE_TABS } from '../../lib/routes';
+import { LIST_SLUGS, MOBILE_TABS } from '../../lib/routes';
 import { MOBILE_TAB_ICONS, type IconMapKey } from '../../icons';
 
 function tabIcon(key: (typeof MOBILE_TABS)[number]['icon']): IconMapKey {
@@ -10,8 +10,8 @@ function tabIcon(key: (typeof MOBILE_TABS)[number]['icon']): IconMapKey {
 function isActive(href: string) {
   const path = Astro.url.pathname;
   if (href === '/') return path === '/';
-  if (href.startsWith('/category')) {
-    return path.startsWith('/category');
+  if (href === '/categories') {
+    return path === href || path.startsWith('/category/') || LIST_SLUGS.some((slug) => path === `/${slug}`);
   }
   return path === href || path.startsWith(`${href}/`);
 }
@@ -33,7 +33,7 @@ function isActive(href: string) {
                 ? 'text-[var(--tb-accent-fg)]'
                 : 'text-[var(--tb-muted)]',
             ]}
-            aria-current={isActive(tab.href) ? 'page' : undefined}
+            aria-current={isActive(tab.href) ? (Astro.url.pathname === tab.href ? 'page' : 'location') : undefined}
           >
             <Icon name={tabIcon(tab.icon)} size={24} />
             {tab.label}

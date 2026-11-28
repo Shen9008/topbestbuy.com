@@ -55,8 +55,8 @@
   --leading-prose: 1.7;
   --topbar-height: 3.75rem;
   --tabbar-height: 4rem;
-  --category-rail-height: 2.5rem;
-  --subnav-height: 2.75rem;
+  --category-rail-height: calc(var(--hit-target) + 1rem + 1px);
+  --subnav-height: 4.5rem;
   --section-gap: 2.5rem;
   --editorial-sidebar: 16rem;
   --hit-target: 2.75rem;
@@ -128,7 +128,7 @@
   --tb-band-on-navy-ink: oklch(0.96 0.005 260);
   --tb-band-on-navy-muted: oklch(0.78 0.02 255);
   --tb-band-on-navy-heading: oklch(0.99 0 0);
-  --tb-sticky-stack: calc(var(--topbar-height) + var(--category-rail-height));
+  --tb-sticky-stack: calc(var(--topbar-height) + 1px + var(--category-rail-height));
 
   /* Palette-derived gradient stops (navy depth + low-opacity lime wash) */
   --tb-gradient-navy-deep: var(--color-brand-navy);

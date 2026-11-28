@@ -3,8 +3,6 @@ import ThemeToggle from '../islands/ThemeToggle.tsx';
 import Icon from '../ui/Icon.astro';
 import MegaMenu from './MegaMenu.astro';
 import SiteLogo from './SiteLogo.astro';
-
-const path = Astro.url.pathname;
 ---
 
 <header class="border-b border-[var(--tb-line)] bg-[var(--tb-bg)]/92 backdrop-blur-md">
@@ -12,44 +10,37 @@ const path = Astro.url.pathname;
     class="relative mx-auto flex h-[var(--topbar-height)] max-w-[var(--content-max)] items-center gap-2 px-4 sm:gap-3"
   >
     <SiteLogo variant="full" class="shrink-0" />
-    <MegaMenu currentPath={path} />
+    <MegaMenu />
     <nav class="hidden items-center gap-1 xl:flex" aria-label="Primary">
-      <a href="/categories" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)] xl:hidden">Lists</a>
+      <a href="/categories" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Lists</a>
       <a href="/tools" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Tools</a>
       <a href="/guides" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Guides</a>
       <a href="/how-we-rank" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">How we rank</a>
       <a href="/trust" class="rounded-lg px-3 py-2 text-sm font-semibold text-[var(--tb-ink)] hover:bg-[var(--tb-surface)]">Trust centre</a>
     </nav>
     <div class="ml-auto flex items-center gap-2">
-      <button
-        type="button"
+      <a
+        href="/search"
+        data-open-overlay="search"
         id="open-search"
         class="tb-icon-slot tb-icon-slot--hover tb-icon-slot-pad-20 cursor-pointer"
         aria-label="Search the site"
         title="Search"
       >
         <Icon name="nav.search" size={20} strokeWidth={2} />
-      </button>
-      <button
-        type="button"
+      </a>
+      <a
+        href="/saved"
+        data-open-overlay="shortlist"
         id="open-shortlist"
         class="tb-icon-slot tb-icon-slot--hover inline-flex min-h-11 cursor-pointer items-center gap-1.5 px-2.5"
         aria-label="Open my shortlist"
         title="Saved"
       >
         <Icon name="nav.saved" size={20} strokeWidth={2} />
-        <span class="text-xs font-bold">Saved</span>
-      </button>
+        <span class="hidden text-xs font-bold sm:inline">Saved</span>
+      </a>
       <ThemeToggle client:load />
     </div>
   </div>
 </header>
-
-<script is:inline>
-  document.getElementById('open-search')?.addEventListener('click', () => {
-    window.dispatchEvent(new Event('tb-open-search'));
-  });
-  document.getElementById('open-shortlist')?.addEventListener('click', () => {
-    window.dispatchEvent(new Event('tb-open-shortlist'));
-  });
-</script>

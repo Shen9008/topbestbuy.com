@@ -9,7 +9,7 @@ function isCategoryActive(id: string) {
   return path === `/category/${id}` || path.startsWith(`/category/${id}/`);
 }
 
-function isListInCategory(_categoryId: string, lists: readonly string[]) {
+function isListInCategory(lists: readonly string[]) {
   if (path === '/') return false;
   const slug = path.replace(/^\//, '').split('/')[0];
   return lists.includes(slug);
@@ -34,8 +34,9 @@ function isListInCategory(_categoryId: string, lists: readonly string[]) {
           href="/categories"
           class:list={[
             'tb-category-pill',
-            path === '/categories' || path.startsWith('/category') ? 'tb-category-pill--on' : '',
+            path === '/categories' && 'tb-category-pill--on',
           ]}
+          aria-current={path === '/categories' ? 'page' : undefined}
         >
           All lists
         </a>
@@ -43,13 +44,14 @@ function isListInCategory(_categoryId: string, lists: readonly string[]) {
       {
         CATS.filter((c) => c.lists.length).map((c) => {
           const icon = CATEGORY_ICONS[c.id] as IconMapKey | undefined;
-          const active = isCategoryActive(c.id) || isListInCategory(c.id, c.lists);
+          const currentPage = isCategoryActive(c.id);
+          const active = currentPage || isListInCategory(c.lists);
           return (
             <li class="shrink-0">
               <a
                 href={`/category/${c.id}`}
                 class:list={['tb-category-pill inline-flex items-center gap-1.5', active && 'tb-category-pill--on']}
-                aria-current={active ? 'page' : undefined}
+                aria-current={currentPage ? 'page' : active ? 'location' : undefined}
               >
                 {icon ? <Icon name={icon} size={16} decorative /> : null}
                 {c.name}

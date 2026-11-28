@@ -43,18 +43,17 @@ const listCount = listSlugs().length;
       <h1 class="tb-h1 mt-3 max-w-[18ch] lg:max-w-none">
         Ten picks. Clear reasons. No <span class="tb-heading-accent">hype</span>.
       </h1>
-      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
+      <p class="mx-0! mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
         Before you spend, see the short list. Every Top 10 is scored on a published scorecard,
         with dated prices, trade-offs and the sources behind each pick.
       </p>
-      <div class="tb-search-hero mx-0 mt-6 max-w-xl" aria-label="Open site search">
+      <a href="/search" data-open-overlay="search" class="tb-search-hero mx-0 mt-6 max-w-xl no-underline" aria-label="Search the site">
         <span class="flex min-w-0 flex-1 items-center gap-2 text-sm text-[var(--tb-muted)]">
           <Icon name="nav.search" size={20} strokeWidth={2} />
           <span class="truncate">Search air fryer, mattress, purifier…</span>
-          <kbd class="ml-auto hidden rounded border border-[var(--tb-line)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--tb-muted)] sm:inline">⌘K</kbd>
         </span>
-        <button type="button" id="home-open-search" class="tb-btn">Search</button>
-      </div>
+        <span class="tb-btn" aria-hidden="true">Search</span>
+      </a>
       <div class="tb-scroll-strip mt-4 lg:flex lg:flex-wrap lg:overflow-visible lg:pb-0">
         {
           listSlugs().map((slug) => {
@@ -74,7 +73,7 @@ const listCount = listSlugs().length;
     </div>
     <div class="flex min-h-0 w-full flex-col gap-3 lg:w-[500px] lg:shrink-0">
       <div class="tb-hero__media">
-        <ImageSlot slotId="home-hero" aspect="match" label="Home hero banner" class="h-full min-h-0 w-full" />
+        <ImageSlot slotId="home-hero" aspect="match" label="Home hero banner" class="h-full min-h-0 w-full" loading="eager" />
       </div>
       <div class="grid gap-2" aria-label="Current number one picks">
         {
@@ -102,12 +101,6 @@ const listCount = listSlugs().length;
       </div>
     </div>
   </section>
-
-  <script is:inline>
-    document.getElementById('home-open-search')?.addEventListener('click', () => {
-      window.dispatchEvent(new Event('tb-open-search'));
-    });
-  </script>
 
   <div class="tb-page-bands">
     <BrandLogoStrip />

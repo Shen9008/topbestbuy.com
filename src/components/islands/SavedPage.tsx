@@ -3,12 +3,14 @@ import { allProductsMap } from '../../lib/catalog';
 import { formatRM, productFullName } from '../../lib/format';
 import Icon from '../ui/Icon';
 import ProductThumbImg from '../ui/ProductThumbImg';
+import { shortlistCompareHref } from '../../lib/routes';
 
 const STORAGE_KEY = 'tb-shortlist';
 
 export default function SavedPage() {
   const [ids, setIds] = useState<string[]>([]);
   const catalog = allProductsMap();
+  const savedIds = ids.filter((id) => Object.hasOwn(catalog, id));
 
   useEffect(() => {
     const sync = () => {
@@ -25,7 +27,7 @@ export default function SavedPage() {
     return () => window.removeEventListener('tb-shortlist-change', sync);
   }, []);
 
-  if (ids.length === 0) {
+  if (savedIds.length === 0) {
     return (
       <div class="tb-callout tb-card--editorial mt-6 flex items-start gap-3">
         <Icon name="state.empty-saved" size={32} class="shrink-0 opacity-80" />
@@ -45,14 +47,13 @@ export default function SavedPage() {
 
   return (
     <div class="mt-6 space-y-2">
-      {ids.map((id) => {
+      {savedIds.map((id) => {
         const p = catalog[id];
-        if (!p) return null;
         return (
           <div class="tb-feed-row tb-feed-row--thumb" key={id}>
-            <ProductThumbImg productId={id} alt={productFullName(p)} size="sm" />
+            <ProductThumbImg productId={id} alt={productFullName(p)} size="sm" decorative />
             <span class="min-w-0">
-              <strong class="block truncate text-[var(--tb-ink)]">{productFullName(p)}</strong>
+              <strong class="block wrap-anywhere text-[var(--tb-ink)]">{productFullName(p)}</strong>
               <small class="text-[var(--tb-muted)]">
                 {formatRM(p.price)} · {p.tag}
               </small>
@@ -64,9 +65,9 @@ export default function SavedPage() {
           </div>
         );
       })}
-      <a href="/compare" class="tb-btn mt-4 inline-flex min-h-11 items-center gap-2">
+      <a href={shortlistCompareHref(savedIds)} class="tb-btn mt-4 inline-flex min-h-11 items-center gap-2">
         <Icon name="tool.compare" size={20} />
-        Compare these
+        {savedIds.length === 1 ? 'Compare saved product' : 'Compare saved products'}
       </a>
     </div>
   );

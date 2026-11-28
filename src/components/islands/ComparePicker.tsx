@@ -21,16 +21,18 @@ export default function ComparePicker({ initialIds }: { initialIds?: string[] })
   );
 
   const [ids, setIds] = useState<[string, string, string]>([
-    initialIds?.[0] ?? 'crispa-dualzone-9l',
-    initialIds?.[1] ?? 'aeris-family-8l',
+    initialIds?.[0] ?? grouped[0]?.ids[0] ?? '',
+    initialIds?.[1] ?? grouped[0]?.ids[1] ?? '',
     initialIds?.[2] ?? '',
   ]);
 
   useEffect(() => {
-    if (initialIds?.length) {
-      setIds([initialIds[0] ?? '', initialIds[1] ?? '', initialIds[2] ?? '']);
+    const requested = initialIds ?? new URLSearchParams(window.location.search).getAll('product');
+    const valid = [...new Set(requested)].filter((id) => Object.hasOwn(all, id));
+    if (valid.length) {
+      setIds([valid[0] ?? '', valid[1] ?? '', valid[2] ?? '']);
     }
-  }, [initialIds]);
+  }, [all, initialIds]);
 
   const products = ids.filter(Boolean).map((id) => all[id]).filter(Boolean);
   const sameList = products.every((p) => p.list === products[0]?.list);
@@ -41,7 +43,7 @@ export default function ComparePicker({ initialIds }: { initialIds?: string[] })
     <div>
       <div class="grid gap-3 sm:grid-cols-3">
         {[0, 1, 2].map((i) => (
-          <label class="block text-sm font-bold" key={i}>
+          <label class="block min-w-0 text-sm font-bold" key={i}>
             Product {i + 1}
             {i === 2 ? ' (optional)' : ''}
             <select
@@ -54,11 +56,11 @@ export default function ComparePicker({ initialIds }: { initialIds?: string[] })
                 setIds(next);
               }}
             >
-              {i === 2 && <option value="">None</option>}
+              <option value="">{i === 2 ? 'None' : 'Choose a product'}</option>
               {grouped.map((g) => (
                 <optgroup label={g.label} key={g.slug}>
                   {g.ids.map((id) => (
-                    <option value={id} key={id}>
+                    <option value={id} key={id} disabled={ids.some((selected, index) => index !== i && selected === id)}>
                       {all[id] ? productFullName(all[id]) : id}
                     </option>
                   ))}
@@ -69,15 +71,19 @@ export default function ComparePicker({ initialIds }: { initialIds?: string[] })
         ))}
       </div>
 
+      {products.length < 2 && (
+        <p class="mt-4 text-sm text-[var(--tb-muted)]" role="status">
+          Choose at least two products to see their scores and prices side by side.
+        </p>
+      )}
       {products.length >= 2 && (
         <div class="mt-6 space-y-4" aria-live="polite">
           {!sameList && (
             <Box class="tb-callout">
-              These products are from different lists. Usage scores and specs show only when
-              products share a list.
+              Choose products from the same list to compare their scores for specific uses.
             </Box>
           )}
-          <div class="tb-tablewrap">
+          <div class="tb-tablewrap" tabindex={0} role="region" aria-label="Product comparison">
             <table class="tb-table">
               <thead>
                 <tr>
