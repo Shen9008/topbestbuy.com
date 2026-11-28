@@ -8,7 +8,6 @@ import HomeTrustStrip from '../components/sections/HomeTrustStrip.astro';
 import HomeBrowseSection from '../components/sections/HomeBrowseSection.astro';
 import HomeToolsStrip from '../components/sections/HomeToolsStrip.astro';
 import HomeGuidesSection from '../components/sections/HomeGuidesSection.astro';
-import HomeListsByCategory from '../components/sections/HomeListsByCategory.astro';
 import HomeTrustEarn from '../components/sections/HomeTrustEarn.astro';
 import HomeMethodologySection from '../components/sections/HomeMethodologySection.astro';
 import EditorialSection from '../components/sections/EditorialSection.astro';
@@ -107,10 +106,6 @@ const listCount = listSlugs().length;
 
     <HomeValueProps />
     <HomeTrustStrip />
-
-    <EditorialSection band="auto" aria-label="Lists by category">
-      <HomeListsByCategory />
-    </EditorialSection>
 
     <EditorialSection band="auto" aria-label="Trust principles">
       <HomeTrustEarn />
