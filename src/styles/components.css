@@ -706,6 +706,10 @@
     @apply inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--tb-line)] bg-[var(--tb-surface-raised)] p-2.5;
   }
 
+  .tb-utility-tile__icon > .tb-visual-well > svg {
+    @apply block size-10;
+  }
+
   .tb-utility-tile__cta {
     @apply mt-auto inline-flex min-h-8 items-center self-start rounded-[var(--radius-sm)] bg-[var(--on-accent)] px-3 py-1.5 text-xs font-bold text-[var(--accent)];
   }
