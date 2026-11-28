@@ -5,6 +5,7 @@ import { formatRM, productFullName } from '../../lib/format';
 import ProductThumbImg from '../ui/ProductThumbImg';
 import Icon from '../ui/Icon';
 import { shortlistCompareHref } from '../../lib/routes';
+import { playEntrance } from '../../lib/motion/entrance';
 
 const STORAGE_KEY = 'tb-shortlist';
 
@@ -39,6 +40,7 @@ export default function AppChrome() {
   const searchDialog = useRef<HTMLDialogElement>(null);
   const shortlistDialog = useRef<HTMLDialogElement>(null);
   const searchInput = useRef<HTMLInputElement>(null);
+  const toastElement = useRef<HTMLParagraphElement>(null);
   const [toast, setToast] = useState<Toast | null>(null);
 
   const catalog = allProductsMap();
@@ -102,7 +104,14 @@ export default function AppChrome() {
     if (!overlay || !dialog || dialog.open) return;
     dialog.showModal();
     if (overlay === 'search') searchInput.current?.focus();
+    return overlay === 'shortlist'
+      ? playEntrance(dialog, { x: 24, y: 0, duration: 240 })
+      : playEntrance(dialog, { y: 6, duration: 150 });
   }, [overlay]);
+
+  useEffect(() => {
+    if (toastElement.current && toast) return playEntrance(toastElement.current, { duration: 160 });
+  }, [toast]);
 
   const dismissBackdrop = (event: MouseEvent) => {
     const dialog = event.currentTarget as HTMLDialogElement;
@@ -250,6 +259,7 @@ export default function AppChrome() {
 
       {toast && (
         <p
+          ref={toastElement}
           class="fixed bottom-[calc(var(--tabbar-height)+1rem)] left-1/2 z-[calc(var(--z-tabbar)+20)] max-w-[min(100%-2rem,28rem)] -translate-x-1/2 rounded-[var(--radius-sm)] bg-[var(--tb-ink)] px-4 py-3 text-sm text-[var(--tb-bg)]"
           role="status"
         >

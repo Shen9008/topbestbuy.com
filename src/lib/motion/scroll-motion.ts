@@ -1,68 +1,39 @@
-/**
- * Scroll-triggered entrance motion (progressive enhancement).
- * Animates transform + opacity only; respects prefers-reduced-motion.
- */
-
-const REVEAL_SEL =
-  '.tb-reveal, .tb-reveal-stagger, [data-tb-motion], .tb-motion-card';
-const PARALLAX_SEL = '[data-tb-parallax]';
-
-const IO_OPTS: IntersectionObserverInit = {
-  threshold: 0.12,
-  rootMargin: '0px 0px -6% 0px',
-};
-
-function prefersReducedMotion(): boolean {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
-function markVisible(el: Element, observer: IntersectionObserver) {
-  el.classList.add('tb-motion-visible');
-  observer.unobserve(el);
-}
+import { playEntrance } from './entrance';
 
 export function initScrollMotion(): void {
-  if (typeof window === 'undefined' || prefersReducedMotion()) return;
+  if (!('IntersectionObserver' in window)) return;
 
-  const root = document.documentElement;
-  root.classList.add('tb-motion-ready', 'tb-scroll-smooth');
-
+  const artworkSelector = '.tb-hero__media';
+  const cardSelector = '.tb-reveal-stagger > *';
+  const headingSelector = '.tb-reveal > .tb-section__inner > .tb-section__bar';
   const observer = new IntersectionObserver((entries) => {
+    const cardsByGroup = new Map<HTMLElement, HTMLElement[]>();
+
     for (const entry of entries) {
-      if (entry.isIntersecting) markVisible(entry.target, observer);
+      if (!entry.isIntersecting) continue;
+      const target = entry.target as HTMLElement;
+      observer.unobserve(target);
+      if (target.matches(cardSelector)) {
+        const group = target.parentElement!;
+        const cards = cardsByGroup.get(group) ?? [];
+        cards.push(target);
+        cardsByGroup.set(group, cards);
+      } else if (target.matches(artworkSelector)) {
+        playEntrance(target, { y: 14, duration: 360, fade: true });
+      } else {
+        playEntrance(target, { y: 6, duration: 240 });
+      }
     }
-  }, IO_OPTS);
 
-  document.querySelectorAll(REVEAL_SEL).forEach((el) => {
-    if (el.closest('.tb-reveal-stagger') && !el.classList.contains('tb-reveal-stagger')) return;
-    observer.observe(el);
-  });
-
-  const parallaxEls = document.querySelectorAll<HTMLElement>(PARALLAX_SEL);
-  if (parallaxEls.length) initParallax(parallaxEls);
-}
-
-function initParallax(els: NodeListOf<HTMLElement>): void {
-  let ticking = false;
-
-  const update = () => {
-    const vh = window.innerHeight;
-    for (const el of els) {
-      const rect = el.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > vh) continue;
-      const offset = (rect.top + rect.height * 0.35 - vh * 0.5) * 0.035;
-      el.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
+    for (const [group, cards] of cardsByGroup) {
+      const visibleCards = Array.from(group.children)
+        .filter((card): card is HTMLElement => cards.includes(card as HTMLElement))
+        .slice(0, 6);
+      playEntrance(visibleCards, { duration: 260, staggered: true });
     }
-    ticking = false;
-  };
+  }, { threshold: 0.1 });
 
-  const onScroll = () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(update);
-    }
-  };
-
-  update();
-  window.addEventListener('scroll', onScroll, { passive: true });
+  document.querySelectorAll(`${artworkSelector}, ${cardSelector}, ${headingSelector}`).forEach(
+    (target) => observer.observe(target),
+  );
 }

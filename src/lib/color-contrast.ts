@@ -50,7 +50,7 @@ export const CONTRAST_PAIRS = [
   { label: 'Muted on canvas', fg: '--text-muted', bg: '--bg' },
   { label: 'Heading on canvas', fg: '--text-strong', bg: '--bg' },
   { label: 'Orange accent on canvas', fg: '--tb-heading-accent', bg: '--bg' },
-  { label: 'Orange accent on navy band', fg: '--tb-heading-accent', bg: '--tb-band-bg-alt' },
+  { label: 'Orange accent on alternate band', fg: '--tb-heading-accent', bg: '--tb-band-bg-alt' },
   { label: 'On-accent on fill', fg: '--on-accent', bg: '--accent' },
   { label: 'Accent-fg on canvas', fg: '--accent-fg', bg: '--bg' },
   { label: 'Success on canvas', fg: '--success', bg: '--bg' },

@@ -79,15 +79,9 @@
     );
   }
 
-  .tb-band {
-    color: var(--tb-band-on-light-ink);
-    --tb-ink: var(--tb-band-on-light-ink);
-    --tb-muted: var(--tb-band-on-light-muted);
-    --tb-heading: var(--tb-band-on-light-heading);
-    --tb-heading-muted: var(--tb-band-on-light-muted);
-  }
-
-  .tb-band::before {
+  /* Band fills follow the theme so nested cards and tables share the same text palette. */
+  .tb-band::before,
+  .tb-page-bands > .tb-page-bands__section:nth-child(odd)::before {
     background: var(--tb-band-glass-light);
   }
 
@@ -164,73 +158,14 @@
     }
   }
 
-  .tb-band--alt,
-  .tb-band--navy {
-    color: var(--tb-band-on-navy-ink);
-    --tb-ink: var(--tb-band-on-navy-ink);
-    --tb-muted: var(--tb-band-on-navy-muted);
-    --tb-heading: var(--tb-band-on-navy-heading);
-    --tb-heading-muted: var(--tb-band-on-navy-muted);
-  }
-
   .tb-band--alt::before,
-  .tb-band--navy::before {
+  .tb-band--navy::before,
+  .tb-page-bands > .tb-page-bands__section:nth-child(even)::before {
     background: var(--tb-band-glass-navy);
   }
 
   .tb-page-bands {
     @apply relative;
-  }
-
-  .tb-page-bands > .tb-page-bands__section:nth-child(odd) {
-    color: var(--tb-band-on-light-ink);
-    --tb-ink: var(--tb-band-on-light-ink);
-    --tb-muted: var(--tb-band-on-light-muted);
-    --tb-heading: var(--tb-band-on-light-heading);
-    --tb-heading-muted: var(--tb-band-on-light-muted);
-  }
-
-  .tb-page-bands > .tb-page-bands__section:nth-child(odd)::before {
-    background: var(--tb-band-glass-light);
-  }
-
-  .tb-page-bands > .tb-page-bands__section:nth-child(even) {
-    color: var(--tb-band-on-navy-ink);
-    --tb-ink: var(--tb-band-on-navy-ink);
-    --tb-muted: var(--tb-band-on-navy-muted);
-    --tb-heading: var(--tb-band-on-navy-heading);
-    --tb-heading-muted: var(--tb-band-on-navy-muted);
-  }
-
-  .tb-page-bands > .tb-page-bands__section:nth-child(even)::before {
-    background: var(--tb-band-glass-navy);
-  }
-
-  /*
-   * Light theme glass navy reads as a pale wash on white — navy ink tokens are white and
-   * inherit into light chips/tables. Use band-on-light ink until reduced-transparency swaps
-   * to the solid navy fill.
-   */
-  [data-theme='light'] .tb-band--navy,
-  [data-theme='light'] .tb-band--alt,
-  [data-theme='light'] .tb-page-bands > .tb-page-bands__section:nth-child(even) {
-    color: var(--tb-band-on-light-ink);
-    --tb-ink: var(--tb-band-on-light-ink);
-    --tb-muted: var(--tb-band-on-light-muted);
-    --tb-heading: var(--tb-band-on-light-heading);
-    --tb-heading-muted: var(--tb-band-on-light-muted);
-  }
-
-  @media (prefers-color-scheme: light) {
-    html:not([data-theme='dark']) .tb-band--navy,
-    html:not([data-theme='dark']) .tb-band--alt,
-    html:not([data-theme='dark']) .tb-page-bands > .tb-page-bands__section:nth-child(even) {
-      color: var(--tb-band-on-light-ink);
-      --tb-ink: var(--tb-band-on-light-ink);
-      --tb-muted: var(--tb-band-on-light-muted);
-      --tb-heading: var(--tb-band-on-light-heading);
-      --tb-heading-muted: var(--tb-band-on-light-muted);
-    }
   }
 
   [data-theme='light'] .tb-band--navy .tb-chip,
@@ -257,41 +192,13 @@
       mask-image: none;
     }
 
-    .tb-band::before {
-      background: var(--tb-band-bg);
-    }
-
-    .tb-band--alt::before,
-    .tb-band--navy::before {
-      background: var(--tb-band-bg-alt);
-    }
-
-    [data-theme='light'] .tb-band--navy,
-    [data-theme='light'] .tb-band--alt,
-    [data-theme='light'] .tb-page-bands > .tb-page-bands__section:nth-child(even) {
-      color: var(--tb-band-on-navy-ink);
-      --tb-ink: var(--tb-band-on-navy-ink);
-      --tb-muted: var(--tb-band-on-navy-muted);
-      --tb-heading: var(--tb-band-on-navy-heading);
-      --tb-heading-muted: var(--tb-band-on-navy-muted);
-    }
-
-    @media (prefers-color-scheme: light) {
-      html:not([data-theme='dark']) .tb-band--navy,
-      html:not([data-theme='dark']) .tb-band--alt,
-      html:not([data-theme='dark']) .tb-page-bands > .tb-page-bands__section:nth-child(even) {
-        color: var(--tb-band-on-navy-ink);
-        --tb-ink: var(--tb-band-on-navy-ink);
-        --tb-muted: var(--tb-band-on-navy-muted);
-        --tb-heading: var(--tb-band-on-navy-heading);
-        --tb-heading-muted: var(--tb-band-on-navy-muted);
-      }
-    }
-
+    .tb-band::before,
     .tb-page-bands > .tb-page-bands__section:nth-child(odd)::before {
       background: var(--tb-band-bg);
     }
 
+    .tb-band--alt::before,
+    .tb-band--navy::before,
     .tb-page-bands > .tb-page-bands__section:nth-child(even)::before {
       background: var(--tb-band-bg-alt);
     }

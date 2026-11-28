@@ -122,12 +122,6 @@
   --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 62%, transparent);
   --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 76%, transparent);
   --tb-band-edge-fade: 4.5rem;
-  --tb-band-on-light-ink: var(--tb-ink);
-  --tb-band-on-light-muted: var(--tb-muted);
-  --tb-band-on-light-heading: var(--tb-heading);
-  --tb-band-on-navy-ink: oklch(0.96 0.005 260);
-  --tb-band-on-navy-muted: oklch(0.78 0.02 255);
-  --tb-band-on-navy-heading: oklch(0.99 0 0);
   --tb-sticky-stack: calc(var(--topbar-height) + 1px + var(--category-rail-height));
 
   /* Palette-derived gradient stops (navy depth + low-opacity lime wash) */
@@ -170,7 +164,7 @@
   --accent-hover: #d4ff6b;
   --accent-press: #b3eb2e;
   --on-accent: #141414;
-  --accent-ink: #4d7c0f;
+  --accent-ink: #3b610a;
   --accent-fg: var(--accent-ink);
   --accent-soft: rgba(77, 124, 15, 0.1);
   --accent-line: rgba(77, 124, 15, 0.35);
@@ -192,20 +186,14 @@
   --tb-accent-ink: var(--on-accent);
   --tb-heading: var(--text-strong);
   --tb-heading-muted: var(--text-muted);
-  --tb-heading-accent: var(--color-brand-orange);
+  --tb-heading-accent: #9e4100;
   --tb-cta-bg: var(--accent);
   --tb-cta-ink: var(--on-accent);
   --tb-band-bg: var(--surface);
-  --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 94%, white);
+  --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 8%, var(--bg));
   --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 72%, transparent);
   --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 78%, transparent);
   --tb-band-edge-fade: 4.5rem;
-  --tb-band-on-light-ink: var(--tb-ink);
-  --tb-band-on-light-muted: var(--tb-muted);
-  --tb-band-on-light-heading: var(--tb-heading);
-  --tb-band-on-navy-ink: oklch(0.99 0 0);
-  --tb-band-on-navy-muted: color-mix(in srgb, white 72%, var(--color-brand-slate));
-  --tb-band-on-navy-heading: oklch(0.99 0 0);
 }
 
 @media (prefers-color-scheme: light) {
@@ -224,7 +212,7 @@
     --accent-hover: #d4ff6b;
     --accent-press: #b3eb2e;
     --on-accent: #141414;
-    --accent-ink: #4d7c0f;
+    --accent-ink: #3b610a;
     --accent-fg: var(--accent-ink);
     --accent-soft: rgba(77, 124, 15, 0.1);
     --accent-line: rgba(77, 124, 15, 0.35);
@@ -246,20 +234,14 @@
     --tb-accent-ink: var(--on-accent);
     --tb-heading: var(--text-strong);
     --tb-heading-muted: var(--text-muted);
-    --tb-heading-accent: var(--color-brand-orange);
+    --tb-heading-accent: #9e4100;
     --tb-cta-bg: var(--accent);
     --tb-cta-ink: var(--on-accent);
     --tb-band-bg: var(--surface);
-    --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 94%, white);
+    --tb-band-bg-alt: color-mix(in srgb, var(--color-brand-navy) 8%, var(--bg));
     --tb-band-glass-light: color-mix(in oklch, var(--tb-band-bg) 72%, transparent);
     --tb-band-glass-navy: color-mix(in oklch, var(--tb-band-bg-alt) 78%, transparent);
     --tb-band-edge-fade: 4.5rem;
-    --tb-band-on-light-ink: var(--tb-ink);
-    --tb-band-on-light-muted: var(--tb-muted);
-    --tb-band-on-light-heading: var(--tb-heading);
-    --tb-band-on-navy-ink: oklch(0.99 0 0);
-    --tb-band-on-navy-muted: color-mix(in srgb, white 72%, var(--color-brand-slate));
-    --tb-band-on-navy-heading: oklch(0.99 0 0);
   }
 }
 

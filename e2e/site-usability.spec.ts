@@ -48,3 +48,33 @@ test('saved products open in the comparison picker', async ({ page }) => {
   await expect(page.getByRole('combobox', { name: 'Product 2' })).toHaveValue(ids[1]);
   await expect(page.getByRole('table')).toBeVisible();
 });
+
+test('shortlist entrance respects reduced motion while preserving keyboard focus', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.addInitScript(() => {
+    const animate = Element.prototype.animate;
+    Element.prototype.animate = function (...args: Parameters<typeof animate>) {
+      if (this instanceof HTMLDialogElement) this.setAttribute('data-test-animated', '');
+      return animate.apply(this, args);
+    };
+  });
+  await page.goto('/');
+  await page.locator('astro-island[ssr]:has(dialog)').waitFor({ state: 'detached' });
+  const trigger = page.locator('#open-shortlist');
+  const drawer = page.getByRole('dialog', { name: 'My shortlist' });
+  await trigger.focus();
+  await page.keyboard.press('Enter');
+  await expect(drawer).toHaveAttribute('data-test-animated', '');
+  await expect(drawer.getByRole('button', { name: 'Close' })).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(trigger).toBeFocused();
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.reload();
+  await page.locator('astro-island[ssr]:has(dialog)').waitFor({ state: 'detached' });
+  await trigger.focus();
+  await page.keyboard.press('Enter');
+  await expect(drawer).toBeVisible();
+  await expect(drawer).not.toHaveAttribute('data-test-animated', '');
+  await expect(drawer.getByRole('button', { name: 'Close' })).toBeFocused();
+});

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { CRIT } from '../../data/scorecard';
 import { LISTS } from '../../data/lists';
 import { RANKED } from '../../lib/catalog';
@@ -8,6 +8,7 @@ import type { RankedProduct } from '../../lib/scoring';
 import { TOOL_TAB_ICONS, type IconMapKey } from '../../icons';
 import Icon from '../ui/Icon';
 import ProductThumbImg from '../ui/ProductThumbImg';
+import { playEntrance } from '../../lib/motion/entrance';
 
 const TABS = [
   ['finder', 'Product finder'],
@@ -23,12 +24,21 @@ type TabId = (typeof TABS)[number][0];
 
 export default function ToolsHub({ initialTool }: { initialTool?: string }) {
   const [tab, setTab] = useState<TabId>('finder');
+  const previousTab = useRef(tab);
+  const panel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (initialTool && TABS.some(([id]) => id === initialTool)) {
       setTab(initialTool as TabId);
     }
   }, [initialTool]);
+
+  useEffect(() => {
+    if (previousTab.current === tab) return;
+    previousTab.current = tab;
+    const content = panel.current?.firstElementChild;
+    if (content instanceof HTMLElement) return playEntrance(content, { y: 6, duration: 180 });
+  }, [tab]);
 
   return (
     <div>
@@ -50,7 +60,7 @@ export default function ToolsHub({ initialTool }: { initialTool?: string }) {
           );
         })}
       </div>
-      <div class="tb-card tb-card--editorial" role="tabpanel">
+      <div ref={panel} class="tb-card tb-card--editorial" role="tabpanel">
         {tab === 'finder' && <FinderTool />}
         {tab === 'vacuum' && <VacuumTool />}
         {tab === 'cleanser' && <CleanserTool />}
@@ -65,10 +75,21 @@ export default function ToolsHub({ initialTool }: { initialTool?: string }) {
 
 function FinderTool() {
   const [step, setStep] = useState(0);
+  const previousStep = useRef(step);
+  const stepContent = useRef<HTMLDivElement>(null);
   const [kind, setKind] = useState('');
   const [budget, setBudget] = useState('mid');
   const [pri, setPri] = useState('perf');
   const listKeys = Object.keys(LISTS);
+
+  useEffect(() => {
+    if (previousStep.current === step) return;
+    previousStep.current = step;
+    const content = stepContent.current;
+    if (!content) return;
+    content.querySelector('h2')?.focus({ preventScroll: true });
+    return playEntrance(content, { y: 6, duration: 180 });
+  }, [step]);
 
   if (step < 3) {
     const steps = [
@@ -103,12 +124,14 @@ function FinderTool() {
     ];
     const current = steps[step]!;
     return (
-      <Question
-        title={current.title}
-        options={current.options as [string, string][]}
-        onPick={current.onPick}
-        onBack={step > 0 ? () => setStep(step - 1) : undefined}
-      />
+      <div ref={stepContent}>
+        <Question
+          title={current.title}
+          options={current.options as [string, string][]}
+          onPick={current.onPick}
+          onBack={step > 0 ? () => setStep(step - 1) : undefined}
+        />
+      </div>
     );
   }
 
@@ -126,17 +149,19 @@ function FinderTool() {
     .slice(0, 3);
 
   return (
-    <Panel>
-      <p class="text-xs font-bold uppercase tracking-wide text-[var(--tb-muted)]">Your shortlist</p>
-      <h2 class="mt-0 tb-h3">Three picks for you</h2>
-      <ProductPickList products={pick} />
-      <a href={`/${kind}`} class="tb-btn mt-3">
-        See the full Top 10
-      </a>
-      <button type="button" class="tb-btn tb-btn-ghost tb-btn-sm mt-2" onClick={() => setStep(0)}>
-        Start again
-      </button>
-    </Panel>
+    <div ref={stepContent}>
+      <Panel>
+        <p class="text-xs font-bold uppercase tracking-wide text-[var(--tb-muted)]">Your shortlist</p>
+        <h2 class="mt-0 tb-h3" tabIndex={-1}>Three picks for you</h2>
+        <ProductPickList products={pick} />
+        <a href={`/${kind}`} class="tb-btn mt-3">
+          See the full Top 10
+        </a>
+        <button type="button" class="tb-btn tb-btn-ghost tb-btn-sm mt-2" onClick={() => setStep(0)}>
+          Start again
+        </button>
+      </Panel>
+    </div>
   );
 }
 
@@ -359,7 +384,7 @@ function Question({
 }) {
   return (
     <div>
-      <h2 class="mt-0 tb-h3">{title}</h2>
+      <h2 class="mt-0 tb-h3" tabIndex={-1}>{title}</h2>
       <div class="grid gap-2 sm:grid-cols-2">
         {options.map(([value, label]) => (
           <button
