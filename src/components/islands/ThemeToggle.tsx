@@ -3,33 +3,22 @@ import Icon from '../ui/Icon';
 
 type Theme = 'dark' | 'light';
 
-function getInitialTheme(): Theme {
-  if (typeof document === 'undefined') return 'dark';
-  const stored = localStorage.getItem('tb-theme');
-  if (stored === 'light' || stored === 'dark') return stored;
-  return window.matchMedia('(prefers-color-scheme: light)').matches
-    ? 'light'
-    : 'dark';
-}
-
-function applyTheme(theme: Theme) {
-  document.documentElement.dataset.theme = theme;
-  localStorage.setItem('tb-theme', theme);
-}
-
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
-    const initial = getInitialTheme();
-    setTheme(initial);
-    applyTheme(initial);
+    setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
   }, []);
 
   const toggle = () => {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
     setTheme(next);
-    applyTheme(next);
+    try {
+      localStorage.setItem('tb-theme', next);
+    } catch {
+      /* Honor the toggle even when storage is unavailable. */
+    }
   };
 
   return (

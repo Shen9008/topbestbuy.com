@@ -278,30 +278,17 @@
   }
 
   .tb-brand-logo-strip__logo {
-    @apply mx-auto block h-7 w-auto max-w-[7.5rem] object-contain;
-    opacity: 0.45;
-    filter: grayscale(1) brightness(0) invert(1);
-    transition:
-      opacity var(--dur-fast) var(--ease-out),
-      filter var(--dur-fast) var(--ease-out);
+    @apply mx-auto block h-7 w-auto object-contain;
+    max-width: min(100%, 7.5rem);
   }
 
-  [data-theme='light'] .tb-brand-logo-strip__logo {
-    opacity: 0.55;
-    filter: grayscale(1);
+  .tb-brand-logo-strip__logo:not(.tb-brand-logo-strip__logo--color) {
+    opacity: 0.78;
+    filter: brightness(0) invert(1);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .tb-brand-logo-strip__item:hover .tb-brand-logo-strip__logo,
-    .tb-brand-logo-strip__item:focus-within .tb-brand-logo-strip__logo {
-      opacity: 0.88;
-      filter: grayscale(0.35) brightness(0) invert(1);
-    }
-
-    [data-theme='light'] .tb-brand-logo-strip__item:hover .tb-brand-logo-strip__logo,
-    [data-theme='light'] .tb-brand-logo-strip__item:focus-within .tb-brand-logo-strip__logo {
-      filter: grayscale(0.2);
-    }
+  [data-theme='light'] .tb-brand-logo-strip__logo:not(.tb-brand-logo-strip__logo--color) {
+    filter: brightness(0);
   }
 
   .tb-category-pill {
@@ -821,8 +808,9 @@
     @apply border border-[var(--border-strong)] bg-[var(--text-strong)] text-[var(--bg)];
   }
 
-  [data-theme='light'] .tb-btn-secondary {
-    @apply border-[var(--border)] bg-[var(--text)] text-[var(--bg)];
+  .tb-btn-secondary:not(:disabled, [aria-disabled='true']):is(:hover, :active) {
+    background: color-mix(in srgb, var(--text-strong) 90%, var(--bg));
+    box-shadow: none;
   }
 
   .tb-btn-accent {

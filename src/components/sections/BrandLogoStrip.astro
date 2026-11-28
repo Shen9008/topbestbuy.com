@@ -25,7 +25,10 @@ const brands = homeTopBrands();
           <img
             src={brand.src}
             alt={brand.name}
-            class="tb-brand-logo-strip__logo"
+            class:list={[
+              'tb-brand-logo-strip__logo',
+              (brand.slug === 'origin' || brand.slug === 'cetaphil') && 'tb-brand-logo-strip__logo--color',
+            ]}
             width="128"
             height="36"
             loading="lazy"

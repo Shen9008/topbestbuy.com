@@ -30,7 +30,7 @@ const { title, description, canonical, ogImage, ogType, noindex, jsonLd } = Astr
 ---
 
 <!doctype html>
-<html lang="en-MY" data-theme="dark">
+<html lang="en-MY" data-theme="light">
   <head>
     <Seo
       title={title}
@@ -43,12 +43,14 @@ const { title, description, canonical, ogImage, ogType, noindex, jsonLd } = Astr
     <script type="application/ld+json" set:html={orgLd} />
     {jsonLd && <JsonLd data={jsonLd} />}
     <script is:inline>
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       try {
-        const t = localStorage.getItem('tb-theme');
-        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        const stored = localStorage.getItem('tb-theme');
+        if (stored === 'light' || stored === 'dark') theme = stored;
       } catch {
         /* localStorage unavailable */
       }
+      document.documentElement.dataset.theme = theme;
     </script>
   </head>
   <body class="min-h-screen antialiased">

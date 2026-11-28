@@ -1,5 +1,29 @@
 import { expect, test } from '@playwright/test';
 
+test('brand marks keep their detail and product banners stay full color across themes', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });
+  await page.goto('/');
+
+  const brands = page.getByRole('list', { name: 'Brands featured in current top picks' });
+  const banners = page.locator('.tb-ranking-card img');
+  const sources = await banners.evaluateAll((images) => images.map((image) => image.getAttribute('src')));
+  expect(sources).toHaveLength(11);
+  await page.getByRole('button', { name: 'Switch to dark theme' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  for (const name of ['Origin', 'Cetaphil']) {
+    const logo = brands.getByRole('img', { name, exact: true });
+    await expect(logo).toHaveCSS('filter', 'none');
+    await expect(logo).toHaveCSS('opacity', '1');
+  }
+  expect(await banners.evaluateAll((images) => images.map((image) => image.getAttribute('src')))).toEqual(sources);
+  for (const banner of await banners.all()) {
+    await expect(banner).toHaveCSS('filter', 'none');
+    await expect(banner).toHaveCSS('opacity', '1');
+  }
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+});
+
 test('the phone header fits and Browse opens the category index', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 780 });
   await page.goto('/');
