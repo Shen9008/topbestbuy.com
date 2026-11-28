@@ -1,0 +1,24 @@
+---
+import { guideBanner, type GuideId } from '../../lib/guide-banners';
+
+interface Props {
+  id: GuideId;
+  hero?: boolean;
+}
+
+const { id, hero = false } = Astro.props;
+const banner = guideBanner(id);
+---
+
+<img
+  class:list={['tb-guide-photo', hero && 'tb-guide-photo--hero']}
+  src={hero ? banner.large : banner.small}
+  srcset={`${banner.small} 576w, ${banner.large} 1152w`}
+  sizes={hero ? '(min-width: 1180px) 1148px, calc(100vw - 32px)' : '(min-width: 1024px) 384px, (min-width: 640px) calc((100vw - 56px) / 2), calc(100vw - 32px)'}
+  width="1152"
+  height="648"
+  alt={hero ? banner.alt : ''}
+  loading={hero ? 'eager' : 'lazy'}
+  fetchpriority={hero ? 'high' : undefined}
+  decoding="async"
+/>

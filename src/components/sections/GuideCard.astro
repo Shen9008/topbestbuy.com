@@ -1,0 +1,20 @@
+---
+import GuidePhoto from '../media/GuidePhoto.astro';
+import { POSTS } from '../../data/posts';
+import { guideBanner, type GuideId } from '../../lib/guide-banners';
+
+interface Props {
+  id: GuideId;
+  showType?: boolean;
+}
+
+const { id, showType = true } = Astro.props;
+const post = POSTS[id];
+---
+
+<a href={guideBanner(id).href} class="tb-guide-card">
+  <GuidePhoto id={id} />
+  {showType && <p class="tb-guide-card__type">{post.type}</p>}
+  <h3 class="tb-guide-card__title">{post.h1}</h3>
+  <p class="m-0 text-sm text-[var(--tb-muted)]">{post.time} read</p>
+</a>

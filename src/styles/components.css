@@ -466,6 +466,34 @@
     @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-3;
   }
 
+  .tb-ranking-grid {
+    @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .tb-ranking-card {
+    @apply flex min-w-0 flex-col overflow-hidden rounded-[var(--radius-card)] border border-[var(--tb-line)] bg-[var(--tb-surface)] text-[var(--tb-ink)] no-underline;
+  }
+
+  .tb-ranking-card__banner {
+    @apply block aspect-video h-auto w-full object-cover;
+  }
+
+  .tb-ranking-card__banner--fallback {
+    @apply grid place-items-center bg-[var(--tb-surface-raised)];
+  }
+
+  .tb-ranking-card__body {
+    @apply flex flex-1 flex-col p-4 sm:p-5;
+  }
+
+  .tb-ranking-card__title {
+    @apply m-0 mt-1 text-lg font-bold leading-snug;
+  }
+
+  .tb-ranking-card:is(:hover, :focus-visible) .tb-ranking-card__title {
+    @apply underline underline-offset-4;
+  }
+
   .tb-utility-grid {
     @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-4;
   }
@@ -720,12 +748,32 @@
     text-underline-offset: 0.2em;
   }
 
-  .tb-guide-tile {
-    @apply min-h-[9.5rem];
+  .tb-guide-grid {
+    @apply grid gap-x-7 gap-y-9 sm:grid-cols-2 lg:grid-cols-3;
   }
 
-  .tb-guide-tile__dot {
-    @apply h-1.5 w-1.5 rounded-full bg-[var(--tb-accent-fg)];
+  .tb-guide-card {
+    @apply block min-w-0 rounded-[var(--radius-md)] text-[var(--tb-ink)] no-underline;
+  }
+
+  .tb-guide-photo {
+    @apply block aspect-video h-auto w-full rounded-[var(--radius-md)] bg-[var(--tb-surface)] object-cover;
+  }
+
+  .tb-guide-photo--hero {
+    @apply rounded-[var(--radius-lg)] sm:aspect-[2.4];
+  }
+
+  .tb-guide-card__type {
+    @apply mb-1 mt-4 text-xs font-semibold uppercase tracking-[0.08em] text-[var(--tb-muted)];
+  }
+
+  .tb-guide-card__title {
+    @apply mb-1 mt-2 text-lg font-semibold leading-snug;
+  }
+
+  .tb-guide-card:is(:hover, :focus-visible) .tb-guide-card__title {
+    @apply underline underline-offset-4;
   }
 
   .tb-methodology-strip {

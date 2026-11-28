@@ -3,25 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import EditorialSection from '../../components/sections/EditorialSection.astro';
 import SectionHeader from '../../components/sections/SectionHeader.astro';
+import GuideCard from '../../components/sections/GuideCard.astro';
 import { POSTS } from '../../data/posts';
+import { FEATURED_GUIDES, type GuideId } from '../../lib/guide-banners';
 import { breadcrumbListJsonLd } from '../../lib/seo';
 
-const entries = Object.entries(POSTS);
-const featuredIds = [
-  'blog-is-an-air-fryer-worth-it',
-  'blog-mattress-firmness-for-back-pain',
-  'blog-do-you-need-an-ionizer',
-];
-const featured = featuredIds
-  .map((id) => [id, POSTS[id as keyof typeof POSTS]] as const)
-  .filter(([, p]) => p);
-
-const byType = new Map<string, typeof entries>();
-for (const [id, p] of entries) {
-  const list = byType.get(p.type) ?? [];
-  list.push([id, p]);
-  byType.set(p.type, list);
-}
+const remaining = (Object.keys(POSTS) as GuideId[]).filter(
+  (id) => !FEATURED_GUIDES.some((featured) => featured === id),
+);
 ---
 
 <BaseLayout
@@ -35,12 +24,11 @@ for (const [id, p] of entries) {
 >
   <Breadcrumbs items={[{ label: 'Guides' }]} />
 
-  <header class="tb-hero tb-hero--editorial tb-hero--hub tb-reveal" aria-label="Guides hub">
+  <header class="tb-hero tb-hero--hub tb-reveal" aria-label="Guides hub">
     <div>
-      <p class="m-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--tb-muted)]">Editorial</p>
-      <h1 class="tb-h1 mt-3 max-w-[16ch]">Guides and explainers</h1>
-      <p class="mt-4 max-w-[42ch] text-lg text-[var(--tb-muted)]">
-        Short answers to the questions people ask before and after they buy. Same scorecard, no hype.
+      <h1 class="tb-h1">Guides and explainers</h1>
+      <p class="mt-4 max-w-[46ch] text-lg text-[var(--tb-muted)]">
+        Practical answers to the questions that come up before and after you buy.
       </p>
     </div>
   </header>
@@ -48,51 +36,20 @@ for (const [id, p] of entries) {
   <EditorialSection band="default" aria-labelledby="guides-featured-heading">
     <SectionHeader
       titleId="guides-featured-heading"
-      eyebrow="Start here"
       title="Featured reads"
-      description="The guides readers open most before they open a Top 10 list."
-      seeAllHref="/categories"
-      seeAllLabel="See all lists"
+      align="left"
+      seeAllHref="#more-guides"
+      seeAllLabel="More guides"
     />
-    <div class="tb-scroll-strip tb-reveal-stagger mt-6 gap-3 lg:grid lg:max-w-none lg:grid-cols-3 lg:overflow-visible lg:pb-0">
-      {
-        featured.map(([id, p]) => (
-          <a
-            href={`/guides/${id.replace(/^blog-/, '')}`}
-            class="tb-tile tb-guide-tile tb-card--editorial min-w-[min(100%,18rem)] shrink-0 lg:min-w-0"
-          >
-            <span class="tb-pill">{p.type}</span>
-            <h2 class="m-0 tb-h3">{p.h1}</h2>
-            <p class="m-0 text-sm text-[var(--tb-muted)] line-clamp-2">{p.tldr}</p>
-            <p class="m-0 mt-auto flex items-center gap-2 text-xs text-[var(--tb-muted)]">
-              <span class="tb-guide-tile__dot" aria-hidden="true" />
-              {p.time} read
-            </p>
-          </a>
-        ))
-      }
+    <div class="tb-guide-grid tb-reveal-stagger">
+      {FEATURED_GUIDES.map((id) => <GuideCard id={id} />)}
     </div>
   </EditorialSection>
 
-  {
-    [...byType.entries()].map(([type, posts]) => (
-      <EditorialSection band="alt" aria-labelledby={`guides-type-${type.replace(/\s+/g, '-')}`}>
-        <SectionHeader
-          titleId={`guides-type-${type.replace(/\s+/g, '-')}`}
-          title={type}
-          seeAllHref="/tools"
-          seeAllLabel="Buying tools"
-        />
-        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map(([id, p]) => (
-            <a href={`/guides/${id.replace(/^blog-/, '')}`} class="tb-tile tb-guide-tile">
-              <h3 class="m-0 font-display text-base font-bold leading-snug">{p.h1}</h3>
-              <p class="m-0 text-sm text-[var(--tb-muted)] line-clamp-2">{p.tldr}</p>
-              <span class="mt-auto text-xs text-[var(--tb-muted)]">{p.time} read</span>
-            </a>
-          ))}
-        </div>
-      </EditorialSection>
-    ))
-  }
+  <EditorialSection id="more-guides" band="alt" aria-labelledby="more-guides-heading">
+    <SectionHeader titleId="more-guides-heading" title="More guides" align="left" />
+    <div class="tb-guide-grid tb-reveal-stagger">
+      {remaining.map((id) => <GuideCard id={id} />)}
+    </div>
+  </EditorialSection>
 </BaseLayout>

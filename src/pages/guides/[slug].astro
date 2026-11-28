@@ -2,8 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import SectionHeader from '../../components/sections/SectionHeader.astro';
+import GuideCard from '../../components/sections/GuideCard.astro';
+import GuidePhoto from '../../components/media/GuidePhoto.astro';
 import { POSTS } from '../../data/posts';
 import { LISTS } from '../../data/lists';
+import { FEATURED_GUIDES, guideBanner, type GuideId } from '../../lib/guide-banners';
 import {
   articleJsonLd,
   breadcrumbListJsonLd,
@@ -13,14 +16,22 @@ import EditorialByline from '../../components/sections/EditorialByline.astro';
 import TrustPathModule from '../../components/sections/TrustPathModule.astro';
 
 export function getStaticPaths() {
-  return Object.keys(POSTS).map((key) => ({
+  return (Object.keys(POSTS) as GuideId[]).map((key) => ({
     params: { slug: key.replace(/^blog-/, '') },
     props: { postId: key },
   }));
 }
 
 const { postId } = Astro.props;
-const post = POSTS[postId as keyof typeof POSTS];
+const post = POSTS[postId];
+const banner = guideBanner(postId);
+const related: readonly string[] = post.related;
+const relatedGuides = [...new Set([
+  ...related.filter((id): id is GuideId => Object.hasOwn(POSTS, id)),
+  ...FEATURED_GUIDES,
+  ...(Object.keys(POSTS) as GuideId[]),
+])].filter((id) => id !== postId).slice(0, 3);
+const relatedResources = related.filter((id) => !Object.hasOwn(POSTS, id));
 const otherGuides = Object.entries(POSTS)
   .filter(([id]) => id !== postId)
   .slice(0, 4);
@@ -46,6 +57,7 @@ const bodyHtml = normalizeGuideBodyHtml(post.body);
   description={post.meta}
   canonical={guidePath}
   ogType="article"
+  ogImage={banner.large}
   jsonLd={guideSchema}
 >
   <Breadcrumbs items={crumbItems} />
@@ -60,6 +72,10 @@ const bodyHtml = normalizeGuideBodyHtml(post.body);
       <span class="tb-pill tb-pill-sample">Sample article</span>
     </p>
   </header>
+
+  <div class="my-6">
+    <GuidePhoto id={postId} hero />
+  </div>
 
   <div class="tb-disclosure tb-editorial-center">
     <strong>How we make money:</strong> we may earn a commission from links on this page. This
@@ -115,30 +131,25 @@ const bodyHtml = normalizeGuideBodyHtml(post.body);
         <article class="tb-prose mx-auto mt-6 max-w-[65ch]" set:html={bodyHtml} />
       </section>
 
-      <section id="guide-more" class="scroll-mt-28 mt-10">
-        <SectionHeader title="Keep reading" seeAllHref="/guides" seeAllLabel="See all guides" />
-        <div class="tb-scroll-strip mt-4 gap-2">
-          {
-            post.related.map((r) =>
-              LISTS[r as keyof typeof LISTS] ? (
-                <a href={`/${r}`} class="tb-chip shrink-0">
-                  {LISTS[r as keyof typeof LISTS].short}: Top 10
-                </a>
-              ) : POSTS[r as keyof typeof POSTS] ? (
-                <a href={`/guides/${r.replace(/^blog-/, '')}`} class="tb-chip shrink-0">
-                  {POSTS[r as keyof typeof POSTS].h1}
-                </a>
-              ) : (
-                <a href="/how-we-rank" class="tb-chip shrink-0">
-                  How we rank
-                </a>
-              ),
-            )
-          }
-        </div>
-      </section>
-
-      <TrustPathModule />
     </div>
   </div>
+
+  <section id="guide-more" class="scroll-mt-[var(--subnav-height)] mt-12" aria-labelledby="guide-more-title">
+    <SectionHeader titleId="guide-more-title" title="Keep reading" align="left" seeAllHref="/guides" seeAllLabel="See all guides" />
+    <div class="tb-guide-grid tb-reveal-stagger">
+      {relatedGuides.map((id) => <GuideCard id={id} />)}
+    </div>
+    <div class="mt-6 flex flex-wrap gap-2">
+      {relatedResources.map((id) => {
+        const list = LISTS[id as keyof typeof LISTS];
+        return list ? (
+          <a href={`/${id}`} class="tb-chip">{list.short}: Top 10</a>
+        ) : (
+          <a href="/how-we-rank" class="tb-chip">How we rank</a>
+        );
+      })}
+    </div>
+  </section>
+
+  <TrustPathModule />
 </BaseLayout>

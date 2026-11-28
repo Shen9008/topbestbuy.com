@@ -5,8 +5,9 @@ import { hasListVisual } from '../../lib/list-visuals';
 import SectionHeader from './SectionHeader.astro';
 import { CATS } from '../../data/categories';
 import { LISTS } from '../../data/lists';
-import { RANKED, listSlugs } from '../../lib/catalog';
+import { listSlugs, topPick, type ListSlug } from '../../lib/catalog';
 import { productFullName } from '../../lib/format';
+import { rankingCardBanner } from '../../lib/ranking-card-banners';
 import { CATEGORY_ICONS, type IconMapKey } from '../../icons';
 
 interface Props {
@@ -48,37 +49,50 @@ const sectionClass = bare ? '' : 'tb-section';
     seeAllHref="/categories"
     seeAllLabel="See all lists"
   />
-  <div class="tb-studio-grid tb-reveal-stagger mt-6">
+  <div class="tb-ranking-grid tb-reveal-stagger mt-6">
     {
       listSlugs().map((slug) => {
         const L = LISTS[slug as keyof typeof LISTS];
-        const p = RANKED[slug]?.[0];
+        const p = topPick(slug);
+        const banner = rankingCardBanner(slug as ListSlug, p?.id);
         return (
-          <a href={`/${slug}`} class="tb-tile tb-studio-tile">
-            <span class="tb-pill">{CATS.find((c) => c.id === L.cat)?.name}</span>
-            <div class="tb-studio-tile__head">
-              {hasListVisual(slug) ? <ListVisual slug={slug} size="md" /> : null}
-              <h3 class="m-0 font-display text-lg font-bold leading-snug">{L.short}: Top 10 in Malaysia</h3>
-            </div>
-            {
-              p && (
-                <p class="tb-tile__score m-0 mt-auto text-sm text-[var(--tb-muted)]">
+          <a href={`/${slug}`} class="tb-ranking-card">
+            {banner ? (
+              <img
+                class="tb-ranking-card__banner"
+                src={banner}
+                width="800"
+                height="450"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="tb-ranking-card__banner tb-ranking-card__banner--fallback" aria-hidden="true">
+                {hasListVisual(slug) && <ListVisual slug={slug} size="md" />}
+              </div>
+            )}
+            <div class="tb-ranking-card__body">
+              <p class="m-0 text-xs font-semibold text-[var(--tb-muted)]">
+                {CATS.find((c) => c.id === L.cat)?.name}
+              </p>
+              <h3 class="tb-ranking-card__title">{L.short}: Top 10 in Malaysia</h3>
+              {p && (
+                <p class="m-0 mt-3 text-sm text-[var(--tb-muted)]">
                   #1 {productFullName(p)}{' '}
                   <span class="tb-num font-semibold text-[var(--tb-ink)]">({p.total.toFixed(1)}/100)</span>
                 </p>
-              )
-            }
-            {
-              L.kw && (
-                <span class="mt-2 text-xs text-[var(--tb-muted)]">
+              )}
+              {L.kw && (
+                <span class="mt-auto pt-3 text-xs text-[var(--tb-muted)]">
                   About{' '}
                   <span class="tb-num font-medium text-[var(--tb-ink)]">
                     {L.kw[1].toLocaleString('en-MY')}
                   </span>{' '}
                   searches a month for &ldquo;{L.kw[0]}&rdquo; (Semrush, Malaysia)
                 </span>
-              )
-            }
+              )}
+            </div>
           </a>
         );
       })
