@@ -30,6 +30,19 @@ async function lowestRenderedContrast(text: Locator) {
   return minimum;
 }
 
+test('the tool action stays legible in both themes', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const tool = page.getByRole('link', { name: /Product finder.*Open tool/i }).first();
+  const action = tool.getByText('Open tool', { exact: false });
+
+  for (const theme of ['light', 'dark']) {
+    await page.evaluate((mode) => { document.documentElement.dataset.theme = mode; }, theme);
+    expect(await lowestRenderedContrast(action)).toBeGreaterThanOrEqual(4.5);
+  }
+  await expect(tool).toHaveAttribute('href', '/tools?tool=finder');
+});
+
 test.describe('light theme list compare section', () => {
   test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => {

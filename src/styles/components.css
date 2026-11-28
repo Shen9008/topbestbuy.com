@@ -707,7 +707,13 @@
   }
 
   .tb-utility-tile__cta {
-    @apply mt-auto pt-1;
+    @apply mt-auto inline-flex min-h-8 items-center self-start rounded-[var(--radius-sm)] bg-[var(--on-accent)] px-3 py-1.5 text-xs font-bold text-[var(--accent)];
+  }
+
+  .tb-utility-tile:is(:hover, :focus-visible) .tb-utility-tile__cta {
+    color: var(--accent-hover);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
 
   .tb-guide-tile {

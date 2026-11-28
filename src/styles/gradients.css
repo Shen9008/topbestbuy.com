@@ -117,6 +117,64 @@
       radial-gradient(ellipse 70% 50% at 100% 15%, var(--tb-gradient-orange-06), transparent 60%);
   }
 
+  :where(.tb-atmosphere) {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .tb-atmosphere__wash {
+    position: absolute;
+    inset: 0 0 auto;
+    height: min(100%, 30rem);
+    overflow: clip;
+    z-index: -1;
+    pointer-events: none;
+    --tb-blob-start: 15%;
+    --tb-blob-end: 85%;
+  }
+
+  .tb-atmosphere:nth-of-type(even) > .tb-atmosphere__wash {
+    --tb-blob-start: 80%;
+    --tb-blob-end: 20%;
+  }
+
+  .tb-atmosphere__wash::before,
+  .tb-atmosphere__wash::after {
+    content: '';
+    position: absolute;
+    inset: 0 4%;
+  }
+
+  .tb-atmosphere__wash::before {
+    background: radial-gradient(ellipse 46% 57% at var(--tb-blob-start) 38%, var(--tb-gradient-lime-12), transparent 78%);
+  }
+
+  .tb-atmosphere__wash::after {
+    --tb-blob-drift-x: 5%;
+    background: radial-gradient(ellipse 38% 58% at var(--tb-blob-end) 44%, var(--tb-gradient-orange-10), transparent 78%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tb-atmosphere__wash--entered::before {
+      animation: tb-gradient-bloom 3.8s ease-out backwards;
+    }
+
+    .tb-atmosphere__wash--entered::after {
+      animation: tb-gradient-bloom 3.8s ease-out 180ms backwards;
+    }
+  }
+
+  @keyframes tb-gradient-bloom {
+    from {
+      transform: translate3d(var(--tb-blob-drift-x, -5%), -4%, 0) scale(0.86);
+      opacity: 0.4;
+    }
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+
   /* Fixed ambient layer — drifts under page gradient on html */
   body::before {
     content: '';

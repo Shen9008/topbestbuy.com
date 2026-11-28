@@ -1,6 +1,22 @@
 import { playEntrance } from './entrance';
 
 export function initScrollMotion(): void {
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  const sectionSelector = 'main > header, main > section, .tb-page-bands > section, .tb-editorial-main > section';
+  const sections = Array.from(main.querySelectorAll(sectionSelector)).filter(
+    (section) => !section.querySelector(sectionSelector),
+  );
+  const washes = (sections.length ? sections : [main]).map((section) => {
+    const wash = document.createElement('div');
+    wash.className = 'tb-atmosphere__wash';
+    wash.setAttribute('aria-hidden', 'true');
+    section.classList.add('tb-atmosphere');
+    section.prepend(wash);
+    return wash;
+  });
+
   if (!('IntersectionObserver' in window)) return;
 
   const artworkSelector = '.tb-hero__media';
@@ -13,7 +29,9 @@ export function initScrollMotion(): void {
       if (!entry.isIntersecting) continue;
       const target = entry.target as HTMLElement;
       observer.unobserve(target);
-      if (target.matches(cardSelector)) {
+      if (target.classList.contains('tb-atmosphere__wash')) {
+        target.classList.add('tb-atmosphere__wash--entered');
+      } else if (target.matches(cardSelector)) {
         const group = target.parentElement!;
         const cards = cardsByGroup.get(group) ?? [];
         cards.push(target);
@@ -33,6 +51,7 @@ export function initScrollMotion(): void {
     }
   }, { threshold: 0.1 });
 
+  washes.forEach((wash) => observer.observe(wash));
   document.querySelectorAll(`${artworkSelector}, ${cardSelector}, ${headingSelector}`).forEach(
     (target) => observer.observe(target),
   );
